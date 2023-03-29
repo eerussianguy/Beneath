@@ -1,6 +1,6 @@
 # Beneath
 
-Beneath makes food in TFC work more like it did in Classic (or in 2012). Food weight and decay are represented as fractions and are shown as bars on items. Food decay can also be cut off of items by right clicking them with a knife in your inventory.
+Beneath integrates the nether with TFC.
 
 This mod requires [TerraFirmaCraft for 1.18+](https://www.curseforge.com/minecraft/mc-mods/tfcraft/)
 
