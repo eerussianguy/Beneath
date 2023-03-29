@@ -1,0 +1,56 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "count=1": [
+      {
+        "model": "beneath:block/nether_pebble_pebble",
+        "y": 90
+      },
+      {
+        "model": "beneath:block/nether_pebble_pebble"
+      },
+      {
+        "model": "beneath:block/nether_pebble_pebble",
+        "y": 180
+      },
+      {
+        "model": "beneath:block/nether_pebble_pebble",
+        "y": 270
+      }
+    ],
+    "count=2": [
+      {
+        "model": "beneath:block/nether_pebble_rubble",
+        "y": 90
+      },
+      {
+        "model": "beneath:block/nether_pebble_rubble"
+      },
+      {
+        "model": "beneath:block/nether_pebble_rubble",
+        "y": 180
+      },
+      {
+        "model": "beneath:block/nether_pebble_rubble",
+        "y": 270
+      }
+    ],
+    "count=3": [
+      {
+        "model": "beneath:block/nether_pebble_boulder",
+        "y": 90
+      },
+      {
+        "model": "beneath:block/nether_pebble_boulder"
+      },
+      {
+        "model": "beneath:block/nether_pebble_boulder",
+        "y": 180
+      },
+      {
+        "model": "beneath:block/nether_pebble_boulder",
+        "y": 270
+      }
+    ]
+  }
+}

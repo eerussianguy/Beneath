@@ -1,0 +1,20 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "facing=east": {
+      "model": "beneath:block/wood/planks/crimson_tool_rack",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "beneath:block/wood/planks/crimson_tool_rack",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "beneath:block/wood/planks/crimson_tool_rack"
+    },
+    "facing=west": {
+      "model": "beneath:block/wood/planks/crimson_tool_rack",
+      "y": 90
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/wood/support/horizontal",
+  "textures": {
+    "texture": "beneath:block/wood/sheet/crimson",
+    "particle": "beneath:block/wood/sheet/crimson"
+  }
+}

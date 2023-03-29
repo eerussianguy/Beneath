@@ -1,0 +1,14 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:wood/log/crimson",
+    "beneath:wood/stripped_log/crimson",
+    "beneath:wood/wood/crimson",
+    "beneath:wood/stripped_wood/crimson",
+    "beneath:wood/log/warped",
+    "beneath:wood/stripped_log/warped",
+    "beneath:wood/wood/warped",
+    "beneath:wood/stripped_wood/warped"
+  ]
+}

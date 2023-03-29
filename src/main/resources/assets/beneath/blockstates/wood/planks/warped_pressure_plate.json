@@ -1,0 +1,11 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "powered=false": {
+      "model": "beneath:block/wood/planks/warped_pressure_plate"
+    },
+    "powered=true": {
+      "model": "beneath:block/wood/planks/warped_pressure_plate_down"
+    }
+  }
+}

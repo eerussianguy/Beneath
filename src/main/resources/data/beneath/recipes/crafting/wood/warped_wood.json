@@ -1,0 +1,17 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    "XX"
+  ],
+  "key": {
+    "X": {
+      "item": "beneath:wood/log/warped"
+    }
+  },
+  "result": {
+    "item": "beneath:wood/wood/warped",
+    "count": 3
+  }
+}

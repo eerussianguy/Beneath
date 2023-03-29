@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/tool_rack",
+  "textures": {
+    "texture": "beneath:block/wood/planks/crimson",
+    "particle": "beneath:block/wood/planks/crimson"
+  }
+}

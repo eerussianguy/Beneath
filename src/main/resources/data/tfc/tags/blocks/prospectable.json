@@ -1,0 +1,13 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:ore/poor_nether_gold",
+    "beneath:ore/normal_nether_gold",
+    "beneath:ore/rich_nether_gold",
+    "beneath:ore/nether_pyrite",
+    "beneath:ore/blackstone_sylvite",
+    "beneath:ore/nether_cursecoal",
+    "minecraft:nether_quartz_ore"
+  ]
+}

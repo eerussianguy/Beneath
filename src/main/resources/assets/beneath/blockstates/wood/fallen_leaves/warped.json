@@ -1,0 +1,22 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "": [
+      {
+        "model": "beneath:block/wood/fallen_leaves/warped",
+        "y": 90
+      },
+      {
+        "model": "beneath:block/wood/fallen_leaves/warped"
+      },
+      {
+        "model": "beneath:block/wood/fallen_leaves/warped",
+        "y": 180
+      },
+      {
+        "model": "beneath:block/wood/fallen_leaves/warped",
+        "y": 270
+      }
+    ]
+  }
+}

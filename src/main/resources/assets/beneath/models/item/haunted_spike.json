@@ -1,0 +1,7 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "beneath:block/spike/haunted_base",
+  "textures": {
+    "layer0": "beneath:block/haunted_spike"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    " Y "
+  ],
+  "key": {
+    "X": {
+      "item": "beneath:wood/lumber/warped"
+    },
+    "Y": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "beneath:wood/sign/warped",
+    "count": 3
+  }
+}

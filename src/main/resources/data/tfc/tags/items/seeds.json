@@ -1,0 +1,11 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:seeds/crimson_roots",
+    "beneath:seeds/ghost_pepper",
+    "beneath:seeds/gleamflower",
+    "beneath:seeds/nether_wart",
+    "beneath:seeds/warped_roots"
+  ]
+}

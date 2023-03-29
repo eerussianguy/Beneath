@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfc:collapse",
+  "ingredient": {
+    "tag": "beneath:nether_bricks"
+  },
+  "copy_input": true
+}

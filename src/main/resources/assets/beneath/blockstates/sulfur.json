@@ -1,0 +1,19 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "": [
+      {
+        "model": "beneath:block/sulfur0"
+      },
+      {
+        "model": "beneath:block/sulfur1"
+      },
+      {
+        "model": "beneath:block/sulfur2"
+      },
+      {
+        "model": "beneath:block/sulfur3"
+      }
+    ]
+  }
+}

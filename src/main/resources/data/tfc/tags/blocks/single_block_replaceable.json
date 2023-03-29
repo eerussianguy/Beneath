@@ -1,0 +1,10 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:wood/twig/crimson",
+    "beneath:wood/fallen_leaves/crimson",
+    "beneath:wood/twig/warped",
+    "beneath:wood/fallen_leaves/warped"
+  ]
+}

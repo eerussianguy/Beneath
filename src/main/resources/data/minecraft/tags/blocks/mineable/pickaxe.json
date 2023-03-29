@@ -1,0 +1,17 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:ore/poor_nether_gold",
+    "beneath:ore/normal_nether_gold",
+    "beneath:ore/rich_nether_gold",
+    "beneath:ore/nether_pyrite",
+    "beneath:ore/blackstone_sylvite",
+    "beneath:ore/nether_cursecoal",
+    "beneath:haunted_spike",
+    "beneath:glowstone_spike",
+    "beneath:cobblerack",
+    "beneath:fungal_cobblerack",
+    "beneath:blackstone_aqueduct"
+  ]
+}

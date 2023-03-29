@@ -1,0 +1,22 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "": [
+      {
+        "model": "beneath:block/wood/twig/crimson",
+        "y": 90
+      },
+      {
+        "model": "beneath:block/wood/twig/crimson"
+      },
+      {
+        "model": "beneath:block/wood/twig/crimson",
+        "y": 180
+      },
+      {
+        "model": "beneath:block/wood/twig/crimson",
+        "y": 270
+      }
+    ]
+  }
+}

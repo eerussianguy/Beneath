@@ -1,0 +1,17 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "age=0": {
+      "model": "beneath:block/crop/crimson_roots_age_0"
+    },
+    "age=1": {
+      "model": "beneath:block/crop/crimson_roots_age_1"
+    },
+    "age=2": {
+      "model": "beneath:block/crop/crimson_roots_age_2"
+    },
+    "age=3": {
+      "model": "beneath:block/crop/crimson_roots_age_3"
+    }
+  }
+}

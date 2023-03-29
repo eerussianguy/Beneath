@@ -1,0 +1,10 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:wood/vertical_support/crimson",
+    "beneath:wood/horizontal_support/crimson",
+    "beneath:wood/vertical_support/warped",
+    "beneath:wood/horizontal_support/warped"
+  ]
+}

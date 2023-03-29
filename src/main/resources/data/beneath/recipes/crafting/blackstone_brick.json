@@ -1,0 +1,18 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfc:damage_inputs_shapeless_crafting",
+  "recipe": {
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+      {
+        "item": "beneath:blackstone_pebble"
+      },
+      {
+        "tag": "tfc:chisels"
+      }
+    ],
+    "result": {
+      "item": "beneath:blackstone_brick"
+    }
+  }
+}

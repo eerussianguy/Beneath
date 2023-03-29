@@ -1,0 +1,10 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:wood/planks/crimson_fence",
+    "beneath:wood/planks/crimson_log_fence",
+    "beneath:wood/planks/warped_fence",
+    "beneath:wood/planks/warped_log_fence"
+  ]
+}

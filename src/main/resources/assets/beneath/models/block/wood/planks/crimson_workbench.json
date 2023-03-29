@@ -1,0 +1,13 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "beneath:block/wood/planks/crimson_workbench_front",
+    "north": "beneath:block/wood/planks/crimson_workbench_front",
+    "south": "beneath:block/wood/planks/crimson_workbench_side",
+    "east": "beneath:block/wood/planks/crimson_workbench_side",
+    "west": "beneath:block/wood/planks/crimson_workbench_front",
+    "up": "beneath:block/wood/planks/crimson_workbench_top",
+    "down": "beneath:block/wood/planks/crimson"
+  }
+}

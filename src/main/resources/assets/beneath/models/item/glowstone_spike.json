@@ -1,0 +1,7 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "beneath:block/spike/glowstone_base",
+  "textures": {
+    "layer0": "beneath:block/glowstone_spike"
+  }
+}

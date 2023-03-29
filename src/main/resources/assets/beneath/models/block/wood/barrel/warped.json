@@ -1,0 +1,10 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/barrel",
+  "textures": {
+    "particle": "beneath:block/wood/planks/warped",
+    "planks": "beneath:block/wood/planks/warped",
+    "sheet": "beneath:block/wood/sheet/warped",
+    "hoop": "tfc:block/barrel_hoop"
+  }
+}

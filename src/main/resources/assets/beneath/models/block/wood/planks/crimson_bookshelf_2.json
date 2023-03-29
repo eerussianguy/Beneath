@@ -1,0 +1,9 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "block/cube_column",
+  "textures": {
+    "north": "beneath:block/wood/planks/crimson_bookshelf_stage2",
+    "side": "beneath:block/wood/planks/crimson_bookshelf_side",
+    "end": "beneath:block/wood/planks/crimson_bookshelf_top"
+  }
+}

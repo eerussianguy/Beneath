@@ -1,0 +1,12 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "#tfc:metal_item/black_steel",
+    "#tfc:metal_item/blue_steel",
+    "#tfc:metal_item/red_steel",
+    "#tfc:metal_item/steel",
+    "#tfc:metal_item/wrought_iron",
+    "#tfc:metal_item/cast_iron"
+  ]
+}

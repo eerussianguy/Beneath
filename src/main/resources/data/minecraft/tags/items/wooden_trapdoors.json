@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:wood/planks/crimson_trapdoor",
+    "beneath:wood/planks/warped_trapdoor"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:wood/chest/crimson",
+    "beneath:wood/trapped_chest/crimson",
+    "beneath:wood/chest/warped",
+    "beneath:wood/trapped_chest/warped"
+  ]
+}

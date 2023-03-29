@@ -1,0 +1,12 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "minecraft:block/lectern",
+  "textures": {
+    "bottom": "beneath:block/wood/planks/warped",
+    "base": "beneath:block/wood/lectern/warped/base",
+    "front": "beneath:block/wood/lectern/warped/front",
+    "sides": "beneath:block/wood/lectern/warped/sides",
+    "top": "beneath:block/wood/lectern/warped/top",
+    "particle": "beneath:block/wood/lectern/warped/sides"
+  }
+}

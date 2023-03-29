@@ -1,0 +1,24 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "beneath:pure_death"
+    },
+    {
+      "item": "beneath:pure_destruction"
+    },
+    {
+      "item": "beneath:pure_decay"
+    },
+    {
+      "item": "beneath:pure_sorrow"
+    },
+    {
+      "item": "beneath:pure_flame"
+    }
+  ],
+  "result": {
+    "item": "beneath:agonizing_fertilizer"
+  }
+}

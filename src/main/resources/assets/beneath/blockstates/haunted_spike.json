@@ -1,0 +1,14 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "part=base": {
+      "model": "beneath:block/spike/haunted_base"
+    },
+    "part=middle": {
+      "model": "beneath:block/spike/haunted_middle"
+    },
+    "part=tip": {
+      "model": "beneath:block/spike/haunted_tip"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "axis=y": {
+      "model": "beneath:block/wood/stripped_wood/warped"
+    },
+    "axis=z": {
+      "model": "beneath:block/wood/stripped_wood/warped",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "beneath:block/wood/stripped_wood/warped",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "#beneath:nether_bricks",
+    "#beneath:nether_brick_decor",
+    "#beneath:blackstone",
+    "#beneath:blackstone_decor",
+    "beneath:cobblerack",
+    "beneath:fungal_cobblerack",
+    "minecraft:glowstone",
+    "minecraft:basalt"
+  ]
+}

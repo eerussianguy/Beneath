@@ -1,0 +1,19 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "MXM"
+  ],
+  "key": {
+    "X": {
+      "item": "beneath:blackstone_brick"
+    },
+    "M": {
+      "tag": "tfc:mortar"
+    }
+  },
+  "result": {
+    "item": "beneath:blackstone_aqueduct"
+  }
+}

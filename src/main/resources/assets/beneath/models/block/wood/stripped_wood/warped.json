@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "beneath:block/wood/stripped_log/warped",
+    "side": "beneath:block/wood/stripped_log/warped"
+  }
+}

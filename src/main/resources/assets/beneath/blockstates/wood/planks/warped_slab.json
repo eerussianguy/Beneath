@@ -1,0 +1,14 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "type=bottom": {
+      "model": "beneath:block/wood/planks/warped_slab"
+    },
+    "type=top": {
+      "model": "beneath:block/wood/planks/warped_slab_top"
+    },
+    "type=double": {
+      "model": "beneath:block/wood/planks/warped"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/rock/spike_middle",
+  "textures": {
+    "texture": "beneath:block/glowstone_spike",
+    "particle": "beneath:block/glowstone_spike"
+  }
+}

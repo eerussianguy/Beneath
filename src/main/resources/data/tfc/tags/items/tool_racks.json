@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:wood/planks/crimson_tool_rack",
+    "beneath:wood/planks/warped_tool_rack"
+  ]
+}

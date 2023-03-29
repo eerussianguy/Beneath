@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/groundcover/guano",
+  "textures": {
+    "0": "beneath:block/sulfur3",
+    "particle": "beneath:block/sulfur3"
+  }
+}

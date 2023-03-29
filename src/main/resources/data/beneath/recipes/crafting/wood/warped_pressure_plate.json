@@ -1,0 +1,15 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX"
+  ],
+  "key": {
+    "X": {
+      "item": "beneath:wood/lumber/warped"
+    }
+  },
+  "result": {
+    "item": "beneath:wood/planks/warped_pressure_plate"
+  }
+}

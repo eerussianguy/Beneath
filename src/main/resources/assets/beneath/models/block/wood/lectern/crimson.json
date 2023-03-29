@@ -1,0 +1,12 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "minecraft:block/lectern",
+  "textures": {
+    "bottom": "beneath:block/wood/planks/crimson",
+    "base": "beneath:block/wood/lectern/crimson/base",
+    "front": "beneath:block/wood/lectern/crimson/front",
+    "sides": "beneath:block/wood/lectern/crimson/sides",
+    "top": "beneath:block/wood/lectern/crimson/top",
+    "particle": "beneath:block/wood/lectern/crimson/sides"
+  }
+}

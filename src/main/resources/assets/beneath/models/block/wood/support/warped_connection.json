@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/wood/support/connection",
+  "textures": {
+    "texture": "beneath:block/wood/sheet/warped",
+    "particle": "beneath:block/wood/sheet/warped"
+  }
+}
