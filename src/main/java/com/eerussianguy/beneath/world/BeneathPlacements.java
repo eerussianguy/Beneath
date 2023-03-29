@@ -52,6 +52,7 @@ public class BeneathPlacements
     public static final RegistryObject<PlacedFeature> CRIMSON_TREE = register("tree/crimson", BeneathConfiguredFeatures.CRIMSON_TREE, () -> List.of(everyLayer(8), BiomeFilter.biome()));
     public static final RegistryObject<PlacedFeature> WARPED_TREE = register("tree/warped", BeneathConfiguredFeatures.WARPED_TREE, () -> List.of(everyLayer(8), BiomeFilter.biome()));
     public static final RegistryObject<PlacedFeature> AMETHYST_GEODE = register("amethyst_geode", BeneathConfiguredFeatures.AMETHYST_GEODE, () -> List.of(RarityFilter.onAverageOnceEvery(100), HeightRangePlacement.uniform(VerticalAnchor.BOTTOM, VerticalAnchor.aboveBottom(32)), InSquarePlacement.spread()));
+    public static final RegistryObject<PlacedFeature> DELTA = register("delta", BeneathConfiguredFeatures.DELTA, () -> List.of(everyLayer(40), BiomeFilter.biome()));
 
     @SuppressWarnings("deprecation")
     private static CountOnEveryLayerPlacement everyLayer(int amount)

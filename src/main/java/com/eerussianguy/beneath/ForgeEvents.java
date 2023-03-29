@@ -161,6 +161,7 @@ public class ForgeEvents
 
             gen.getFeatures(GenerationStep.Decoration.UNDERGROUND_DECORATION).removeIf(removeIf(REMOVED_ORES));
             gen.getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION).removeIf(removeIf(REMOVED_VEGETAL));
+            gen.getFeatures(GenerationStep.Decoration.SURFACE_STRUCTURES).removeIf(removeIf(REMOVED_STRUCTURES));
 
             if (name != null)
             {
@@ -189,6 +190,7 @@ public class ForgeEvents
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.BLACKSTONE_BOULDER));
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.COBBLE_BOULDER));
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.SULFUR_PATCH));
+                    gen.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, get(BeneathPlacements.DELTA));
                 }
 
                 gen.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, get(BeneathPlacements.AMETHYST_GEODE));
@@ -235,5 +237,9 @@ public class ForgeEvents
         new ResourceLocation("ore_gold_deltas"),
         new ResourceLocation("ore_ancient_debris_large"),
         new ResourceLocation("ore_ancient_debris_small")
+    );
+
+    private static final List<ResourceLocation> REMOVED_STRUCTURES = List.of(
+        new ResourceLocation("delta")
     );
 }

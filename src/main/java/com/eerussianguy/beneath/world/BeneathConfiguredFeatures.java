@@ -18,13 +18,17 @@ import com.eerussianguy.beneath.world.feature.NetherSpikesFeature;
 import com.eerussianguy.beneath.world.feature.WeightedStateConfig;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.Registry;
+import net.minecraft.data.worldgen.features.NetherFeatures;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.DeltaFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.DeltaFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
@@ -126,6 +130,13 @@ public class BeneathConfiguredFeatures
     public static final RegistryObject<ConfiguredFeature<WeightedStateConfig, NetherBouldersFeature>> BLACKSTONE_BOULDER = register("nether_boulders", () -> new ConfiguredFeature<>(BeneathFeatures.NETHER_BOULDERS.get(), new WeightedStateConfig(new Weighted<>(Map.of(Blocks.BLACKSTONE.defaultBlockState(), 50d, Blocks.BASALT.defaultBlockState(), 10d, Blocks.GILDED_BLACKSTONE.defaultBlockState(), 1d)))));
     public static final RegistryObject<ConfiguredFeature<WeightedStateConfig, NetherBouldersFeature>> COBBLE_BOULDER = register("cobble_boulder", () -> new ConfiguredFeature<>(BeneathFeatures.NETHER_BOULDERS.get(), new WeightedStateConfig(new Weighted<>(Map.of(Blocks.NETHERRACK.defaultBlockState(), 10d, BeneathBlocks.COBBLERACK.get().defaultBlockState(), 20d, BeneathBlocks.FUNGAL_COBBLERACK.get().defaultBlockState(), 10d)))));
     public static final RegistryObject<ConfiguredFeature<TFCGeodeConfig, TFCGeodeFeature>> AMETHYST_GEODE = register("amethyst_geode", () -> new ConfiguredFeature<>(TFCFeatures.GEODE.get(), new TFCGeodeConfig(Blocks.BLACKSTONE.defaultBlockState(), tfcRock(Rock.QUARTZITE, Rock.BlockType.RAW), SimpleWeightedRandomList.<BlockState>builder().add(tfcRock(Rock.QUARTZITE, Rock.BlockType.RAW), 2).add(getMineral(Rock.QUARTZITE, Ore.AMETHYST), 1).build())));
+
+    public static final RegistryObject<ConfiguredFeature<DeltaFeatureConfiguration, Feature<DeltaFeatureConfiguration>>> DELTA = register("delta", () -> new ConfiguredFeature<>(Feature.DELTA_FEATURE, new DeltaFeatureConfiguration(
+        Blocks.LAVA.defaultBlockState(),
+        TFCBlocks.MAGMA_BLOCKS.get(Rock.BASALT).get().defaultBlockState(),
+        UniformInt.of(3, 7),
+        UniformInt.of(0, 2)
+    )));
 
     public static final RegistryObject<ConfiguredFeature<RandomTreeConfig, RandomTreeFeature>> CRIMSON_TREE = register("tree/crimson", () -> new ConfiguredFeature<>(TFCFeatures.RANDOM_TREE.get(),
         new RandomTreeConfig(
