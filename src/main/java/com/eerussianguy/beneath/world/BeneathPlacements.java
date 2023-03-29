@@ -1,6 +1,7 @@
 package com.eerussianguy.beneath.world;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
@@ -27,6 +28,9 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
+import net.dries007.tfc.common.blocks.rock.Rock;
+import net.dries007.tfc.common.blocks.rock.RockCategory;
+import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.world.blockpredicate.ReplaceablePredicate;
 import net.dries007.tfc.world.placement.FlatEnoughPlacement;
 
@@ -53,6 +57,19 @@ public class BeneathPlacements
     public static final RegistryObject<PlacedFeature> WARPED_TREE = register("tree/warped", BeneathConfiguredFeatures.WARPED_TREE, () -> List.of(everyLayer(8), BiomeFilter.biome()));
     public static final RegistryObject<PlacedFeature> AMETHYST_GEODE = register("amethyst_geode", BeneathConfiguredFeatures.AMETHYST_GEODE, () -> List.of(RarityFilter.onAverageOnceEvery(100), HeightRangePlacement.uniform(VerticalAnchor.BOTTOM, VerticalAnchor.aboveBottom(32)), InSquarePlacement.spread()));
     public static final RegistryObject<PlacedFeature> DELTA = register("delta", BeneathConfiguredFeatures.DELTA, () -> List.of(everyLayer(40), BiomeFilter.biome()));
+    public static final Map<Rock, RegistryObject<PlacedFeature>> MAGMA_ORES = Helpers.mapOfKeys(Rock.class, rock -> rock.category() == RockCategory.IGNEOUS_EXTRUSIVE, rock ->
+        register("magma_" + rock.getSerializedName(), BeneathConfiguredFeatures.MAGMA_ORES.get(rock), () -> commonOrePlacement(24, HeightRangePlacement.uniform(VerticalAnchor.absolute(27), VerticalAnchor.absolute(36))))
+    );
+
+    private static List<PlacementModifier> orePlacement(PlacementModifier mod, PlacementModifier mod2)
+    {
+        return List.of(mod, InSquarePlacement.spread(), mod2, BiomeFilter.biome());
+    }
+
+    private static List<PlacementModifier> commonOrePlacement(int rarity, PlacementModifier mod)
+    {
+        return orePlacement(CountPlacement.of(rarity), mod);
+    }
 
     @SuppressWarnings("deprecation")
     private static CountOnEveryLayerPlacement everyLayer(int amount)

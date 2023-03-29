@@ -3,6 +3,7 @@ package com.eerussianguy.beneath;
 import java.util.List;
 import java.util.function.Predicate;
 import com.eerussianguy.beneath.common.blocks.BeneathBlockTags;
+import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
 import com.eerussianguy.beneath.common.entities.BeneathEntities;
 import com.eerussianguy.beneath.common.network.BeneathPackets;
 import com.eerussianguy.beneath.misc.NetherClimateModel;
@@ -22,13 +23,17 @@ import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.common.world.MobSpawnSettingsBuilder;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -38,6 +43,7 @@ import net.minecraftforge.event.entity.EntityMobGriefingEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.network.PacketDistributor;
@@ -60,6 +66,7 @@ public class ForgeEvents
         bus.addListener(ForgeEvents::onBiomeLoad);
         bus.addListener(ForgeEvents::onBreakSpeed);
         bus.addListener(ForgeEvents::onMobGriefing);
+        bus.addListener(ForgeEvents::onToolUse);
         bus.addListener(ForgeEvents::onLogin);
         bus.addListener(ForgeEvents::onSelectClimateModel);
         bus.addListener(ForgeEvents::onDataSync);
@@ -158,6 +165,7 @@ public class ForgeEvents
             gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.NORMAL_GOLD_VEIN));
             gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.DEEP_GOLD_VEIN));
             gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.CURSECOAL_VEIN));
+            BeneathPlacements.MAGMA_ORES.values().forEach(ore -> gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(ore)));
 
             gen.getFeatures(GenerationStep.Decoration.UNDERGROUND_DECORATION).removeIf(removeIf(REMOVED_ORES));
             gen.getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION).removeIf(removeIf(REMOVED_VEGETAL));
@@ -198,9 +206,21 @@ public class ForgeEvents
         }
     }
 
+    private static void onToolUse(BlockEvent.BlockToolModificationEvent event)
+    {
+        if (event.getToolAction() == ToolActions.HOE_TILL)
+        {
+            final UseOnContext context = event.getContext();
+            if (context != null && context.getLevel().getBlockState(context.getClickedPos()).getBlock() == Blocks.SOUL_SOIL)
+            {
+                event.setFinalState(BeneathBlocks.SOUL_FARMLAND.get().defaultBlockState());
+            }
+        }
+    }
+
     private static void onMobGriefing(EntityMobGriefingEvent event)
     {
-        if (event.getEntity() instanceof LargeFireball)
+        if (event.getEntity() instanceof LargeFireball && event.getEntity().level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING))
         {
             event.setResult(Event.Result.ALLOW);
         }
@@ -236,7 +256,8 @@ public class ForgeEvents
         new ResourceLocation("ore_gold_nether"),
         new ResourceLocation("ore_gold_deltas"),
         new ResourceLocation("ore_ancient_debris_large"),
-        new ResourceLocation("ore_ancient_debris_small")
+        new ResourceLocation("ore_ancient_debris_small"),
+        new ResourceLocation("ore_magma")
     );
 
     private static final List<ResourceLocation> REMOVED_STRUCTURES = List.of(

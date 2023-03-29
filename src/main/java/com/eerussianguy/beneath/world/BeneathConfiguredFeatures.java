@@ -28,11 +28,14 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.DeltaFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.OreFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.DeltaFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
@@ -40,7 +43,9 @@ import org.jetbrains.annotations.Nullable;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.rock.Ore;
 import net.dries007.tfc.common.blocks.rock.Rock;
+import net.dries007.tfc.common.blocks.rock.RockCategory;
 import net.dries007.tfc.common.blocks.wood.Wood;
+import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.collections.IWeighted;
 import net.dries007.tfc.util.collections.Weighted;
 import net.dries007.tfc.world.feature.TFCFeatures;
@@ -137,6 +142,10 @@ public class BeneathConfiguredFeatures
         UniformInt.of(3, 7),
         UniformInt.of(0, 2)
     )));
+
+    public static final Map<Rock, RegistryObject<ConfiguredFeature<OreConfiguration, Feature<OreConfiguration>>>> MAGMA_ORES = Helpers.mapOfKeys(Rock.class, rock -> rock.category() == RockCategory.IGNEOUS_EXTRUSIVE, rock ->
+        register("magma_" + rock.getSerializedName(), () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(Blocks.NETHERRACK), TFCBlocks.MAGMA_BLOCKS.get(rock).get().defaultBlockState(), 33)))
+    );
 
     public static final RegistryObject<ConfiguredFeature<RandomTreeConfig, RandomTreeFeature>> CRIMSON_TREE = register("tree/crimson", () -> new ConfiguredFeature<>(TFCFeatures.RANDOM_TREE.get(),
         new RandomTreeConfig(
