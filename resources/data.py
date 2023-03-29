@@ -186,8 +186,20 @@ def generate(rm: ResourceManager):
     ### FOODS ###
     food_item(rm, 'ghost_pepper', 'beneath:ghost_pepper', Category.vegetable, 4, 1, 0, 2.5, veg=1)
 
+    ### FERTILIZERS ###
+    n_fertilizer(rm, 'pure_death', 'beneath:pure_death', death=0.1)
+    n_fertilizer(rm, 'pure_decay', 'beneath:pure_decay', decay=0.1)
+    n_fertilizer(rm, 'pure_destruction', 'beneath:pure_destruction', destr=0.1)
+    n_fertilizer(rm, 'pure_sorrow', 'beneath:pure_sorrow', sorrow=0.1)
+    n_fertilizer(rm, 'pure_flame', 'beneath:pure_flame', flame=0.1)
+
+    n_fertilizer(rm, 'sulfur', 'tfc:powder/sulfur', decay=0.2, flame=0.1)
+    n_fertilizer(rm, 'gunpowder', 'minecraft:gunpowder', destr=0.6, flame=0.1, death=0.4)
+    n_fertilizer(rm, 'ghast_tear', 'minecraft:ghast_tear', sorrow=0.3)
+    n_fertilizer(rm, 'blaze_powder', 'minecraft:blaze_powder', flame=0.2)
+
 def n_fertilizer(rm: ResourceManager, name: str, ingredient: str, death: float = None, destr: float = None, flame: float = None, decay: float = None, sorrow: float = None):
-    rm.data(('firmalife', 'nether_fertilizers', name), {
+    rm.data(('beneath', 'nether_fertilizers', name), {
         'ingredient': utils.ingredient(ingredient),
         'death': death,
         'destruction': destr,

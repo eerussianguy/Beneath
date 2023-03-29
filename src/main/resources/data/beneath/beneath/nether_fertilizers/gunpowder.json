@@ -1,0 +1,9 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "ingredient": {
+    "item": "minecraft:gunpowder"
+  },
+  "death": 0.4,
+  "destruction": 0.6,
+  "flame": 0.1
+}
