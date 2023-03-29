@@ -1,0 +1,11 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "ingredient": {
+    "item": "beneath:agonizing_fertilizer"
+  },
+  "death": 0.1,
+  "destruction": 0.1,
+  "flame": 0.1,
+  "decay": 0.1,
+  "sorrow": 0.1
+}

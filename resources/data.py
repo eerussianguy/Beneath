@@ -197,6 +197,7 @@ def generate(rm: ResourceManager):
     n_fertilizer(rm, 'gunpowder', 'minecraft:gunpowder', destr=0.6, flame=0.1, death=0.4)
     n_fertilizer(rm, 'ghast_tear', 'minecraft:ghast_tear', sorrow=0.3)
     n_fertilizer(rm, 'blaze_powder', 'minecraft:blaze_powder', flame=0.2)
+    n_fertilizer(rm, 'agonizing_fertilizer', 'beneath:agonizing_fertilizer', flame=0.1, death=0.1, decay=0.1, destr=0.1, sorrow=0.1)
 
 def n_fertilizer(rm: ResourceManager, name: str, ingredient: str, death: float = None, destr: float = None, flame: float = None, decay: float = None, sorrow: float = None):
     rm.data(('beneath', 'nether_fertilizers', name), {
