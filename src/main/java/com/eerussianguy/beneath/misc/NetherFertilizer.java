@@ -77,7 +77,7 @@ public class NetherFertilizer extends ItemDefinition
     {
         for (SoulFarmlandBlockEntity.NutrientType type : SoulFarmlandBlockEntity.NutrientType.VALUES)
         {
-            tooltip.add(Helpers.translatable("beneath.nutrient." + type.name(), format(getNutrient(type))));
+            tooltip.add(Helpers.translatable("beneath.nutrient." + type.getName(), format(getNutrient(type))));
         }
     }
 

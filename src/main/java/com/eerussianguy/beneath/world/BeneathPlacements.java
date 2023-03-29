@@ -58,17 +58,12 @@ public class BeneathPlacements
     public static final RegistryObject<PlacedFeature> AMETHYST_GEODE = register("amethyst_geode", BeneathConfiguredFeatures.AMETHYST_GEODE, () -> List.of(RarityFilter.onAverageOnceEvery(100), HeightRangePlacement.uniform(VerticalAnchor.BOTTOM, VerticalAnchor.aboveBottom(32)), InSquarePlacement.spread()));
     public static final RegistryObject<PlacedFeature> DELTA = register("delta", BeneathConfiguredFeatures.DELTA, () -> List.of(everyLayer(40), BiomeFilter.biome()));
     public static final Map<Rock, RegistryObject<PlacedFeature>> MAGMA_ORES = Helpers.mapOfKeys(Rock.class, rock -> rock.category() == RockCategory.IGNEOUS_EXTRUSIVE, rock ->
-        register("magma_" + rock.getSerializedName(), BeneathConfiguredFeatures.MAGMA_ORES.get(rock), () -> commonOrePlacement(24, HeightRangePlacement.uniform(VerticalAnchor.absolute(27), VerticalAnchor.absolute(36))))
+        register("magma_" + rock.getSerializedName(), BeneathConfiguredFeatures.MAGMA_ORES.get(rock), () -> orePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(27), VerticalAnchor.absolute(36))))
     );
 
-    private static List<PlacementModifier> orePlacement(PlacementModifier mod, PlacementModifier mod2)
+    private static List<PlacementModifier> orePlacement(int rarity, PlacementModifier heightFilter)
     {
-        return List.of(mod, InSquarePlacement.spread(), mod2, BiomeFilter.biome());
-    }
-
-    private static List<PlacementModifier> commonOrePlacement(int rarity, PlacementModifier mod)
-    {
-        return orePlacement(CountPlacement.of(rarity), mod);
+        return List.of(RarityFilter.onAverageOnceEvery(rarity), InSquarePlacement.spread(), heightFilter, BiomeFilter.biome());
     }
 
     @SuppressWarnings("deprecation")

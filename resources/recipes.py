@@ -18,7 +18,7 @@ def generate(rm: ResourceManager):
     rm.crafting_shaped('crafting/blackstone_aqueduct', ['X X', 'MXM'], {'X': 'beneath:blackstone_brick', 'M': '#tfc:mortar'}, 'beneath:blackstone_aqueduct').with_advancement('beneath:blackstone_brick')
     damage_shapeless(rm, 'crafting/cracked_blackstone_bricks', ('minecraft:polished_blackstone_bricks', '#tfc:hammers'), 'minecraft:cracked_polished_blackstone_bricks').with_advancement('minecraft:polished_blackstone_bricks')
     rm.crafting_shapeless('crafting/agonizing_fertilizer', tuple('beneath:pure_%s' % n for n in NUTRIENTS), 'beneath:agonizing_fertilizer').with_advancement('beneath:pure_flame')
-
+    rm.crafting_shapeless('crafting/cursed_hide_change', ('beneath:cursed_hide', 'tfc:powder/flux', 'tfc:powder/flux', 'minecraft:white_dye'), 'tfc:large_raw_hide').with_advancement('beneath:cursed_hide')
 
     ### HEATING RECIPES ###
     metal_data = TFC_METALS['gold']
