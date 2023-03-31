@@ -82,7 +82,7 @@ def generate(rm: ResourceManager):
     rm.blockstate('sulfur', variants={'': [{'model': 'beneath:block/sulfur%s' % i} for i in range(0, 4)]}, use_default_model=False).with_block_loot('tfc:powder/sulfur').with_lang(lang('sulfur')).with_tag('minecraft:mineable/shovel')
 
     for crop, stages in DEFAULT_CROPS.items():
-        name = 'beneath:%s' % crop if crop in ('ghost_pepper', 'gleam_flower') else 'minecraft:%s' % crop
+        name = 'beneath:%s' % crop if crop in ('ghost_pepper', 'gleamflower') else 'minecraft:%s' % crop
         block = rm.blockstate(('crop', crop), variants=dict(('age=%d' % i, {'model': 'beneath:block/crop/%s_age_%d' % (crop, i)}) for i in range(stages)))
         block.with_lang(lang(crop))
         for i in range(stages):
@@ -114,6 +114,8 @@ def generate(rm: ResourceManager):
     rm.block_model('blackstone_aqueduct_west', textures, parent='tfc:block/aqueduct/west')
 
     rm.blockstate('soul_farmland').with_block_loot('minecraft:soul_soil').with_lang(lang('soul farmland')).with_block_model({'dirt': 'minecraft:block/soul_soil', 'top': 'beneath:block/soul_farmland'}, 'minecraft:block/template_farmland').with_tag('minecraft:mineable/shovel').with_item_model()
+    rm.blockstate('soul_clay').with_block_loot('1-4 minecraft:clay_ball').with_lang(lang('soul clay')).with_block_model(textures={'end': 'minecraft:block/soul_sand', 'side': 'beneath:block/soul_clay'}, parent='block/cube_column').with_tag('minecraft:mineable/shovel').with_item_model()
+    rm.blockstate('crackrack').with_block_loot('1-4 beneath:crackrack_rock').with_lang(lang('crackrack')).with_block_model().with_tag('minecraft:mineable/pickaxe').with_tag('minecraft:base_stone_nether').with_item_model()
 
     simple_block(rm, 'cobblerack', 'minecraft:mineable/pickaxe', 'forge:cobblestone')
     simple_block(rm, 'fungal_cobblerack', 'minecraft:mineable/pickaxe')

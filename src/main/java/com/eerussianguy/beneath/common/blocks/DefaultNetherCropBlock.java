@@ -2,6 +2,7 @@ package com.eerussianguy.beneath.common.blocks;
 
 import java.util.function.Supplier;
 import com.eerussianguy.beneath.common.blockentities.SoulFarmlandBlockEntity;
+import com.eerussianguy.beneath.common.items.BeneathItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -11,7 +12,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.dries007.tfc.common.blockentities.CropBlockEntity;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
-import net.dries007.tfc.common.items.TFCItems;
 
 public abstract class DefaultNetherCropBlock extends NetherCropBlock
 {
@@ -19,7 +19,7 @@ public abstract class DefaultNetherCropBlock extends NetherCropBlock
     public static DefaultNetherCropBlock create(ExtendedProperties properties, int stages, NCrop crop)
     {
         final IntegerProperty property = TFCBlockStateProperties.getAgeProperty(stages - 1);
-        return new DefaultNetherCropBlock(properties, stages - 1, TFCItems.CROP_SEEDS.get(crop), crop.getNutrient())
+        return new DefaultNetherCropBlock(properties, stages - 1, BeneathItems.SEEDS.get(crop), crop.getNutrient())
         {
             @Override
             public IntegerProperty getAgeProperty()

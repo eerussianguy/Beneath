@@ -37,6 +37,7 @@ public class BeneathItems
 
     public static final RegistryObject<Item> AGONIZING_FERTILIZER = register("agonizing_fertilizer", ItemGroup.BENEATH);
     public static final RegistryObject<Item> BLACKSTONE_BRICK = register("blackstone_brick", ItemGroup.BENEATH);
+    public static final RegistryObject<Item> CRACKRACK_ROCK = register("crackrack_rock", ItemGroup.BENEATH);
     public static final RegistryObject<Item> CRIMSON_STRAW = register("crimson_straw", ItemGroup.BENEATH);
     public static final RegistryObject<Item> CURSECOAL = register("cursecoal", ItemGroup.BENEATH);
     public static final RegistryObject<Item> CURSED_HIDE = register("cursed_hide", ItemGroup.BENEATH);

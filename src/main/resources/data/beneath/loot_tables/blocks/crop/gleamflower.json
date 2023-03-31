@@ -8,7 +8,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:gleamflower",
+          "name": "beneath:gleamflower",
           "conditions": [
             {
               "condition": "minecraft:block_state_property",

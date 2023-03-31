@@ -43,6 +43,7 @@ public class BeneathPlacements
     public static final RegistryObject<PlacedFeature> NORMAL_GOLD_VEIN = register("vein/normal_gold", BeneathConfiguredFeatures.NORMAL_GOLD_VEIN);
     public static final RegistryObject<PlacedFeature> DEEP_GOLD_VEIN = register("vein/deep_gold", BeneathConfiguredFeatures.DEEP_GOLD_VEIN);
     public static final RegistryObject<PlacedFeature> CURSECOAL_VEIN = register("vein/cursecoal", BeneathConfiguredFeatures.CURSECOAL_VEIN);
+    public static final RegistryObject<PlacedFeature> CRACKRACK_PIPE_VEIN = register("vein/crackrack_pipe", BeneathConfiguredFeatures.CRACKRACK_PIPE_VEIN);
     public static final RegistryObject<PlacedFeature> NETHER_SPIKES = register("nether_spikes", BeneathConfiguredFeatures.NETHER_SPIKES, () -> List.of(CountPlacement.of(128), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome()));
     public static final RegistryObject<PlacedFeature> GLOWSTONE_SPIKES = register("glowstone_spikes", BeneathConfiguredFeatures.GLOWSTONE_SPIKES, () -> List.of(RarityFilter.onAverageOnceEvery(3), CountPlacement.of(32), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome()));
     public static final RegistryObject<PlacedFeature> NETHER_PEBBLE = register("nether_pebble", BeneathConfiguredFeatures.NETHER_PEBBLE, () -> List.of(BlockPredicateFilter.forPredicate(ReplaceablePredicate.INSTANCE), BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(BeneathBlocks.NETHER_PEBBLE.get().defaultBlockState(), Vec3i.ZERO)), BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluid(Fluids.EMPTY, Vec3i.ZERO))));
@@ -57,6 +58,8 @@ public class BeneathPlacements
     public static final RegistryObject<PlacedFeature> WARPED_TREE = register("tree/warped", BeneathConfiguredFeatures.WARPED_TREE, () -> List.of(everyLayer(8), BiomeFilter.biome()));
     public static final RegistryObject<PlacedFeature> AMETHYST_GEODE = register("amethyst_geode", BeneathConfiguredFeatures.AMETHYST_GEODE, () -> List.of(RarityFilter.onAverageOnceEvery(100), HeightRangePlacement.uniform(VerticalAnchor.BOTTOM, VerticalAnchor.aboveBottom(32)), InSquarePlacement.spread()));
     public static final RegistryObject<PlacedFeature> DELTA = register("delta", BeneathConfiguredFeatures.DELTA, () -> List.of(everyLayer(40), BiomeFilter.biome()));
+    public static final RegistryObject<PlacedFeature> SOUL_CLAY_DISC = register("soul_clay_disc", BeneathConfiguredFeatures.SOUL_CLAY_DISC, () -> List.of(RarityFilter.onAverageOnceEvery(20), everyLayer(1), new FlatEnoughPlacement(0.4f, 2, 4)));
+
     public static final Map<Rock, RegistryObject<PlacedFeature>> MAGMA_ORES = Helpers.mapOfKeys(Rock.class, rock -> rock.category() == RockCategory.IGNEOUS_EXTRUSIVE, rock ->
         register("magma_" + rock.getSerializedName(), BeneathConfiguredFeatures.MAGMA_ORES.get(rock), () -> orePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(27), VerticalAnchor.absolute(36))))
     );

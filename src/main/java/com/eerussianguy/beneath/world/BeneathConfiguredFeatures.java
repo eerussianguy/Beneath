@@ -48,6 +48,8 @@ import net.dries007.tfc.common.blocks.wood.Wood;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.collections.IWeighted;
 import net.dries007.tfc.util.collections.Weighted;
+import net.dries007.tfc.world.feature.SoilDiscConfig;
+import net.dries007.tfc.world.feature.SoilDiscFeature;
 import net.dries007.tfc.world.feature.TFCFeatures;
 import net.dries007.tfc.world.feature.TFCGeodeConfig;
 import net.dries007.tfc.world.feature.TFCGeodeFeature;
@@ -58,6 +60,8 @@ import net.dries007.tfc.world.feature.tree.TrunkConfig;
 import net.dries007.tfc.world.feature.vein.ClusterVeinFeature;
 import net.dries007.tfc.world.feature.vein.DiscVeinConfig;
 import net.dries007.tfc.world.feature.vein.DiscVeinFeature;
+import net.dries007.tfc.world.feature.vein.PipeVeinConfig;
+import net.dries007.tfc.world.feature.vein.PipeVeinFeature;
 import net.dries007.tfc.world.feature.vein.VeinConfig;
 
 public class BeneathConfiguredFeatures
@@ -112,17 +116,30 @@ public class BeneathConfiguredFeatures
         Optional.empty()
     )));
 
-    public static final RegistryObject<ConfiguredFeature<DiscVeinConfig, DiscVeinFeature>> CURSECOAL_VEIN = register("vein/cursecoal", () -> new ConfiguredFeature<>(TFCFeatures.DISC_VEIN.get(), new TempDVConfig(new VeinConfig(
+    public static final RegistryObject<ConfiguredFeature<DiscVeinConfig, DiscVeinFeature>> CURSECOAL_VEIN = register("vein/cursecoal", () -> new ConfiguredFeature<>(TFCFeatures.DISC_VEIN.get(), new DiscVeinConfig(new VeinConfig(
         ImmutableMap.of(Blocks.NETHERRACK, IWeighted.singleton(getMineral(BeneathMineral.NETHER_CURSECOAL))),
         Optional.empty(),
         45,
         13,
         0.88f,
         VerticalAnchor.absolute(80),
-        VerticalAnchor.absolute(128),
+        VerticalAnchor.absolute(127),
         "cursecoal",
         Optional.empty()
     ), 3)));
+
+    public static final RegistryObject<ConfiguredFeature<PipeVeinConfig, PipeVeinFeature>> CRACKRACK_PIPE_VEIN = register("vein/crackrack", () -> new ConfiguredFeature<>(TFCFeatures.PIPE_VEIN.get(), new PipeVeinConfig(new VeinConfig(
+        ImmutableMap.of(Blocks.NETHERRACK, IWeighted.singleton(BeneathBlocks.CRACKRACK.get().defaultBlockState())),
+        Optional.empty(),
+        45,
+        50,
+        0.95f,
+        VerticalAnchor.absolute(1),
+        VerticalAnchor.absolute(127),
+        "crackrack_pipe",
+        Optional.empty()
+    ), 4, 1, 5, 1, 3, 0.5f)));
+
 
     public static final RegistryObject<ConfiguredFeature<NetherSpikeConfig, NetherSpikesFeature>> NETHER_SPIKES = register("nether_spikes", () -> new ConfiguredFeature<>(BeneathFeatures.NETHER_SPIKES.get(), new NetherSpikeConfig(Blocks.NETHERRACK.defaultBlockState(), BeneathBlocks.HAUNTED_SPIKE.get().defaultBlockState())));
     public static final RegistryObject<ConfiguredFeature<NetherSpikeConfig, LargeNetherSpikesFeature>> GLOWSTONE_SPIKES = register("large_nether_spikes", () -> new ConfiguredFeature<>(BeneathFeatures.LARGE_NETHER_SPIKES.get(), new NetherSpikeConfig(Blocks.GLOWSTONE.defaultBlockState(), BeneathBlocks.GLOWSTONE_SPIKE.get().defaultBlockState())));
@@ -135,6 +152,7 @@ public class BeneathConfiguredFeatures
     public static final RegistryObject<ConfiguredFeature<WeightedStateConfig, NetherBouldersFeature>> BLACKSTONE_BOULDER = register("nether_boulders", () -> new ConfiguredFeature<>(BeneathFeatures.NETHER_BOULDERS.get(), new WeightedStateConfig(new Weighted<>(Map.of(Blocks.BLACKSTONE.defaultBlockState(), 50d, Blocks.BASALT.defaultBlockState(), 10d, Blocks.GILDED_BLACKSTONE.defaultBlockState(), 1d)))));
     public static final RegistryObject<ConfiguredFeature<WeightedStateConfig, NetherBouldersFeature>> COBBLE_BOULDER = register("cobble_boulder", () -> new ConfiguredFeature<>(BeneathFeatures.NETHER_BOULDERS.get(), new WeightedStateConfig(new Weighted<>(Map.of(Blocks.NETHERRACK.defaultBlockState(), 10d, BeneathBlocks.COBBLERACK.get().defaultBlockState(), 20d, BeneathBlocks.FUNGAL_COBBLERACK.get().defaultBlockState(), 10d)))));
     public static final RegistryObject<ConfiguredFeature<TFCGeodeConfig, TFCGeodeFeature>> AMETHYST_GEODE = register("amethyst_geode", () -> new ConfiguredFeature<>(TFCFeatures.GEODE.get(), new TFCGeodeConfig(Blocks.BLACKSTONE.defaultBlockState(), tfcRock(Rock.QUARTZITE, Rock.BlockType.RAW), SimpleWeightedRandomList.<BlockState>builder().add(tfcRock(Rock.QUARTZITE, Rock.BlockType.RAW), 2).add(getMineral(Rock.QUARTZITE, Ore.AMETHYST), 1).build())));
+    public static final RegistryObject<ConfiguredFeature<SoilDiscConfig, SoilDiscFeature>> SOUL_CLAY_DISC = register("soul_clay_disc", () -> new ConfiguredFeature<>(TFCFeatures.SOIL_DISC.get(), new SoilDiscConfig(Map.of(Blocks.SOUL_SAND, BeneathBlocks.SOUL_CLAY.get().defaultBlockState()), 3, 6, 4)));
 
     public static final RegistryObject<ConfiguredFeature<DeltaFeatureConfiguration, Feature<DeltaFeatureConfiguration>>> DELTA = register("delta", () -> new ConfiguredFeature<>(Feature.DELTA_FEATURE, new DeltaFeatureConfiguration(
         Blocks.LAVA.defaultBlockState(),

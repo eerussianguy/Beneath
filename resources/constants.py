@@ -27,7 +27,9 @@ TREE_SAPLING_DROP_CHANCES = {
 
 NUTRIENTS = ('death', 'destruction', 'decay', 'sorrow', 'flame')
 
-SIMPLE_ITEMS = ('gold_chunk', 'cursed_hide', 'cursecoal', 'pure_death', 'pure_decay', 'pure_destruction', 'pure_sorrow', 'pure_flame', 'agonizing_fertilizer', 'crimson_straw', 'warped_straw', 'ghost_pepper', 'blackstone_brick')
+SIMPLE_ITEMS = ('gold_chunk', 'cursed_hide', 'cursecoal', 'pure_death', 'pure_decay', 'pure_destruction', 'pure_sorrow', 'pure_flame', 'agonizing_fertilizer', 'crimson_straw', 'warped_straw', 'ghost_pepper', 'blackstone_brick',
+                'crackrack_rock',
+                )
 
 ROCK_SPIKE_PARTS = ('base', 'middle', 'tip')
 

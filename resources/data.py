@@ -24,6 +24,7 @@ def generate(rm: ResourceManager):
     rm.block_loot('minecraft:blackstone', '2-4 beneath:blackstone_pebble')
     rm.block_loot('minecraft:crimson_roots', loot_tables.alternatives({'name': 'minecraft:crimson_roots', 'conditions': [loot_tables.match_tag('forge:shears')]}, {'name': 'beneath:crimson_straw', 'conditions': [loot_tables.match_tag('tfc:sharp_tools')]}, {'name': 'beneath:seeds/crimson_roots', 'conditions': [loot_tables.random_chance(0.1)]}))
     rm.block_loot('minecraft:warped_roots', loot_tables.alternatives({'name': 'minecraft:warped_roots', 'conditions': [loot_tables.match_tag('forge:shears')]}, {'name': 'beneath:warped_straw', 'conditions': [loot_tables.match_tag('tfc:sharp_tools')]}, {'name': 'beneath:seeds/warped_roots', 'conditions': [loot_tables.random_chance(0.1)]}))
+    rm.block_loot('minecraft:bone_block', '1-3 minecraft:bone_meal')
 
     rm.loot('minecraft:nether_bridge', {
         'rolls': uniform(2, 4),

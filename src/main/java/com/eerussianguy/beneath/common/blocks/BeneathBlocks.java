@@ -1,6 +1,7 @@
 package com.eerussianguy.beneath.common.blocks;
 
 import java.util.Map;
+import java.util.Properties;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import com.eerussianguy.beneath.Beneath;
@@ -8,14 +9,19 @@ import com.eerussianguy.beneath.common.blockentities.BeneathBlockEntities;
 import com.eerussianguy.beneath.common.items.BeneathItems;
 import com.eerussianguy.beneath.misc.ItemGroup;
 import javax.annotation.Nullable;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.DeferredRegister;
@@ -23,6 +29,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.common.blockentities.LoomBlockEntity;
+import net.dries007.tfc.common.blockentities.TFCBlockEntities;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.TFCMaterials;
@@ -32,9 +40,11 @@ import net.dries007.tfc.common.blocks.rock.MossGrowingBlock;
 import net.dries007.tfc.common.blocks.rock.MossSpreadingBlock;
 import net.dries007.tfc.common.blocks.rock.Ore;
 import net.dries007.tfc.common.blocks.rock.RockSpikeBlock;
+import net.dries007.tfc.common.blocks.wood.TFCLoomBlock;
 import net.dries007.tfc.common.blocks.wood.Wood;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.registry.RegistrationHelpers;
+import net.dries007.tfc.util.registry.RegistryWood;
 
 import static net.dries007.tfc.common.TFCItemGroup.*;
 
@@ -60,6 +70,8 @@ public class BeneathBlocks
     public static final Map<NCrop, RegistryObject<Block>> CROPS = Helpers.mapOfKeys(NCrop.class, crop -> register("crop/" + crop.name(), crop::create));
     public static final RegistryObject<Block> CRIMSON_THATCH = register("crimson_thatch", () -> new ThatchBlock(ExtendedProperties.of(TFCMaterials.THATCH_COLOR_LEAVES, MaterialColor.CRIMSON_STEM).strength(0.6F, 0.4F).noOcclusion().isViewBlocking(TFCBlocks::never).sound(TFCSounds.THATCH)), MISC);
     public static final RegistryObject<Block> WARPED_THATCH = register("warped_thatch", () -> new ThatchBlock(ExtendedProperties.of(TFCMaterials.THATCH_COLOR_LEAVES, MaterialColor.WARPED_STEM).strength(0.6F, 0.4F).noOcclusion().isViewBlocking(TFCBlocks::never).sound(TFCSounds.THATCH)), MISC);
+    public static final RegistryObject<Block> SOUL_CLAY = register("soul_clay", () -> new SoulClayBlock(BlockBehaviour.Properties.of(Material.SAND, MaterialColor.COLOR_BROWN).strength(0.5F).speedFactor(0.4F).sound(SoundType.SOUL_SAND).isValidSpawn(BeneathBlocks::always).isRedstoneConductor(BeneathBlocks::always).isViewBlocking(BeneathBlocks::always).isSuffocating(BeneathBlocks::always)), ItemGroup.BENEATH);
+    public static final RegistryObject<Block> CRACKRACK = register("crackrack", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).strength(5F).requiresCorrectToolForDrops().sound(SoundType.NETHERRACK)), ItemGroup.BENEATH);
 
     public static final Map<Stem, Map<Wood.BlockType, RegistryObject<Block>>> WOODS = Helpers.mapOfKeys(Stem.class, wood ->
         Helpers.mapOfKeys(Wood.BlockType.class, type ->
@@ -67,11 +79,30 @@ public class BeneathBlocks
         )
     );
 
+    public static Supplier<Block> createWood(Stem stem, Wood.BlockType blockType)
+    {
+        if (blockType == Wood.BlockType.LOOM)
+        {
+            return () -> new TFCLoomBlock(woodProperties(stem).strength(2.5F).noOcclusion().blockEntity(TFCBlockEntities.LOOM).ticks(LoomBlockEntity::tick), Beneath.identifier("block/wood/planks/" + stem.getSerializedName()));
+        }
+        return blockType.create(stem);
+    }
+
+    private static ExtendedProperties woodProperties(RegistryWood wood)
+    {
+        return ExtendedProperties.of(Material.WOOD, wood.woodColor()).sound(SoundType.WOOD);
+    }
+
     public static void registerFlowerPotFlowers()
     {
         FlowerPotBlock pot = (FlowerPotBlock) Blocks.FLOWER_POT;
         WOODS.forEach((wood, map) -> pot.addPlant(map.get(Wood.BlockType.SAPLING).getId(), map.get(Wood.BlockType.POTTED_SAPLING)));
     }
+
+    private static boolean always(BlockState s, BlockGetter l, BlockPos p, EntityType<?> t) { return true; }
+
+    private static boolean always(BlockState s, BlockGetter l, BlockPos p) { return true; }
+
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier)
     {

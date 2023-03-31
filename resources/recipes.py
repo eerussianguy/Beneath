@@ -8,6 +8,7 @@ from constants import *
 def generate(rm: ResourceManager):
     ### CRAFTING RECIPES ###
     rm.crafting_shaped('crafting/cobblerack', ['XX', 'XX'], {'X': 'beneath:nether_pebble'}, 'beneath:cobblerack').with_advancement('beneath:nether_pebble')
+    rm.crafting_shaped('crafting/crackrack', ['XX', 'XX'], {'X': 'beneath:crackrack_rock'}, 'beneath:crackrack').with_advancement('beneath:crackrack_rock')
     rm.crafting_shaped('crafting/crimson_thatch', ['XX', 'XX'], {'X': 'beneath:warped_straw'}, 'beneath:crimson_thatch').with_advancement('beneath:crimson_strawr')
     rm.crafting_shaped('crafting/warped_thatch', ['XX', 'XX'], {'X': 'beneath:warped_straw'}, 'beneath:warped_thatch').with_advancement('beneath:warped_straw')
     rm.crafting_shaped('crafting/blackstone', ['XX', 'XX'], {'X': 'beneath:blackstone_pebble'}, 'minecraft:blackstone').with_advancement('beneath:blackstone_pebble')
@@ -23,6 +24,9 @@ def generate(rm: ResourceManager):
     ### HEATING RECIPES ###
     metal_data = TFC_METALS['gold']
     heat_recipe(rm, 'gold_chunk', 'beneath:gold_chunk', metal_data.melt_temperature, None, '100 tfc:metal/gold')
+
+    ### BARREL RECIPES ###
+    barrel_sealed_recipe(rm, 'mortar', 'Mortar', 8000, 'minecraft:soul_sand', '100 tfc:limewater', output_item='16 tfc:mortar')
 
     ### COLLAPSE RECIPES ###
     # Note: TRIGGERS are auto-added by TFC to CAN_COLLAPSE
@@ -48,6 +52,7 @@ def generate(rm: ResourceManager):
     collapse_recipe(rm, 'glowstone_spike', 'beneath:glowstone_spike', copy_input=True)
 
     # Misc
+    basic_collapsible(rm, 'crackrack', 'beneath:crackrack', copy_input=True)
     basic_collapsible(rm, 'cobblerack', 'beneath:cobblerack', copy_input=True)
     basic_landslide(rm, 'cobblerack', 'beneath:cobblerack')
     basic_collapsible(rm, 'fungal_cobblerack', 'beneath:fungal_cobblerack', copy_input=True)
@@ -165,3 +170,49 @@ def collapse_recipe(rm: ResourceManager, name_parts: utils.ResourceIdentifier, i
         'result': result,
         'copy_input': copy_input
     })
+
+def barrel_sealed_recipe(rm: ResourceManager, name_parts: utils.ResourceIdentifier, translation: str, duration: int, input_item: Optional[Json] = None, input_fluid: Optional[Json] = None, output_item: Optional[Json] = None, output_fluid: Optional[Json] = None, on_seal: Optional[Json] = None, on_unseal: Optional[Json] = None, sound: Optional[str] = None):
+    rm.recipe(('barrel', name_parts), 'tfc:barrel_sealed', {
+        'input_item': item_stack_ingredient(input_item) if input_item is not None else None,
+        'input_fluid': fluid_stack_ingredient(input_fluid) if input_fluid is not None else None,
+        'output_item': item_stack_provider(output_item) if isinstance(output_item, str) else output_item,
+        'output_fluid': fluid_stack(output_fluid) if output_fluid is not None else None,
+        'duration': duration,
+        'on_seal': on_seal,
+        'on_unseal': on_unseal,
+        'sound': sound
+    })
+    res = utils.resource_location('tfc', name_parts)
+    rm.lang('tfc.recipe.barrel.' + res.domain + '.barrel.' + res.path.replace('/', '.'), lang(translation))
+
+def fluid_stack_ingredient(data_in: Json) -> Json:
+    if isinstance(data_in, dict):
+        return {
+            'ingredient': fluid_ingredient(data_in['ingredient']),
+            'amount': data_in['amount']
+        }
+    if pair := utils.maybe_unordered_pair(data_in, int, object):
+        amount, fluid = pair
+        return {'ingredient': fluid_ingredient(fluid), 'amount': amount}
+    fluid, tag, amount, _ = utils.parse_item_stack(data_in, False)
+    if tag:
+        return {'ingredient': {'tag': fluid}, 'amount': amount}
+    else:
+        return {'ingredient': fluid, 'amount': amount}
+
+def item_stack_ingredient(data_in: Json):
+    if isinstance(data_in, dict):
+        if 'type' in data_in:
+            return item_stack_ingredient({'ingredient': data_in})
+        return {
+            'ingredient': utils.ingredient(data_in['ingredient']),
+            'count': data_in['count'] if data_in.get('count') is not None else None
+        }
+    if pair := utils.maybe_unordered_pair(data_in, int, object):
+        count, item = pair
+        return {'ingredient': fluid_ingredient(item), 'count': count}
+    item, tag, count, _ = utils.parse_item_stack(data_in, False)
+    if tag:
+        return {'ingredient': {'tag': item}, 'count': count}
+    else:
+        return {'ingredient': {'item': item}, 'count': count}

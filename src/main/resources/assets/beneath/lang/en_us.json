@@ -102,6 +102,7 @@
   "item.beneath.warped_straw": "Warped Straw",
   "item.beneath.ghost_pepper": "Ghost Pepper",
   "item.beneath.blackstone_brick": "Blackstone Brick",
+  "item.beneath.crackrack_rock": "Crackrack Rock",
   "item.beneath.spawn_egg.red_elk": "Red Elk Spawn Egg",
   "block.beneath.ore.poor_nether_gold": "Poor Nether Gold Ore",
   "block.beneath.ore.poor_nether_gold.prospected": "Nether Gold",
@@ -133,8 +134,11 @@
   "item.beneath.seeds.warped_roots": "Warped Roots Seeds",
   "block.beneath.blackstone_aqueduct": "Blackstone Aqueduct",
   "block.beneath.soul_farmland": "Soul Farmland",
+  "block.beneath.soul_clay": "Soul Clay",
+  "block.beneath.crackrack": "Crackrack",
   "block.beneath.cobblerack": "Cobblerack",
   "block.beneath.fungal_cobblerack": "Fungal Cobblerack",
   "block.beneath.warped_thatch": "Warped Thatch",
-  "block.beneath.crimson_thatch": "Crimson Thatch"
+  "block.beneath.crimson_thatch": "Crimson Thatch",
+  "tfc.recipe.barrel.tfc.barrel.mortar": "Mortar"
 }
