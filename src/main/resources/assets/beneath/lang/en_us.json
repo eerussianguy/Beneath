@@ -85,6 +85,7 @@
   "beneath.nutrient.destruction": "Destruction: §6%s%%",
   "beneath.nutrient.flame": "Flame: §c%s%%",
   "beneath.nutrient.sorrow": "Sorrow: §9%s%%",
+  "beneath.block_entity.hellforge": "Hellforge",
   "death.attack.beneath.sulfur": "%1$s mined sulfur with an iron tool and blew themselves up.",
   "death.attack.beneath.sulfur.player": "%1$s mined sulfur with an iron tool and blew themselves up while trying to escape %2$s.",
   "entity.beneath.boat.crimson": "Crimson Boat",
@@ -132,6 +133,10 @@
   "item.beneath.seeds.nether_wart": "Nether Wart Seeds",
   "block.beneath.crop.warped_roots": "Warped Roots",
   "item.beneath.seeds.warped_roots": "Warped Roots Seeds",
+  "block.beneath.gleamflower": "Gleamflower",
+  "block.beneath.cursecoal_pile": "Cursecoal Pile",
+  "block.beneath.hellforge": "Hellforge",
+  "block.beneath.hellforge_side": "Hellforge",
   "block.beneath.blackstone_aqueduct": "Blackstone Aqueduct",
   "block.beneath.soul_farmland": "Soul Farmland",
   "block.beneath.soul_clay": "Soul Clay",
@@ -140,5 +145,6 @@
   "block.beneath.fungal_cobblerack": "Fungal Cobblerack",
   "block.beneath.warped_thatch": "Warped Thatch",
   "block.beneath.crimson_thatch": "Crimson Thatch",
+  "block.beneath.hellbricks": "Hellbricks",
   "tfc.recipe.barrel.tfc.barrel.mortar": "Mortar"
 }

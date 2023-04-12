@@ -96,6 +96,16 @@ def generate(rm: ResourceManager):
         })
         rm.item_model('seeds/%s' % crop).with_tag('tfc:seeds').with_lang(lang('%s seeds', crop))
 
+    rm.blockstate('gleamflower').with_block_model(parent='block/cross', textures={'cross': 'beneath:block/plant/gleamflower'}).with_block_loot('beneath:gleamflower').with_lang(lang('gleamflower')).with_tag('tfc:plants')
+    rm.item_model('gleamflower', 'beneath:block/plant/gleamflower')
+
+    rm.blockstate('cursecoal_pile', variants=dict((('layers=%d' % i), {'model': 'beneath:block/pile/cursecoal_height%d' % (i * 2) if i != 8 else 'beneath:block/pile/cursecoal_block'}) for i in range(1, 1 + 8))).with_lang(lang('Cursecoal Pile')).with_block_loot('beneath:cursecoal')
+    rm.block_model('pile/cursecoal_block', textures={'all': 'beneath:block/cursecoal'})
+    rm.blockstate('hellforge', variants=dict((('heat_level=%d' % i), {'model': 'beneath:block/hellforge/heat_%d' % i}) for i in range(0, 7 + 1))).with_lang(lang('Hellforge')).with_block_loot('7 beneath:cursecoal')
+    rm.blockstate('hellforge_side', variants=dict((('heat_level=%d' % i), {'model': 'beneath:block/hellforge/heat_%d' % i}) for i in range(0, 7 + 1))).with_lang(lang('Hellforge')).with_block_loot('7 beneath:cursecoal')
+    for stage in range(0, 7 + 1):
+        rm.block_model('hellforge/heat_%d' % stage, parent='tfc:block/charcoal_forge/template_forge', textures={'top': 'beneath:block/hellforge/%d' % stage})
+        rm.block_model('pile/cursecoal_height%d' % (stage * 2), parent='tfc:block/charcoal_pile/charcoal_height%s' % (stage * 2), textures={'texture': 'beneath:block/cursecoal', 'particle': 'beneath:block/cursecoal'})
 
     block = rm.blockstate_multipart('blackstone_aqueduct', *[
         {'model': 'beneath:block/blackstone_aqueduct_base'},
@@ -114,13 +124,15 @@ def generate(rm: ResourceManager):
     rm.block_model('blackstone_aqueduct_west', textures, parent='tfc:block/aqueduct/west')
 
     rm.blockstate('soul_farmland').with_block_loot('minecraft:soul_soil').with_lang(lang('soul farmland')).with_block_model({'dirt': 'minecraft:block/soul_soil', 'top': 'beneath:block/soul_farmland'}, 'minecraft:block/template_farmland').with_tag('minecraft:mineable/shovel').with_item_model()
-    rm.blockstate('soul_clay').with_block_loot('1-4 minecraft:clay_ball').with_lang(lang('soul clay')).with_block_model(textures={'end': 'minecraft:block/soul_sand', 'side': 'beneath:block/soul_clay'}, parent='block/cube_column').with_tag('minecraft:mineable/shovel').with_item_model()
+    rm.blockstate('soul_clay', variants={'up=true': {'model': 'beneath:block/soul_clay_up'}, 'up=false': {'model': 'beneath:block/soul_clay'}}).with_block_loot('1-4 minecraft:clay_ball').with_lang(lang('soul clay')).with_block_model(textures={'all': 'beneath:block/soul_clay'}).with_tag('minecraft:mineable/shovel').with_item_model()
+    rm.block_model('soul_clay_up', textures={'end': 'minecraft:block/soul_sand', 'side': 'beneath:block/soul_clay_up'}, parent='block/cube_column')
     rm.blockstate('crackrack').with_block_loot('1-4 beneath:crackrack_rock').with_lang(lang('crackrack')).with_block_model().with_tag('minecraft:mineable/pickaxe').with_tag('minecraft:base_stone_nether').with_item_model()
 
     simple_block(rm, 'cobblerack', 'minecraft:mineable/pickaxe', 'forge:cobblestone')
     simple_block(rm, 'fungal_cobblerack', 'minecraft:mineable/pickaxe')
     simple_block(rm, 'warped_thatch', 'tfc:mineable_with_sharp_tool')
     simple_block(rm, 'crimson_thatch', 'tfc:mineable_with_sharp_tool')
+    simple_block(rm, 'hellbricks', 'minecraft:mineable/pickaxe')
 
 
 def simple_block(rm: ResourceManager, name: str, *tags: str) -> BlockContext:

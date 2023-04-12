@@ -1,0 +1,29 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "heat_level=0": {
+      "model": "beneath:block/hellforge/heat_0"
+    },
+    "heat_level=1": {
+      "model": "beneath:block/hellforge/heat_1"
+    },
+    "heat_level=2": {
+      "model": "beneath:block/hellforge/heat_2"
+    },
+    "heat_level=3": {
+      "model": "beneath:block/hellforge/heat_3"
+    },
+    "heat_level=4": {
+      "model": "beneath:block/hellforge/heat_4"
+    },
+    "heat_level=5": {
+      "model": "beneath:block/hellforge/heat_5"
+    },
+    "heat_level=6": {
+      "model": "beneath:block/hellforge/heat_6"
+    },
+    "heat_level=7": {
+      "model": "beneath:block/hellforge/heat_7"
+    }
+  }
+}

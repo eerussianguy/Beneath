@@ -123,6 +123,31 @@
           "type": "minecraft:item",
           "name": "tfc:metal/boots/steel",
           "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:pure_sorrow",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:pure_flame",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:pure_death",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:pure_destruction",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:pure_decay",
+          "weight": 1
         }
       ]
     },

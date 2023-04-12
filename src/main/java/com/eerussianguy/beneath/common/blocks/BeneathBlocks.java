@@ -1,11 +1,11 @@
 package com.eerussianguy.beneath.common.blocks;
 
 import java.util.Map;
-import java.util.Properties;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.common.blockentities.BeneathBlockEntities;
+import com.eerussianguy.beneath.common.blockentities.HellforgeBlockEntity;
 import com.eerussianguy.beneath.common.items.BeneathItems;
 import com.eerussianguy.beneath.misc.ItemGroup;
 import javax.annotation.Nullable;
@@ -13,7 +13,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -24,6 +23,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -31,10 +31,12 @@ import net.minecraftforge.registries.RegistryObject;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.blockentities.LoomBlockEntity;
 import net.dries007.tfc.common.blockentities.TFCBlockEntities;
+import net.dries007.tfc.common.blocks.CharcoalPileBlock;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.TFCMaterials;
 import net.dries007.tfc.common.blocks.ThatchBlock;
+import net.dries007.tfc.common.blocks.devices.CharcoalForgeBlock;
 import net.dries007.tfc.common.blocks.rock.LooseRockBlock;
 import net.dries007.tfc.common.blocks.rock.MossGrowingBlock;
 import net.dries007.tfc.common.blocks.rock.MossSpreadingBlock;
@@ -72,10 +74,15 @@ public class BeneathBlocks
     public static final RegistryObject<Block> WARPED_THATCH = register("warped_thatch", () -> new ThatchBlock(ExtendedProperties.of(TFCMaterials.THATCH_COLOR_LEAVES, MaterialColor.WARPED_STEM).strength(0.6F, 0.4F).noOcclusion().isViewBlocking(TFCBlocks::never).sound(TFCSounds.THATCH)), MISC);
     public static final RegistryObject<Block> SOUL_CLAY = register("soul_clay", () -> new SoulClayBlock(BlockBehaviour.Properties.of(Material.SAND, MaterialColor.COLOR_BROWN).strength(0.5F).speedFactor(0.4F).sound(SoundType.SOUL_SAND).isValidSpawn(BeneathBlocks::always).isRedstoneConductor(BeneathBlocks::always).isViewBlocking(BeneathBlocks::always).isSuffocating(BeneathBlocks::always)), ItemGroup.BENEATH);
     public static final RegistryObject<Block> CRACKRACK = register("crackrack", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).strength(5F).requiresCorrectToolForDrops().sound(SoundType.NETHERRACK)), ItemGroup.BENEATH);
+    public static final RegistryObject<Block> HELLBRICKS = register("hellbricks", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).strength(5F).requiresCorrectToolForDrops().sound(SoundType.NETHER_BRICKS)), ItemGroup.BENEATH);
+    public static final RegistryObject<Block> HELLFORGE = register("hellforge", () -> new HellforgeBlock(ExtendedProperties.of(Material.DIRT, MaterialColor.COLOR_BLACK).strength(0.2F).randomTicks().sound(TFCSounds.CHARCOAL).lightLevel(state -> state.getValue(HellforgeBlock.HEAT) * 2).pathType(BlockPathTypes.DAMAGE_FIRE).blockEntity(BeneathBlockEntities.HELLFORGE).serverTicks(HellforgeBlockEntity::serverTick)));
+    public static final RegistryObject<Block> HELLFORGE_SIDE = register("hellforge_side", () -> new HellforgeSideBlock(ExtendedProperties.of(Material.DIRT, MaterialColor.COLOR_BLACK).strength(0.2f).randomTicks().sound(TFCSounds.CHARCOAL).lightLevel(state -> state.getValue(HellforgeBlock.HEAT) * 2).pathType(BlockPathTypes.DAMAGE_FIRE)));
+    public static final RegistryObject<Block> CURSECOAL_PILE = register("cursecoal_pile", () -> new CursecoalPileBlock(BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.COLOR_BLACK).strength(0.2F).sound(TFCSounds.CHARCOAL).isViewBlocking((state, level, pos) -> state.getValue(CharcoalPileBlock.LAYERS) >= 8).isSuffocating((state, level, pos) -> state.getValue(CharcoalPileBlock.LAYERS) >= 8)));
+    public static final RegistryObject<Block> GLEAMFLOWER = register("gleamflower", () -> new NFlower(ExtendedProperties.of(Material.REPLACEABLE_PLANT).sound(SoundType.GRASS).instabreak().speedFactor(0.8f).noCollission().flammable(60, 30).lightLevel(s -> 7)), ItemGroup.BENEATH);
 
     public static final Map<Stem, Map<Wood.BlockType, RegistryObject<Block>>> WOODS = Helpers.mapOfKeys(Stem.class, wood ->
         Helpers.mapOfKeys(Wood.BlockType.class, type ->
-            register(type.nameFor(wood), type.create(wood), type.createBlockItem(new Item.Properties().tab(ItemGroup.BENEATH)))
+            register(type.nameFor(wood), createWood(wood, type), type.createBlockItem(new Item.Properties().tab(ItemGroup.BENEATH)))
         )
     );
 

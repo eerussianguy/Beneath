@@ -20,6 +20,8 @@ def generate(rm: ResourceManager):
     damage_shapeless(rm, 'crafting/cracked_blackstone_bricks', ('minecraft:polished_blackstone_bricks', '#tfc:hammers'), 'minecraft:cracked_polished_blackstone_bricks').with_advancement('minecraft:polished_blackstone_bricks')
     rm.crafting_shapeless('crafting/agonizing_fertilizer', tuple('beneath:pure_%s' % n for n in NUTRIENTS), 'beneath:agonizing_fertilizer').with_advancement('beneath:pure_flame')
     rm.crafting_shapeless('crafting/cursed_hide_change', ('beneath:cursed_hide', 'tfc:powder/flux', 'tfc:powder/flux', 'minecraft:white_dye'), 'tfc:large_raw_hide').with_advancement('beneath:cursed_hide')
+    rm.crafting_shapeless('crafting/hellbricks', ('minecraft:nether_bricks', 'minecraft:magma_cream'), 'beneath:hellbricks').with_advancement('minecraft:magma_cream')
+
 
     ### HEATING RECIPES ###
     metal_data = TFC_METALS['gold']

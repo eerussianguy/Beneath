@@ -1,8 +1,7 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "parent": "block/cube_column",
+  "parent": "block/cube_all",
   "textures": {
-    "end": "minecraft:block/soul_sand",
-    "side": "beneath:block/soul_clay"
+    "all": "beneath:block/soul_clay"
   }
 }

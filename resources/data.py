@@ -39,6 +39,11 @@ def generate(rm: ResourceManager):
             weight('minecraft:golden_horse_armor', 8),
             weight('minecraft:iron_horse_armor', 5),
             weight('minecraft:obsidian', 5, 2, 4),
+            weight('beneath:pure_sorrow', 1),
+            weight('beneath:pure_flame', 1),
+            weight('beneath:pure_death', 1),
+            weight('beneath:pure_destruction', 1),
+            weight('beneath:pure_decay', 1),
         ]
     }, path='chests', loot_type='minecraft:chest')
     rm.loot('minecraft:bastion_treasure', {
@@ -53,6 +58,11 @@ def generate(rm: ResourceManager):
             weight('tfc:gem/diamond', 10),
             weight('tfc:gem/opal', 10),
             weight('tfc:gem/ruby', 10),
+            weight('beneath:pure_sorrow', 1),
+            weight('beneath:pure_flame', 1),
+            weight('beneath:pure_death', 1),
+            weight('beneath:pure_destruction', 1),
+            weight('beneath:pure_decay', 1),
         ]
     }, {
         'rolls': uniform(3, 4),
@@ -103,6 +113,11 @@ def generate(rm: ResourceManager):
             weight('tfc:metal/helmet/steel', 1),
             weight('tfc:metal/greaves/steel', 1),
             weight('tfc:metal/boots/steel', 1),
+            weight('beneath:pure_sorrow', 1),
+            weight('beneath:pure_flame', 1),
+            weight('beneath:pure_death', 1),
+            weight('beneath:pure_destruction', 1),
+            weight('beneath:pure_decay', 1),
         ]
     }, {
         'rolls': uniform(2, 4),
@@ -170,12 +185,16 @@ def generate(rm: ResourceManager):
 
     rm.block_tag('tfc:breaks_when_isolated', 'minecraft:basalt', 'minecraft:blackstone', 'minecraft:netherrack')
     rm.block_tag('tfc:tree_grows_on', 'minecraft:netherrack', 'minecraft:warped_nylium', 'minecraft:crimson_nylium')
+    rm.block_tag('beneath:hellforge_insulation', 'beneath:hellbricks')
+    rm.block_tag('beneath:nether_bush_plantable_on', '#minecraft:base_stone_nether', 'minecraft:soul_soil', 'minecraft:soul_sand', 'beneath:soul_farmland')
     rm.block_tag('minecraft:mineable/pickaxe', 'beneath:blackstone_aqueduct')
+    rm.block_tag('minecraft:mineable/shovel', 'beneath:cursecoal_pile', 'beneath:hellforge')
 
     ### ITEM TAGS ###
     rm.item_tag('sparks_on_sulfur', *['#tfc:metal_item/%s' % metal for metal in ('black_steel', 'blue_steel', 'red_steel', 'steel', 'wrought_iron', 'cast_iron')])
 
     block_and_item_tag(rm, 'tfc:rock/aqueduct', 'beneath:blackstone_aqueduct')
+    block_and_item_tag(rm, 'minecraft:stone_bricks', 'beneath:hellbricks')
 
     ### ITEM HEATS ###
     metal_data = TFC_METALS['gold']

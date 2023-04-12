@@ -7,6 +7,7 @@ import com.eerussianguy.beneath.common.BeneathDispenserBehaviors;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
 import com.eerussianguy.beneath.common.entities.BeneathEntities;
 import com.eerussianguy.beneath.misc.BeneathClimateModels;
+import com.eerussianguy.beneath.misc.BeneathInteractionManager;
 import com.eerussianguy.beneath.mixin.BlockEntityTypeAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -41,6 +42,8 @@ public class ModEvents
             modifyFlammability();
             modifyBlockEntityTypes();
         });
+
+        BeneathInteractionManager.init();
     }
 
     private static void modifyFlammability()

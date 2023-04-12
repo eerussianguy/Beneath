@@ -32,7 +32,10 @@ public class SoulFarmlandBlockEntity extends TFCBlockEntity
     {
         for (NutrientType type : NutrientType.VALUES)
         {
-            tooltip.add(Helpers.translatable("beneath.nutrient." + type.getName(), format(getNutrient(type))));
+            if (getNutrient(type) > 0)
+            {
+                tooltip.add(Helpers.translatable("beneath.nutrient." + type.getName(), format(getNutrient(type))));
+            }
         }
     }
 

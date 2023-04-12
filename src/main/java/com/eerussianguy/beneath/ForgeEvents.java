@@ -2,13 +2,18 @@ package com.eerussianguy.beneath;
 
 import java.util.List;
 import java.util.function.Predicate;
+import com.eerussianguy.beneath.common.blockentities.HellforgeBlockEntity;
 import com.eerussianguy.beneath.common.blocks.BeneathBlockTags;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
+import com.eerussianguy.beneath.common.blocks.CursecoalPileBlock;
+import com.eerussianguy.beneath.common.blocks.HellforgeBlock;
+import com.eerussianguy.beneath.common.blocks.HellforgeSideBlock;
 import com.eerussianguy.beneath.common.entities.BeneathEntities;
 import com.eerussianguy.beneath.common.network.BeneathPackets;
 import com.eerussianguy.beneath.misc.NetherClimateModel;
 import com.eerussianguy.beneath.misc.NetherFertilizer;
 import com.eerussianguy.beneath.world.BeneathPlacements;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,7 +34,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.common.MinecraftForge;
@@ -51,11 +58,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import net.dries007.tfc.common.TFCTags;
+import net.dries007.tfc.common.blocks.devices.CharcoalForgeBlock;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.config.TFCConfig;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.Metal;
 import net.dries007.tfc.util.events.SelectClimateModelEvent;
+import net.dries007.tfc.util.events.StartFireEvent;
 
 public class ForgeEvents
 {
@@ -73,6 +82,7 @@ public class ForgeEvents
         bus.addListener(ForgeEvents::onReloadListeners);
         bus.addListener(ForgeEvents::onEntityJoinLevel);
         bus.addListener(ForgeEvents::onSpawnCheck);
+        bus.addListener(ForgeEvents::onFireStart);
     }
 
     private static final EquipmentSlot[] SLOTS = EquipmentSlot.values();
@@ -88,6 +98,45 @@ public class ForgeEvents
     private static void onReloadListeners(AddReloadListenerEvent event)
     {
         event.addListener(NetherFertilizer.MANAGER);
+    }
+
+    private static void onFireStart(StartFireEvent event)
+    {
+        final Level level = event.getLevel();
+        final BlockPos pos = event.getPos();
+        final BlockState state = event.getState();
+        final Block block = state.getBlock();
+
+        final boolean hfSide = block instanceof HellforgeSideBlock;
+        final boolean hf = block instanceof HellforgeBlock;
+        if (hf || hfSide)
+        {
+            BlockPos forgePos = pos;
+            if (hfSide)
+            {
+                forgePos = HellforgeSideBlock.getCenterPos(level, pos);
+            }
+            if (forgePos != null && level.getBlockEntity(forgePos) instanceof HellforgeBlockEntity forge && HellforgeBlock.HELLFORGE_MULTIBLOCK.test(level, forgePos) && state.getValue(CharcoalForgeBlock.HEAT) == 0 && forge.light())
+            {
+                event.setCanceled(true);
+            }
+        }
+        else if (block == BeneathBlocks.CURSECOAL_PILE.get() && state.getValue(CursecoalPileBlock.LAYERS) >= 7)
+        {
+            final BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
+            for (int x = -1; x <= 1; x++)
+            {
+                for (int z = -1; z <= 1; z++)
+                {
+                    if (HellforgeBlock.PRE_HELLFORGE_MULTIBLOCK.test(level, cursor.setWithOffset(pos, x, 0, z)))
+                    {
+                        HellforgeBlockEntity.createFromCharcoalPile(level, cursor);
+                        event.setCanceled(true);
+                        return;
+                    }
+                }
+            }
+        }
     }
 
     private static void onEntityJoinLevel(EntityJoinWorldEvent event)

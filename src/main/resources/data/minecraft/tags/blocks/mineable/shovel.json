@@ -4,6 +4,8 @@
   "values": [
     "beneath:sulfur",
     "beneath:soul_farmland",
-    "beneath:soul_clay"
+    "beneath:soul_clay",
+    "beneath:cursecoal_pile",
+    "beneath:hellforge"
   ]
 }

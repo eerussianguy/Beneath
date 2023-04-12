@@ -1,0 +1,29 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "layers=1": {
+      "model": "beneath:block/pile/cursecoal_height2"
+    },
+    "layers=2": {
+      "model": "beneath:block/pile/cursecoal_height4"
+    },
+    "layers=3": {
+      "model": "beneath:block/pile/cursecoal_height6"
+    },
+    "layers=4": {
+      "model": "beneath:block/pile/cursecoal_height8"
+    },
+    "layers=5": {
+      "model": "beneath:block/pile/cursecoal_height10"
+    },
+    "layers=6": {
+      "model": "beneath:block/pile/cursecoal_height12"
+    },
+    "layers=7": {
+      "model": "beneath:block/pile/cursecoal_height14"
+    },
+    "layers=8": {
+      "model": "beneath:block/pile/cursecoal_block"
+    }
+  }
+}

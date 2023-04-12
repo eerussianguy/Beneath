@@ -1,7 +1,10 @@
 {
   "__comment__": "This file was automatically created by mcresources",
   "variants": {
-    "": {
+    "up=true": {
+      "model": "beneath:block/soul_clay_up"
+    },
+    "up=false": {
       "model": "beneath:block/soul_clay"
     }
   }

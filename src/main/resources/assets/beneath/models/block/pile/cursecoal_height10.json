@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/charcoal_pile/charcoal_height10",
+  "textures": {
+    "texture": "beneath:block/cursecoal",
+    "particle": "beneath:block/cursecoal"
+  }
+}

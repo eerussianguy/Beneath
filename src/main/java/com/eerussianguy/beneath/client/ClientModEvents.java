@@ -5,13 +5,18 @@ import java.util.stream.Stream;
 import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.client.model.LeviathanFireballModel;
 import com.eerussianguy.beneath.client.render.BlazeLeviathanRenderer;
+import com.eerussianguy.beneath.client.render.HellforgeRenderer;
 import com.eerussianguy.beneath.client.render.LeviathanFireballRenderer;
+import com.eerussianguy.beneath.client.screen.HellforgeScreen;
+import com.eerussianguy.beneath.common.blockentities.BeneathBlockEntities;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
 import com.eerussianguy.beneath.common.blocks.Stem;
+import com.eerussianguy.beneath.common.container.BeneathContainerTypes;
 import com.eerussianguy.beneath.common.entities.BeneathEntities;
 import com.eerussianguy.beneath.misc.BeneathParticles;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.BlazeModel;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
@@ -60,6 +65,8 @@ public class ClientModEvents
     {
         event.enqueueWork(() -> {
             BeneathBlocks.WOODS.values().forEach(map -> ItemProperties.register(map.get(BARREL).get().asItem(), Helpers.identifier("sealed"), (stack, level, entity, unused) -> stack.hasTag() ? 1.0f : 0f));
+
+            MenuScreens.register(BeneathContainerTypes.HELLFORGE_CONTAINER.get(), HellforgeScreen::new);
         });
 
         final RenderType solid = RenderType.solid();
@@ -79,6 +86,8 @@ public class ClientModEvents
         ItemBlockRenderTypes.setRenderLayer(BeneathBlocks.BLACKSTONE_PEBBLE.get(), cutout);
         ItemBlockRenderTypes.setRenderLayer(BeneathBlocks.BLACKSTONE_AQUEDUCT.get(), cutout);
 
+
+
     }
 
     private static final ResourceLocation RED_ELK_LOCATION = Beneath.identifier("textures/entity/red_elk.png");
@@ -93,6 +102,8 @@ public class ClientModEvents
         event.registerEntityRenderer(BeneathEntities.BLAZE_LEVIATHAN.get(), BlazeLeviathanRenderer::new);
         event.registerEntityRenderer(BeneathEntities.LEVIATHAN_FIREBALL.get(), LeviathanFireballRenderer::new);
         event.registerEntityRenderer(BeneathEntities.RED_ELK.get(), ctx -> new SimpleMobRenderer.Builder<>(ctx, DeerModel::new, "red_elk").shadow(0.6f).texture(p -> RED_ELK_LOCATION).build());
+
+        event.registerBlockEntityRenderer(BeneathBlockEntities.HELLFORGE.get(), ctx -> new HellforgeRenderer());
 
     }
 
