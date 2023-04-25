@@ -99,6 +99,12 @@ def generate(rm: ResourceManager):
     rm.blockstate('gleamflower').with_block_model(parent='block/cross', textures={'cross': 'beneath:block/plant/gleamflower'}).with_block_loot('beneath:gleamflower').with_lang(lang('gleamflower')).with_tag('tfc:plants')
     rm.item_model('gleamflower', 'beneath:block/plant/gleamflower')
 
+    rm.blockstate('burpflower', variants={
+        **four_rotations('beneath:block/burpflower', (90, None, 180, 270), suffix=',mature=true'),
+        **four_rotations('beneath:block/burpflower_growing', (90, None, 180, 270), suffix=',mature=false'),
+    }).with_lang(lang('burpflower')).with_tag('tfc:plants').with_block_loot('beneath:burpflower')
+    rm.item_model('burpflower', 'beneath:block/plant/burpflower_base')
+
     rm.blockstate('cursecoal_pile', variants=dict((('layers=%d' % i), {'model': 'beneath:block/pile/cursecoal_height%d' % (i * 2) if i != 8 else 'beneath:block/pile/cursecoal_block'}) for i in range(1, 1 + 8))).with_lang(lang('Cursecoal Pile')).with_block_loot('beneath:cursecoal')
     rm.block_model('pile/cursecoal_block', textures={'all': 'beneath:block/cursecoal'})
     rm.blockstate('hellforge', variants=dict((('heat_level=%d' % i), {'model': 'beneath:block/hellforge/heat_%d' % i}) for i in range(0, 7 + 1))).with_lang(lang('Hellforge')).with_block_loot('7 beneath:cursecoal')

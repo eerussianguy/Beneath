@@ -16,6 +16,7 @@ public final class BeneathParticles
     public static final RegistryObject<SimpleParticleType> SORROW = register("sorrow");
     public static final RegistryObject<SimpleParticleType> FLAME = register("flame");
     public static final RegistryObject<SimpleParticleType> DEATH = register("death");
+    public static final RegistryObject<SimpleParticleType> SULFURIC_SMOKE = register("sulfuric_smoke");
 
     private static RegistryObject<SimpleParticleType> register(String name)
     {

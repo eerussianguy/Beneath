@@ -88,6 +88,12 @@ public class SoulFarmlandBlockEntity extends TFCBlockEntity
         setNutrient(type, Math.max(nutrients[type.ordinal()], minimumValue));
     }
 
+    public void addUpToMinimumNutrient(NutrientType type, float minimumValue, float add)
+    {
+        final float current = nutrients[type.ordinal()];
+        setNutrient(type, Math.min(minimumValue, current + add));
+    }
+
     public void setNutrient(NutrientType type, float value)
     {
         nutrients[type.ordinal()] = value;

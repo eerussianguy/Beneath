@@ -36,7 +36,6 @@ import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.TFCMaterials;
 import net.dries007.tfc.common.blocks.ThatchBlock;
-import net.dries007.tfc.common.blocks.devices.CharcoalForgeBlock;
 import net.dries007.tfc.common.blocks.rock.LooseRockBlock;
 import net.dries007.tfc.common.blocks.rock.MossGrowingBlock;
 import net.dries007.tfc.common.blocks.rock.MossSpreadingBlock;
@@ -78,7 +77,8 @@ public class BeneathBlocks
     public static final RegistryObject<Block> HELLFORGE = register("hellforge", () -> new HellforgeBlock(ExtendedProperties.of(Material.DIRT, MaterialColor.COLOR_BLACK).strength(0.2F).randomTicks().sound(TFCSounds.CHARCOAL).lightLevel(state -> state.getValue(HellforgeBlock.HEAT) * 2).pathType(BlockPathTypes.DAMAGE_FIRE).blockEntity(BeneathBlockEntities.HELLFORGE).serverTicks(HellforgeBlockEntity::serverTick)));
     public static final RegistryObject<Block> HELLFORGE_SIDE = register("hellforge_side", () -> new HellforgeSideBlock(ExtendedProperties.of(Material.DIRT, MaterialColor.COLOR_BLACK).strength(0.2f).randomTicks().sound(TFCSounds.CHARCOAL).lightLevel(state -> state.getValue(HellforgeBlock.HEAT) * 2).pathType(BlockPathTypes.DAMAGE_FIRE)));
     public static final RegistryObject<Block> CURSECOAL_PILE = register("cursecoal_pile", () -> new CursecoalPileBlock(BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.COLOR_BLACK).strength(0.2F).sound(TFCSounds.CHARCOAL).isViewBlocking((state, level, pos) -> state.getValue(CharcoalPileBlock.LAYERS) >= 8).isSuffocating((state, level, pos) -> state.getValue(CharcoalPileBlock.LAYERS) >= 8)));
-    public static final RegistryObject<Block> GLEAMFLOWER = register("gleamflower", () -> new NFlower(ExtendedProperties.of(Material.REPLACEABLE_PLANT).sound(SoundType.GRASS).instabreak().speedFactor(0.8f).noCollission().flammable(60, 30).lightLevel(s -> 7)), ItemGroup.BENEATH);
+    public static final RegistryObject<Block> GLEAMFLOWER = register("gleamflower", () -> new NFlowerBlock(ExtendedProperties.of(Material.REPLACEABLE_PLANT).sound(SoundType.GRASS).instabreak().speedFactor(0.8f).noCollission().lightLevel(s -> 7)), ItemGroup.BENEATH);
+    public static final RegistryObject<Block> BURPFLOWER = register("burpflower", () -> new BurpingFlowerBlock(ExtendedProperties.of(Material.PLANT).sound(SoundType.GRASS).instabreak().speedFactor(0.8f).noCollission().randomTicks()), ItemGroup.BENEATH);
 
     public static final Map<Stem, Map<Wood.BlockType, RegistryObject<Block>>> WOODS = Helpers.mapOfKeys(Stem.class, wood ->
         Helpers.mapOfKeys(Wood.BlockType.class, type ->

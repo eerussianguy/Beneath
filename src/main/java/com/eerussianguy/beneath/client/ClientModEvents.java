@@ -14,6 +14,7 @@ import com.eerussianguy.beneath.common.blocks.Stem;
 import com.eerussianguy.beneath.common.container.BeneathContainerTypes;
 import com.eerussianguy.beneath.common.entities.BeneathEntities;
 import com.eerussianguy.beneath.misc.BeneathParticles;
+import com.eerussianguy.beneath.misc.ColoredSmokeParticleProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -34,13 +35,13 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.RegistryObject;
 
 import net.dries007.tfc.client.RenderHelpers;
 import net.dries007.tfc.client.model.entity.DeerModel;
 import net.dries007.tfc.client.particle.GlintParticleProvider;
 import net.dries007.tfc.client.render.entity.SimpleMobRenderer;
 import net.dries007.tfc.client.render.entity.TFCBoatRenderer;
-import net.dries007.tfc.common.entities.TFCEntities;
 import net.dries007.tfc.util.Helpers;
 
 import static net.dries007.tfc.common.blocks.wood.Wood.BlockType.*;
@@ -73,6 +74,9 @@ public class ClientModEvents
         final RenderType cutout = RenderType.cutout();
         final RenderType cutoutMipped = RenderType.cutoutMipped();
         final RenderType translucent = RenderType.translucent();
+
+        Stream.of(BeneathBlocks.GLEAMFLOWER, BeneathBlocks.BURPFLOWER)
+            .map(RegistryObject::get).forEach(b -> ItemBlockRenderTypes.setRenderLayer(b, cutout));
 
         BeneathBlocks.WOODS.values().forEach(map -> {
             Stream.of(SAPLING, DOOR, TRAPDOOR, FENCE, FENCE_GATE, BUTTON, PRESSURE_PLATE, SLAB, STAIRS, TWIG, BARREL, SCRIBING_TABLE, POTTED_SAPLING).forEach(type -> ItemBlockRenderTypes.setRenderLayer(map.get(type).get(), cutout));
@@ -141,6 +145,7 @@ public class ClientModEvents
         r.register(BeneathParticles.DECAY.get(), set -> new GlintParticleProvider(set, ChatFormatting.YELLOW));
         r.register(BeneathParticles.SORROW.get(), set -> new GlintParticleProvider(set, ChatFormatting.DARK_BLUE));
         r.register(BeneathParticles.FLAME.get(), set -> new GlintParticleProvider(set, ChatFormatting.RED));
+        r.register(BeneathParticles.SULFURIC_SMOKE.get(), set -> new ColoredSmokeParticleProvider(set, 1f, 1f, 0f));
     }
 
     private static void onTextureStitch(TextureStitchEvent.Pre event)

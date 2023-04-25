@@ -21,6 +21,7 @@ public class BeneathBlockEntities
     public static final RegistryObject<BlockEntityType<SoulFarmlandBlockEntity>> SOUL_FARMLAND = register("soul_farmland", SoulFarmlandBlockEntity::new, BeneathBlocks.SOUL_FARMLAND);
     public static final RegistryObject<BlockEntityType<NetherCropBlockEntity>> NETHER_CROP = register("nether_crop", NetherCropBlockEntity::new, BeneathBlocks.CROPS.values().stream());
     public static final RegistryObject<BlockEntityType<HellforgeBlockEntity>> HELLFORGE = register("hellforge", HellforgeBlockEntity::new, BeneathBlocks.HELLFORGE);
+    public static final RegistryObject<BlockEntityType<BeneathTickCounterBlockEntity>> TICK_COUNTER = register("tick_counter", BeneathTickCounterBlockEntity::new, Stream.of());
 
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String name, BlockEntityType.BlockEntitySupplier<T> factory, Supplier<? extends Block> block)
     {

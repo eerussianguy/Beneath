@@ -1,0 +1,10 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "#minecraft:base_stone_nether",
+    "minecraft:soul_soil",
+    "minecraft:soul_sand",
+    "beneath:soul_farmland"
+  ]
+}

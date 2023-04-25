@@ -1,0 +1,35 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "facing=east,mature=true": {
+      "model": "beneath:block/burpflower",
+      "y": 90
+    },
+    "facing=north,mature=true": {
+      "model": "beneath:block/burpflower"
+    },
+    "facing=south,mature=true": {
+      "model": "beneath:block/burpflower",
+      "y": 180
+    },
+    "facing=west,mature=true": {
+      "model": "beneath:block/burpflower",
+      "y": 270
+    },
+    "facing=east,mature=false": {
+      "model": "beneath:block/burpflower_growing",
+      "y": 90
+    },
+    "facing=north,mature=false": {
+      "model": "beneath:block/burpflower_growing"
+    },
+    "facing=south,mature=false": {
+      "model": "beneath:block/burpflower_growing",
+      "y": 180
+    },
+    "facing=west,mature=false": {
+      "model": "beneath:block/burpflower_growing",
+      "y": 270
+    }
+  }
+}
