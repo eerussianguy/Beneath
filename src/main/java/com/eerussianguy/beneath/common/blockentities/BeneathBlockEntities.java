@@ -10,6 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import net.dries007.tfc.common.blocks.wood.Wood;
 import net.dries007.tfc.util.registry.RegistrationHelpers;
 
 import static com.eerussianguy.beneath.Beneath.*;
@@ -22,6 +23,7 @@ public class BeneathBlockEntities
     public static final RegistryObject<BlockEntityType<NetherCropBlockEntity>> NETHER_CROP = register("nether_crop", NetherCropBlockEntity::new, BeneathBlocks.CROPS.values().stream());
     public static final RegistryObject<BlockEntityType<HellforgeBlockEntity>> HELLFORGE = register("hellforge", HellforgeBlockEntity::new, BeneathBlocks.HELLFORGE);
     public static final RegistryObject<BlockEntityType<BeneathTickCounterBlockEntity>> TICK_COUNTER = register("tick_counter", BeneathTickCounterBlockEntity::new, Stream.of());
+    public static final RegistryObject<BlockEntityType<BeneathSignBlockEntity>> SIGN = register("sign", BeneathSignBlockEntity::new, BeneathBlocks.WOODS.values().stream().flatMap(map -> Stream.of(Wood.BlockType.SIGN, Wood.BlockType.WALL_SIGN).map(map::get)));
 
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String name, BlockEntityType.BlockEntitySupplier<T> factory, Supplier<? extends Block> block)
     {

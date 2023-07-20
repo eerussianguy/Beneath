@@ -9,7 +9,7 @@ def generate(rm: ResourceManager):
     ### CRAFTING RECIPES ###
     rm.crafting_shaped('crafting/cobblerack', ['XX', 'XX'], {'X': 'beneath:nether_pebble'}, 'beneath:cobblerack').with_advancement('beneath:nether_pebble')
     rm.crafting_shaped('crafting/crackrack', ['XX', 'XX'], {'X': 'beneath:crackrack_rock'}, 'beneath:crackrack').with_advancement('beneath:crackrack_rock')
-    rm.crafting_shaped('crafting/crimson_thatch', ['XX', 'XX'], {'X': 'beneath:warped_straw'}, 'beneath:crimson_thatch').with_advancement('beneath:crimson_strawr')
+    rm.crafting_shaped('crafting/crimson_thatch', ['XX', 'XX'], {'X': 'beneath:warped_straw'}, 'beneath:crimson_thatch').with_advancement('beneath:crimson_straw')
     rm.crafting_shaped('crafting/warped_thatch', ['XX', 'XX'], {'X': 'beneath:warped_straw'}, 'beneath:warped_thatch').with_advancement('beneath:warped_straw')
     rm.crafting_shaped('crafting/blackstone', ['XX', 'XX'], {'X': 'beneath:blackstone_pebble'}, 'minecraft:blackstone').with_advancement('beneath:blackstone_pebble')
     rm.crafting_shaped('crafting/blackstone_bricks', ['XMX', 'MXM', 'XMX'], {'X': 'beneath:blackstone_brick', 'M': '#tfc:mortar'}, (4, 'minecraft:polished_blackstone_bricks')).with_advancement('beneath:blackstone_brick')

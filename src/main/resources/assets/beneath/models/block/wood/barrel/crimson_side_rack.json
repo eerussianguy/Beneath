@@ -1,6 +1,6 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "parent": "tfc:block/barrel_sealed",
+  "parent": "tfc:block/barrel_side_rack",
   "textures": {
     "particle": "beneath:block/wood/planks/crimson",
     "planks": "beneath:block/wood/planks/crimson",

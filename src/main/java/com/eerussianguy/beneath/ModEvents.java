@@ -1,7 +1,9 @@
 package com.eerussianguy.beneath;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 import com.eerussianguy.beneath.common.BeneathDispenserBehaviors;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
@@ -58,22 +60,19 @@ public class ModEvents
 
     private static void modifyBlockEntityTypes()
     {
-        modifyWood(TFCBlockEntities.CHEST.get(), Wood.BlockType.CHEST);
-        modifyWood(TFCBlockEntities.CHEST.get(), Wood.BlockType.TRAPPED_CHEST);
+        modifyWood(TFCBlockEntities.CHEST.get(), Wood.BlockType.CHEST, Wood.BlockType.TRAPPED_CHEST);
         modifyWood(TFCBlockEntities.LOOM.get(), Wood.BlockType.LOOM);
         modifyWood(TFCBlockEntities.TICK_COUNTER.get(), Wood.BlockType.SAPLING);
         modifyWood(TFCBlockEntities.BARREL.get(), Wood.BlockType.BARREL);
         modifyWood(TFCBlockEntities.SLUICE.get(), Wood.BlockType.SLUICE);
         modifyWood(TFCBlockEntities.BOOKSHELF.get(), Wood.BlockType.BOOKSHELF);
         modifyWood(TFCBlockEntities.TOOL_RACK.get(), Wood.BlockType.TOOL_RACK);
-        modifyWood(TFCBlockEntities.SIGN.get(), Wood.BlockType.SIGN);
-        modifyWood(TFCBlockEntities.SIGN.get(), Wood.BlockType.WALL_SIGN);
         modifyWood(TFCBlockEntities.LECTERN.get(), Wood.BlockType.LECTERN);
     }
 
-    private static void modifyWood(BlockEntityType<?> type, Wood.BlockType blockType)
+    private static void modifyWood(BlockEntityType<?> type, Wood.BlockType... blockType)
     {
-        modifyBlockEntityType(type, BeneathBlocks.WOODS.values().stream().map(map -> map.get(blockType).get()));
+        modifyBlockEntityType(type, BeneathBlocks.WOODS.values().stream().flatMap(map -> Arrays.stream(blockType).map(map::get).map(Supplier::get)));
     }
 
     private static void modifyBlockEntityType(BlockEntityType<?> type, Stream<Block> extraBlocks)

@@ -78,7 +78,10 @@ def generate(rm: ResourceManager):
         block.with_tag('minecraft:leaves')
         block.with_block_loot(({
                'name': 'beneath:wood/leaves/%s' % wood,
-               'conditions': [loot_tables.or_condition(loot_tables.match_tag('forge:shears'), loot_tables.silk_touch())]
+               'conditions': [{
+                   "condition": "minecraft:alternative",
+                   "terms": [loot_tables.match_tag('forge:shears'), loot_tables.silk_touch()]
+               }]
             }, {
                'name': 'beneath:wood/sapling/%s' % wood,
                'conditions': ['minecraft:survives_explosion', loot_tables.random_chance(TREE_SAPLING_DROP_CHANCES[wood])]
@@ -174,14 +177,14 @@ def generate(rm: ResourceManager):
                 ({'east': True}, {'model': connection}),
                 ({'south': True}, {'model': connection, 'y': 90}),
                 ({'west': True}, {'model': connection, 'y': 180}),
-                ).with_tag('tfc:support_beam').with_lang(lang('%s Support', wood)).with_block_loot('beneath:wood/support/' + wood)
+                ).with_tag('tfc:support_beams').with_lang(lang('%s Support', wood)).with_block_loot('beneath:wood/support/' + wood)
         rm.blockstate_multipart(('wood', 'horizontal_support', wood),
             {'model': 'beneath:block/wood/support/%s_horizontal' % wood},
             ({'north': True}, {'model': connection, 'y': 270}),
             ({'east': True}, {'model': connection}),
             ({'south': True}, {'model': connection, 'y': 90}),
             ({'west': True}, {'model': connection, 'y': 180}),
-            ).with_tag('tfc:support_beam').with_lang(lang('%s Support', wood)).with_block_loot('beneath:wood/support/' + wood)
+            ).with_tag('tfc:support_beams').with_lang(lang('%s Support', wood)).with_block_loot('beneath:wood/support/' + wood)
 
         rm.block_model('beneath:wood/support/%s_inventory' % wood, textures={'texture': texture}, parent='tfc:block/wood/support/inventory')
         rm.block_model('beneath:wood/support/%s_vertical' % wood, textures={'texture': texture, 'particle': texture}, parent='tfc:block/wood/support/vertical')
@@ -206,16 +209,23 @@ def generate(rm: ResourceManager):
 
         # Barrels
         texture = 'beneath:block/wood/planks/%s' % wood
-        textures = {'particle': texture, 'planks': texture, 'sheet': 'beneath:block/wood/sheet/%s' % wood, 'hoop': 'tfc:block/barrel_hoop'}
-        block = rm.blockstate(('wood', 'barrel', wood), variants={
-            'sealed=true': {'model': 'beneath:block/wood/barrel_sealed/%s' % wood},
-            'sealed=false': {'model': 'beneath:block/wood/barrel/%s' % wood}
-        })
+        textures = {'particle': texture, 'planks': texture, 'sheet': 'beneath:block/wood/sheet/%s' % wood}
+
+        faces = (('up', 0), ('east', 0), ('west', 180), ('south', 90), ('north', 270))
+        seals = (('true', 'barrel_sealed'), ('false', 'barrel'))
+        racks = (('true', '_rack'), ('false', ''))
+        block = rm.blockstate(('wood', 'barrel', wood), variants=dict((
+            'facing=%s,rack=%s,sealed=%s' % (face, rack, is_seal), {'model': 'beneath:block/wood/%s/%s%s%s' % (seal_type, wood, '_side' if face != 'up' else '', suffix if face != 'up' else ''), 'y': yrot if yrot != 0 else None}
+        ) for face, yrot in faces for rack, suffix in racks for is_seal, seal_type in seals))
+
         item_model_property(rm, ('wood', 'barrel', wood), [{'predicate': {'tfc:sealed': 1.0}, 'model': 'beneath:block/wood/barrel_sealed/%s' % wood}], {'parent': 'beneath:block/wood/barrel/%s' % wood})
         block.with_block_model(textures, 'tfc:block/barrel')
+        rm.block_model(('wood', 'barrel', wood + '_side'), textures, 'tfc:block/barrel_side')
+        rm.block_model(('wood', 'barrel', wood + '_side_rack'), textures, 'tfc:block/barrel_side_rack')
+        rm.block_model(('wood', 'barrel_sealed', wood + '_side_rack'), textures, 'tfc:block/barrel_side_sealed_rack')
         rm.block_model(('wood', 'barrel_sealed', wood), textures, 'tfc:block/barrel_sealed')
+        rm.block_model(('wood', 'barrel_sealed', wood + '_side'), textures, 'tfc:block/barrel_side_sealed')
         block.with_lang(lang('%s barrel', wood))
-        block.with_tag('tfc:barrels').with_tag('minecraft:mineable/axe')
         block.with_block_loot(({
            'name': 'beneath:wood/barrel/%s' % wood,
            'functions': [loot_tables.copy_block_entity_name(), loot_tables.copy_block_entity_nbt()],

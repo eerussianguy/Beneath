@@ -4,7 +4,6 @@
   "textures": {
     "particle": "beneath:block/wood/planks/crimson",
     "planks": "beneath:block/wood/planks/crimson",
-    "sheet": "beneath:block/wood/sheet/crimson",
-    "hoop": "tfc:block/barrel_hoop"
+    "sheet": "beneath:block/wood/sheet/crimson"
   }
 }

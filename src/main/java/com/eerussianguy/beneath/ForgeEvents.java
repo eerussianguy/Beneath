@@ -217,7 +217,7 @@ public class ForgeEvents
             gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.CRACKRACK_PIPE_VEIN));
             BeneathPlacements.MAGMA_ORES.values().forEach(ore -> gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(ore)));
 
-            gen.getFeatures(GenerationStep.Decoration.UNDERGROUND_DECORATION).removeIf(removeIf(REMOVED_ORES));
+            gen.getFeatures(GenerationStep.Decoration.UNDERGROUND_DECORATION).removeIf(removeIf(REMOVED_UNDER));
             gen.getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION).removeIf(removeIf(REMOVED_VEGETAL));
             gen.getFeatures(GenerationStep.Decoration.SURFACE_STRUCTURES).removeIf(removeIf(REMOVED_STRUCTURES));
 
@@ -301,17 +301,22 @@ public class ForgeEvents
 
     private static final List<ResourceLocation> REMOVED_VEGETAL = List.of(
         new ResourceLocation("crimson_fungi"),
-        new ResourceLocation("warped_fungi")
+        new ResourceLocation("warped_fungi"),
+        new ResourceLocation("brown_mushroom_normal"),
+        new ResourceLocation("red_mushroom_normal")
     );
 
-    private static final List<ResourceLocation> REMOVED_ORES = List.of(
+    private static final List<ResourceLocation> REMOVED_UNDER = List.of(
         new ResourceLocation("ore_quartz_nether"),
         new ResourceLocation("ore_quartz_deltas"),
         new ResourceLocation("ore_gold_nether"),
         new ResourceLocation("ore_gold_deltas"),
         new ResourceLocation("ore_ancient_debris_large"),
         new ResourceLocation("ore_ancient_debris_small"),
-        new ResourceLocation("ore_magma")
+        new ResourceLocation("ore_magma"),
+        new ResourceLocation("red_mushroom_nether"),
+        new ResourceLocation("brown_mushroom_nether")
+
     );
 
     private static final List<ResourceLocation> REMOVED_STRUCTURES = List.of(

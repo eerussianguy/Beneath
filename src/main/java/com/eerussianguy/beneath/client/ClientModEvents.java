@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.client.model.LeviathanFireballModel;
+import com.eerussianguy.beneath.client.render.BeneathSignRenderer;
 import com.eerussianguy.beneath.client.render.BlazeLeviathanRenderer;
 import com.eerussianguy.beneath.client.render.HellforgeRenderer;
 import com.eerussianguy.beneath.client.render.LeviathanFireballRenderer;
@@ -59,7 +60,6 @@ public class ClientModEvents
         bus.addListener(ClientModEvents::onItemColors);
         bus.addListener(ClientModEvents::onTextureStitch);
         bus.addListener(ClientModEvents::onParticlesRegister);
-
     }
 
     private static void setup(FMLClientSetupEvent event)
@@ -90,8 +90,6 @@ public class ClientModEvents
         ItemBlockRenderTypes.setRenderLayer(BeneathBlocks.BLACKSTONE_PEBBLE.get(), cutout);
         ItemBlockRenderTypes.setRenderLayer(BeneathBlocks.BLACKSTONE_AQUEDUCT.get(), cutout);
 
-
-
     }
 
     private static final ResourceLocation RED_ELK_LOCATION = Beneath.identifier("textures/entity/red_elk.png");
@@ -108,6 +106,7 @@ public class ClientModEvents
         event.registerEntityRenderer(BeneathEntities.RED_ELK.get(), ctx -> new SimpleMobRenderer.Builder<>(ctx, DeerModel::new, "red_elk").shadow(0.6f).texture(p -> RED_ELK_LOCATION).build());
 
         event.registerBlockEntityRenderer(BeneathBlockEntities.HELLFORGE.get(), ctx -> new HellforgeRenderer());
+        event.registerBlockEntityRenderer(BeneathBlockEntities.SIGN.get(), BeneathSignRenderer::new);
 
     }
 
