@@ -7,13 +7,14 @@ import com.eerussianguy.beneath.common.container.BeneathContainerTypes;
 import com.eerussianguy.beneath.common.entities.BeneathEntities;
 import com.eerussianguy.beneath.common.items.BeneathItems;
 import com.eerussianguy.beneath.common.network.BeneathPackets;
+import com.eerussianguy.beneath.misc.BeneathCreativeTabs;
 import com.eerussianguy.beneath.misc.BeneathParticles;
 import com.eerussianguy.beneath.world.BeneathConfiguredFeatures;
 import com.eerussianguy.beneath.world.BeneathFeatures;
 import com.eerussianguy.beneath.world.BeneathPlacementModifiers;
 import com.eerussianguy.beneath.world.BeneathPlacements;
 import com.mojang.logging.LogUtils;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -25,7 +26,6 @@ import com.eerussianguy.beneath.client.ClientForgeEvents;
 import com.eerussianguy.beneath.client.ClientModEvents;
 import org.slf4j.Logger;
 
-import net.dries007.tfc.util.Helpers;
 
 @Mod(Beneath.MOD_ID)
 public class Beneath
@@ -59,6 +59,7 @@ public class Beneath
         BeneathPlacements.PLACED_FEATURES.register(bus);
         BeneathParticles.PARTICLE_TYPES.register(bus);
         BeneathContainerTypes.CONTAINERS.register(bus);
+        BeneathCreativeTabs.TABS.register(bus);
     }
 
     public static ResourceLocation identifier(String path)
@@ -66,9 +67,9 @@ public class Beneath
         return new ResourceLocation(Beneath.MOD_ID, path);
     }
 
-    public static TranslatableComponent blockEntityName(String path)
+    public static Component blockEntityName(String path)
     {
-        return Helpers.translatable("beneath.block_entity." + path);
+        return Component.translatable("beneath.block_entity." + path);
     }
 
 }

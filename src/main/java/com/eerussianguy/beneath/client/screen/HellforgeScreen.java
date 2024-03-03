@@ -3,7 +3,8 @@ package com.eerussianguy.beneath.client.screen;
 import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.common.blockentities.HellforgeBlockEntity;
 import com.eerussianguy.beneath.common.container.HellforgeContainer;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -27,7 +28,7 @@ public class HellforgeScreen extends BlockEntityScreen<HellforgeBlockEntity, Hel
     }
 
     @Override
-    protected void renderBg(PoseStack poseStack, float partialTicks, int mouseX, int mouseY)
+    protected void renderBg(GuiGraphics poseStack, float partialTicks, int mouseX, int mouseY)
     {
         super.renderBg(poseStack, partialTicks, mouseX, mouseY);
         int width = (int) (105 * blockEntity.getTemperature() / Heat.maxVisibleTemperature());
@@ -39,9 +40,9 @@ public class HellforgeScreen extends BlockEntityScreen<HellforgeBlockEntity, Hel
     }
 
     @Override
-    protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY)
+    protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY)
     {
-        this.font.draw(poseStack, this.title, (float)this.titleLabelX, (float)this.titleLabelY, 4210752);
+        graphics.drawString(Minecraft.getInstance().font, this.title, this.titleLabelX, this.titleLabelY, 4210752, false);
         //this.font.draw(poseStack, this.playerInventoryTitle, (float)this.inventoryLabelX, (float)this.inventoryLabelY, 4210752);
     }
 

@@ -30,7 +30,7 @@ public class SulfurBlock extends BottomSupportedBlock
         if (Helpers.isItem(player.getMainHandItem(), BeneathItemTags.SPARKS_ON_SULFUR))
         {
             level.removeBlock(pos, false);
-            level.explode(null, BeneathDamageSources.SULFUR, null, pos.getX() + 0.5, pos.getY() + 0.125, pos.getZ() + 0.5, 3f, true, Explosion.BlockInteraction.NONE);
+            level.explode(null, BeneathDamageSources.sulfur(player), null, pos.getX() + 0.5, pos.getY() + 0.125, pos.getZ() + 0.5, 3f, true, Level.ExplosionInteraction.BLOCK);
         }
     }
 

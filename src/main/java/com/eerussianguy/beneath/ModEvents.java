@@ -77,7 +77,7 @@ public class ModEvents
 
     private static void modifyBlockEntityType(BlockEntityType<?> type, Stream<Block> extraBlocks)
     {
-        Beneath.LOGGER.debug("Modifying block entity type: " + ForgeRegistries.BLOCK_ENTITIES.getKey(type));
+        Beneath.LOGGER.debug("Modifying block entity type: " + ForgeRegistries.BLOCK_ENTITY_TYPES.getKey(type));
         Set<Block> blocks = ((BlockEntityTypeAccessor) (Object) type).accessor$getValidBlocks();
         blocks = new HashSet<>(blocks);
         blocks.addAll(extraBlocks.toList());

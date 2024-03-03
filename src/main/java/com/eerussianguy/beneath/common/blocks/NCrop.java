@@ -4,7 +4,6 @@ import com.eerussianguy.beneath.common.blockentities.BeneathBlockEntities;
 import com.eerussianguy.beneath.common.blockentities.SoulFarmlandBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.material.Material;
 
 import net.dries007.tfc.common.blockentities.CropBlockEntity;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
@@ -52,7 +51,7 @@ public enum NCrop
 
     private static ExtendedProperties dead()
     {
-        return ExtendedProperties.of(Material.PLANT).noCollission().randomTicks().strength(0.4F).sound(SoundType.CROP).flammable(60, 30);
+        return ExtendedProperties.of().noCollission().randomTicks().strength(0.4F).sound(SoundType.CROP).flammable(60, 30);
     }
 
 }

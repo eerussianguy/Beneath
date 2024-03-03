@@ -80,7 +80,7 @@ public class NetherFertilizer extends ItemDefinition
             final float amount = getNutrient(type);
             if (amount > 0)
             {
-                tooltip.add(Helpers.translatable("beneath.nutrient." + type.getName(), format(amount)));
+                tooltip.add(Component.translatable("beneath.nutrient." + type.getName(), format(amount)));
             }
         }
     }

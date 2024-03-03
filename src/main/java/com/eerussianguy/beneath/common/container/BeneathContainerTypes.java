@@ -19,7 +19,7 @@ import static com.eerussianguy.beneath.Beneath.*;
 
 public final class BeneathContainerTypes
 {
-    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MOD_ID);
+    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MOD_ID);
 
     public static final RegistryObject<MenuType<HellforgeContainer>> HELLFORGE_CONTAINER = BeneathContainerTypes.<HellforgeBlockEntity, HellforgeContainer>registerBlock("hellforge", BeneathBlockEntities.HELLFORGE, HellforgeContainer::create);
 

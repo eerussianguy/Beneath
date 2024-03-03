@@ -1,12 +1,12 @@
 package com.eerussianguy.beneath.common.blocks;
 
-import java.util.Random;
 import com.eerussianguy.beneath.common.blockentities.SoulFarmlandBlockEntity;
 import com.eerussianguy.beneath.misc.BeneathParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -31,7 +31,7 @@ public class BurpingFlowerBlock extends FacingFlowerBlock
     
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random rand)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
     {
         if (meetsConditions(level, pos, state))
         {
@@ -53,7 +53,7 @@ public class BurpingFlowerBlock extends FacingFlowerBlock
         return level.getBlockState(pos.relative(state.getValue(FACING).getOpposite())).getBlock() instanceof SulfurBlock;
     }
 
-    public void performAction(ServerLevel level, BlockPos pos, BlockState state, Random random)
+    public void performAction(ServerLevel level, BlockPos pos, BlockState state, RandomSource random)
     {
         final Direction dir = state.getValue(FACING);
         final BlockPos resultPos = pos.relative(dir);

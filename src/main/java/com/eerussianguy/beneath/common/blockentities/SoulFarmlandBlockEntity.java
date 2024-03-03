@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import net.dries007.tfc.common.blockentities.TFCBlockEntity;
-import net.dries007.tfc.util.Helpers;
 
 public class SoulFarmlandBlockEntity extends TFCBlockEntity
 {
@@ -34,7 +33,7 @@ public class SoulFarmlandBlockEntity extends TFCBlockEntity
         {
             if (getNutrient(type) > 0)
             {
-                tooltip.add(Helpers.translatable("beneath.nutrient." + type.getName(), format(getNutrient(type))));
+                tooltip.add(Component.translatable("beneath.nutrient." + type.getName(), format(getNutrient(type))));
             }
         }
     }

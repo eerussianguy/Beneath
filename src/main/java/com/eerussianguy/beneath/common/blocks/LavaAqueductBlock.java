@@ -1,7 +1,6 @@
 package com.eerussianguy.beneath.common.blocks;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -11,7 +10,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.minecraft.world.level.pathfinder.PathComputationType;
 import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.common.blocks.rock.AqueductBlock;
@@ -31,14 +29,15 @@ public class LavaAqueductBlock extends AqueductBlock
     {
         if (state.getValue(getFluidProperty()).getFluid().isSame(Fluids.LAVA) && !entity.fireImmune() && entity instanceof LivingEntity living && !EnchantmentHelper.hasFrostWalker(living))
         {
-            entity.hurt(DamageSource.HOT_FLOOR, 1.0F);
+            entity.hurt(level.damageSources().hotFloor(), 1.0F);
         }
         super.stepOn(level, pos, state, entity);
     }
 
+
     @Nullable
     @Override
-    public BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob entity)
+    public BlockPathTypes getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob entity)
     {
         return state.getValue(FLUID_PROPERTY).getFluid().isSame(Fluids.LAVA) ? BlockPathTypes.DAMAGE_FIRE : null;
     }

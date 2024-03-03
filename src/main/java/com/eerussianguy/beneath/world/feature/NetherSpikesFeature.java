@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -29,7 +30,7 @@ public class NetherSpikesFeature extends Feature<NetherSpikeConfig>
     {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
         final NetherSpikeConfig config = context.config();
 
         // The direction that the spike is pointed
@@ -52,7 +53,7 @@ public class NetherSpikesFeature extends Feature<NetherSpikeConfig>
         return true;
     }
 
-    protected void place(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, Random random)
+    protected void place(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, RandomSource random)
     {
         this.placeSmallSpike(level, pos, spike, raw, direction, random);
     }
@@ -87,12 +88,12 @@ public class NetherSpikesFeature extends Feature<NetherSpikeConfig>
         }
     }
 
-    protected void placeSmallSpike(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, Random random)
+    protected void placeSmallSpike(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, RandomSource random)
     {
         this.placeSmallSpike(level, pos, spike, raw, direction, random, random.nextFloat());
     }
 
-    protected void placeSmallSpike(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, Random random, float sizeWeight)
+    protected void placeSmallSpike(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, RandomSource random, float sizeWeight)
     {
         BlockPos above = pos.above();
         BlockState stateAbove = level.getBlockState(pos.above());

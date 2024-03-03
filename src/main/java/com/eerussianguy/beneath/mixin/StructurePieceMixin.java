@@ -1,11 +1,10 @@
 package com.eerussianguy.beneath.mixin;
 
-import java.util.Random;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
 import com.eerussianguy.beneath.common.blocks.Stem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.Level;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChestBlock;
@@ -26,8 +25,8 @@ import net.dries007.tfc.util.Helpers;
 public class StructurePieceMixin
 {
 
-    @Inject(method = "createChest(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/level/levelgen/structure/BoundingBox;Ljava/util/Random;Lnet/minecraft/core/BlockPos;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/world/level/block/state/BlockState;)Z", at = @At("HEAD"), cancellable = true)
-    private void inject$createChest(ServerLevelAccessor level, BoundingBox box, Random random, BlockPos pos, ResourceLocation lootTable, @Nullable BlockState state, CallbackInfoReturnable<Boolean> cir)
+    @Inject(method = "createChest(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/level/levelgen/structure/BoundingBox;Lnet/minecraft/util/RandomSource;Lnet/minecraft/core/BlockPos;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/world/level/block/state/BlockState;)Z", at = @At("HEAD"), cancellable = true)
+    private void inject$createChest(ServerLevelAccessor level, BoundingBox box, RandomSource random, BlockPos pos, ResourceLocation lootTable, @Nullable BlockState state, CallbackInfoReturnable<Boolean> cir)
     {
         if (level.dimensionType().ultraWarm() && (state == null || Helpers.isBlock(state, Blocks.CHEST)))
         {

@@ -45,10 +45,13 @@ import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.common.world.MobSpawnSettingsBuilder;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.OnDatapackSyncEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityMobGriefingEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -72,7 +75,6 @@ public class ForgeEvents
     {
         final IEventBus bus = MinecraftForge.EVENT_BUS;
 
-        bus.addListener(ForgeEvents::onBiomeLoad);
         bus.addListener(ForgeEvents::onBreakSpeed);
         bus.addListener(ForgeEvents::onMobGriefing);
         bus.addListener(ForgeEvents::onToolUse);
@@ -139,7 +141,7 @@ public class ForgeEvents
         }
     }
 
-    private static void onEntityJoinLevel(EntityJoinWorldEvent event)
+    private static void onEntityJoinLevel(EntityJoinLevelEvent event)
     {
         if (event.loadedFromDisk()) return;
 
@@ -170,9 +172,9 @@ public class ForgeEvents
         }
     }
 
-    private static void onSpawnCheck(LivingSpawnEvent.CheckSpawn event)
+    private static void onSpawnCheck(MobSpawnEvent.FinalizeSpawn event)
     {
-        if (event.getEntityLiving() instanceof Strider)
+        if (event.getEntity() instanceof Strider)
         {
             event.setResult(Event.Result.DENY);
         }
@@ -200,63 +202,58 @@ public class ForgeEvents
         }
     }
 
-    private static void onBiomeLoad(BiomeLoadingEvent event)
+    private static void onBiomeLoad(Object event)
     {
-        if (event.getCategory() == Biome.BiomeCategory.NETHER)
+        final ResourceLocation name = event.getName();
+        final BiomeGenerationSettingsBuilder gen = event.getGeneration();
+        final MobSpawnSettingsBuilder spawns = event.getSpawns();
+        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.QUARTZ_VEIN));
+        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.SYLVITE_VEIN));
+        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.NORMAL_GOLD_VEIN));
+        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.DEEP_GOLD_VEIN));
+        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.CURSECOAL_VEIN));
+        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.CRACKRACK_PIPE_VEIN));
+        BeneathPlacements.MAGMA_ORES.values().forEach(ore -> gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(ore)));
+
+        gen.getFeatures(GenerationStep.Decoration.UNDERGROUND_DECORATION).removeIf(removeIf(REMOVED_UNDER));
+        gen.getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION).removeIf(removeIf(REMOVED_VEGETAL));
+        gen.getFeatures(GenerationStep.Decoration.SURFACE_STRUCTURES).removeIf(removeIf(REMOVED_STRUCTURES));
+
+        if (name != null)
         {
-            final ResourceLocation name = event.getName();
-
-            Beneath.LOGGER.debug("Manipulating biome: " + name);
-            final BiomeGenerationSettingsBuilder gen = event.getGeneration();
-            final MobSpawnSettingsBuilder spawns = event.getSpawns();
-            gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.QUARTZ_VEIN));
-            gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.SYLVITE_VEIN));
-            gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.NORMAL_GOLD_VEIN));
-            gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.DEEP_GOLD_VEIN));
-            gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.CURSECOAL_VEIN));
-            gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.CRACKRACK_PIPE_VEIN));
-            BeneathPlacements.MAGMA_ORES.values().forEach(ore -> gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(ore)));
-
-            gen.getFeatures(GenerationStep.Decoration.UNDERGROUND_DECORATION).removeIf(removeIf(REMOVED_UNDER));
-            gen.getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION).removeIf(removeIf(REMOVED_VEGETAL));
-            gen.getFeatures(GenerationStep.Decoration.SURFACE_STRUCTURES).removeIf(removeIf(REMOVED_STRUCTURES));
-
-            if (name != null)
+            if (name.equals(Biomes.NETHER_WASTES.location()))
             {
-                if (name.equals(Biomes.NETHER_WASTES.location()))
-                {
-                    gen.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, get(BeneathPlacements.NETHER_SPIKES));
-                    gen.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, get(BeneathPlacements.GLOWSTONE_SPIKES));
-                    spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(BeneathEntities.RED_ELK.get(), 4, 1, 4));
-                }
-                else if (name.equals(Biomes.CRIMSON_FOREST.location()))
-                {
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.CRIMSON_TREE));
-                }
-                else if (name.equals(Biomes.WARPED_FOREST.location()))
-                {
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.WARPED_TREE));
-                }
-                else if (name.equals(Biomes.BASALT_DELTAS.location()))
-                {
-                    gen.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, get(BeneathPlacements.DELTA));
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.BLACKSTONE_PEBBLE_PATCH));
-                }
-                else if (name.equals(Biomes.SOUL_SAND_VALLEY.location()))
-                {
-                    gen.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, get(BeneathPlacements.SOUL_CLAY_DISC));
-                }
-
-                if (!name.equals(Biomes.BASALT_DELTAS.location()))
-                {
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.NETHER_PEBBLE_PATCH));
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.BLACKSTONE_BOULDER));
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.COBBLE_BOULDER));
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.SULFUR_PATCH));
-                }
-
-                gen.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, get(BeneathPlacements.AMETHYST_GEODE));
+                gen.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, get(BeneathPlacements.NETHER_SPIKES));
+                gen.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, get(BeneathPlacements.GLOWSTONE_SPIKES));
+                spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(BeneathEntities.RED_ELK.get(), 4, 1, 4));
             }
+            else if (name.equals(Biomes.CRIMSON_FOREST.location()))
+            {
+                gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.CRIMSON_TREE));
+            }
+            else if (name.equals(Biomes.WARPED_FOREST.location()))
+            {
+                gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.WARPED_TREE));
+            }
+            else if (name.equals(Biomes.BASALT_DELTAS.location()))
+            {
+                gen.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, get(BeneathPlacements.DELTA));
+                gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.BLACKSTONE_PEBBLE_PATCH));
+            }
+            else if (name.equals(Biomes.SOUL_SAND_VALLEY.location()))
+            {
+                gen.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, get(BeneathPlacements.SOUL_CLAY_DISC));
+            }
+
+            if (!name.equals(Biomes.BASALT_DELTAS.location()))
+            {
+                gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.NETHER_PEBBLE_PATCH));
+                gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.BLACKSTONE_BOULDER));
+                gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.COBBLE_BOULDER));
+                gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.SULFUR_PATCH));
+            }
+
+            gen.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, get(BeneathPlacements.AMETHYST_GEODE));
         }
     }
 
@@ -265,7 +262,7 @@ public class ForgeEvents
         if (event.getToolAction() == ToolActions.HOE_TILL)
         {
             final UseOnContext context = event.getContext();
-            if (context != null && context.getLevel().getBlockState(context.getClickedPos()).getBlock() == Blocks.SOUL_SOIL)
+            if (context.getLevel().getBlockState(context.getClickedPos()).getBlock() == Blocks.SOUL_SOIL)
             {
                 event.setFinalState(BeneathBlocks.SOUL_FARMLAND.get().defaultBlockState());
             }
@@ -274,7 +271,7 @@ public class ForgeEvents
 
     private static void onMobGriefing(EntityMobGriefingEvent event)
     {
-        if (event.getEntity() instanceof LargeFireball && event.getEntity().level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING))
+        if (event.getEntity() instanceof LargeFireball && event.getEntity().level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING))
         {
             event.setResult(Event.Result.ALLOW);
         }

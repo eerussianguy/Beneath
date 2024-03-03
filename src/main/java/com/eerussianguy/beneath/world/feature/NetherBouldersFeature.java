@@ -4,6 +4,7 @@ import java.util.Random;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -25,12 +26,12 @@ public class NetherBouldersFeature extends Feature<WeightedStateConfig>
     {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
         final IWeighted<BlockState> weighted = context.config().weighted();
         return place(level, pos, weighted, random);
     }
 
-    private boolean place(WorldGenLevel level, BlockPos pos, IWeighted<BlockState> states, Random random)
+    private boolean place(WorldGenLevel level, BlockPos pos, IWeighted<BlockState> states, RandomSource random)
     {
         final BlockState stateAt = level.getBlockState(pos);
         if (Helpers.isBlock(stateAt, BlockTags.LEAVES) || Helpers.isBlock(stateAt, BlockTags.LOGS))

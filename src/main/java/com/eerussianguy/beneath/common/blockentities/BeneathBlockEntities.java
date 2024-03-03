@@ -17,7 +17,7 @@ import static com.eerussianguy.beneath.Beneath.*;
 
 public class BeneathBlockEntities
 {
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MOD_ID);
 
     public static final RegistryObject<BlockEntityType<SoulFarmlandBlockEntity>> SOUL_FARMLAND = register("soul_farmland", SoulFarmlandBlockEntity::new, BeneathBlocks.SOUL_FARMLAND);
     public static final RegistryObject<BlockEntityType<NetherCropBlockEntity>> NETHER_CROP = register("nether_crop", NetherCropBlockEntity::new, BeneathBlocks.CROPS.values().stream());

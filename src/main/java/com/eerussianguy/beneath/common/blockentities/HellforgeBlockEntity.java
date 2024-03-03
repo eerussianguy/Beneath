@@ -228,15 +228,13 @@ public class HellforgeBlockEntity extends TickableInventoryBlockEntity<ItemStack
     }
 
     @Override
-    @Deprecated
-    public long getLastUpdateTick()
+    public long getLastCalendarUpdateTick()
     {
         return lastPlayerTick;
     }
 
     @Override
-    @Deprecated
-    public void setLastUpdateTick(long tick)
+    public void setLastCalendarUpdateTick(long tick)
     {
         lastPlayerTick = tick;
     }
@@ -398,7 +396,7 @@ public class HellforgeBlockEntity extends TickableInventoryBlockEntity<ItemStack
             // Handle possible metal output
             final ItemStackInventory inventory = new ItemStackInventory(stack);
             FluidStack fluidStack = recipe.assembleFluid(inventory);
-            ItemStack outputStack = recipe.assemble(inventory);
+            ItemStack outputStack = recipe.assemble(inventory, null);
             float itemTemperature = cap.getTemperature();
 
             // Loop through all input slots

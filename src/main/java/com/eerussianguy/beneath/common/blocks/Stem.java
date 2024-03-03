@@ -4,7 +4,7 @@ import java.util.Locale;
 import java.util.function.Supplier;
 import com.eerussianguy.beneath.Beneath;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 import net.dries007.tfc.common.blocks.wood.Wood;
 import net.dries007.tfc.util.registry.RegistryWood;
@@ -12,20 +12,20 @@ import net.dries007.tfc.world.feature.tree.TFCTreeGrower;
 
 public enum Stem implements RegistryWood
 {
-    CRIMSON(true, MaterialColor.TERRACOTTA_RED, MaterialColor.COLOR_RED, 7, 8),
-    WARPED(true, MaterialColor.TERRACOTTA_BLUE, MaterialColor.COLOR_BLUE, 7, 8);
+    CRIMSON(true, MapColor.TERRACOTTA_RED, MapColor.COLOR_RED, 7, 8),
+    WARPED(true, MapColor.TERRACOTTA_BLUE, MapColor.COLOR_BLUE, 7, 8);
 
     public static final Stem[] VALUES = values();
 
     private final String serializedName;
     private final boolean conifer;
-    private final MaterialColor woodColor;
-    private final MaterialColor barkColor;
+    private final MapColor woodColor;
+    private final MapColor barkColor;
     private final TFCTreeGrower tree;
     private final int maxDecayDistance;
     private final int daysToGrow;
 
-    Stem(boolean conifer, MaterialColor woodColor, MaterialColor barkColor, int maxDecayDistance, int daysToGrow)
+    Stem(boolean conifer, MapColor woodColor, MapColor barkColor, int maxDecayDistance, int daysToGrow)
     {
         this.serializedName = name().toLowerCase(Locale.ROOT);
         this.conifer = conifer;
@@ -48,13 +48,13 @@ public enum Stem implements RegistryWood
     }
 
     @Override
-    public MaterialColor woodColor()
+    public MapColor woodColor()
     {
         return woodColor;
     }
 
     @Override
-    public MaterialColor barkColor()
+    public MapColor barkColor()
     {
         return barkColor;
     }

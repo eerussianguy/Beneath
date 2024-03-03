@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import net.dries007.tfc.common.entities.TFCFallingBlockEntity;
+import net.dries007.tfc.common.entities.misc.TFCFallingBlockEntity;
 import net.dries007.tfc.util.Helpers;
 
 @Mixin(TFCFallingBlockEntity.class)
@@ -30,12 +30,12 @@ public abstract class TFCFallingBlockEntityMixin extends FallingBlockEntity
     {
         if (Helpers.isBlock(fallingBlockState, Blocks.GLOWSTONE))
         {
-            level.setBlock(posAt, level.getBlockState(posAt).getFluidState().createLegacyBlock(), 3);
-            Helpers.playSound(level, posAt, SoundType.GLASS.getBreakSound());
+            level().setBlock(posAt, level().getBlockState(posAt).getFluidState().createLegacyBlock(), 3);
+            Helpers.playSound(level(), posAt, SoundType.GLASS.getBreakSound());
             final int count = random.nextInt(0, 3);
             if (count > 0)
             {
-                Helpers.spawnItem(level, posAt, new ItemStack(Items.GLOWSTONE_DUST, count));
+                Helpers.spawnItem(level(), posAt, new ItemStack(Items.GLOWSTONE_DUST, count));
             }
         }
     }

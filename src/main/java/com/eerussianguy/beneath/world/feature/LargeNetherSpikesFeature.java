@@ -1,9 +1,9 @@
 package com.eerussianguy.beneath.world.feature;
 
-import java.util.Random;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -15,7 +15,7 @@ public class LargeNetherSpikesFeature extends NetherSpikesFeature
     }
 
     @Override
-    public void place(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, Random random)
+    public void place(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, RandomSource random)
     {
         final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
         final int height = 6 + random.nextInt(11);

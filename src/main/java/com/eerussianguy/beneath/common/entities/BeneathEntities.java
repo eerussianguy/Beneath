@@ -1,11 +1,8 @@
 package com.eerussianguy.beneath.common.entities;
 
 import java.util.Locale;
-import java.util.Map;
 import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.common.blocks.Stem;
-import com.eerussianguy.beneath.common.entities.blaze_leviathan.BasicFireball;
-import com.eerussianguy.beneath.common.entities.blaze_leviathan.BlazeLeviathanBoss;
 import com.eerussianguy.beneath.common.entities.prey.NetherPrey;
 import com.eerussianguy.beneath.common.items.BeneathItems;
 import net.minecraft.world.entity.Entity;
@@ -18,17 +15,13 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import net.dries007.tfc.common.entities.TFCBoat;
 import net.dries007.tfc.util.Helpers;
 
 import static net.dries007.tfc.TerraFirmaCraft.*;
 
 public class BeneathEntities
 {
-    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, Beneath.MOD_ID);
-
-    public static final RegistryObject<EntityType<BlazeLeviathanBoss>> BLAZE_LEVIATHAN = register("blaze_leviathan", EntityType.Builder.of(BlazeLeviathanBoss::new, MobCategory.MONSTER).fireImmune().sized(4f, 9f).clientTrackingRange(10));
-    public static final RegistryObject<EntityType<BasicFireball>> LEVIATHAN_FIREBALL = register("leviathan_fireball", EntityType.Builder.<BasicFireball>of(BasicFireball::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(4).updateInterval(10));
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Beneath.MOD_ID);
 
     public static final RegistryObject<EntityType<NetherPrey>> RED_ELK = register("red_elk", EntityType.Builder.of(NetherPrey::makeDeer, MobCategory.CREATURE).sized(1.0F, 1.3F).fireImmune().clientTrackingRange(10));
 
@@ -52,7 +45,6 @@ public class BeneathEntities
 
     public static void onAttributes(EntityAttributeCreationEvent event)
     {
-        event.put(BLAZE_LEVIATHAN.get(), BlazeLeviathanBoss.createAttributes().build());
         event.put(RED_ELK.get(), NetherPrey.createAttributes().build());
     }
 

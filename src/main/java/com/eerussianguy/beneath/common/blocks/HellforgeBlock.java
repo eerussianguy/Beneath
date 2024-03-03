@@ -3,20 +3,18 @@ package com.eerussianguy.beneath.common.blocks;
 import java.util.Random;
 import java.util.function.Predicate;
 import com.eerussianguy.beneath.common.blockentities.HellforgeBlockEntity;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.BaseFireBlock;
-import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
@@ -80,7 +78,7 @@ public class HellforgeBlock extends CharcoalForgeBlock
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random rand)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
     {
         if (hellForgeValid(level, pos))
         {
@@ -116,7 +114,7 @@ public class HellforgeBlock extends CharcoalForgeBlock
 
     @Override
     @SuppressWarnings("deprecation")
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (!hellForgeValid(level, pos))
         {

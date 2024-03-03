@@ -20,7 +20,7 @@ public class SlimeMixin
         final int size = Mth.clamp(slime.getSize(), 1, 127);
         if (size > 1 && slime.getRandom().nextInt(128) < size)
         {
-            CollapseRecipe.tryTriggerCollapse(slime.level, slime.blockPosition().below());
+            CollapseRecipe.tryTriggerCollapse(slime.level(), slime.blockPosition().below());
         }
     }
 

@@ -1,7 +1,6 @@
 package com.eerussianguy.beneath.common.blocks;
 
 import java.util.List;
-import java.util.Random;
 import java.util.function.Supplier;
 import com.eerussianguy.beneath.common.blockentities.SoulFarmlandBlockEntity;
 import com.eerussianguy.beneath.misc.NCropUtil;
@@ -9,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -65,7 +65,7 @@ public class SoulFarmlandBlock extends Block implements ISoilBlock, HoeOverlayBl
 
     @Override
     @SuppressWarnings("deprecation")
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random rand)
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
     {
         if (!state.canSurvive(level, pos))
         {
