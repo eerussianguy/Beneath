@@ -10,6 +10,6 @@ public class BeneathSignRenderer extends TFCSignBlockEntityRenderer
 {
     public BeneathSignRenderer(BlockEntityRendererProvider.Context context)
     {
-        super(context, BeneathBlocks.WOODS.entrySet().stream().map((entry) -> new SignModelData("tfc", entry.getKey().getSerializedName(), entry.getValue().get(Wood.BlockType.SIGN).get(), entry.getValue().get(Wood.BlockType.WALL_SIGN).get())));
+        super(context, BeneathBlocks.WOODS.keySet().stream().map(wood -> new SignModelData("tfc", wood.getSerializedName(), wood.getVanillaWoodType())));
     }
 }

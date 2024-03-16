@@ -1,22 +1,29 @@
 {
   "__comment__": "This file was automatically created by mcresources",
   "variants": {
-    "": [
-      {
-        "model": "beneath:block/wood/fallen_leaves/warped",
-        "y": 90
-      },
-      {
-        "model": "beneath:block/wood/fallen_leaves/warped"
-      },
-      {
-        "model": "beneath:block/wood/fallen_leaves/warped",
-        "y": 180
-      },
-      {
-        "model": "beneath:block/wood/fallen_leaves/warped",
-        "y": 270
-      }
-    ]
+    "layers=1": {
+      "model": "beneath:block/wood/fallen_leaves/warped_height2"
+    },
+    "layers=2": {
+      "model": "beneath:block/wood/fallen_leaves/warped_height4"
+    },
+    "layers=3": {
+      "model": "beneath:block/wood/fallen_leaves/warped_height6"
+    },
+    "layers=4": {
+      "model": "beneath:block/wood/fallen_leaves/warped_height8"
+    },
+    "layers=5": {
+      "model": "beneath:block/wood/fallen_leaves/warped_height10"
+    },
+    "layers=6": {
+      "model": "beneath:block/wood/fallen_leaves/warped_height12"
+    },
+    "layers=7": {
+      "model": "beneath:block/wood/fallen_leaves/warped_height14"
+    },
+    "layers=8": {
+      "model": "beneath:block/wood/leaves/warped"
+    }
   }
 }

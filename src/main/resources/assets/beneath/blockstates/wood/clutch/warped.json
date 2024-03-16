@@ -1,0 +1,29 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "axis=x,powered=false": {
+      "model": "beneath:block/wood/clutch/warped",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,powered=true": {
+      "model": "beneath:block/wood/clutch/warped_powered",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,powered=false": {
+      "model": "beneath:block/wood/clutch/warped"
+    },
+    "axis=y,powered=true": {
+      "model": "beneath:block/wood/clutch/warped_powered"
+    },
+    "axis=z,powered=false": {
+      "model": "beneath:block/wood/clutch/warped",
+      "x": 90
+    },
+    "axis=z,powered=true": {
+      "model": "beneath:block/wood/clutch/warped_powered",
+      "x": 90
+    }
+  }
+}

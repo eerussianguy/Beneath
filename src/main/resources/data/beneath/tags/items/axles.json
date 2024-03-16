@@ -1,0 +1,10 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:wood/axle/crimson",
+    "beneath:wood/encased_axle/crimson",
+    "beneath:wood/axle/warped",
+    "beneath:wood/encased_axle/warped"
+  ]
+}

@@ -1,6 +1,7 @@
 package com.eerussianguy.beneath.common.blocks;
 
 import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import com.eerussianguy.beneath.Beneath;
@@ -16,9 +17,13 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.SignBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.registries.DeferredRegister;
@@ -37,11 +42,14 @@ import net.dries007.tfc.common.blocks.rock.MossGrowingBlock;
 import net.dries007.tfc.common.blocks.rock.MossSpreadingBlock;
 import net.dries007.tfc.common.blocks.rock.Ore;
 import net.dries007.tfc.common.blocks.rock.RockSpikeBlock;
+import net.dries007.tfc.common.blocks.wood.TFCCeilingHangingSignBlock;
 import net.dries007.tfc.common.blocks.wood.TFCLoomBlock;
 import net.dries007.tfc.common.blocks.wood.TFCStandingSignBlock;
+import net.dries007.tfc.common.blocks.wood.TFCWallHangingSignBlock;
 import net.dries007.tfc.common.blocks.wood.TFCWallSignBlock;
 import net.dries007.tfc.common.blocks.wood.Wood;
 import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.Metal;
 import net.dries007.tfc.util.registry.RegistrationHelpers;
 import net.dries007.tfc.util.registry.RegistryWood;
 
@@ -68,8 +76,8 @@ public class BeneathBlocks
     public static final RegistryObject<Block> CRIMSON_THATCH = register("crimson_thatch", () -> new ThatchBlock(ExtendedProperties.of(MapColor.CRIMSON_STEM).strength(0.6F, 0.4F).noOcclusion().isViewBlocking(TFCBlocks::never).sound(TFCSounds.THATCH)));
     public static final RegistryObject<Block> WARPED_THATCH = register("warped_thatch", () -> new ThatchBlock(ExtendedProperties.of(MapColor.WARPED_STEM).strength(0.6F, 0.4F).noOcclusion().isViewBlocking(TFCBlocks::never).sound(TFCSounds.THATCH)));
     public static final RegistryObject<Block> SOUL_CLAY = register("soul_clay", () -> new SoulClayBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(0.5F).speedFactor(0.4F).sound(SoundType.SOUL_SAND).isValidSpawn(BeneathBlocks::always).isRedstoneConductor(BeneathBlocks::always).isViewBlocking(BeneathBlocks::always).isSuffocating(BeneathBlocks::always)));
-    public static final RegistryObject<Block> CRACKRACK = register("crackrack", () -> new Block(BlockBehaviour.Properties.of(MapColor.COLOR_GRAY).strength(5F).requiresCorrectToolForDrops().sound(SoundType.NETHERRACK)));
-    public static final RegistryObject<Block> HELLBRICKS = register("hellbricks", () -> new Block(BlockBehaviour.Properties.of(MapColor.COLOR_GRAY).strength(5F).requiresCorrectToolForDrops().sound(SoundType.NETHER_BRICKS)));
+    public static final RegistryObject<Block> CRACKRACK = register("crackrack", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(5F).requiresCorrectToolForDrops().sound(SoundType.NETHERRACK)));
+    public static final RegistryObject<Block> HELLBRICKS = register("hellbricks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(5F).requiresCorrectToolForDrops().sound(SoundType.NETHER_BRICKS)));
     public static final RegistryObject<Block> HELLFORGE = registerNoItem("hellforge", () -> new HellforgeBlock(ExtendedProperties.of(MapColor.COLOR_BLACK).strength(0.2F).randomTicks().sound(TFCSounds.CHARCOAL).lightLevel(state -> state.getValue(HellforgeBlock.HEAT) * 2).pathType(BlockPathTypes.DAMAGE_FIRE).blockEntity(BeneathBlockEntities.HELLFORGE).serverTicks(HellforgeBlockEntity::serverTick)));
     public static final RegistryObject<Block> HELLFORGE_SIDE = registerNoItem("hellforge_side", () -> new HellforgeSideBlock(ExtendedProperties.of(MapColor.COLOR_BLACK).strength(0.2f).randomTicks().sound(TFCSounds.CHARCOAL).lightLevel(state -> state.getValue(HellforgeBlock.HEAT) * 2).pathType(BlockPathTypes.DAMAGE_FIRE)));
     public static final RegistryObject<Block> CURSECOAL_PILE = registerNoItem("cursecoal_pile", () -> new CursecoalPileBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(0.2F).sound(TFCSounds.CHARCOAL).isViewBlocking((state, level, pos) -> state.getValue(CharcoalPileBlock.LAYERS) >= 8).isSuffocating((state, level, pos) -> state.getValue(CharcoalPileBlock.LAYERS) >= 8)));
@@ -81,6 +89,8 @@ public class BeneathBlocks
             register(type.nameFor(wood), createWood(wood, type), type.createBlockItem(wood, new Item.Properties()))
         )
     );
+    public static final Map<Stem, Map<Metal.Default, RegistryObject<TFCCeilingHangingSignBlock>>> CEILING_HANGING_SIGNS = registerHangingSigns("hanging_sign", TFCCeilingHangingSignBlock::new);
+    public static final Map<Stem, Map<Metal.Default, RegistryObject<TFCWallHangingSignBlock>>> WALL_HANGING_SIGNS = registerHangingSigns("wall_hanging_sign", TFCWallHangingSignBlock::new);
 
     public static Supplier<Block> createWood(Stem stem, Wood.BlockType blockType)
     {
@@ -90,11 +100,11 @@ public class BeneathBlocks
         }
         if (blockType == Wood.BlockType.SIGN)
         {
-            return () -> new TFCStandingSignBlock(woodProperties(stem).noCollission().strength(1.0F).flammableLikePlanks().blockEntity(BeneathBlockEntities.SIGN));
+            return () -> new TFCStandingSignBlock(ExtendedProperties.of(MapColor.WOOD).sound(SoundType.WOOD).instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).flammableLikePlanks().blockEntity(BeneathBlockEntities.SIGN), stem.getVanillaWoodType());
         }
         if (blockType == Wood.BlockType.WALL_SIGN)
         {
-            return () -> new TFCWallSignBlock(woodProperties(stem).noCollission().strength(1.0F).dropsLike(stem.getBlock(Wood.BlockType.SIGN)).flammableLikePlanks().blockEntity(BeneathBlockEntities.SIGN));
+            return () -> new TFCWallSignBlock(ExtendedProperties.of(MapColor.WOOD).sound(SoundType.WOOD).instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).dropsLike(stem.getBlock(Wood.BlockType.SIGN)).flammableLikePlanks().blockEntity(BeneathBlockEntities.SIGN), stem.getVanillaWoodType());
         }
         return blockType.create(stem);
     }
@@ -134,4 +144,14 @@ public class BeneathBlocks
         return RegistrationHelpers.registerBlock(BLOCKS, BeneathItems.ITEMS, name, blockSupplier, blockItemFactory);
     }
 
+    private static <B extends SignBlock> Map<Stem, Map<Metal.Default, RegistryObject<B>>> registerHangingSigns(String variant, BiFunction<ExtendedProperties, WoodType, B> factory)
+    {
+        return Helpers.mapOfKeys(Stem.class, wood ->
+            Helpers.mapOfKeys(Metal.Default.class, Metal.Default::hasUtilities, metal -> register(
+                "wood/planks/" + variant + "/" + metal.getSerializedName() + "/" + wood.getSerializedName(),
+                () -> factory.apply(ExtendedProperties.of(wood.woodColor()).sound(SoundType.WOOD).noCollission().strength(1F).flammableLikePlanks().blockEntity(BeneathBlockEntities.HANGING_SIGN).ticks(SignBlockEntity::tick), wood.getVanillaWoodType()),
+                (Function<B, BlockItem>) null)
+            )
+        );
+    }
 }

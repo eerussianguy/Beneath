@@ -1,0 +1,24 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " L ",
+    "WAW",
+    " L "
+  ],
+  "key": {
+    "L": {
+      "item": "beneath:wood/stripped_log/crimson"
+    },
+    "W": {
+      "item": "beneath:wood/lumber/crimson"
+    },
+    "A": {
+      "item": "beneath:wood/axle/crimson"
+    }
+  },
+  "result": {
+    "item": "beneath:wood/encased_axle/crimson",
+    "count": 4
+  }
+}

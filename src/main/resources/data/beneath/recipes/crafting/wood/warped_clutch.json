@@ -1,0 +1,30 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LSL",
+    "MAR",
+    "LSL"
+  ],
+  "key": {
+    "L": {
+      "item": "beneath:wood/lumber/warped"
+    },
+    "S": {
+      "item": "beneath:wood/stripped_log/warped"
+    },
+    "M": {
+      "item": "tfc:brass_mechanisms"
+    },
+    "A": {
+      "item": "beneath:wood/axle/warped"
+    },
+    "R": {
+      "tag": "forge:dusts/redstone"
+    }
+  },
+  "result": {
+    "item": "beneath:wood/clutch/warped",
+    "count": 2
+  }
+}

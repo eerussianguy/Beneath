@@ -1,3 +1,5 @@
+import os
+
 from PIL import Image, ImageDraw, ImageEnhance, ImageOps
 from PIL.Image import Transpose
 
@@ -217,25 +219,126 @@ def put_on_all_pixels(img: Image, color) -> Image:
     img.putalpha(alpha)
     return img
 
+
+def create_bookshelf(wood: str):
+    planks = Image.open(path + 'block/wood/planks/%s' % wood + '.png').convert('RGBA')
+    mask = Image.open(templates + 'chiseled_bookshelf_mask.png').convert('L')
+    empty = Image.open(templates + 'chiseled_bookshelf_empty.png').convert('RGBA')
+    filled = Image.open(templates + 'chiseled_bookshelf_occupied.png').convert('RGBA')
+    empty.paste(planks, mask=mask)
+    filled.paste(planks, mask=mask)
+    empty.save(path + 'block/wood/planks/%s_bookshelf_empty.png' % wood)
+    filled.save(path + 'block/wood/planks/%s_bookshelf_occupied.png' % wood)
+
+
+def create_hanging_sign_chains_item(metal: str, smooth_color):
+    chains = Image.open(templates + 'hanging_sign_head_chains.png')
+    chains = put_on_all_pixels(chains, smooth_color)
+    chains.save(path + 'item/metal/hanging_sign/%s.png' % metal)
+
+
+def create_horse_chest(wood: str, plank_color, log_color):
+    for variant in ('chest', 'barrel'):
+        image = Image.new('RGBA', (64, 64), (0, 0, 0, 0))
+        overlay = Image.open(templates + 'horse_%s_overlay.png' % variant).convert('RGBA')
+        frame = Image.open(templates + 'horse_%s_log.png' % variant).convert('RGBA')
+        body = Image.open(templates + 'horse_%s_sheet.png' % variant).convert('RGBA')
+        frame = put_on_all_pixels(frame, log_color)
+        body = put_on_all_pixels(body, plank_color)
+        image.paste(frame, (26, 21), frame)
+        image.paste(body, (26, 21), body)
+        image.paste(overlay, (26, 21), overlay)
+        if variant == 'chest':
+            image.save(path + 'entity/chest/horse/%s.png' % wood)
+        elif variant == 'barrel':
+            image.save(path + 'entity/chest/horse/%s_barrel.png' % wood)
+
+def create_hanging_sign(wood: str, metal: str):
+    img = Image.new('RGBA', (64, 32))
+    sheet = Image.open(path + 'block/wood/sheet/%s.png' % wood).convert('RGBA').transpose(Transpose.TRANSVERSE)
+    big_sheet = fill_image(sheet, 64, 32, 16, 16)
+    mask = Image.open(templates + 'hanging_sign.png').convert('L')
+    img.paste(big_sheet, mask=mask)
+    smooth = Image.open(path + 'block/metal/smooth/%s.png' % metal).convert('RGBA').transpose(Transpose.TRANSVERSE)
+    big_smooth = fill_image(smooth, 64, 32, 16, 16)
+    chain_mask = Image.open(templates + 'hanging_sign_chains.png').convert('L')
+    img.paste(big_smooth, mask=chain_mask)
+    img.save(path + 'entity/signs/hanging/%s/%s.png' % (metal, wood))
+
+    img = Image.new('RGBA', (16, 16))
+    img.paste(sheet, mask=Image.open(templates + 'hanging_sign_edit.png').convert('L'))
+    img.paste(smooth, mask=Image.open(templates + 'hanging_sign_edit_overlay.png').convert('L'))
+    img.save(path + 'gui/hanging_signs/%s/%s.png' % (metal, wood))
+
+def fill_image(tile_instance, width: int, height: int, tile_width: int, tile_height: int):
+    image_instance = Image.new('RGBA', (width, height))
+    for i in range(0, int(width / tile_width)):
+        for j in range(0, int(height / tile_height)):
+            image_instance.paste(tile_instance, (i * tile_width, j * tile_height))
+    return image_instance
+
+def stitch_images(width: int, height: int, name: str, paths: List[str]):
+    img = Image.new('RGBA', (width, height))
+    images = []
+    for fp in paths:
+        images.append(Image.open(fp).convert('RGBA'))
+    for i in range(0, int(width / 16)):
+        for j in range(0, int(height / 16)):
+            if len(images) == 0:
+                img.save(templates + name + '.png')
+                return
+            else:
+                img.paste(images.pop(), (j * 16, i * 16))
+
+def create_chest_boat(wood: str):
+    log = Image.open(path + 'block/wood/log/%s.png' % wood).convert('RGBA')
+    sheet = Image.open(path + 'block/wood/sheet/%s.png' % wood).convert('RGBA').transpose(Transpose.TRANSVERSE)
+    log_mask = Image.open(templates + 'chest_boat_log_mask.png').convert('L')
+    sheet_mask = Image.open(templates + 'chest_boat_sheet_mask.png').convert('L')
+    big_log = fill_image(log, 128, 128, 16, 16)
+    big_sheet = fill_image(sheet, 128, 128, 16, 16)
+    cover = Image.open(templates + 'chest_boat_static.png')
+
+    base = Image.new('RGBA', (128, 128))
+    base.paste(big_log, mask=log_mask)
+    base.paste(big_sheet, mask=sheet_mask)
+    base.paste(cover, mask=cover)
+    base.save(path + 'entity/chest_boat/%s.png' % wood)
+
+def create_boat_texture(wood: str):
+    img = Image.open(templates + 'boat.png').convert('RGBA')
+    palette_key = Image.open(path + 'color_palettes/wood/planks/palette.png').convert('RGBA')
+    palette = Image.open(path + 'color_palettes/wood/planks/%s.png' % wood).convert('RGBA')
+    manual_palette_swap(img, palette_key, palette)
+    img.save(path + 'entity/boat/%s.png' % wood)
+
+def manual_palette_swap(img: Image, palette_key: Image, palette: Image) -> Image:
+    data = {}
+    for x in range(0, palette_key.width):
+        data[palette_key.getpixel((x, 0))] = palette.getpixel((x, 0))
+    for x in range(0, img.width):
+        for y in range(0, img.height):
+            dat = img.getpixel((x, y))
+            if dat in data:
+                img.putpixel((x, y), data[dat])
+    return img
+
 def main():
     for wood in WOODS:
-        #overlay_image(templates + 'log_top/%s' % wood, path + 'block/wood/log/%s' % wood, path + 'block/wood/log_top/%s' % wood)
-        overlay_image(templates + 'log_top/%s' % wood, path + 'block/wood/stripped_log/%s' % wood, path + 'block/wood/stripped_log_top/%s' % wood)
         for bench in ('workbench_front', 'workbench_side', 'workbench_top'):
             overlay_image(templates + bench, path + 'block/wood/planks/%s' % wood, path + 'block/wood/planks/%s_' % wood + bench)
         create_chest(wood)
         create_sign(wood)
+        create_bookshelf(wood)
         plank_color = get_wood_colors('planks/%s' % wood)
         log_color = get_wood_colors('log/%s' % wood)
-        create_sign_item(wood, plank_color, log_color)
-        for item in ('twig', 'boat', 'lumber'):
-            easy_colorize(plank_color, templates + '/%s' % item, path + 'item/wood/%s/%s' % (item, wood))
-        easy_colorize(plank_color, templates + '/bookshelf_side', path + 'block/wood/planks/%s_bookshelf_side' % wood)
-        easy_colorize(plank_color, templates + '/bookshelf_top', path + 'block/wood/planks/%s_bookshelf_top' % wood)
-        for i in range(0, 7):
-            overlay_image(templates + '/bookshelf_' + str(i), path + 'block/wood/planks/%s_bookshelf_side' % wood, path + 'block/wood/planks/%s_bookshelf_stage%s' % (wood, str(i)))
-        create_chest_minecart(wood, plank_color)
-        create_logs(wood, plank_color)
+        create_horse_chest(wood, plank_color, log_color)
+        create_chest_boat(wood)
+        if wood != 'palm':
+            create_boat_texture(wood)
+        for metal, metal_data in METALS.items():
+            if 'utility' in metal_data.types:
+                create_hanging_sign(wood, metal)
 
 if __name__ == '__main__':
     main()

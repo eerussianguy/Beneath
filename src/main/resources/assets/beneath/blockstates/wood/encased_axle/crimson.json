@@ -1,0 +1,17 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "axis=x": {
+      "model": "beneath:block/wood/encased_axle/crimson",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "beneath:block/wood/encased_axle/crimson"
+    },
+    "axis=z": {
+      "model": "beneath:block/wood/encased_axle/crimson",
+      "x": 90
+    }
+  }
+}

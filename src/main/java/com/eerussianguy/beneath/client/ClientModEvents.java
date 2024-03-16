@@ -2,6 +2,7 @@ package com.eerussianguy.beneath.client;
 
 import java.util.stream.Stream;
 import com.eerussianguy.beneath.Beneath;
+import com.eerussianguy.beneath.client.render.BeneathHangingSignRenderer;
 import com.eerussianguy.beneath.client.render.BeneathSignRenderer;
 import com.eerussianguy.beneath.client.render.HellforgeRenderer;
 import com.eerussianguy.beneath.client.screen.HellforgeScreen;
@@ -19,6 +20,7 @@ import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -34,6 +36,7 @@ import net.dries007.tfc.client.model.entity.DeerModel;
 import net.dries007.tfc.client.particle.GlintParticleProvider;
 import net.dries007.tfc.client.render.entity.SimpleMobRenderer;
 import net.dries007.tfc.client.render.entity.TFCBoatRenderer;
+import net.dries007.tfc.client.render.entity.TFCChestBoatRenderer;
 import net.dries007.tfc.util.Helpers;
 
 import static net.dries007.tfc.common.blocks.wood.Wood.BlockType.*;
@@ -50,12 +53,18 @@ public class ClientModEvents
         bus.addListener(ClientModEvents::onParticlesRegister);
     }
 
+    @SuppressWarnings("deprecation")
     private static void setup(FMLClientSetupEvent event)
     {
         event.enqueueWork(() -> {
             BeneathBlocks.WOODS.values().forEach(map -> ItemProperties.register(map.get(BARREL).get().asItem(), Helpers.identifier("sealed"), (stack, level, entity, unused) -> stack.hasTag() ? 1.0f : 0f));
 
             MenuScreens.register(BeneathContainerTypes.HELLFORGE_CONTAINER.get(), HellforgeScreen::new);
+
+            for (Stem stem : Stem.VALUES)
+            {
+                Sheets.addWoodType(stem.getVanillaWoodType());
+            }
         });
 
         final RenderType solid = RenderType.solid();
@@ -87,12 +96,14 @@ public class ClientModEvents
         for (Stem wood : Stem.VALUES)
         {
             event.registerEntityRenderer(BeneathEntities.BOATS.get(wood).get(), ctx -> new TFCBoatRenderer(ctx, wood.getSerializedName()));
+            event.registerEntityRenderer(BeneathEntities.CHEST_BOATS.get(wood).get(), ctx -> new TFCChestBoatRenderer(ctx, wood.getSerializedName()));
         }
 
         event.registerEntityRenderer(BeneathEntities.RED_ELK.get(), ctx -> new SimpleMobRenderer.Builder<>(ctx, DeerModel::new, "red_elk").shadow(0.6f).texture(p -> RED_ELK_LOCATION).build());
 
         event.registerBlockEntityRenderer(BeneathBlockEntities.HELLFORGE.get(), ctx -> new HellforgeRenderer());
         event.registerBlockEntityRenderer(BeneathBlockEntities.SIGN.get(), BeneathSignRenderer::new);
+        event.registerBlockEntityRenderer(BeneathBlockEntities.HANGING_SIGN.get(), BeneathHangingSignRenderer::new);
 
     }
 

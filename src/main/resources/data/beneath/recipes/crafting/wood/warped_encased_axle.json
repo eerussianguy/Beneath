@@ -1,0 +1,24 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " L ",
+    "WAW",
+    " L "
+  ],
+  "key": {
+    "L": {
+      "item": "beneath:wood/stripped_log/warped"
+    },
+    "W": {
+      "item": "beneath:wood/lumber/warped"
+    },
+    "A": {
+      "item": "beneath:wood/axle/warped"
+    }
+  },
+  "result": {
+    "item": "beneath:wood/encased_axle/warped",
+    "count": 4
+  }
+}

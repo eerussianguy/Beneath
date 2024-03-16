@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "minecraft:block/chiseled_bookshelf",
+  "textures": {
+    "top": "beneath:block/wood/planks/crimson_bookshelf_top",
+    "side": "beneath:block/wood/planks/crimson_bookshelf_side"
+  }
+}

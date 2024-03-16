@@ -4,9 +4,12 @@ import java.util.Locale;
 import java.util.function.Supplier;
 import com.eerussianguy.beneath.Beneath;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 
 import net.dries007.tfc.common.blocks.wood.Wood;
+import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.registry.RegistryWood;
 import net.dries007.tfc.world.feature.tree.TFCTreeGrower;
 
@@ -24,6 +27,8 @@ public enum Stem implements RegistryWood
     private final TFCTreeGrower tree;
     private final int maxDecayDistance;
     private final int daysToGrow;
+    private final BlockSetType blockSet;
+    private final WoodType woodType;
 
     Stem(boolean conifer, MapColor woodColor, MapColor barkColor, int maxDecayDistance, int daysToGrow)
     {
@@ -33,6 +38,8 @@ public enum Stem implements RegistryWood
         this.barkColor = barkColor;
         this.tree = new TFCTreeGrower(Beneath.identifier("tree/" + serializedName), Beneath.identifier("tree/" + serializedName + "_large"));
         this.maxDecayDistance = maxDecayDistance;
+        this.blockSet = new BlockSetType(serializedName);
+        this.woodType = new WoodType(Beneath.identifier(this.serializedName).toString(), this.blockSet);
         this.daysToGrow = daysToGrow;
     }
 
@@ -66,15 +73,15 @@ public enum Stem implements RegistryWood
     }
 
     @Override
-    public int maxDecayDistance()
-    {
-        return maxDecayDistance;
-    }
-
-    @Override
     public int daysToGrow()
     {
         return defaultDaysToGrow();
+    }
+
+    @Override
+    public int autumnIndex()
+    {
+        return 0;
     }
 
     public int defaultDaysToGrow()
@@ -86,5 +93,17 @@ public enum Stem implements RegistryWood
     public Supplier<Block> getBlock(Wood.BlockType type)
     {
         return BeneathBlocks.WOODS.get(this).get(type);
+    }
+
+    @Override
+    public BlockSetType getBlockSet()
+    {
+        return blockSet;
+    }
+
+    @Override
+    public WoodType getVanillaWoodType()
+    {
+        return woodType;
     }
 }

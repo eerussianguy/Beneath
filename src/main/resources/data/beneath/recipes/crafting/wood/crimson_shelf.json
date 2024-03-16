@@ -1,0 +1,24 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "Y Y",
+    "Z Z"
+  ],
+  "key": {
+    "X": {
+      "item": "beneath:wood/planks/crimson"
+    },
+    "Y": {
+      "item": "beneath:wood/lumber/crimson"
+    },
+    "Z": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "beneath:wood/jar_shelf/crimson",
+    "count": 2
+  }
+}

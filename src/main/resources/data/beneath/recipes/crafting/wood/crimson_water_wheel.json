@@ -1,0 +1,23 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LPL",
+    "PAP",
+    "LPL"
+  ],
+  "key": {
+    "L": {
+      "item": "beneath:wood/lumber/crimson"
+    },
+    "P": {
+      "item": "beneath:wood/planks/crimson"
+    },
+    "A": {
+      "item": "beneath:wood/axle/crimson"
+    }
+  },
+  "result": {
+    "item": "beneath:wood/water_wheel/crimson"
+  }
+}

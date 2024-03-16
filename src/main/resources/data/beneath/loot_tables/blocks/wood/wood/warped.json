@@ -39,7 +39,7 @@
                   "condition": "minecraft:block_state_property",
                   "block": "beneath:wood/wood/warped",
                   "properties": {
-                    "natural": "false"
+                    "branch_direction": "none"
                   }
                 }
               ]

@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "block/door_bottom_left",
+  "textures": {
+    "top": "beneath:block/wood/planks/warped_door_top",
+    "bottom": "beneath:block/wood/planks/warped_door_bottom"
+  }
+}

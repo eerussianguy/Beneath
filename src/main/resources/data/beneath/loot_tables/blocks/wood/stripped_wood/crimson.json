@@ -39,7 +39,7 @@
                   "condition": "minecraft:block_state_property",
                   "block": "beneath:wood/stripped_wood/crimson",
                   "properties": {
-                    "natural": "false"
+                    "branch_direction": "none"
                   }
                 }
               ]

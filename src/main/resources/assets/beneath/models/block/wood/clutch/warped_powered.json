@@ -1,0 +1,11 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/ore_column",
+  "textures": {
+    "side": "beneath:block/wood/stripped_log/warped",
+    "end": "beneath:block/wood/planks/warped",
+    "overlay": "tfc:block/axle_casing_powered",
+    "overlay_end": "tfc:block/axle_casing_front",
+    "particle": "beneath:block/wood/stripped_log/warped"
+  }
+}

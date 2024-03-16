@@ -1,9 +1,9 @@
 package com.eerussianguy.beneath.common.entities.prey;
 
-import java.util.Random;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
@@ -32,7 +32,7 @@ public class NetherPrey extends Prey
         return new NetherPrey(type, level, TFCSounds.DEER);
     }
 
-    public static boolean checkSpawnRules(EntityType<? extends NetherPrey> type, LevelAccessor level, MobSpawnType spawn, BlockPos pos, Random rand)
+    public static boolean spawnRules(EntityType<? extends NetherPrey> type, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource rand)
     {
         final BlockPos.MutableBlockPos cursor = pos.mutable();
         do
@@ -122,9 +122,9 @@ public class NetherPrey extends Prey
         if (this.isInLava())
         {
             final CollisionContext context = CollisionContext.of(this);
-            if (context.isAbove(LiquidBlock.STABLE_SHAPE, this.blockPosition(), true) && !Helpers.isFluid(level.getFluidState(this.blockPosition().above()), FluidTags.LAVA))
+            if (context.isAbove(LiquidBlock.STABLE_SHAPE, this.blockPosition(), true) && !Helpers.isFluid(level().getFluidState(this.blockPosition().above()), FluidTags.LAVA))
             {
-                this.onGround = true;
+                setOnGround(false);
             }
             else
             {

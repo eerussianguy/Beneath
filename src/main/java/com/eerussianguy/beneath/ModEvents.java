@@ -7,12 +7,15 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 import com.eerussianguy.beneath.common.BeneathDispenserBehaviors;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
+import com.eerussianguy.beneath.common.blocks.Stem;
 import com.eerussianguy.beneath.common.entities.BeneathEntities;
 import com.eerussianguy.beneath.misc.BeneathClimateModels;
 import com.eerussianguy.beneath.misc.BeneathInteractionManager;
 import com.eerussianguy.beneath.mixin.BlockEntityTypeAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -38,11 +41,16 @@ public class ModEvents
         event.enqueueWork(() -> {
             BeneathDispenserBehaviors.registerDispenseBehaviors();
             BeneathBlocks.registerFlowerPotFlowers();
-            BeneathEntities.onSpawnPlacement();
             BeneathClimateModels.registerModels();
 
             modifyFlammability();
             modifyBlockEntityTypes();
+
+            for (Stem stem : Stem.VALUES)
+            {
+                BlockSetType.register(stem.getBlockSet());
+                WoodType.register(stem.getVanillaWoodType());
+            }
         });
 
         BeneathInteractionManager.init();
@@ -60,14 +68,19 @@ public class ModEvents
 
     private static void modifyBlockEntityTypes()
     {
-        modifyWood(TFCBlockEntities.CHEST.get(), Wood.BlockType.CHEST, Wood.BlockType.TRAPPED_CHEST);
-        modifyWood(TFCBlockEntities.LOOM.get(), Wood.BlockType.LOOM);
         modifyWood(TFCBlockEntities.TICK_COUNTER.get(), Wood.BlockType.SAPLING);
+        modifyWood(TFCBlockEntities.CHEST.get(), Wood.BlockType.CHEST);
+        modifyWood(TFCBlockEntities.TRAPPED_CHEST.get(), Wood.BlockType.TRAPPED_CHEST);
+        modifyWood(TFCBlockEntities.LOOM.get(), Wood.BlockType.LOOM);
         modifyWood(TFCBlockEntities.BARREL.get(), Wood.BlockType.BARREL);
         modifyWood(TFCBlockEntities.SLUICE.get(), Wood.BlockType.SLUICE);
         modifyWood(TFCBlockEntities.BOOKSHELF.get(), Wood.BlockType.BOOKSHELF);
         modifyWood(TFCBlockEntities.TOOL_RACK.get(), Wood.BlockType.TOOL_RACK);
         modifyWood(TFCBlockEntities.LECTERN.get(), Wood.BlockType.LECTERN);
+        modifyWood(TFCBlockEntities.AXLE.get(), Wood.BlockType.AXLE);
+        modifyWood(TFCBlockEntities.BLADED_AXLE.get(), Wood.BlockType.BLADED_AXLE);
+        modifyWood(TFCBlockEntities.WATER_WHEEL.get(), Wood.BlockType.WATER_WHEEL);
+        modifyWood(TFCBlockEntities.WINDMILL.get(), Wood.BlockType.WINDMILL);
     }
 
     private static void modifyWood(BlockEntityType<?> type, Wood.BlockType... blockType)

@@ -1,0 +1,20 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "facing=east": {
+      "model": "beneath:block/wood/jar_shelf/crimson",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "beneath:block/wood/jar_shelf/crimson"
+    },
+    "facing=south": {
+      "model": "beneath:block/wood/jar_shelf/crimson",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "beneath:block/wood/jar_shelf/crimson",
+      "y": 270
+    }
+  }
+}

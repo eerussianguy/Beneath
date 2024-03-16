@@ -1,22 +1,29 @@
 {
   "__comment__": "This file was automatically created by mcresources",
   "variants": {
-    "": [
-      {
-        "model": "beneath:block/wood/fallen_leaves/crimson",
-        "y": 90
-      },
-      {
-        "model": "beneath:block/wood/fallen_leaves/crimson"
-      },
-      {
-        "model": "beneath:block/wood/fallen_leaves/crimson",
-        "y": 180
-      },
-      {
-        "model": "beneath:block/wood/fallen_leaves/crimson",
-        "y": 270
-      }
-    ]
+    "layers=1": {
+      "model": "beneath:block/wood/fallen_leaves/crimson_height2"
+    },
+    "layers=2": {
+      "model": "beneath:block/wood/fallen_leaves/crimson_height4"
+    },
+    "layers=3": {
+      "model": "beneath:block/wood/fallen_leaves/crimson_height6"
+    },
+    "layers=4": {
+      "model": "beneath:block/wood/fallen_leaves/crimson_height8"
+    },
+    "layers=5": {
+      "model": "beneath:block/wood/fallen_leaves/crimson_height10"
+    },
+    "layers=6": {
+      "model": "beneath:block/wood/fallen_leaves/crimson_height12"
+    },
+    "layers=7": {
+      "model": "beneath:block/wood/fallen_leaves/crimson_height14"
+    },
+    "layers=8": {
+      "model": "beneath:block/wood/leaves/crimson"
+    }
   }
 }

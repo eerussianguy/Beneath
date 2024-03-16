@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "block/door_top_right",
+  "textures": {
+    "top": "beneath:block/wood/planks/crimson_door_top",
+    "bottom": "beneath:block/wood/planks/crimson_door_bottom"
+  }
+}

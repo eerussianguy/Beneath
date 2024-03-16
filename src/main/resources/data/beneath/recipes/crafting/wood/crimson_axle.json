@@ -1,0 +1,19 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WGW"
+  ],
+  "key": {
+    "G": {
+      "item": "tfc:glue"
+    },
+    "W": {
+      "item": "beneath:wood/stripped_log/crimson"
+    }
+  },
+  "result": {
+    "item": "beneath:wood/axle/crimson",
+    "count": 4
+  }
+}

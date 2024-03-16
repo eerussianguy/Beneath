@@ -1,6 +1,7 @@
 package com.eerussianguy.beneath.common.entities;
 
 import java.util.Locale;
+import java.util.Map;
 import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.common.blocks.Stem;
 import com.eerussianguy.beneath.common.entities.prey.NetherPrey;
@@ -11,10 +12,13 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import net.dries007.tfc.common.entities.misc.TFCBoat;
+import net.dries007.tfc.common.entities.misc.TFCChestBoat;
 import net.dries007.tfc.util.Helpers;
 
 import static net.dries007.tfc.TerraFirmaCraft.*;
@@ -25,8 +29,11 @@ public class BeneathEntities
 
     public static final RegistryObject<EntityType<NetherPrey>> RED_ELK = register("red_elk", EntityType.Builder.of(NetherPrey::makeDeer, MobCategory.CREATURE).sized(1.0F, 1.3F).fireImmune().clientTrackingRange(10));
 
+    public static final Map<Stem, RegistryObject<EntityType<TFCChestBoat>>> CHEST_BOATS = Helpers.mapOfKeys(Stem.class, wood ->
+        register("chest_boat/" + wood.name(), EntityType.Builder.<TFCChestBoat>of((type, level) -> new TFCChestBoat(type, level, BeneathItems.BOATS.get(wood)), MobCategory.MISC).sized(1.375F, 0.5625F).clientTrackingRange(10))
+    );
     public static final Map<Stem, RegistryObject<EntityType<TFCBoat>>> BOATS = Helpers.mapOfKeys(Stem.class, wood ->
-        register("boat/" + wood.name(), EntityType.Builder.<TFCBoat>of((type, level) -> new TFCBoat(type, level, BeneathItems.BOATS.get(wood)), MobCategory.MISC).sized(1.375F, 0.5625F).clientTrackingRange(10))
+        register("boat/" + wood.name(), EntityType.Builder.<TFCBoat>of((type, level) -> new TFCBoat(type, level, CHEST_BOATS.get(wood), BeneathItems.BOATS.get(wood)), MobCategory.MISC).sized(1.375F, 0.5625F).clientTrackingRange(10))
     );
 
     public static <E extends Entity> RegistryObject<EntityType<E>> register(String name, EntityType.Builder<E> builder)
@@ -48,8 +55,8 @@ public class BeneathEntities
         event.put(RED_ELK.get(), NetherPrey.createAttributes().build());
     }
 
-    public static void onSpawnPlacement()
+    public static void onSpawnPlacement(SpawnPlacementRegisterEvent event)
     {
-        SpawnPlacements.register(RED_ELK.get(), SpawnPlacements.Type.IN_LAVA, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NetherPrey::checkSpawnRules);
+        event.register(RED_ELK.get(), SpawnPlacements.Type.IN_LAVA, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NetherPrey::spawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 }

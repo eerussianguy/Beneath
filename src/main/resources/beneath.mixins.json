@@ -13,6 +13,7 @@
     "TFCFallingBlockEntityMixin"
   ],
   "client": [
+    "TFCHangingSignBlockEntityRendererMixin"
   ],
   "refmap": "beneath.refmap.json"
 }

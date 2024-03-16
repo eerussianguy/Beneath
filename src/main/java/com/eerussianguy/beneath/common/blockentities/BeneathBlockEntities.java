@@ -24,6 +24,9 @@ public class BeneathBlockEntities
     public static final RegistryObject<BlockEntityType<HellforgeBlockEntity>> HELLFORGE = register("hellforge", HellforgeBlockEntity::new, BeneathBlocks.HELLFORGE);
     public static final RegistryObject<BlockEntityType<BeneathTickCounterBlockEntity>> TICK_COUNTER = register("tick_counter", BeneathTickCounterBlockEntity::new, Stream.of());
     public static final RegistryObject<BlockEntityType<BeneathSignBlockEntity>> SIGN = register("sign", BeneathSignBlockEntity::new, BeneathBlocks.WOODS.values().stream().flatMap(map -> Stream.of(Wood.BlockType.SIGN, Wood.BlockType.WALL_SIGN).map(map::get)));
+    public static final RegistryObject<BlockEntityType<BeneathHangingSignBlockEntity>> HANGING_SIGN = register("sign", BeneathHangingSignBlockEntity::new, Stream.of(
+        BeneathBlocks.CEILING_HANGING_SIGNS, BeneathBlocks.WALL_HANGING_SIGNS
+    ).flatMap(woodMap -> woodMap.values().stream().flatMap(metalMap -> metalMap.values().stream())));
 
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String name, BlockEntityType.BlockEntitySupplier<T> factory, Supplier<? extends Block> block)
     {
