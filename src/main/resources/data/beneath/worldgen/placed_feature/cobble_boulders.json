@@ -1,0 +1,23 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "feature": "beneath:cobble_boulders",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 24
+    },
+    {
+      "type": "minecraft:count_on_every_layer",
+      "count": 1
+    },
+    {
+      "type": "tfc:flat_enough",
+      "flatness": 0.4,
+      "radius": 3,
+      "max_depth": 4
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

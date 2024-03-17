@@ -1,0 +1,12 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "#beneath:veins",
+    "beneath:magma_rhyolite",
+    "beneath:magma_basalt",
+    "beneath:magma_andesite",
+    "beneath:magma_dacite",
+    "beneath:amethyst_geode"
+  ]
+}

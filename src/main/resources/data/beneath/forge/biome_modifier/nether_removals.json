@@ -1,0 +1,6 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "forge:remove_features",
+  "biomes": "#minecraft:is_nether",
+  "features": "#beneath:removed_features"
+}

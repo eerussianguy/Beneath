@@ -3,7 +3,7 @@ import json
 from mcresources import utils
 
 ASSETS_PATH = '../src/main/resources/assets/'
-TEXTURE_FORGIVENESS_PATHS = ('_fluff',)
+TEXTURE_FORGIVENESS_PATHS = ['_fluff', 'metal/smooth', 'bookshelf']
 LANG_PATH = ASSETS_PATH + 'beneath/lang/en_us.json'
 SOUNDS_PATH = ASSETS_PATH + 'beneath/sounds.json'
 
@@ -90,6 +90,15 @@ def validate_textures(model_locations):
     files_tested = 0
     errors = 0
     existing_textures = []
+    atlas = load(ASSETS_PATH + 'minecraft/atlases/blocks.json')
+    for source in atlas['sources']:
+        if source['type'] == 'paletted_permutations':
+            for tex in source['textures']:
+                TEXTURE_FORGIVENESS_PATHS.append(tex.replace('tfc:', '').replace('beneath:', ''))
+                for suffix in source['permutations'].keys():
+                    model_like_path = tex + '_' + suffix + '.png'
+                    path = model_like_path.replace('beneath:', ASSETS_PATH + 'beneath/textures/')
+                    existing_textures.append(path)
     for f in model_locations:
         model_file = load(f)
         if 'textures' in model_file:
@@ -102,11 +111,12 @@ def validate_textures(model_locations):
                         if res.domain == 'beneath':
                             tested += 1
                             path = ASSETS_PATH + 'beneath/textures/%s.png' % res.path
-                            if len(glob(path)) == 0:
-                                print('Texture file not found. Name: %s Filepath: %s' % (f, path))
-                                errors += 1
-                            else:
-                                existing_textures.append(path)
+                            if path not in existing_textures:
+                                if len(glob(path)) == 0:
+                                    print('Texture file not found. Name: %s Filepath: %s' % (f, path))
+                                    errors += 1
+                                else:
+                                    existing_textures.append(path)
     for f in glob(ASSETS_PATH + 'beneath/textures/**/*.png', recursive=True):
         f = f.replace('\\', '/')
         if f not in existing_textures and ('block/' in f or 'item/' in f):

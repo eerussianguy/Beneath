@@ -43,7 +43,7 @@ public class HellforgeSideBlock extends CharcoalForgeBlock
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random rand)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
     {
         if (getCenterPos(level, pos) == null)
         {

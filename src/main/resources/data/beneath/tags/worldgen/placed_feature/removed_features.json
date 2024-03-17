@@ -1,0 +1,20 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "minecraft:crimson_fungi",
+    "minecraft:warped_fungi",
+    "minecraft:brown_mushroom_normal",
+    "minecraft:red_mushroom_normal",
+    "minecraft:ore_quartz_nether",
+    "minecraft:ore_quartz_deltas",
+    "minecraft:ore_gold_nether",
+    "minecraft:ore_gold_deltas",
+    "minecraft:ore_ancient_debris_large",
+    "minecraft:ore_debris_small",
+    "minecraft:ore_magma",
+    "minecraft:red_mushroom_nether",
+    "minecraft:brown_mushroom_nether",
+    "minecraft:delta"
+  ]
+}

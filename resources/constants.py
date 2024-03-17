@@ -14,6 +14,11 @@ class Metal(NamedTuple):
     def specific_heat_capacity(self) -> float: return round(300 / self.heat_capacity_base) / 100_000
     def ingot_heat_capacity(self) -> float: return 1 / self.heat_capacity_base
 
+class Rock(NamedTuple):
+    category: str
+    sand: str
+
+
 TFC_METALS: Dict[str, Metal] = {
     'gold': Metal(1, {'part'}, 0.6, 1060, None),
 }
@@ -49,6 +54,29 @@ METALS: Dict[str, Metal] = {
     'unknown': Metal(0, set(), 0.5, 400, None)
 }
 
+ROCKS: Dict[str, Rock] = {
+    'granite': Rock('igneous_intrusive', 'white'),
+    'diorite': Rock('igneous_intrusive', 'white'),
+    'gabbro': Rock('igneous_intrusive', 'black'),
+    'shale': Rock('sedimentary', 'black'),
+    'claystone': Rock('sedimentary', 'brown'),
+    'limestone': Rock('sedimentary', 'white'),
+    'conglomerate': Rock('sedimentary', 'green'),
+    'dolomite': Rock('sedimentary', 'black'),
+    'chert': Rock('sedimentary', 'yellow'),
+    'chalk': Rock('sedimentary', 'white'),
+    'rhyolite': Rock('igneous_extrusive', 'red'),
+    'basalt': Rock('igneous_extrusive', 'red'),
+    'andesite': Rock('igneous_extrusive', 'red'),
+    'dacite': Rock('igneous_extrusive', 'yellow'),
+    'quartzite': Rock('metamorphic', 'white'),
+    'slate': Rock('metamorphic', 'yellow'),
+    'phyllite': Rock('metamorphic', 'brown'),
+    'schist': Rock('metamorphic', 'green'),
+    'gneiss': Rock('metamorphic', 'green'),
+    'marble': Rock('metamorphic', 'yellow')
+}
+
 WOODS = ['crimson', 'warped']
 
 TREE_SAPLING_DROP_CHANCES = {
@@ -77,7 +105,7 @@ DEFAULT_CROPS = {
 }
 
 DEFAULT_LANG = {
-    'itemGroup.beneath.beneath': 'Beneath Items',
+    'beneath.creative_tab.beneath': 'Beneath Items',
     'entity.beneath.leviathan_fireball': 'Leviathan Fireball',
     'entity.beneath.blaze_leviathan': 'Blaze Leviathan',
     'entity.beneath.red_elk': 'Red Elk',
@@ -90,6 +118,7 @@ DEFAULT_LANG = {
     'death.attack.beneath.sulfur': '%1$s mined sulfur with an iron tool and blew themselves up.',
     'death.attack.beneath.sulfur.player': '%1$s mined sulfur with an iron tool and blew themselves up while trying to escape %2$s.',
     **{'entity.beneath.boat.%s' % wood: lang('%s boat', wood) for wood in WOODS},
+    **{'entity.beneath.chest_boat.%s' % wood: lang('%s chest boat', wood) for wood in WOODS},
 }
 
 

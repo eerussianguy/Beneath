@@ -1,0 +1,7 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "forge:add_features",
+  "biomes": "minecraft:basalt_deltas",
+  "features": "#beneath:vegetal_decoration/basalt_deltas",
+  "step": "vegetal_decoration"
+}

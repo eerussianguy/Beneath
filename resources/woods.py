@@ -1,6 +1,6 @@
 from typing import Optional
 
-from mcresources import ResourceManager, block_states, loot_tables, BlockContext
+from mcresources import ResourceManager, block_states, loot_tables, BlockContext, atlases
 from mcresources.type_definitions import JsonObject
 
 from constants import lang, WOODS, TREE_SAPLING_DROP_CHANCES, METALS
@@ -50,7 +50,7 @@ def generate(rm: ResourceManager):
                 block.with_lang(lang(variant.replace('_', ' ' + wood + ' ')))
             else:
                 block.with_lang(lang('%s %s', wood, variant))
-        for item_type in ('lumber', 'sign', 'chest_minecart', 'boat'):
+        for item_type in ('lumber', 'sign', 'boat'):
             rm.item_model(('wood', item_type, wood)).with_lang(lang('%s %s', wood, item_type))
         rm.item_tag('minecraft:signs', 'beneath:wood/sign/' + wood)
         rm.item_tag('beneath:minecarts', 'beneath:wood/chest_minecart/' + wood)
@@ -62,6 +62,8 @@ def generate(rm: ResourceManager):
         block.with_block_model({'side': 'beneath:block/wood/log/%s' % wood, 'top': 'beneath:block/wood/log_top/%s' % wood}, parent='tfc:block/groundcover/twig')
         rm.item_model('wood/twig/%s' % wood, 'beneath:item/wood/twig/%s' % wood, parent='item/handheld_rod')
         block.with_block_loot('beneath:wood/twig/%s' % wood)
+
+        rm.item_model(('wood', 'chest_minecart', wood), 'beneath:item/wood/chest_minecart_base', 'beneath:item/wood/chest_minecart_cover_%s' % wood).with_lang(lang('%s chest minecart', wood))
 
         block = rm.blockstate(('wood', 'fallen_leaves', wood), variants=dict((('layers=%d' % i), {'model': 'beneath:block/wood/fallen_leaves/%s_height%d' % (wood, i * 2) if i != 8 else 'beneath:block/wood/leaves/%s' % wood}) for i in range(1, 1 + 8))).with_lang(lang('fallen %s leaves', wood))
         tex = {'all': 'beneath:block/wood/leaves/%s' % wood}
@@ -210,6 +212,7 @@ def generate(rm: ResourceManager):
         block.with_block_loot({'name': 'beneath:wood/sluice/%s' % wood, 'conditions': [loot_tables.block_state_property('beneath:wood/sluice/%s[upper=true]' % wood)]})
         rm.item_model(('wood', 'sluice', wood), parent='beneath:block/wood/sluice/%s_lower' % wood, no_textures=True)
 
+        rm.block_model(('wood', 'planks', '%s_sign_particle' % wood), {'particle': 'beneath:block/wood/planks/%s' % wood}, parent=None)
         rm.blockstate(('wood', 'planks', '%s_sign' % wood), model='beneath:block/wood/planks/%s_sign' % wood).with_lang(lang('%s Sign', wood)).with_block_model({'particle': 'beneath:block/wood/planks/%s' % wood}, parent=None).with_block_loot('beneath:wood/sign/%s' % wood).with_tag('minecraft:standing_sings')
         rm.blockstate(('wood', 'planks', '%s_wall_sign' % wood), model='beneath:block/wood/planks/%s_sign' % wood).with_lang(lang('%s Sign', wood)).with_lang(lang('%s Sign', wood)).with_tag('minecraft:wall_signs')
         for metal, metal_data in METALS.items():
@@ -218,7 +221,7 @@ def generate(rm: ResourceManager):
                     rm.blockstate(('wood', 'planks', variant, metal, wood), model='beneath:block/wood/planks/%s_sign_particle' % wood).with_lang(lang('%s %s %s', metal, wood, variant)).with_block_loot('beneath:wood/hanging_sign/%s/%s' % (metal, wood))
         for metal, metal_data in METALS.items():
             if 'utility' in metal_data.types:
-                rm.item_model(('wood', 'hanging_sign', metal, wood), 'beneath:item/wood/hanging_sign/head_%s' % wood, 'tfc:item/wood/hanging_sign_head_overlay%s' % ('_white' if wood in ('mahogany', 'cypress') else ''), 'tfc:item/metal/hanging_sign/%s' % metal).with_lang(lang('%s %s hanging sign', metal, wood))
+                rm.item_model(('wood', 'hanging_sign', metal, wood), 'beneath:item/wood/hanging_sign_head_%s' % wood, 'tfc:item/wood/hanging_sign_head_overlay', 'tfc:item/metal/hanging_sign/%s' % metal).with_lang(lang('%s %s hanging sign', metal, wood))
 
         # Barrels
         texture = 'beneath:block/wood/planks/%s' % wood
@@ -361,7 +364,7 @@ def generate(rm: ResourceManager):
         block.with_block_model({'particle': 'beneath:block/wood/planks/%s' % wood}, parent=None)
         block.with_lang(lang('%s water wheel', wood))
         block.with_block_loot('beneath:wood/water_wheel/%s' % wood)
-        rm.item_model('beneath:wood/water_wheel/%s' % wood, 'beneath:item/wood/water_wheel/%s' % wood)
+        rm.item_model('beneath:wood/water_wheel/%s' % wood, 'beneath:item/wood/water_wheel_%s' % wood)
 
         # Lang
         for variant in ('door', 'trapdoor', 'fence', 'log_fence', 'fence_gate', 'button', 'pressure_plate', 'slab', 'stairs'):
@@ -484,7 +487,25 @@ def generate(rm: ResourceManager):
 
         for metal, metal_data in METALS.items():
             if 'utility' in metal_data.types:
-                rm.crafting_shaped('crafting/wood/hanging_sign/%s/%s' % (metal, wood), ['X X', 'YYY', 'YYY'], {'X': 'tfc:metal/chain/%s' % metal, 'Y': item('lumber')}, (3, 'tfc:wood/hanging_sign/%s/%s' % (metal, wood))).with_advancement('tfc:metal/chain/%s' % metal)
+                rm.crafting_shaped('crafting/wood/hanging_sign/%s/%s' % (metal, wood), ['X X', 'YYY', 'YYY'], {'X': 'tfc:metal/chain/%s' % metal, 'Y': item('lumber')}, (3, 'beneath:wood/hanging_sign/%s/%s' % (metal, wood))).with_advancement('tfc:metal/chain/%s' % metal)
+
+        rm.atlas('minecraft:blocks',
+             atlases.palette(
+                 key='beneath:color_palettes/wood/planks/palette',
+                 textures=['beneath:block/wood/planks/%s' % v for v in ('bookshelf_top', 'bookshelf_side')],
+                 permutations=dict((wood, 'beneath:color_palettes/wood/planks/%s' % wood) for wood in WOODS)
+             ),
+             atlases.palette(
+                 key='beneath:color_palettes/wood/planks/palette',
+                 textures=['beneath:item/wood/%s' % v for v in ('twig', 'lumber', 'chest_minecart_cover', 'stripped_log', 'sign_head', 'hanging_sign_head', 'water_wheel')],
+                 permutations=dict((wood, 'beneath:color_palettes/wood/plank_items/%s' % wood) for wood in WOODS)
+             ),
+             atlases.palette(
+                 key='beneath:color_palettes/wood/planks/palette',
+                 textures=['beneath:item/wood/boat'],
+                 permutations=dict((wood, 'beneath:color_palettes/wood/plank_items/%s' % wood) for wood in WOODS if wood != 'palm')
+             ),  # palm textures are manually done because it's a raft
+         )
 
 def make_door(block_context: BlockContext, door_suffix: str = '_door', top_texture: Optional[str] = None, bottom_texture: Optional[str] = None) -> 'BlockContext':
     """

@@ -1,0 +1,7 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "forge:add_features",
+  "biomes": "minecraft:basalt_deltas",
+  "features": "#beneath:surface_structures/basalt_deltas",
+  "step": "surface_structures"
+}

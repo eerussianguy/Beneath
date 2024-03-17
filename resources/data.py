@@ -219,6 +219,19 @@ def generate(rm: ResourceManager):
     n_fertilizer(rm, 'blaze_powder', 'minecraft:blaze_powder', flame=0.2)
     n_fertilizer(rm, 'agonizing_fertilizer', 'beneath:agonizing_fertilizer', flame=0.1, death=0.1, decay=0.1, destr=0.1, sorrow=0.1)
 
+    ### DAMAGE TYPES ###
+    damage_type(rm, 'sulfur')
+
+
+def damage_type(rm: ResourceManager, name_parts: utils.ResourceIdentifier, message_id: str = None, exhaustion: float = 0.0, scaling: str = 'when_caused_by_living_non_player', effects: str = None, message_type: str = None):
+    rm.data(('damage_type', name_parts), {
+        'message_id': message_id if message_id is not None else 'beneath.' + name_parts,
+        'exhaustion': exhaustion,
+        'scaling': scaling,
+        'effects': effects,
+        'death_message_type': message_type
+    })
+
 def n_fertilizer(rm: ResourceManager, name: str, ingredient: str, death: float = None, destr: float = None, flame: float = None, decay: float = None, sorrow: float = None):
     rm.data(('beneath', 'nether_fertilizers', name), {
         'ingredient': utils.ingredient(ingredient),

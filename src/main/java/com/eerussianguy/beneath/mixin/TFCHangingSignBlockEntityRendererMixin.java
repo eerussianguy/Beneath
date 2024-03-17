@@ -13,7 +13,7 @@ import net.dries007.tfc.client.render.blockentity.TFCHangingSignBlockEntityRende
 public abstract class TFCHangingSignBlockEntityRendererMixin
 {
     @Inject(method = "getData", at = @At("HEAD"), remap = false, cancellable = true)
-    static void inject$getData(Block block, CallbackInfoReturnable<TFCHangingSignBlockEntityRenderer.HangingSignModelData> cir)
+    private static void inject$getData(Block block, CallbackInfoReturnable<TFCHangingSignBlockEntityRenderer.HangingSignModelData> cir)
     {
         if (cir.getReturnValue() == null)
         {

@@ -1,0 +1,7 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_nether",
+  "features": "#beneath:underground_decoration",
+  "step": "underground_decoration"
+}

@@ -1,0 +1,7 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "forge:add_features",
+  "biomes": "minecraft:soul_sand_valley",
+  "features": "#beneath:vegetal_decoration/soul_sand_valley",
+  "step": "vegetal_decoration"
+}

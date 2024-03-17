@@ -1,0 +1,20 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "beneath:nether_boulders",
+  "config": {
+    "blocks": [
+      {
+        "block": "minecraft:netherrack",
+        "weight": 10
+      },
+      {
+        "block": "beneath:cobblerack",
+        "weight": 20
+      },
+      {
+        "block": "beneath:fungal_cobblerack",
+        "weight": 10
+      }
+    ]
+  }
+}

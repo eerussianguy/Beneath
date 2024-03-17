@@ -1,0 +1,33 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfc:cluster_vein",
+  "config": {
+    "rarity": 81,
+    "size": 17,
+    "density": 0.6,
+    "min_y": 1,
+    "max_y": 32,
+    "random_name": "deep_gold",
+    "blocks": [
+      {
+        "replace": [
+          "minecraft:netherrack"
+        ],
+        "with": [
+          {
+            "weight": 5,
+            "block": "beneath:ore/poor_nether_gold"
+          },
+          {
+            "weight": 10,
+            "block": "beneath:ore/normal_nether_gold"
+          },
+          {
+            "weight": 3,
+            "block": "beneath:ore/rich_nether_gold"
+          }
+        ]
+      }
+    ]
+  }
+}

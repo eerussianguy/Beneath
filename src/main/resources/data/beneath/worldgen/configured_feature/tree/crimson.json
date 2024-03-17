@@ -1,0 +1,41 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfc:random_tree",
+  "config": {
+    "structures": [
+      "beneath:crimson/1",
+      "beneath:crimson/2",
+      "beneath:crimson/3",
+      "beneath:crimson/4",
+      "beneath:crimson/5",
+      "beneath:crimson/6",
+      "beneath:crimson/7",
+      "beneath:crimson/8",
+      "beneath:crimson/9",
+      "beneath:crimson/10",
+      "beneath:crimson/11",
+      "beneath:crimson/12",
+      "beneath:crimson/13",
+      "beneath:crimson/14",
+      "beneath:crimson/15",
+      "beneath:crimson/16"
+    ],
+    "radius": 1,
+    "placement": {
+      "width": 1,
+      "height": 7
+    },
+    "trunk": {
+      "state": {
+        "Name": "beneath:wood/log/crimson",
+        "Properties": {
+          "axis": "y",
+          "branch_direction": "none"
+        }
+      },
+      "min_height": 3,
+      "max_height": 5,
+      "wide": false
+    }
+  }
+}

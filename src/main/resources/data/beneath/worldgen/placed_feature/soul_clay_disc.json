@@ -1,0 +1,20 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "feature": "beneath:soul_clay_disc",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 20
+    },
+    {
+      "type": "minecraft:count_on_every_layer",
+      "count": 1
+    },
+    {
+      "type": "tfc:flat_enough",
+      "flatness": 0.4,
+      "radius": 2,
+      "max_depth": 4
+    }
+  ]
+}

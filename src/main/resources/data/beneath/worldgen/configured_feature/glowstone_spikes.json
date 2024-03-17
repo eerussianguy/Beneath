@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "beneath:large_nether_spikes",
+  "config": {
+    "raw": "minecraft:glowstone",
+    "spike": "beneath:glowstone_spike"
+  }
+}

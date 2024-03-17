@@ -1,0 +1,7 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "forge:add_features",
+  "biomes": "minecraft:nether_wastes",
+  "features": "#beneath:surface_structures/nether_wastes",
+  "step": "surface_structures"
+}

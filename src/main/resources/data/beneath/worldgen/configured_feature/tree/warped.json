@@ -1,0 +1,42 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfc:random_tree",
+  "config": {
+    "structures": [
+      "beneath:warped/1",
+      "beneath:warped/2",
+      "beneath:warped/3",
+      "beneath:warped/4",
+      "beneath:warped/5",
+      "beneath:warped/6",
+      "beneath:warped/7",
+      "beneath:warped/8",
+      "beneath:warped/9",
+      "beneath:warped/10",
+      "beneath:warped/11",
+      "beneath:warped/12",
+      "beneath:warped/13",
+      "beneath:warped/14",
+      "beneath:warped/15",
+      "beneath:warped/16",
+      "beneath:warped/17"
+    ],
+    "radius": 1,
+    "placement": {
+      "width": 1,
+      "height": 5
+    },
+    "trunk": {
+      "state": {
+        "Name": "beneath:wood/log/warped",
+        "Properties": {
+          "axis": "y",
+          "branch_direction": "none"
+        }
+      },
+      "min_height": 3,
+      "max_height": 5,
+      "wide": false
+    }
+  }
+}

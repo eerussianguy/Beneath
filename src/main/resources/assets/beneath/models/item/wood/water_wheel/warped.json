@@ -2,6 +2,6 @@
   "__comment__": "This file was automatically created by mcresources",
   "parent": "item/generated",
   "textures": {
-    "layer0": "beneath:item/wood/water_wheel/warped"
+    "layer0": "beneath:item/wood/water_wheel_warped"
   }
 }

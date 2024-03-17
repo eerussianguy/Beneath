@@ -1,0 +1,20 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "beneath:nether_boulders",
+  "config": {
+    "blocks": [
+      {
+        "block": "minecraft:blackstone",
+        "weight": 50
+      },
+      {
+        "block": "minecraft:basalt",
+        "weight": 10
+      },
+      {
+        "block": "minecraft:gilded_blackstone",
+        "weight": 1
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "sources": [
+    {
+      "type": "paletted_permutations",
+      "palette_key": "beneath:color_palettes/wood/planks/palette",
+      "textures": [
+        "beneath:block/wood/planks/bookshelf_top",
+        "beneath:block/wood/planks/bookshelf_side"
+      ],
+      "permutations": {
+        "crimson": "beneath:color_palettes/wood/planks/crimson",
+        "warped": "beneath:color_palettes/wood/planks/warped"
+      }
+    },
+    {
+      "type": "paletted_permutations",
+      "palette_key": "beneath:color_palettes/wood/planks/palette",
+      "textures": [
+        "beneath:item/wood/twig",
+        "beneath:item/wood/lumber",
+        "beneath:item/wood/chest_minecart_cover",
+        "beneath:item/wood/stripped_log",
+        "beneath:item/wood/sign_head",
+        "beneath:item/wood/hanging_sign_head",
+        "beneath:item/wood/water_wheel"
+      ],
+      "permutations": {
+        "crimson": "beneath:color_palettes/wood/plank_items/crimson",
+        "warped": "beneath:color_palettes/wood/plank_items/warped"
+      }
+    },
+    {
+      "type": "paletted_permutations",
+      "palette_key": "beneath:color_palettes/wood/planks/palette",
+      "textures": [
+        "beneath:item/wood/boat"
+      ],
+      "permutations": {
+        "crimson": "beneath:color_palettes/wood/plank_items/crimson",
+        "warped": "beneath:color_palettes/wood/plank_items/warped"
+      }
+    }
+  ]
+}

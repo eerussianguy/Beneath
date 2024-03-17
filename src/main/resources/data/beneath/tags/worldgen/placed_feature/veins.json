@@ -1,0 +1,12 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:vein/quartz",
+    "beneath:vein/sylvite",
+    "beneath:vein/normal_gold",
+    "beneath:vein/deep_gold",
+    "beneath:vein/cursecoal",
+    "beneath:vein/crackrack_pipe"
+  ]
+}

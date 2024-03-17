@@ -1,0 +1,7 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "forge:add_features",
+  "biomes": "minecraft:warped_forest",
+  "features": "#beneath:vegetal_decoration/warped_forest",
+  "step": "vegetal_decoration"
+}

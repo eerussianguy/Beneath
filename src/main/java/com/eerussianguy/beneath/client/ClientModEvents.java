@@ -17,6 +17,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -110,10 +111,12 @@ public class ClientModEvents
     private static void onLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
     {
         final LayerDefinition boatLayer = BoatModel.createBodyModel();
+        final LayerDefinition chestLayer = ChestBoatModel.createBodyModel();
         final LayerDefinition signLayer = SignRenderer.createSignLayer();
         for (Stem wood : Stem.VALUES)
         {
             event.registerLayerDefinition(TFCBoatRenderer.boatName(wood.getSerializedName()), () -> boatLayer);
+            event.registerLayerDefinition(TFCChestBoatRenderer.chestBoatName(wood.getSerializedName()), () -> chestLayer);
             event.registerLayerDefinition(RenderHelpers.modelIdentifier("sign/" + wood.getSerializedName()), () -> signLayer);
         }
 

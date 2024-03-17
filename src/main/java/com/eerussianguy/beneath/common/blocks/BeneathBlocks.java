@@ -53,6 +53,7 @@ import net.dries007.tfc.util.Metal;
 import net.dries007.tfc.util.registry.RegistrationHelpers;
 import net.dries007.tfc.util.registry.RegistryWood;
 
+@SuppressWarnings("unused")
 public class BeneathBlocks
 {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Beneath.MOD_ID);
@@ -72,7 +73,7 @@ public class BeneathBlocks
     public static final RegistryObject<Block> SULFUR = registerNoItem("sulfur", () -> new SulfurBlock(BlockBehaviour.Properties.of().sound(SoundType.GRAVEL).noCollission().strength(1f).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> BLACKSTONE_AQUEDUCT = register("blackstone_aqueduct", () -> new LavaAqueductBlock(BlockBehaviour.Properties.of().sound(SoundType.STONE).strength(7f, 10).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> SOUL_FARMLAND = register("soul_farmland", () -> new SoulFarmlandBlock(ExtendedProperties.of().strength(1.3f).sound(SoundType.GRAVEL).isViewBlocking(TFCBlocks::always).isSuffocating(TFCBlocks::always).blockEntity(BeneathBlockEntities.SOUL_FARMLAND), () -> Blocks.SOUL_SOIL));
-    public static final Map<NCrop, RegistryObject<Block>> CROPS = Helpers.mapOfKeys(NCrop.class, crop -> register("crop/" + crop.name(), crop::create));
+    public static final Map<NCrop, RegistryObject<Block>> CROPS = Helpers.mapOfKeys(NCrop.class, crop -> registerNoItem("crop/" + crop.name(), crop::create));
     public static final RegistryObject<Block> CRIMSON_THATCH = register("crimson_thatch", () -> new ThatchBlock(ExtendedProperties.of(MapColor.CRIMSON_STEM).strength(0.6F, 0.4F).noOcclusion().isViewBlocking(TFCBlocks::never).sound(TFCSounds.THATCH)));
     public static final RegistryObject<Block> WARPED_THATCH = register("warped_thatch", () -> new ThatchBlock(ExtendedProperties.of(MapColor.WARPED_STEM).strength(0.6F, 0.4F).noOcclusion().isViewBlocking(TFCBlocks::never).sound(TFCSounds.THATCH)));
     public static final RegistryObject<Block> SOUL_CLAY = register("soul_clay", () -> new SoulClayBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(0.5F).speedFactor(0.4F).sound(SoundType.SOUL_SAND).isValidSpawn(BeneathBlocks::always).isRedstoneConductor(BeneathBlocks::always).isViewBlocking(BeneathBlocks::always).isSuffocating(BeneathBlocks::always)));
@@ -131,7 +132,7 @@ public class BeneathBlocks
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier)
     {
-        return register(name, blockSupplier, (Function<T, ? extends BlockItem>) null);
+        return register(name, blockSupplier, b -> new BlockItem(b, new Item.Properties()));
     }
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier, Item.Properties blockItemProperties)

@@ -1,0 +1,15 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfc:soil_disc",
+  "config": {
+    "states": [
+      {
+        "replace": "minecraft:soul_sand",
+        "with": "beneath:soul_clay"
+      }
+    ],
+    "min_radius": 3,
+    "max_radius": 5,
+    "height": 3
+  }
+}

@@ -57,14 +57,9 @@ def generate(rm: ResourceManager):
             }, parent='tfc:block/rock/spike_%s' % part)
 
     for pebble in ('nether_pebble', 'blackstone_pebble',):
-        block = rm.blockstate(pebble, variants={
-            'count=1': four_ways('beneath:block/%s_pebble' % pebble),
-            'count=2': four_ways('beneath:block/%s_rubble' % pebble),
-            'count=3': four_ways('beneath:block/%s_boulder' % pebble)
-        }, use_default_model=False)
-
-        for loose_type in ('pebble', 'rubble', 'boulder'):
-            rm.block_model('%s_%s' % (pebble, loose_type), 'beneath:item/%s' % pebble, parent='tfc:block/groundcover/%s' % loose_type)
+        block = rm.blockstate(pebble, variants=dict(('count=%s' % i, four_ways('beneath:block/%s_%s' % (pebble, i))) for i in range(1, 4)), use_default_model=False)
+        for i in range(1, 4):
+            rm.block_model('%s_%s' % (pebble, i), {'texture': 'beneath:item/%s' % pebble}, parent='tfc:block/rock/loose_%s_%s' % ('sedimentary' if pebble == 'nether_pebble' else 'metamorphic', i))
 
         block.with_lang(lang(pebble)).with_tag('can_be_snow_piled').with_block_loot({
             'name': 'beneath:' + pebble,

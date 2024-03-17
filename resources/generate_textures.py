@@ -171,13 +171,6 @@ def create_sign_item(wood: str, plank_color, log_color):
     image = Image.alpha_composite(mast, head)
     image.save(path + 'item/wood/sign/%s.png' % wood)
 
-def create_chest_minecart(wood: str, plank_color):
-    top = Image.open(templates + 'chest_minecart_chest.png')
-    bottom = Image.open(templates + 'chest_minecart_cart.png')
-    top = put_on_all_pixels(top, plank_color)
-    image = Image.alpha_composite(bottom, top)
-    image.save(path + 'item/wood/chest_minecart/%s.png' % wood)
-
 def create_logs(wood: str, plank_color):
     log = Image.open(templates + 'log.png')
     face = Image.open(templates + 'log_face.png')
