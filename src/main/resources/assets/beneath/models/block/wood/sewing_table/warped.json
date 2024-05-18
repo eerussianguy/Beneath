@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/sewing_table",
+  "textures": {
+    "0": "beneath:block/wood/log/warped",
+    "1": "beneath:block/wood/planks/warped"
+  }
+}

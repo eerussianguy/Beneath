@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -63,5 +64,6 @@ public final class BeneathInteractionManager
 
         InteractionManager.register(new BlockItemPlacement(TFCItems.POWDERS.get(Powder.SULFUR), BeneathBlocks.SULFUR));
 
+        InteractionManager.register(Ingredient.of(Items.NETHER_WART), false, (stack, context) -> InteractionResult.PASS);
     }
 }

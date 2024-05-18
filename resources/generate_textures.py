@@ -161,7 +161,7 @@ def create_sign(wood: str):
     for coord in ((0, 0), (16, 0), (32, 0), (48, 0)):
         image.paste(planks, coord)
     image.paste(log, (0, 16))
-    image.save(tfc_path + 'entity/signs/%s.png' % wood)
+    image.save(path + 'entity/signs/%s.png' % wood)
 
 def create_sign_item(wood: str, plank_color, log_color):
     head = Image.open(templates + 'sign_head.png')

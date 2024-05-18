@@ -13,10 +13,12 @@ import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.registry.RegistryWood;
 import net.dries007.tfc.world.feature.tree.TFCTreeGrower;
 
+import static net.dries007.tfc.common.blocks.wood.Wood.BlockType.*;
+
 public enum Stem implements RegistryWood
 {
-    CRIMSON(true, MapColor.TERRACOTTA_RED, MapColor.COLOR_RED, 7, 8),
-    WARPED(true, MapColor.TERRACOTTA_BLUE, MapColor.COLOR_BLUE, 7, 8);
+    CRIMSON(true, MapColor.TERRACOTTA_RED, MapColor.COLOR_RED, 8),
+    WARPED(true, MapColor.TERRACOTTA_BLUE, MapColor.COLOR_BLUE, 8);
 
     public static final Stem[] VALUES = values();
 
@@ -25,19 +27,17 @@ public enum Stem implements RegistryWood
     private final MapColor woodColor;
     private final MapColor barkColor;
     private final TFCTreeGrower tree;
-    private final int maxDecayDistance;
     private final int daysToGrow;
     private final BlockSetType blockSet;
     private final WoodType woodType;
 
-    Stem(boolean conifer, MapColor woodColor, MapColor barkColor, int maxDecayDistance, int daysToGrow)
+    Stem(boolean conifer, MapColor woodColor, MapColor barkColor, int daysToGrow)
     {
         this.serializedName = name().toLowerCase(Locale.ROOT);
         this.conifer = conifer;
         this.woodColor = woodColor;
         this.barkColor = barkColor;
         this.tree = new TFCTreeGrower(Beneath.identifier("tree/" + serializedName), Beneath.identifier("tree/" + serializedName + "_large"));
-        this.maxDecayDistance = maxDecayDistance;
         this.blockSet = new BlockSetType(serializedName);
         this.woodType = new WoodType(Beneath.identifier(this.serializedName).toString(), this.blockSet);
         this.daysToGrow = daysToGrow;
@@ -106,4 +106,10 @@ public enum Stem implements RegistryWood
     {
         return woodType;
     }
+
+    public Wood.BlockType twig() { return TWIG; }
+    public Wood.BlockType fallenLeaves() { return FALLEN_LEAVES; }
+    public Wood.BlockType leaves() { return LEAVES; }
+    public Wood.BlockType axle() { return AXLE; }
+    public Wood.BlockType windmill() { return WINDMILL; }
 }

@@ -3,6 +3,8 @@
   "replace": false,
   "values": [
     "beneath:tree/warped",
-    "#beneath:everywhere_but_basalt_deltas"
+    "#beneath:everywhere_but_basalt_deltas",
+    "beneath:gleamflower_patch",
+    "beneath:burpflower_patch"
   ]
 }

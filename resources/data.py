@@ -25,6 +25,19 @@ def generate(rm: ResourceManager):
     rm.block_loot('minecraft:crimson_roots', loot_tables.alternatives({'name': 'minecraft:crimson_roots', 'conditions': [loot_tables.match_tag('forge:shears')]}, {'name': 'beneath:crimson_straw', 'conditions': [loot_tables.match_tag('tfc:sharp_tools')]}, {'name': 'beneath:seeds/crimson_roots', 'conditions': [loot_tables.random_chance(0.1)]}))
     rm.block_loot('minecraft:warped_roots', loot_tables.alternatives({'name': 'minecraft:warped_roots', 'conditions': [loot_tables.match_tag('forge:shears')]}, {'name': 'beneath:warped_straw', 'conditions': [loot_tables.match_tag('tfc:sharp_tools')]}, {'name': 'beneath:seeds/warped_roots', 'conditions': [loot_tables.random_chance(0.1)]}))
     rm.block_loot('minecraft:bone_block', '1-3 minecraft:bone_meal')
+    rm.block_loot('minecraft:gravel', {
+           'conditions': [loot_tables.silk_touch()],
+           'name': 'tfc:rock/gravel/basalt'
+       }, loot_tables.alternatives({
+            'type': 'minecraft:item',
+            'conditions': [loot_tables.fortune_table((0.1, 0.14285715, 0.25, 1.0))],
+            'name': 'minecraft:flint'
+       }, {
+        'type': 'minecraft:item',
+        'name': 'tfc:rock/gravel/basalt'
+       }, conditions=['minecraft:survives_explosion']
+    ))
+    rm.block_loot('minecraft:nether_wart', '1-3 beneath:seeds/nether_wart', {'name': 'minecraft:nether_wart', 'conditions': [loot_tables.block_state_property('minecraft:nether_wart[age=3]')]})
 
     rm.loot('minecraft:nether_bridge', {
         'rolls': uniform(2, 4),
@@ -44,6 +57,8 @@ def generate(rm: ResourceManager):
             weight('beneath:pure_death', 1),
             weight('beneath:pure_destruction', 1),
             weight('beneath:pure_decay', 1),
+            weight('beneath:seeds/ghost_pepper', 1, 3, 6),
+            weight('beneath:seeds/gleamflower', 1, 3, 6),
         ]
     }, path='chests', loot_type='minecraft:chest')
     rm.loot('minecraft:bastion_treasure', {
@@ -84,6 +99,8 @@ def generate(rm: ResourceManager):
             weight('minecraft:spectral_arrow', 10, 10, 22),
             weight('minecraft:piglin_banner_pattern', 9),
             weight('minecraft:music_disc_pigstep', 5),
+            weight('beneath:seeds/ghost_pepper', 1, 3, 6),
+            weight('beneath:seeds/gleamflower', 1, 3, 6),
         ]
     }, {
         'entries': [
@@ -168,7 +185,7 @@ def generate(rm: ResourceManager):
             weight('minecraft:arrow', 2, 6, 12),
             weight('minecraft:spectral_arrow', 2, 6, 12),
             weight('tfc:glow_arrow', 2, 6, 12),
-            weight('minecraft:gravel', 1, 8, 16),
+            weight('tfc:rock/gravel/basalt', 1, 8, 16),
             weight('minecraft:blackstone', 1, 8, 16),
             weight('tfc:powder/flux', 2, 4, 12)
         ]
@@ -186,7 +203,7 @@ def generate(rm: ResourceManager):
     rm.block_tag('tfc:breaks_when_isolated', 'minecraft:basalt', 'minecraft:blackstone', 'minecraft:netherrack')
     rm.block_tag('tfc:tree_grows_on', 'minecraft:netherrack', 'minecraft:warped_nylium', 'minecraft:crimson_nylium')
     rm.block_tag('beneath:hellforge_insulation', 'beneath:hellbricks')
-    rm.block_tag('beneath:nether_bush_plantable_on', '#minecraft:base_stone_nether', 'minecraft:soul_soil', 'minecraft:soul_sand', 'beneath:soul_farmland')
+    rm.block_tag('beneath:nether_bush_plantable_on', '#minecraft:base_stone_nether', 'minecraft:soul_soil', 'minecraft:soul_sand', 'beneath:soul_farmland', 'minecraft:crimson_nylium', 'minecraft:warped_nylium')
     rm.block_tag('minecraft:mineable/pickaxe', 'beneath:blackstone_aqueduct')
     rm.block_tag('minecraft:mineable/shovel', 'beneath:cursecoal_pile', 'beneath:hellforge')
 
@@ -194,7 +211,11 @@ def generate(rm: ResourceManager):
     rm.item_tag('sparks_on_sulfur', *['#tfc:metal_item/%s' % metal for metal in ('black_steel', 'blue_steel', 'red_steel', 'steel', 'wrought_iron', 'cast_iron')])
 
     block_and_item_tag(rm, 'tfc:rock/aqueduct', 'beneath:blackstone_aqueduct')
+    rm.item_tag('tfc:rock_knapping', 'beneath:nether_pebble', 'beneath:blackstone_pebble')
     block_and_item_tag(rm, 'minecraft:stone_bricks', 'beneath:hellbricks')
+
+    ### ENTITY TAGS ###
+    rm.entity_tag('can_be_sacrificed', 'tfc:pig', 'tfc:goat', 'tfc:sheep')
 
     ### ITEM HEATS ###
     metal_data = TFC_METALS['gold']

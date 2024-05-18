@@ -12,8 +12,6 @@
     "StructurePieceMixin",
     "TFCFallingBlockEntityMixin"
   ],
-  "client": [
-    "TFCHangingSignBlockEntityRendererMixin"
-  ],
+  "client": ["FallingLeafParticleMixin", "LeafParticleMixin"],
   "refmap": "beneath.refmap.json"
 }

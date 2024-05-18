@@ -59,7 +59,7 @@ def generate(rm: ResourceManager):
     for pebble in ('nether_pebble', 'blackstone_pebble',):
         block = rm.blockstate(pebble, variants=dict(('count=%s' % i, four_ways('beneath:block/%s_%s' % (pebble, i))) for i in range(1, 4)), use_default_model=False)
         for i in range(1, 4):
-            rm.block_model('%s_%s' % (pebble, i), {'texture': 'beneath:item/%s' % pebble}, parent='tfc:block/rock/loose_%s_%s' % ('sedimentary' if pebble == 'nether_pebble' else 'metamorphic', i))
+            rm.block_model('%s_%s' % (pebble, i), {'texture': 'minecraft:block/netherrack' if pebble == 'nether_pebble' else 'minecraft:block/blackstone'}, parent='tfc:block/rock/loose_%s_%s' % ('sedimentary' if pebble == 'nether_pebble' else 'metamorphic', i))
 
         block.with_lang(lang(pebble)).with_tag('can_be_snow_piled').with_block_loot({
             'name': 'beneath:' + pebble,

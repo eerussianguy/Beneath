@@ -1,6 +1,5 @@
 package com.eerussianguy.beneath.common.blocks;
 
-import java.util.Random;
 import java.util.function.Predicate;
 import com.eerussianguy.beneath.common.blockentities.HellforgeBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -82,7 +81,8 @@ public class HellforgeBlock extends CharcoalForgeBlock
     {
         if (hellForgeValid(level, pos))
         {
-            Helpers.fireSpreaderTick(level, pos, rand, 3);
+            if (!level.dimensionType().ultraWarm())
+                Helpers.fireSpreaderTick(level, pos, rand, 3);
         }
         else
         {

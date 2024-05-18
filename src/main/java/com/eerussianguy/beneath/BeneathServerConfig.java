@@ -1,19 +1,19 @@
 package com.eerussianguy.beneath;
 
-import java.util.function.Function;
-
 import net.minecraftforge.common.ForgeConfigSpec;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import net.dries007.tfc.config.ConfigBuilder;
 
 public class BeneathServerConfig
 {
-    public BeneathServerConfig(ForgeConfigSpec.Builder innerBuilder)
+    private final ForgeConfigSpec.BooleanValue deathBan;
+
+    public BeneathServerConfig(ConfigBuilder builder)
     {
-        Function<String, ForgeConfigSpec.Builder> builder = name -> innerBuilder.translation(MOD_ID + ".config.client." + name);
+        builder.push("general");
 
-        innerBuilder.push("general");
+        deathBan = builder.comment("If on death, players should be banished to the Nether.").define("deathBan", true);
 
-        innerBuilder.pop();
+        builder.pop();
     }
 }

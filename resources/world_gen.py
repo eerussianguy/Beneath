@@ -19,6 +19,10 @@ def generate(rm: ResourceManager):
     configured_placed_feature(rm, 'amethyst_geode', 'tfc:geode', {'outer': 'minecraft:blackstone', 'middle': 'tfc:rock/raw/quartzite', 'inner': [{'data': 'tfc:ore/amethyst/quartzite', 'weight': 1}, {'data': 'tfc:rock/raw/quartzite', 'weight': 2}]}, decorate_chance(100), decorate_above_lava_level(), decorate_square())
     configured_placed_feature(rm, 'soul_clay_disc', 'tfc:soil_disc', {'states': [{'replace': 'minecraft:soul_sand', 'with': 'beneath:soul_clay'}], 'min_radius': 3, 'max_radius': 5, 'height': 3}, decorate_chance(20), decorate_every_layer(1), decorate_flat_enough(0.4, 2, 4))
     configured_placed_feature(rm, 'delta', 'minecraft:delta_feature', {'contents': utils.block_state('minecraft:lava[level=0]'), 'rim': utils.block_state('tfc:rock/magma/basalt'), 'rim_size': uniform_int(3, 7), 'size': uniform_int(0, 2)}, decorate_every_layer(40), decorate_biome())
+    configured_placed_feature(rm, 'gleamflower', 'minecraft:simple_block', {'to_place': simple_state_provider('beneath:gleamflower')}, decorate_replaceable(), decorate_would_survive('beneath:gleamflower'), decorate_air())
+    configured_placed_feature(rm, 'gleamflower_patch', 'minecraft:random_patch', random_config('beneath:gleamflower', 5, 5, 1), decorate_chance(4), decorate_every_layer(1), decorate_biome())
+    configured_placed_feature(rm, 'burpflower', 'minecraft:simple_block', {'to_place': simple_state_provider('beneath:burpflower')}, decorate_replaceable(), decorate_would_survive('beneath:burpflower'), decorate_air())
+    configured_placed_feature(rm, 'burpflower_patch', 'minecraft:random_patch', random_config('beneath:burpflower', 5, 5, 1), decorate_chance(20), decorate_every_layer(1), decorate_biome())
 
     for rock, rock_data in ROCKS.items():
         if rock_data.category == 'igneous_extrusive':
@@ -133,8 +137,8 @@ def generate(rm: ResourceManager):
     rm.placed_feature_tag('vegetal_decoration/nether_wastes', 'beneath:nether_spikes', 'beneath:glowstone_spikes')
     rm.placed_feature_tag('surface_structures/nether_wastes', 'beneath:nether_spikes', 'beneath:glowstone_spikes')
 
-    rm.placed_feature_tag('vegetal_decoration/crimson_forest', 'beneath:tree/crimson', '#beneath:everywhere_but_basalt_deltas')
-    rm.placed_feature_tag('vegetal_decoration/warped_forest', 'beneath:tree/warped', '#beneath:everywhere_but_basalt_deltas')
+    rm.placed_feature_tag('vegetal_decoration/crimson_forest', 'beneath:tree/crimson', '#beneath:everywhere_but_basalt_deltas', 'beneath:gleamflower_patch', 'beneath:burpflower_patch')
+    rm.placed_feature_tag('vegetal_decoration/warped_forest', 'beneath:tree/warped', '#beneath:everywhere_but_basalt_deltas', 'beneath:gleamflower_patch', 'beneath:burpflower_patch')
 
     rm.placed_feature_tag('surface_structures/basalt_deltas', 'beneath:delta')
     rm.placed_feature_tag('vegetal_decoration/basalt_deltas', 'beneath:blackstone_pebble_patch')

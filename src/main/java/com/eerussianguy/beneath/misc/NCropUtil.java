@@ -167,13 +167,16 @@ public final class NCropUtil
                 {
                     repeat = 1; // By default, we consume 1
                 }
+                boolean isUseless = true;
                 for (SoulFarmlandBlockEntity.NutrientType type : SoulFarmlandBlockEntity.NutrientType.VALUES)
                 {
-                    if (fertilizer.getNutrient(type) == 0 || farmland.getNutrient(type) == 1)
+                    if (!(fertilizer.getNutrient(type) == 0 || farmland.getNutrient(type) == 1))
                     {
-                        return false;
+                        isUseless = false;
                     }
                 }
+                if (isUseless)
+                    return false;
 
                 addNutrients(farmland, fertilizer, repeat);
                 if (!player.isCreative()) stack.shrink(repeat);

@@ -1,7 +1,5 @@
 package com.eerussianguy.beneath;
 
-import java.util.List;
-import java.util.function.Predicate;
 import com.eerussianguy.beneath.common.blockentities.HellforgeBlockEntity;
 import com.eerussianguy.beneath.common.blocks.BeneathBlockTags;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
@@ -12,9 +10,8 @@ import com.eerussianguy.beneath.common.entities.BeneathEntities;
 import com.eerussianguy.beneath.common.network.BeneathPackets;
 import com.eerussianguy.beneath.misc.NetherClimateModel;
 import com.eerussianguy.beneath.misc.NetherFertilizer;
+import com.eerussianguy.beneath.misc.PortalUtil;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -32,7 +29,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -41,12 +38,13 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityMobGriefingEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blocks.devices.CharcoalForgeBlock;
@@ -74,6 +72,8 @@ public class ForgeEvents
         bus.addListener(ForgeEvents::onSpawnCheck);
         bus.addListener(ForgeEvents::onFireStart);
         bus.addListener(BeneathEntities::onSpawnPlacement);
+        bus.addListener(PortalUtil::onLivingDeath);
+        bus.addListener(EventPriority.LOWEST, true, ForgeEvents::onPlayerRightClickBlockLowestPriority);
     }
 
     private static final EquipmentSlot[] SLOTS = EquipmentSlot.values();
@@ -127,6 +127,14 @@ public class ForgeEvents
                     }
                 }
             }
+        }
+    }
+
+    public static void onPlayerRightClickBlockLowestPriority(PlayerInteractEvent.RightClickBlock event)
+    {
+        if (NetherFertilizer.get(event.getItemStack()) != null)
+        {
+            event.setUseBlock(Event.Result.ALLOW);
         }
     }
 
@@ -191,61 +199,6 @@ public class ForgeEvents
         }
     }
 
-//    private static void onBiomeLoad(Object event)
-//    {
-//        final ResourceLocation name = event.getName();
-//        final BiomeGenerationSettingsBuilder gen = event.getGeneration();
-//        final MobSpawnSettingsBuilder spawns = event.getSpawns();
-//        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.QUARTZ_VEIN));
-//        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.SYLVITE_VEIN));
-//        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.NORMAL_GOLD_VEIN));
-//        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.DEEP_GOLD_VEIN));
-//        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.CURSECOAL_VEIN));
-//        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(BeneathPlacements.CRACKRACK_PIPE_VEIN));
-//        BeneathPlacements.MAGMA_ORES.values().forEach(ore -> gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, get(ore)));
-//
-//        gen.getFeatures(GenerationStep.Decoration.UNDERGROUND_DECORATION).removeIf(removeIf(REMOVED_UNDER));
-//        gen.getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION).removeIf(removeIf(REMOVED_VEGETAL));
-//        gen.getFeatures(GenerationStep.Decoration.SURFACE_STRUCTURES).removeIf(removeIf(REMOVED_STRUCTURES));
-//
-//        if (name != null)
-//        {
-//            if (name.equals(Biomes.NETHER_WASTES.location()))
-//            {
-//                gen.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, get(BeneathPlacements.NETHER_SPIKES));
-//                gen.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, get(BeneathPlacements.GLOWSTONE_SPIKES));
-//                spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(BeneathEntities.RED_ELK.get(), 4, 1, 4));
-//            }
-//            else if (name.equals(Biomes.CRIMSON_FOREST.location()))
-//            {
-//                gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.CRIMSON_TREE));
-//            }
-//            else if (name.equals(Biomes.WARPED_FOREST.location()))
-//            {
-//                gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.WARPED_TREE));
-//            }
-//            else if (name.equals(Biomes.BASALT_DELTAS.location()))
-//            {
-//                gen.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, get(BeneathPlacements.DELTA));
-//                gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.BLACKSTONE_PEBBLE_PATCH));
-//            }
-//            else if (name.equals(Biomes.SOUL_SAND_VALLEY.location()))
-//            {
-//                gen.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, get(BeneathPlacements.SOUL_CLAY_DISC));
-//            }
-//
-//            if (!name.equals(Biomes.BASALT_DELTAS.location()))
-//            {
-//                gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.NETHER_PEBBLE_PATCH));
-//                gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.BLACKSTONE_BOULDER));
-//                gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.COBBLE_BOULDER));
-//                gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, get(BeneathPlacements.SULFUR_PATCH));
-//            }
-//
-//            gen.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, get(BeneathPlacements.AMETHYST_GEODE));
-//        }
-//    }
-
     private static void onToolUse(BlockEvent.BlockToolModificationEvent event)
     {
         if (event.getToolAction() == ToolActions.HOE_TILL)
@@ -266,46 +219,4 @@ public class ForgeEvents
         }
     }
 
-    private static Holder<PlacedFeature> get(RegistryObject<PlacedFeature> reg)
-    {
-        return reg.getHolder().orElseThrow();
-    }
-
-    private static Predicate<Holder<PlacedFeature>> removeIf(List<ResourceLocation> list)
-    {
-        return pf -> {
-            for (ResourceLocation id : list)
-            {
-                if (pf.is(id))
-                {
-                    return true;
-                }
-            }
-            return false;
-        };
-    }
-
-//    private static final List<ResourceLocation> REMOVED_VEGETAL = List.of(
-//        new ResourceLocation("crimson_fungi"),
-//        new ResourceLocation("warped_fungi"),
-//        new ResourceLocation("brown_mushroom_normal"),
-//        new ResourceLocation("red_mushroom_normal")
-//    );
-//
-//    private static final List<ResourceLocation> REMOVED_UNDER = List.of(
-//        new ResourceLocation("ore_quartz_nether"),
-//        new ResourceLocation("ore_quartz_deltas"),
-//        new ResourceLocation("ore_gold_nether"),
-//        new ResourceLocation("ore_gold_deltas"),
-//        new ResourceLocation("ore_ancient_debris_large"),
-//        new ResourceLocation("ore_ancient_debris_small"),
-//        new ResourceLocation("ore_magma"),
-//        new ResourceLocation("red_mushroom_nether"),
-//        new ResourceLocation("brown_mushroom_nether")
-//
-//    );
-//
-//    private static final List<ResourceLocation> REMOVED_STRUCTURES = List.of(
-//        new ResourceLocation("delta")
-//    );
 }

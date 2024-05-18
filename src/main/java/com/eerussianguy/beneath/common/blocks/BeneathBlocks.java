@@ -43,6 +43,7 @@ import net.dries007.tfc.common.blocks.rock.MossSpreadingBlock;
 import net.dries007.tfc.common.blocks.rock.Ore;
 import net.dries007.tfc.common.blocks.rock.RockSpikeBlock;
 import net.dries007.tfc.common.blocks.wood.TFCCeilingHangingSignBlock;
+import net.dries007.tfc.common.blocks.wood.TFCLeavesBlock;
 import net.dries007.tfc.common.blocks.wood.TFCLoomBlock;
 import net.dries007.tfc.common.blocks.wood.TFCStandingSignBlock;
 import net.dries007.tfc.common.blocks.wood.TFCWallHangingSignBlock;
@@ -106,6 +107,10 @@ public class BeneathBlocks
         if (blockType == Wood.BlockType.WALL_SIGN)
         {
             return () -> new TFCWallSignBlock(ExtendedProperties.of(MapColor.WOOD).sound(SoundType.WOOD).instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).dropsLike(stem.getBlock(Wood.BlockType.SIGN)).flammableLikePlanks().blockEntity(BeneathBlockEntities.SIGN), stem.getVanillaWoodType());
+        }
+        if (blockType == Wood.BlockType.LEAVES)
+        {
+            return () -> new WartLeavesBlock(ExtendedProperties.of().mapColor(MapColor.PLANT).strength(0.5F).sound(SoundType.WART_BLOCK).defaultInstrument().randomTicks().noOcclusion().isViewBlocking(TFCBlocks::never).flammableLikeLeaves(), stem.autumnIndex(), stem.getBlock(stem.fallenLeaves()), stem.getBlock(stem.twig()), stem == Stem.CRIMSON ? 0xb01735 : 0x18a5ba);
         }
         return blockType.create(stem);
     }

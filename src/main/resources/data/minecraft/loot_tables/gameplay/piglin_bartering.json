@@ -168,7 +168,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:gravel",
+          "name": "tfc:rock/gravel/basalt",
           "functions": [
             {
               "function": "minecraft:set_count",

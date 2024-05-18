@@ -25,6 +25,7 @@ public class HellforgeScreen extends BlockEntityScreen<HellforgeBlockEntity, Hel
         super(container, playerInventory, name, HELLFORGE);
         this.inventoryLabelY += 20;
         this.imageHeight += 20;
+        this.titleLabelY += 1;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class HellforgeScreen extends BlockEntityScreen<HellforgeBlockEntity, Hel
     @Override
     protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY)
     {
-        graphics.drawString(Minecraft.getInstance().font, this.title, this.titleLabelX, this.titleLabelY, 4210752, false);
+        graphics.drawString(Minecraft.getInstance().font, this.title, this.titleLabelX, this.titleLabelY, 0xFFFFFF, false);
         //this.font.draw(poseStack, this.playerInventoryTitle, (float)this.inventoryLabelX, (float)this.inventoryLabelY, 4210752);
     }
 
