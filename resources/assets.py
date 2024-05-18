@@ -90,6 +90,7 @@ def generate(rm: ResourceManager):
             'name': 'beneath:seeds/%s' % crop
         })
         rm.item_model('seeds/%s' % crop).with_tag('tfc:seeds').with_lang(lang('%s seeds', crop))
+        block.with_tag('tfc:crops').with_tag('tfc:mineable_with_scythe').with_tag('tfc:mineable_with_sharp_tool')
 
     rm.blockstate('gleamflower').with_block_model(parent='block/cross', textures={'cross': 'beneath:block/plant/gleamflower'}).with_block_loot('beneath:gleamflower').with_lang(lang('gleamflower')).with_tag('tfc:plants')
     rm.item_model('gleamflower', 'beneath:block/plant/gleamflower')

@@ -51,7 +51,7 @@ public enum NCrop
 
     private static ExtendedProperties dead()
     {
-        return ExtendedProperties.of().noCollission().randomTicks().strength(0.4F).sound(SoundType.CROP).flammable(60, 30);
+        return ExtendedProperties.of().noCollission().randomTicks().strength(0.4F).sound(SoundType.CROP);
     }
 
 }
