@@ -53,11 +53,11 @@ jobs:
         if: ${{ steps.version.outputs.result != 'alpha' && success() }}
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-          modrinth-id: 5bKeBHw2
-          modrinth-token: ${{ secrets.MODRINTH_API_KEY }}
-
-          curseforge-id: 453394
-          curseforge-token: ${{ secrets.CURSEFORGE_API_KEY }}
+#          modrinth-id: 5bKeBHw2
+#          modrinth-token: ${{ secrets.MODRINTH_API_KEY }}
+#
+#          curseforge-id: 453394
+#          curseforge-token: ${{ secrets.CURSEFORGE_API_KEY }}
 
           github-tag: ${{ github.ref }}
           github-draft: true
