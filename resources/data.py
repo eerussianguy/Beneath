@@ -39,6 +39,33 @@ def generate(rm: ResourceManager):
     ))
     rm.block_loot('minecraft:nether_wart', '1-3 beneath:seeds/nether_wart', {'name': 'minecraft:nether_wart', 'conditions': [loot_tables.block_state_property('minecraft:nether_wart[age=3]')]})
 
+    rm.loot('minecraft:ruined_portal', {
+        'rolls': uniform(1, 2),
+        'entries': [
+            weight('minecraft:obsidian', 40, 1, 2),
+            weight('minecraft:flint', 40, 1, 4),
+            weight('tfc:metal/ingot/wrought_iron', 40, 1, 4),
+            weight('minecraft:flint_and_steel', 40),
+            weight('minecraft:fire_charge', 40),
+            weight('beneath:gold_chunk', 15, 1, 6),
+            weight('minecraft:bow', 15),
+            weight('tfc:metal/sword/black_bronze', 15),
+            weight('tfc:metal/axe/black_bronze', 15),
+            weight('tfc:metal/shield/black_bronze', 15),
+            weight('tfc:metal/scythe/black_bronze', 15),
+            weight('tfc:metal/shovel/black_bronze', 15),
+            weight('tfc:metal/helmet/black_bronze', 15),
+            weight('tfc:metal/chestplate/black_bronze', 15),
+            weight('tfc:metal/boots/black_bronze', 15),
+            weight('tfc:metal/greaves/black_bronze', 15),
+            weight('tfc:metal/horse_armor/black_bronze', 3),
+            weight('minecraft:clock', 5),
+            weight('tfc:metal/ingot/gold', 5, 2, 8),
+            weight('minecraft:bell', 1),
+            weight('tfc:bronze_bell', 1),
+        ]
+    }, path='chests', loot_type='minecraft:chest')
+
     rm.loot('minecraft:nether_bridge', {
         'rolls': uniform(2, 4),
         'entries': [
@@ -49,8 +76,8 @@ def generate(rm: ResourceManager):
             weight('tfc:metal/chestplate/wrought_iron', 5),
             weight('minecraft:flint_and_steel', 5),
             weight('minecraft:saddle', 10),
-            weight('minecraft:golden_horse_armor', 8),
-            weight('minecraft:iron_horse_armor', 5),
+            weight('tfc:metal/horse_armor/bismuth_bronze', 8),
+            weight('tfc:metal/horse_armor/copper', 5),
             weight('minecraft:obsidian', 5, 2, 4),
             weight('beneath:pure_sorrow', 1),
             weight('beneath:pure_flame', 1),
@@ -212,6 +239,8 @@ def generate(rm: ResourceManager):
 
     block_and_item_tag(rm, 'tfc:rock/aqueduct', 'beneath:blackstone_aqueduct')
     rm.item_tag('tfc:rock_knapping', 'beneath:nether_pebble', 'beneath:blackstone_pebble')
+    rm.item_tag('tfc:metamorphic_rock', 'beneath:blackstone_pebble')
+    rm.item_tag('tfc:sedimentary_rock', 'beneath:nether_pebble')
     block_and_item_tag(rm, 'minecraft:stone_bricks', 'beneath:hellbricks')
 
     ### ENTITY TAGS ###

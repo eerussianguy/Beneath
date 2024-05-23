@@ -7,7 +7,7 @@ from constants import *
 
 def generate(rm: ResourceManager):
     configured_placed_feature(rm, 'nether_spikes', 'beneath:nether_spikes', {'raw': 'minecraft:netherrack', 'spike': 'beneath:haunted_spike'}, decorate_count(128), decorate_square(), decorate_range_10_10(), decorate_biome())
-    configured_placed_feature(rm, 'glowstone_spikes', 'beneath:large_nether_spikes', {'raw': 'minecraft:glowstone', 'spike': 'beneath:glowstone_spike'}, decorate_chance(3), decorate_count(32), decorate_square(), decorate_range_10_10(), decorate_biome())
+    configured_placed_feature(rm, 'glowstone_spikes', 'beneath:large_nether_spikes', {'raw': 'minecraft:glowstone', 'spike': 'beneath:glowstone_spike'}, decorate_chance(6), decorate_count(16), decorate_square(), decorate_range_10_10(), decorate_biome())
     configured_placed_feature(rm, 'nether_pebble', 'minecraft:simple_block', {'to_place': random_property_provider('beneath:nether_pebble', 'count')}, decorate_replaceable(), decorate_would_survive('beneath:nether_pebble'), decorate_air())
     configured_placed_feature(rm, 'nether_pebble_patch', 'minecraft:random_patch', random_config('beneath:nether_pebble', 16, 10, 1), decorate_chance(3), decorate_every_layer(5), decorate_biome())
     configured_placed_feature(rm, 'blackstone_pebble', 'minecraft:simple_block', {'to_place': random_property_provider('beneath:blackstone_pebble', 'count')}, decorate_replaceable(), decorate_would_survive('beneath:nether_pebble'), decorate_air())

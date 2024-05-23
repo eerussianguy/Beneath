@@ -1,0 +1,21 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XMX",
+    "MXM",
+    "XMX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:nether_brick"
+    },
+    "M": {
+      "tag": "tfc:mortar"
+    }
+  },
+  "result": {
+    "item": "minecraft:nether_bricks",
+    "count": 4
+  }
+}

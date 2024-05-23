@@ -6,6 +6,7 @@ from typing import Sequence
 from mcresources import ResourceManager, utils
 from mcresources.type_definitions import Json
 
+import constants
 import woods
 import assets
 import recipes
@@ -53,6 +54,9 @@ def generate_all(rm: ResourceManager):
     data.generate(rm)
     world_gen.generate(rm)
 
+    vanilla_rm = ResourceManager('minecraft', resource_dir=rm.resource_dir)
+    vanilla_rm.lang(constants.VANILLA_OVERRIDE_LANG)
+    vanilla_rm.flush()
 
     rm.flush()
 

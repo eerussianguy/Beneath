@@ -94,7 +94,7 @@ ROCK_SPIKE_PARTS = ('base', 'middle', 'tip')
 
 SPAWN_EGG_ENTITIES = ('red_elk',)
 
-DISABLED_VANILLA_RECIPES = ('polished_blackstone_bricks', 'polished_blackstone_button', 'polished_blackstone_pressure_plate', 'cracked_polished_blackstone_bricks')
+DISABLED_VANILLA_RECIPES = ('polished_blackstone_bricks', 'polished_blackstone_button', 'polished_blackstone_pressure_plate', 'cracked_polished_blackstone_bricks', 'nether_bricks')
 
 DEFAULT_CROPS = {
     'crimson_roots': 4,
@@ -121,4 +121,8 @@ DEFAULT_LANG = {
     **{'entity.beneath.chest_boat.%s' % wood: lang('%s chest boat', wood) for wood in WOODS},
 }
 
+VANILLA_OVERRIDE_LANG = {
+    'block.minecraft.basalt': 'Basalt Column',
+    'block.minecraft.polished_basalt': 'Polished Basalt Column',
+}
 

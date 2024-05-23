@@ -25,6 +25,12 @@ public class LavaAqueductBlock extends AqueductBlock
     }
 
     @Override
+    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos)
+    {
+        return state.getValue(getFluidProperty()).getFluid().getFluidType().getLightLevel();
+    }
+
+    @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity)
     {
         if (state.getValue(getFluidProperty()).getFluid().isSame(Fluids.LAVA) && !entity.fireImmune() && entity instanceof LivingEntity living && !EnchantmentHelper.hasFrostWalker(living))

@@ -13,7 +13,9 @@ def generate(rm: ResourceManager):
     rm.crafting_shaped('crafting/warped_thatch', ['XX', 'XX'], {'X': 'beneath:warped_straw'}, 'beneath:warped_thatch').with_advancement('beneath:warped_straw')
     rm.crafting_shaped('crafting/blackstone', ['XX', 'XX'], {'X': 'beneath:blackstone_pebble'}, 'minecraft:blackstone').with_advancement('beneath:blackstone_pebble')
     rm.crafting_shaped('crafting/blackstone_bricks', ['XMX', 'MXM', 'XMX'], {'X': 'beneath:blackstone_brick', 'M': '#tfc:mortar'}, (4, 'minecraft:polished_blackstone_bricks')).with_advancement('beneath:blackstone_brick')
+    rm.crafting_shaped('crafting/nether_bricks', ['XMX', 'MXM', 'XMX'], {'X': 'minecraft:nether_brick', 'M': '#tfc:mortar'}, (4, 'minecraft:nether_bricks')).with_advancement('minecraft:nether_brick')
     damage_shapeless(rm, 'crafting/blackstone_brick', ('beneath:blackstone_pebble', '#tfc:chisels'), 'beneath:blackstone_brick').with_advancement('beneath:blackstone_pebble')
+    damage_shapeless(rm, 'crafting/nether_brick', ('beneath:nether_pebble', '#tfc:chisels'), 'minecraft:nether_brick').with_advancement('beneath:nether_pebble')
     damage_shapeless(rm, 'crafting/blackstone_button', ('beneath:blackstone_brick', '#tfc:chisels'), 'minecraft:polished_blackstone_button').with_advancement('beneath:blackstone_brick')
     damage_shapeless(rm, 'crafting/blackstone_plate', ('beneath:blackstone_brick', 'beneath:blackstone_brick', '#tfc:chisels'), 'minecraft:polished_blackstone_pressure_plate').with_advancement('beneath:blackstone_brick')
     rm.crafting_shaped('crafting/blackstone_aqueduct', ['X X', 'MXM'], {'X': 'beneath:blackstone_brick', 'M': '#tfc:mortar'}, 'beneath:blackstone_aqueduct').with_advancement('beneath:blackstone_brick')
@@ -21,7 +23,6 @@ def generate(rm: ResourceManager):
     rm.crafting_shapeless('crafting/agonizing_fertilizer', tuple('beneath:pure_%s' % n for n in NUTRIENTS), 'beneath:agonizing_fertilizer').with_advancement('beneath:pure_flame')
     rm.crafting_shapeless('crafting/cursed_hide_change', ('beneath:cursed_hide', 'tfc:powder/flux', 'tfc:powder/flux', 'minecraft:white_dye'), 'tfc:large_raw_hide').with_advancement('beneath:cursed_hide')
     rm.crafting_shapeless('crafting/hellbricks', ('minecraft:nether_bricks', 'minecraft:magma_cream'), 'beneath:hellbricks').with_advancement('minecraft:magma_cream')
-
 
     ### HEATING RECIPES ###
     metal_data = TFC_METALS['gold']

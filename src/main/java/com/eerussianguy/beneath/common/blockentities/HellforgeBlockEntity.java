@@ -109,7 +109,7 @@ public class HellforgeBlockEntity extends TickableInventoryBlockEntity<ItemStack
                     float itemTemp = cap.getTemperature();
                     if (forge.temperature > itemTemp)
                     {
-                        HeatCapability.addTemp(cap, forge.temperature);
+                        HeatCapability.addTemp(cap, 2.0F + forge.temperature * 0.0025F);
                     }
                 });
 

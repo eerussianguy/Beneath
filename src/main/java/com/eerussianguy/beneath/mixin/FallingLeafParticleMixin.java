@@ -24,6 +24,8 @@ public abstract class FallingLeafParticleMixin extends TextureSheetParticle
     @Inject(method = "<init>", at = @At("TAIL"), remap = false)
     private void inject$init(ClientLevel level, double x, double y, double z, SpriteSet set, boolean tinted, BlockState state, CallbackInfo ci)
     {
+        if (state == null)
+            return;
         final Block block = state.getBlock();
         if (block instanceof WartLeavesBlock wart)
         {

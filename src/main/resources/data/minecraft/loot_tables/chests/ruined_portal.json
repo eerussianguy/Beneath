@@ -6,24 +6,39 @@
       "name": "loot_pool",
       "rolls": {
         "type": "minecraft:uniform",
-        "min": 2,
-        "max": 4
+        "min": 1,
+        "max": 2
       },
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tfc:gem/diamond",
+          "name": "minecraft:obsidian",
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "min": 1,
-                "max": 3,
+                "max": 2,
                 "type": "minecraft:uniform"
               }
             }
           ],
-          "weight": 5
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:flint",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 4,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "weight": 40
         },
         {
           "type": "minecraft:item",
@@ -33,11 +48,96 @@
               "function": "minecraft:set_count",
               "count": {
                 "min": 1,
-                "max": 5,
+                "max": 4,
                 "type": "minecraft:uniform"
               }
             }
           ],
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:flint_and_steel",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:fire_charge",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:gold_chunk",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 6,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bow",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/sword/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/axe/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/shield/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/scythe/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/shovel/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/helmet/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/chestplate/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/boots/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/greaves/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/horse_armor/black_bronze",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:clock",
           "weight": 5
         },
         {
@@ -47,53 +147,8 @@
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 1,
-                "max": 15,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "weight": 5
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tfc:metal/sword/wrought_iron",
-          "weight": 5
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tfc:metal/chestplate/wrought_iron",
-          "weight": 5
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:flint_and_steel",
-          "weight": 5
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:saddle",
-          "weight": 10
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tfc:metal/horse_armor/bismuth_bronze",
-          "weight": 8
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tfc:metal/horse_armor/copper",
-          "weight": 5
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:obsidian",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
                 "min": 2,
-                "max": 4,
+                "max": 8,
                 "type": "minecraft:uniform"
               }
             }
@@ -102,57 +157,12 @@
         },
         {
           "type": "minecraft:item",
-          "name": "beneath:pure_sorrow",
+          "name": "minecraft:bell",
           "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "beneath:pure_flame",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "beneath:pure_death",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "beneath:pure_destruction",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "beneath:pure_decay",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "beneath:seeds/ghost_pepper",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 3,
-                "max": 6,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "beneath:seeds/gleamflower",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 3,
-                "max": 6,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
+          "name": "tfc:bronze_bell",
           "weight": 1
         }
       ]
