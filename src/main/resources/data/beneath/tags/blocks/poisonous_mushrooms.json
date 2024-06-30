@@ -1,0 +1,10 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:mushroom/death_cap",
+    "beneath:mushroom/destroying_angels",
+    "beneath:mushroom/fools_funnel",
+    "beneath:mushroom/sulfur_tuft"
+  ]
+}

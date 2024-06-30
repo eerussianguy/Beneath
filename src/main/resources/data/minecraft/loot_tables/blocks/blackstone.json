@@ -7,16 +7,30 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "beneath:blackstone_pebble",
-          "functions": [
+          "type": "minecraft:alternatives",
+          "children": [
             {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 2,
-                "max": 4
-              }
+              "type": "minecraft:item",
+              "name": "minecraft:blackstone",
+              "conditions": [
+                {
+                  "condition": "tfc:is_isolated"
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "beneath:blackstone_pebble",
+              "functions": [
+                {
+                  "function": "minecraft:set_count",
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "min": 2,
+                    "max": 4
+                  }
+                }
+              ]
             }
           ]
         }

@@ -1,0 +1,20 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "ingredient": [
+    {
+      "item": "beneath:wood/log/crimson"
+    },
+    {
+      "item": "beneath:wood/wood/crimson"
+    },
+    {
+      "item": "beneath:wood/stripped_wood/crimson"
+    },
+    {
+      "item": "beneath:wood/stripped_log/crimson"
+    }
+  ],
+  "duration": 800,
+  "temperature": 1000,
+  "purity": 0.6
+}

@@ -4,6 +4,7 @@
   "values": [
     "minecraft:basalt",
     "minecraft:blackstone",
-    "minecraft:netherrack"
+    "minecraft:netherrack",
+    "beneath:crackrack"
   ]
 }

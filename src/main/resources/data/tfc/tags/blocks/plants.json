@@ -3,6 +3,16 @@
   "replace": false,
   "values": [
     "beneath:gleamflower",
-    "beneath:burpflower"
+    "beneath:burpflower",
+    "beneath:mushroom/button",
+    "beneath:mushroom/chantrelle",
+    "beneath:mushroom/death_cap",
+    "beneath:mushroom/destroying_angels",
+    "beneath:mushroom/fools_funnel",
+    "beneath:mushroom/oyster",
+    "beneath:mushroom/parasol",
+    "beneath:mushroom/portobello",
+    "beneath:mushroom/shittake",
+    "beneath:mushroom/sulfur_tuft"
   ]
 }

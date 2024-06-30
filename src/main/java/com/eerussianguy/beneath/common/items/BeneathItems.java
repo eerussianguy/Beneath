@@ -7,9 +7,12 @@ import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.common.blockentities.SoulFarmlandBlockEntity;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
 import com.eerussianguy.beneath.common.blocks.NCrop;
+import com.eerussianguy.beneath.common.blocks.Shroom;
 import com.eerussianguy.beneath.common.blocks.Stem;
 import com.eerussianguy.beneath.common.entities.BeneathEntities;
 import net.minecraft.core.Direction;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.food.FoodProperties;
@@ -43,8 +46,10 @@ public class BeneathItems
     public static final RegistryObject<Item> CURSED_HIDE = register("cursed_hide");
     public static final RegistryObject<Item> GOLD_CHUNK = register("gold_chunk");
     public static final RegistryObject<Item> GHOST_PEPPER = register("ghost_pepper", () -> new Item(food()));
+    public static final RegistryObject<Item> JUICER = register("juicer", () -> new JuicerItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> WARPED_STRAW = register("warped_straw");
 
+    public static final Map<Shroom, RegistryObject<Item>> SHROOMS = Helpers.mapOfKeys(Shroom.class, shroom -> register("food/" + shroom.getSerializedName(), () -> new Item(new Item.Properties().food(getPoisonProperties(shroom.isPoison())))));
     public static final Map<Stem, RegistryObject<Item>> LUMBER = Helpers.mapOfKeys(Stem.class, wood -> register("wood/lumber/" + wood.name()));
     public static final Map<Stem, RegistryObject<Item>> SUPPORTS = Helpers.mapOfKeys(Stem.class, wood ->
         register("wood/support/" + wood.name(), () -> new StandingAndWallBlockItem(BeneathBlocks.WOODS.get(wood).get(Wood.BlockType.VERTICAL_SUPPORT).get(), BeneathBlocks.WOODS.get(wood).get(Wood.BlockType.HORIZONTAL_SUPPORT).get(), new Item.Properties(), Direction.DOWN))
@@ -70,6 +75,13 @@ public class BeneathItems
     public static Item.Properties food()
     {
         return new Item.Properties().food(getFoodProperties());
+    }
+
+    public static FoodProperties getPoisonProperties(boolean poison)
+    {
+        if (!poison)
+            return getFoodProperties();
+        return new FoodProperties.Builder().effect(() -> new MobEffectInstance(MobEffects.POISON, 1200, 1), 1.0F).build();
     }
 
     public static FoodProperties getFoodProperties()

@@ -17,11 +17,11 @@ def generate(rm: ResourceManager):
 
     ### LOOT ###
 
-    rm.block_loot('minecraft:netherrack', '2-4 beneath:nether_pebble')
-    rm.block_loot('minecraft:basalt', '2-4 tfc:rock/loose/basalt')
+    rm.block_loot('minecraft:netherrack', loot_tables.alternatives({'name': 'minecraft:netherrack', 'conditions': [{'condition': 'tfc:is_isolated'}]}, '2-4 beneath:nether_pebble'))
+    rm.block_loot('minecraft:basalt', loot_tables.alternatives({'name': 'minecraft:basalt', 'conditions': [{'condition': 'tfc:is_isolated'}]}, '2-4 tfc:rock/loose/basalt'))
     rm.block_loot('minecraft:gilded_blackstone', 'minecraft:blackstone', {'name': 'beneath:gold_chunk', 'conditions': [loot_tables.random_chance(0.25)]})
     rm.block_loot('minecraft:gold_block', '3-6 beneath:gold_chunk')
-    rm.block_loot('minecraft:blackstone', '2-4 beneath:blackstone_pebble')
+    rm.block_loot('minecraft:blackstone', loot_tables.alternatives({'name': 'minecraft:blackstone', 'conditions': [{'condition': 'tfc:is_isolated'}]}, '2-4 beneath:blackstone_pebble'))
     rm.block_loot('minecraft:crimson_roots', loot_tables.alternatives({'name': 'minecraft:crimson_roots', 'conditions': [loot_tables.match_tag('forge:shears')]}, {'name': 'beneath:crimson_straw', 'conditions': [loot_tables.match_tag('tfc:sharp_tools')]}, {'name': 'beneath:seeds/crimson_roots', 'conditions': [loot_tables.random_chance(0.1)]}))
     rm.block_loot('minecraft:warped_roots', loot_tables.alternatives({'name': 'minecraft:warped_roots', 'conditions': [loot_tables.match_tag('forge:shears')]}, {'name': 'beneath:warped_straw', 'conditions': [loot_tables.match_tag('tfc:sharp_tools')]}, {'name': 'beneath:seeds/warped_roots', 'conditions': [loot_tables.random_chance(0.1)]}))
     rm.block_loot('minecraft:bone_block', '1-3 minecraft:bone_meal')
@@ -227,21 +227,32 @@ def generate(rm: ResourceManager):
     ### BLOCK TAGS ###
     rm.block_tag('breaks_slowly', 'minecraft:netherrack', 'minecraft:soul_sand', 'minecraft:soul_soil', 'minecraft:magma_block', 'minecraft:warped_nylium', 'minecraft:crimson_nylium')
 
-    rm.block_tag('tfc:breaks_when_isolated', 'minecraft:basalt', 'minecraft:blackstone', 'minecraft:netherrack')
+    rm.block_tag('tfc:breaks_when_isolated', 'minecraft:basalt', 'minecraft:blackstone', 'minecraft:netherrack', 'beneath:crackrack')
     rm.block_tag('tfc:tree_grows_on', 'minecraft:netherrack', 'minecraft:warped_nylium', 'minecraft:crimson_nylium')
     rm.block_tag('beneath:hellforge_insulation', 'beneath:hellbricks')
     rm.block_tag('beneath:nether_bush_plantable_on', '#minecraft:base_stone_nether', 'minecraft:soul_soil', 'minecraft:soul_sand', 'beneath:soul_farmland', 'minecraft:crimson_nylium', 'minecraft:warped_nylium')
     rm.block_tag('minecraft:mineable/pickaxe', 'beneath:blackstone_aqueduct')
     rm.block_tag('minecraft:mineable/shovel', 'beneath:cursecoal_pile', 'beneath:hellforge')
 
+    for shroom in MUSHROOMS:
+        rm.block_tag('mushrooms', 'beneath:mushroom/%s' % shroom)
+        if shroom in POISONOUS_MUSHROOMS:
+            rm.block_tag('poisonous_mushrooms', 'beneath:mushroom/%s' % shroom)
+
     ### ITEM TAGS ###
     rm.item_tag('sparks_on_sulfur', *['#tfc:metal_item/%s' % metal for metal in ('black_steel', 'blue_steel', 'red_steel', 'steel', 'wrought_iron', 'cast_iron')])
+    rm.item_tag('usable_in_juicer', '#tfc:foods/fruits', '#beneath:mushrooms')
 
     block_and_item_tag(rm, 'tfc:rock/aqueduct', 'beneath:blackstone_aqueduct')
     rm.item_tag('tfc:rock_knapping', 'beneath:nether_pebble', 'beneath:blackstone_pebble')
     rm.item_tag('tfc:metamorphic_rock', 'beneath:blackstone_pebble')
     rm.item_tag('tfc:sedimentary_rock', 'beneath:nether_pebble')
     block_and_item_tag(rm, 'minecraft:stone_bricks', 'beneath:hellbricks')
+
+    for shroom in MUSHROOMS:
+        rm.item_tag('mushrooms', 'beneath:food/%s' % shroom)
+        if shroom in POISONOUS_MUSHROOMS:
+            rm.item_tag('poisonous_mushrooms', 'beneath:food/%s' % shroom)
 
     ### ENTITY TAGS ###
     rm.entity_tag('can_be_sacrificed', 'tfc:pig', 'tfc:goat', 'tfc:sheep')
@@ -252,9 +263,14 @@ def generate(rm: ResourceManager):
 
     ### FUELS ###
     fuel_item(rm, 'cursecoal', 'beneath:cursecoal', 1800, 1350)
+    for wood in WOODS:
+        fuel_item(rm, wood + '_log', ['beneath:wood/log/' + wood, 'beneath:wood/wood/' + wood, 'beneath:wood/stripped_wood/' + wood, 'beneath:wood/stripped_log/' + wood], 800, 1000, 0.6)
 
     ### FOODS ###
     food_item(rm, 'ghost_pepper', 'beneath:ghost_pepper', Category.vegetable, 4, 1, 0, 2.5, veg=1)
+
+    for shroom in MUSHROOMS:
+        food_item(rm, shroom, 'beneath:food/%s' % shroom, Category.vegetable, 4, 1, 2, 1.5, veg=1)
 
     ### FERTILIZERS ###
     n_fertilizer(rm, 'pure_death', 'beneath:pure_death', death=0.1)

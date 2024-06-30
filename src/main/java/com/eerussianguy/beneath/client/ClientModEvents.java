@@ -6,6 +6,7 @@ import com.eerussianguy.beneath.client.render.BeneathHangingSignRenderer;
 import com.eerussianguy.beneath.client.render.BeneathSignRenderer;
 import com.eerussianguy.beneath.client.render.HellforgeRenderer;
 import com.eerussianguy.beneath.client.screen.HellforgeScreen;
+import com.eerussianguy.beneath.client.screen.JuicerScreen;
 import com.eerussianguy.beneath.common.blockentities.BeneathBlockEntities;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
 import com.eerussianguy.beneath.common.blocks.Stem;
@@ -61,6 +62,7 @@ public class ClientModEvents
             BeneathBlocks.WOODS.values().forEach(map -> ItemProperties.register(map.get(BARREL).get().asItem(), Helpers.identifier("sealed"), (stack, level, entity, unused) -> stack.hasTag() ? 1.0f : 0f));
 
             MenuScreens.register(BeneathContainerTypes.HELLFORGE_CONTAINER.get(), HellforgeScreen::new);
+            MenuScreens.register(BeneathContainerTypes.JUICER_CONTAINER.get(), JuicerScreen::new);
 
             for (Stem stem : Stem.VALUES)
             {
@@ -75,6 +77,7 @@ public class ClientModEvents
 
         Stream.of(BeneathBlocks.GLEAMFLOWER, BeneathBlocks.BURPFLOWER)
             .map(RegistryObject::get).forEach(b -> ItemBlockRenderTypes.setRenderLayer(b, cutout));
+        BeneathBlocks.SHROOMS.values().forEach(reg -> ItemBlockRenderTypes.setRenderLayer(reg.get(), cutout));
 
         BeneathBlocks.WOODS.values().forEach(map -> {
             Stream.of(SAPLING, DOOR, TRAPDOOR, FENCE, FENCE_GATE, BUTTON, PRESSURE_PLATE, SLAB, STAIRS, TWIG, BARREL, SCRIBING_TABLE, POTTED_SAPLING).forEach(type -> ItemBlockRenderTypes.setRenderLayer(map.get(type).get(), cutout));

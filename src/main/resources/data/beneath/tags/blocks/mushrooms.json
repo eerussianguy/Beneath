@@ -1,0 +1,16 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:mushroom/button",
+    "beneath:mushroom/chantrelle",
+    "beneath:mushroom/death_cap",
+    "beneath:mushroom/destroying_angels",
+    "beneath:mushroom/fools_funnel",
+    "beneath:mushroom/oyster",
+    "beneath:mushroom/parasol",
+    "beneath:mushroom/portobello",
+    "beneath:mushroom/shittake",
+    "beneath:mushroom/sulfur_tuft"
+  ]
+}

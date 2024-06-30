@@ -1,0 +1,11 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "ingredient": {
+    "item": "beneath:food/portobello"
+  },
+  "hunger": 4,
+  "saturation": 1,
+  "water": 2,
+  "decay_modifier": 1.5,
+  "vegetables": 1
+}

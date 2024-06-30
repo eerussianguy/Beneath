@@ -86,6 +86,7 @@ public class BeneathBlocks
     public static final RegistryObject<Block> GLEAMFLOWER = register("gleamflower", () -> new NFlowerBlock(ExtendedProperties.of().sound(SoundType.GRASS).instabreak().speedFactor(0.8f).noCollission().lightLevel(s -> 7)));
     public static final RegistryObject<Block> BURPFLOWER = register("burpflower", () -> new BurpingFlowerBlock(ExtendedProperties.of().sound(SoundType.GRASS).instabreak().speedFactor(0.8f).noCollission().randomTicks()));
 
+    public static final Map<Shroom, RegistryObject<Block>> SHROOMS = Helpers.mapOfKeys(Shroom.class, shroom -> registerNoItem("mushroom/" + shroom.getSerializedName(), () -> new NFlowerBlock(ExtendedProperties.of(Blocks.CRIMSON_FUNGUS))));
     public static final Map<Stem, Map<Wood.BlockType, RegistryObject<Block>>> WOODS = Helpers.mapOfKeys(Stem.class, wood ->
         Helpers.mapOfKeys(Wood.BlockType.class, type ->
             register(type.nameFor(wood), createWood(wood, type), type.createBlockItem(wood, new Item.Properties()))

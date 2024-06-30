@@ -1,0 +1,20 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "ingredient": [
+    {
+      "item": "beneath:wood/log/warped"
+    },
+    {
+      "item": "beneath:wood/wood/warped"
+    },
+    {
+      "item": "beneath:wood/stripped_wood/warped"
+    },
+    {
+      "item": "beneath:wood/stripped_log/warped"
+    }
+  ],
+  "duration": 800,
+  "temperature": 1000,
+  "purity": 0.6
+}

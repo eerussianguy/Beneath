@@ -1,0 +1,16 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:food/button",
+    "beneath:food/chantrelle",
+    "beneath:food/death_cap",
+    "beneath:food/destroying_angels",
+    "beneath:food/fools_funnel",
+    "beneath:food/oyster",
+    "beneath:food/parasol",
+    "beneath:food/portobello",
+    "beneath:food/shittake",
+    "beneath:food/sulfur_tuft"
+  ]
+}

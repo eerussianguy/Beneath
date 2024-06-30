@@ -87,8 +87,10 @@ TREE_SAPLING_DROP_CHANCES = {
 NUTRIENTS = ('death', 'destruction', 'decay', 'sorrow', 'flame')
 
 SIMPLE_ITEMS = ('gold_chunk', 'cursed_hide', 'cursecoal', 'pure_death', 'pure_decay', 'pure_destruction', 'pure_sorrow', 'pure_flame', 'agonizing_fertilizer', 'crimson_straw', 'warped_straw', 'ghost_pepper', 'blackstone_brick',
-                'crackrack_rock',
+                'crackrack_rock', 'juicer',
                 )
+MUSHROOMS = ('button', 'chantrelle', 'death_cap', 'destroying_angels', 'fools_funnel', 'oyster', 'parasol', 'portobello', 'shittake', 'sulfur_tuft')
+POISONOUS_MUSHROOMS = ('death_cap', 'destroying_angels', 'fools_funnel', 'sulfur_tuft')
 
 ROCK_SPIKE_PARTS = ('base', 'middle', 'tip')
 
@@ -115,6 +117,8 @@ DEFAULT_LANG = {
     'beneath.nutrient.flame': 'Flame: §c%s%%',
     'beneath.nutrient.sorrow': 'Sorrow: §9%s%%',
     'beneath.block_entity.hellforge': 'Hellforge',
+    'beneath.screen.juicer': 'Juicer',
+    'item.beneath.juicer.filled': 'Juicer (%s)',
     'death.attack.beneath.sulfur': '%1$s mined sulfur with an iron tool and blew themselves up.',
     'death.attack.beneath.sulfur.player': '%1$s mined sulfur with an iron tool and blew themselves up while trying to escape %2$s.',
     **{'entity.beneath.boat.%s' % wood: lang('%s boat', wood) for wood in WOODS},

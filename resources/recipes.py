@@ -8,10 +8,13 @@ from constants import *
 def generate(rm: ResourceManager):
     ### CRAFTING RECIPES ###
     rm.crafting_shaped('crafting/cobblerack', ['XX', 'XX'], {'X': 'beneath:nether_pebble'}, 'beneath:cobblerack').with_advancement('beneath:nether_pebble')
+    rm.crafting_shapeless('crafting/cobblerack_uncraft', ('beneath:cobblerack',), '4 beneath:nether_pebble').with_advancement('beneath:cobblerack')
     rm.crafting_shaped('crafting/crackrack', ['XX', 'XX'], {'X': 'beneath:crackrack_rock'}, 'beneath:crackrack').with_advancement('beneath:crackrack_rock')
+    rm.crafting_shapeless('crafting/crackrack_uncraft', ('beneath:crackrack',), '4 beneath:crackrack_rock').with_advancement('beneath:crackrack')
     rm.crafting_shaped('crafting/crimson_thatch', ['XX', 'XX'], {'X': 'beneath:warped_straw'}, 'beneath:crimson_thatch').with_advancement('beneath:crimson_straw')
     rm.crafting_shaped('crafting/warped_thatch', ['XX', 'XX'], {'X': 'beneath:warped_straw'}, 'beneath:warped_thatch').with_advancement('beneath:warped_straw')
     rm.crafting_shaped('crafting/blackstone', ['XX', 'XX'], {'X': 'beneath:blackstone_pebble'}, 'minecraft:blackstone').with_advancement('beneath:blackstone_pebble')
+    rm.crafting_shapeless('crafting/blackstone_uncraft', ('minecraft:blackstone',), '4 beneath:blackstone_pebble').with_advancement('minecraft:blackstone')
     rm.crafting_shaped('crafting/blackstone_bricks', ['XMX', 'MXM', 'XMX'], {'X': 'beneath:blackstone_brick', 'M': '#tfc:mortar'}, (4, 'minecraft:polished_blackstone_bricks')).with_advancement('beneath:blackstone_brick')
     rm.crafting_shaped('crafting/nether_bricks', ['XMX', 'MXM', 'XMX'], {'X': 'minecraft:nether_brick', 'M': '#tfc:mortar'}, (4, 'minecraft:nether_bricks')).with_advancement('minecraft:nether_brick')
     damage_shapeless(rm, 'crafting/blackstone_brick', ('beneath:blackstone_pebble', '#tfc:chisels'), 'beneath:blackstone_brick').with_advancement('beneath:blackstone_pebble')
@@ -23,6 +26,7 @@ def generate(rm: ResourceManager):
     rm.crafting_shapeless('crafting/agonizing_fertilizer', tuple('beneath:pure_%s' % n for n in NUTRIENTS), 'beneath:agonizing_fertilizer').with_advancement('beneath:pure_flame')
     rm.crafting_shapeless('crafting/cursed_hide_change', ('beneath:cursed_hide', 'tfc:powder/flux', 'tfc:powder/flux', 'minecraft:white_dye'), 'tfc:large_raw_hide').with_advancement('beneath:cursed_hide')
     rm.crafting_shapeless('crafting/hellbricks', ('minecraft:nether_bricks', 'minecraft:magma_cream'), 'beneath:hellbricks').with_advancement('minecraft:magma_cream')
+    damage_shapeless(rm, 'crafting/juicer', ('#forge:leather', '#forge:leather', '#forge:leather', '#tfc:knives', '#forge:rods/wooden'), 'beneath:juicer').with_advancement('#forge:leather')
 
     ### HEATING RECIPES ###
     metal_data = TFC_METALS['gold']
@@ -219,3 +223,26 @@ def item_stack_ingredient(data_in: Json):
         return {'ingredient': {'tag': item}, 'count': count}
     else:
         return {'ingredient': {'item': item}, 'count': count}
+
+def simple_pot_recipe(rm: ResourceManager, name_parts: utils.ResourceIdentifier, ingredients: Json, fluid: str, output_fluid: str = None, output_items: Json = None, duration: int = 2000, temp: int = 300):
+    rm.recipe(('pot', name_parts), 'tfc:pot', {
+        'ingredients': ingredients,
+        'fluid_ingredient': fluid_stack_ingredient(fluid),
+        'duration': duration,
+        'temperature': temp,
+        'fluid_output': fluid_stack(output_fluid) if output_fluid is not None else None,
+        'item_output': [utils.item_stack(item) for item in output_items] if output_items is not None else None
+    })
+
+def fluid_ingredient(data_in: Json) -> Json:
+    if isinstance(data_in, dict):
+        return data_in
+    elif isinstance(data_in, List):
+        return [*utils.flatten_list([fluid_ingredient(e) for e in data_in])]
+    else:
+        fluid, tag, amount, _ = utils.parse_item_stack(data_in, False)
+        if tag:
+            return {'tag': fluid}
+        else:
+            return fluid
+

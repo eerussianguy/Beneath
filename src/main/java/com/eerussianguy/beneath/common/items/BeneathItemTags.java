@@ -9,6 +9,7 @@ import net.minecraft.world.item.Item;
 public class BeneathItemTags
 {
     public static final TagKey<Item> SPARKS_ON_SULFUR = create("sparks_on_sulfur");
+    public static final TagKey<Item> USABLE_IN_JUICER = create("usable_in_juicer");
 
     private static TagKey<Item> create(String id)
     {

@@ -3,6 +3,7 @@
   "replace": false,
   "values": [
     "beneath:nether_spikes",
-    "beneath:glowstone_spikes"
+    "beneath:glowstone_spikes",
+    "#beneath:mushrooms"
   ]
 }

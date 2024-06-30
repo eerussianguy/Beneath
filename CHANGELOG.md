@@ -1,11 +1,8 @@
 # Changes
 
-- Fix knapping with nether rocks
-- Add recipes for nether bricks
-- Add loot table to ruined portal
-- Rename vanilla basalt to 'basalt columns'
-- Fix a crash when it snows in the overworld
-- Remove vanilla horse armor from some loot tables
-- Reduce frequency of glowstone spikes
-- Allow lava aqueducts to emit light
-- Make hellforges add more heat at higher internal temperatures (like crucibles)
+- Add several types of mushrooms
+- Add the juicer, a drinking vessel that can turn mushrooms and fruits into water.
+- Allow decrafting of stone-like nether blocks
+- Fix stone-like nether blocks not dropping themselves when isolated
+- Fix hellforge not heating items
+- Fix knapping with beneath rocks having missing textures

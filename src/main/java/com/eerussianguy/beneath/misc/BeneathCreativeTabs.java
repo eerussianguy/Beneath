@@ -43,9 +43,11 @@ public class BeneathCreativeTabs
         accept(out, BeneathItems.CURSECOAL);
         accept(out, BeneathItems.RED_ELK_EGG);
         accept(out, BeneathItems.GHOST_PEPPER);
+        BeneathItems.SHROOMS.values().forEach(shroom -> accept(out, shroom));
         BeneathItems.SEEDS.values().forEach(seed -> accept(out, seed));
         accept(out, BeneathItems.AGONIZING_FERTILIZER);
         BeneathItems.PURE_NUTRIENTS.values().forEach(fertilizer -> accept(out, fertilizer));
+        accept(out, BeneathItems.JUICER);
         accept(out, BeneathBlocks.HAUNTED_SPIKE);
         accept(out, BeneathBlocks.GLOWSTONE_SPIKE);
         accept(out, BeneathBlocks.NETHER_PEBBLE);

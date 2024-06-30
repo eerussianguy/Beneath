@@ -1,0 +1,16 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "beneath:button_patch",
+    "beneath:chantrelle_patch",
+    "beneath:death_cap_patch",
+    "beneath:destroying_angels_patch",
+    "beneath:fools_funnel_patch",
+    "beneath:oyster_patch",
+    "beneath:parasol_patch",
+    "beneath:portobello_patch",
+    "beneath:shittake_patch",
+    "beneath:sulfur_tuft_patch"
+  ]
+}

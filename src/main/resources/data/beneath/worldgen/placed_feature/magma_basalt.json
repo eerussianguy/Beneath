@@ -18,10 +18,10 @@
       "height": {
         "type": "uniform",
         "min_inclusive": {
-          "absolute": 36
+          "absolute": 27
         },
         "max_inclusive": {
-          "absolute": 27
+          "absolute": 36
         }
       }
     },

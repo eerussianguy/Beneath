@@ -24,9 +24,13 @@ def generate(rm: ResourceManager):
     configured_placed_feature(rm, 'burpflower', 'minecraft:simple_block', {'to_place': simple_state_provider('beneath:burpflower')}, decorate_replaceable(), decorate_would_survive('beneath:burpflower'), decorate_air())
     configured_placed_feature(rm, 'burpflower_patch', 'minecraft:random_patch', random_config('beneath:burpflower', 5, 5, 1), decorate_chance(20), decorate_every_layer(1), decorate_biome())
 
+    for shroom in MUSHROOMS:
+        configured_placed_feature(rm, shroom, 'minecraft:simple_block', {'to_place': simple_state_provider('beneath:mushroom/%s' % shroom)}, decorate_replaceable(), decorate_would_survive('beneath:mushroom/%s' % shroom), decorate_air())
+        configured_placed_feature(rm, '%s_patch' % shroom, 'minecraft:random_patch', random_config('beneath:%s' % shroom, 5, 5, 1), decorate_chance(60), decorate_every_layer(1), decorate_biome())
+
     for rock, rock_data in ROCKS.items():
         if rock_data.category == 'igneous_extrusive':
-            configured_placed_feature(rm, 'magma_' + rock, 'minecraft:ore', {'discard_chance_on_air_exposure': 0, 'size': 33, 'targets': [{'state': utils.block_state('tfc:rock/magma/%s' % rock), 'target': {'block': 'minecraft:netherrack', 'predicate_type': 'minecraft:block_match'}}]}, decorate_chance(10), decorate_count(4), decorate_square(), decorate_range(36, 27), decorate_biome())
+            configured_placed_feature(rm, 'magma_' + rock, 'minecraft:ore', {'discard_chance_on_air_exposure': 0, 'size': 33, 'targets': [{'state': utils.block_state('tfc:rock/magma/%s' % rock), 'target': {'block': 'minecraft:netherrack', 'predicate_type': 'minecraft:block_match'}}]}, decorate_chance(10), decorate_count(4), decorate_square(), decorate_range(27, 36), decorate_biome())
 
     configured_placed_feature(rm, 'tree/crimson', 'tfc:random_tree', {
         'structures': ['beneath:crimson/%s' % i for i in range(1, 17)],
@@ -130,15 +134,16 @@ def generate(rm: ResourceManager):
         'blocks': [{'replace': ['minecraft:netherrack'], 'with': [{'weight': 1, 'block': 'beneath:crackrack'}]}]
     })
 
+    rm.placed_feature_tag('mushrooms', *['beneath:%s_patch' % shr for shr in MUSHROOMS])
     rm.placed_feature_tag('veins', *['beneath:vein/%s' % v for v in ('quartz', 'sylvite', 'normal_gold', 'deep_gold', 'cursecoal', 'crackrack_pipe')])
     rm.placed_feature_tag('underground_decoration', '#beneath:veins', *['beneath:magma_%s' % r for r, d in ROCKS.items() if d.category == 'igneous_extrusive'], 'beneath:amethyst_geode')
     rm.placed_feature_tag('everywhere_but_basalt_deltas', 'beneath:nether_pebble_patch', 'beneath:blackstone_boulders', 'beneath:cobble_boulders', 'beneath:sulfur_patch')
 
-    rm.placed_feature_tag('vegetal_decoration/nether_wastes', 'beneath:nether_spikes', 'beneath:glowstone_spikes')
+    rm.placed_feature_tag('vegetal_decoration/nether_wastes', 'beneath:nether_spikes', 'beneath:glowstone_spikes', '#beneath:mushrooms')
     rm.placed_feature_tag('surface_structures/nether_wastes', 'beneath:nether_spikes', 'beneath:glowstone_spikes')
 
-    rm.placed_feature_tag('vegetal_decoration/crimson_forest', 'beneath:tree/crimson', '#beneath:everywhere_but_basalt_deltas', 'beneath:gleamflower_patch', 'beneath:burpflower_patch')
-    rm.placed_feature_tag('vegetal_decoration/warped_forest', 'beneath:tree/warped', '#beneath:everywhere_but_basalt_deltas', 'beneath:gleamflower_patch', 'beneath:burpflower_patch')
+    rm.placed_feature_tag('vegetal_decoration/crimson_forest', 'beneath:tree/crimson', '#beneath:everywhere_but_basalt_deltas', 'beneath:gleamflower_patch', 'beneath:burpflower_patch', '#beneath:mushrooms')
+    rm.placed_feature_tag('vegetal_decoration/warped_forest', 'beneath:tree/warped', '#beneath:everywhere_but_basalt_deltas', 'beneath:gleamflower_patch', 'beneath:burpflower_patch', '#beneath:mushrooms')
 
     rm.placed_feature_tag('surface_structures/basalt_deltas', 'beneath:delta')
     rm.placed_feature_tag('vegetal_decoration/basalt_deltas', 'beneath:blackstone_pebble_patch')
