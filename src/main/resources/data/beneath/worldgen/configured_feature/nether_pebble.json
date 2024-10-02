@@ -5,8 +5,7 @@
     "to_place": {
       "type": "tfc:random_property",
       "state": {
-        "Name": "beneath:nether_pebble",
-        "Properties": {}
+        "Name": "beneath:nether_pebble"
       },
       "property": "count"
     }

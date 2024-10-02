@@ -1,0 +1,15 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "#beneath:mushrooms",
+    "minecraft:warped_fungus",
+    "minecraft:crimson_fungus",
+    "beneath:ghost_pepper",
+    "beneath:gleamflower",
+    "minecraft:crimson_roots",
+    "minecraft:warped_roots",
+    "minecraft:nether_wart",
+    "minecraft:ghast_tear"
+  ]
+}

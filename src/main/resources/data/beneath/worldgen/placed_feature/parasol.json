@@ -13,8 +13,7 @@
       "predicate": {
         "type": "would_survive",
         "state": {
-          "Name": "beneath:mushroom/parasol",
-          "Properties": {}
+          "Name": "beneath:mushroom/parasol"
         }
       }
     },

@@ -18,6 +18,7 @@ class Rock(NamedTuple):
     category: str
     sand: str
 
+ROCK_CATEGORIES: List[str] = ['sedimentary', 'metamorphic', 'igneous_extrusive', 'igneous_intrusive']
 
 TFC_METALS: Dict[str, Metal] = {
     'gold': Metal(1, {'part'}, 0.6, 1060, None),
@@ -118,6 +119,7 @@ DEFAULT_LANG = {
     'beneath.nutrient.sorrow': 'Sorrow: §9%s%%',
     'beneath.block_entity.hellforge': 'Hellforge',
     'beneath.screen.juicer': 'Juicer',
+    'beneath.screen.juicer.mushrooms': 'Feed me mushrooms!',
     'item.beneath.juicer.filled': 'Juicer (%s)',
     'death.attack.beneath.sulfur': '%1$s mined sulfur with an iron tool and blew themselves up.',
     'death.attack.beneath.sulfur.player': '%1$s mined sulfur with an iron tool and blew themselves up while trying to escape %2$s.',

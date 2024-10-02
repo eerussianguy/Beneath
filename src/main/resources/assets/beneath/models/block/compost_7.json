@@ -1,0 +1,83 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"1": "beneath:block/unposter/unposter_side",
+		"particle": "beneath:block/unposter/unposter_bottom",
+		"1_0": "beneath:block/unposter/unposter_bottom"
+	},
+	"elements": [
+		{
+			"from": [1, 1, 1],
+			"to": [15, 14, 15],
+			"faces": {
+				"north": {"uv": [0, 0, 14, 13], "texture": "#0"},
+				"east": {"uv": [0, 0, 14, 13], "texture": "#0"},
+				"south": {"uv": [0, 0, 14, 13], "texture": "#0"},
+				"west": {"uv": [0, 0, 14, 13], "texture": "#0"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [16, 1, 16],
+			"faces": {
+				"north": {"uv": [0, 15, 16, 16], "texture": "#1"},
+				"east": {"uv": [0, 15, 16, 16], "texture": "#1"},
+				"south": {"uv": [0, 15, 16, 16], "texture": "#1"},
+				"west": {"uv": [0, 15, 16, 16], "texture": "#1"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#1_0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#1_0"}
+			}
+		},
+		{
+			"from": [0, 1, 0],
+			"to": [16, 16, 1],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 15], "texture": "#1"},
+				"east": {"uv": [0, 0, 1, 15], "texture": "#1"},
+				"south": {"uv": [0, 0, 16, 15], "texture": "#1"},
+				"west": {"uv": [0, 0, 1, 15], "texture": "#1"},
+				"up": {"uv": [0, 0, 16, 1], "texture": "#1"}
+			}
+		},
+		{
+			"from": [0, 1, 15],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 15], "texture": "#1"},
+				"east": {"uv": [0, 0, 1, 15], "texture": "#1"},
+				"south": {"uv": [0, 0, 16, 15], "texture": "#1"},
+				"west": {"uv": [0, 0, 1, 15], "texture": "#1"},
+				"up": {"uv": [0, 0, 16, 1], "texture": "#1"}
+			}
+		},
+		{
+			"from": [0, 1, 1],
+			"to": [1, 16, 15],
+			"faces": {
+				"east": {"uv": [0, 0, 14, 15], "texture": "#1"},
+				"west": {"uv": [1, 0, 15, 15], "texture": "#1"},
+				"up": {"uv": [0, 0, 14, 1], "rotation": 90, "texture": "#1"}
+			}
+		},
+		{
+			"from": [15, 1, 1],
+			"to": [16, 16, 15],
+			"faces": {
+				"east": {"uv": [1, 0, 15, 15], "texture": "#1"},
+				"west": {"uv": [1, 0, 15, 15], "texture": "#1"},
+				"up": {"uv": [1, 0, 15, 1], "rotation": 90, "texture": "#1_0"}
+			}
+		}
+	],
+	"groups": [
+		0,
+		{
+			"name": "unposter",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [1, 2, 3, 4, 5]
+		}
+	]
+}

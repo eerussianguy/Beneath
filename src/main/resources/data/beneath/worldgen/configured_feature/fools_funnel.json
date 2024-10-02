@@ -5,8 +5,7 @@
     "to_place": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "beneath:mushroom/fools_funnel",
-        "Properties": {}
+        "Name": "beneath:mushroom/fools_funnel"
       }
     }
   }

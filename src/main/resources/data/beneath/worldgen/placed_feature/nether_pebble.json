@@ -13,8 +13,7 @@
       "predicate": {
         "type": "would_survive",
         "state": {
-          "Name": "beneath:nether_pebble",
-          "Properties": {}
+          "Name": "beneath:nether_pebble"
         }
       }
     },

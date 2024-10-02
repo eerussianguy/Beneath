@@ -85,6 +85,7 @@ public class BeneathBlocks
     public static final RegistryObject<Block> CURSECOAL_PILE = registerNoItem("cursecoal_pile", () -> new CursecoalPileBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(0.2F).sound(TFCSounds.CHARCOAL).isViewBlocking((state, level, pos) -> state.getValue(CharcoalPileBlock.LAYERS) >= 8).isSuffocating((state, level, pos) -> state.getValue(CharcoalPileBlock.LAYERS) >= 8)));
     public static final RegistryObject<Block> GLEAMFLOWER = register("gleamflower", () -> new NFlowerBlock(ExtendedProperties.of().sound(SoundType.GRASS).instabreak().speedFactor(0.8f).noCollission().lightLevel(s -> 7)));
     public static final RegistryObject<Block> BURPFLOWER = register("burpflower", () -> new BurpingFlowerBlock(ExtendedProperties.of().sound(SoundType.GRASS).instabreak().speedFactor(0.8f).noCollission().randomTicks()));
+    public static final RegistryObject<Block> UNPOSTER = register("unposter", () -> new UnposterBlock(ExtendedProperties.of(MapColor.COLOR_BLUE).strength(0.6F).noOcclusion().sound(SoundType.WOOD).randomTicks().blockEntity(BeneathBlockEntities.UNPOSTER)));
 
     public static final Map<Shroom, RegistryObject<Block>> SHROOMS = Helpers.mapOfKeys(Shroom.class, shroom -> registerNoItem("mushroom/" + shroom.getSerializedName(), () -> new NFlowerBlock(ExtendedProperties.of(Blocks.CRIMSON_FUNGUS))));
     public static final Map<Stem, Map<Wood.BlockType, RegistryObject<Block>>> WOODS = Helpers.mapOfKeys(Stem.class, wood ->

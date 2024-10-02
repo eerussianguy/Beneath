@@ -3,6 +3,8 @@
   "replace": false,
   "values": [
     "#tfc:foods/fruits",
-    "#beneath:mushrooms"
+    "#beneath:mushrooms",
+    "minecraft:warped_fungus",
+    "minecraft:crimson_fungus"
   ]
 }

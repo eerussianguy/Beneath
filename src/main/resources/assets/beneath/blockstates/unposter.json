@@ -1,0 +1,32 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "stage=0": {
+      "model": "beneath:block/unposter_0"
+    },
+    "stage=1": {
+      "model": "beneath:block/unposter_1"
+    },
+    "stage=2": {
+      "model": "beneath:block/unposter_2"
+    },
+    "stage=3": {
+      "model": "beneath:block/unposter_3"
+    },
+    "stage=4": {
+      "model": "beneath:block/unposter_4"
+    },
+    "stage=5": {
+      "model": "beneath:block/unposter_5"
+    },
+    "stage=6": {
+      "model": "beneath:block/unposter_6"
+    },
+    "stage=7": {
+      "model": "beneath:block/unposter_7"
+    },
+    "stage=8": {
+      "model": "beneath:block/unposter_8"
+    }
+  }
+}

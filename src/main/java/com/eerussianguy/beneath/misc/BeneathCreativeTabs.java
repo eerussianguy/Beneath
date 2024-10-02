@@ -55,6 +55,7 @@ public class BeneathCreativeTabs
         accept(out, BeneathBlocks.COBBLERACK);
         accept(out, BeneathBlocks.FUNGAL_COBBLERACK);
         accept(out, BeneathBlocks.BLACKSTONE_AQUEDUCT);
+        accept(out, BeneathBlocks.UNPOSTER);
         accept(out, BeneathBlocks.SOUL_FARMLAND);
         accept(out, BeneathBlocks.CRIMSON_THATCH);
         accept(out, BeneathBlocks.WARPED_THATCH);

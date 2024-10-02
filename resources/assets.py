@@ -101,6 +101,12 @@ def generate(rm: ResourceManager):
     }).with_lang(lang('burpflower')).with_tag('tfc:plants').with_block_loot('beneath:burpflower')
     rm.item_model('burpflower', 'beneath:block/plant/burpflower_base')
 
+    for i in range(1, 9):
+        rm.block_model('unposter_%s' % i, parent='beneath:block/compost_%s' % i, textures={'0': 'beneath:block/unposter/normal'})
+    rm.block_model('unposter_0', parent='beneath:block/unposter', no_textures=True)
+    rm.blockstate('unposter', variants=dict(('stage=%s' % i, {'model': 'beneath:block/unposter_%s' % i}) for i in range(0, 9))).with_lang(lang('unposter')).with_block_loot('beneath:unposter')
+    rm.item_model('unposter', parent='beneath:block/unposter', no_textures=True)
+
     rm.blockstate('cursecoal_pile', variants=dict((('layers=%d' % i), {'model': 'beneath:block/pile/cursecoal_height%d' % (i * 2) if i != 8 else 'beneath:block/pile/cursecoal_block'}) for i in range(1, 1 + 8))).with_lang(lang('Cursecoal Pile')).with_block_loot('beneath:cursecoal')
     rm.block_model('pile/cursecoal_block', textures={'all': 'beneath:block/cursecoal'})
     rm.blockstate('hellforge', variants=dict((('heat_level=%d' % i), {'model': 'beneath:block/hellforge/heat_%d' % i}) for i in range(0, 7 + 1))).with_lang(lang('Hellforge')).with_block_loot('7 beneath:cursecoal')
@@ -131,9 +137,9 @@ def generate(rm: ResourceManager):
     rm.blockstate('crackrack').with_block_loot(loot_tables.alternatives({'name': 'beneath:crackrack', 'conditions': [{'condition': 'tfc:is_isolated'}]}, '2-4 beneath:crackrack_rock')).with_lang(lang('crackrack')).with_block_model().with_tag('minecraft:mineable/pickaxe').with_tag('minecraft:base_stone_nether').with_item_model()
 
     for shroom in MUSHROOMS:
-        mushlang = '%s mushroom' % shroom.replace('fools', 'Fool\'s')
+        mushlang = lang(shroom) if 'fools' not in shroom else 'Fool\'s Funnel'
         rm.blockstate('mushroom/%s' % shroom).with_block_model(parent='block/cross', textures={'cross': 'beneath:block/mushroom/%s' % shroom}).with_block_loot('beneath:food/%s' % shroom).with_tag('tfc:plants').with_tag('tfc:mineable_with_sharp_tool').with_lang(lang(mushlang))
-        rm.item_model('food/%s' % shroom, 'beneath:block/mushroom/%s' % shroom).with_lang(lang(mushlang))
+        rm.item_model('food/%s' % shroom, 'beneath:block/mushroom/%s' % shroom).with_lang(mushlang)
 
     simple_block(rm, 'cobblerack', 'minecraft:mineable/pickaxe', 'forge:cobblestone')
     simple_block(rm, 'fungal_cobblerack', 'minecraft:mineable/pickaxe')

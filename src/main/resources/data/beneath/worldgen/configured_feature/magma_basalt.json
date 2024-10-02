@@ -7,8 +7,7 @@
     "targets": [
       {
         "state": {
-          "Name": "tfc:rock/magma/basalt",
-          "Properties": {}
+          "Name": "tfc:rock/magma/basalt"
         },
         "target": {
           "block": "minecraft:netherrack",

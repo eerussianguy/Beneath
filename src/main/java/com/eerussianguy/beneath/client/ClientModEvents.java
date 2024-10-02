@@ -2,6 +2,7 @@ package com.eerussianguy.beneath.client;
 
 import java.util.stream.Stream;
 import com.eerussianguy.beneath.Beneath;
+import com.eerussianguy.beneath.client.models.RedElkModel;
 import com.eerussianguy.beneath.client.render.BeneathHangingSignRenderer;
 import com.eerussianguy.beneath.client.render.BeneathSignRenderer;
 import com.eerussianguy.beneath.client.render.HellforgeRenderer;
@@ -34,7 +35,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegistryObject;
 
 import net.dries007.tfc.client.RenderHelpers;
-import net.dries007.tfc.client.model.entity.DeerModel;
 import net.dries007.tfc.client.particle.GlintParticleProvider;
 import net.dries007.tfc.client.render.entity.SimpleMobRenderer;
 import net.dries007.tfc.client.render.entity.TFCBoatRenderer;
@@ -90,10 +90,12 @@ public class ClientModEvents
         ItemBlockRenderTypes.setRenderLayer(BeneathBlocks.NETHER_PEBBLE.get(), cutout);
         ItemBlockRenderTypes.setRenderLayer(BeneathBlocks.BLACKSTONE_PEBBLE.get(), cutout);
         ItemBlockRenderTypes.setRenderLayer(BeneathBlocks.BLACKSTONE_AQUEDUCT.get(), cutout);
+        ItemBlockRenderTypes.setRenderLayer(BeneathBlocks.UNPOSTER.get(), cutout);
 
     }
 
-    private static final ResourceLocation RED_ELK_LOCATION = Beneath.identifier("textures/entity/red_elk.png");
+    private static final ResourceLocation RED_ELK_LOCATION = Beneath.identifier("textures/entity/nether_deer.png");
+    private static final ResourceLocation RED_ELK_F_LOCATION = Beneath.identifier("textures/entity/nether_deer_fawn.png");
 
     private static void onEntityRenderers(EntityRenderersEvent.RegisterRenderers event)
     {
@@ -103,7 +105,7 @@ public class ClientModEvents
             event.registerEntityRenderer(BeneathEntities.CHEST_BOATS.get(wood).get(), ctx -> new TFCChestBoatRenderer(ctx, wood.getSerializedName()));
         }
 
-        event.registerEntityRenderer(BeneathEntities.RED_ELK.get(), ctx -> new SimpleMobRenderer.Builder<>(ctx, DeerModel::new, "red_elk").shadow(0.6f).texture(p -> RED_ELK_LOCATION).build());
+        event.registerEntityRenderer(BeneathEntities.RED_ELK.get(), ctx -> new SimpleMobRenderer.Builder<>(ctx, RedElkModel::new, "red_elk").shadow(0.6f).texture(p -> p.isMale() ? RED_ELK_LOCATION : RED_ELK_F_LOCATION).build());
 
         event.registerBlockEntityRenderer(BeneathBlockEntities.HELLFORGE.get(), ctx -> new HellforgeRenderer());
         event.registerBlockEntityRenderer(BeneathBlockEntities.SIGN.get(), BeneathSignRenderer::new);
@@ -123,7 +125,7 @@ public class ClientModEvents
             event.registerLayerDefinition(RenderHelpers.modelIdentifier("sign/" + wood.getSerializedName()), () -> signLayer);
         }
 
-        event.registerLayerDefinition(RenderHelpers.modelIdentifier("red_elk"), DeerModel::createBodyLayer);
+        event.registerLayerDefinition(RenderHelpers.modelIdentifier("red_elk"), RedElkModel::createBodyLayer);
     }
 
     private static void onParticlesRegister(RegisterParticleProvidersEvent event)

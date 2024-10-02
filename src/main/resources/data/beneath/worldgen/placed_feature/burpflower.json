@@ -13,8 +13,7 @@
       "predicate": {
         "type": "would_survive",
         "state": {
-          "Name": "beneath:burpflower",
-          "Properties": {}
+          "Name": "beneath:burpflower"
         }
       }
     },

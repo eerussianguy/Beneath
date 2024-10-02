@@ -241,7 +241,8 @@ def generate(rm: ResourceManager):
 
     ### ITEM TAGS ###
     rm.item_tag('sparks_on_sulfur', *['#tfc:metal_item/%s' % metal for metal in ('black_steel', 'blue_steel', 'red_steel', 'steel', 'wrought_iron', 'cast_iron')])
-    rm.item_tag('usable_in_juicer', '#tfc:foods/fruits', '#beneath:mushrooms')
+    rm.item_tag('usable_in_juicer', '#tfc:foods/fruits', '#beneath:mushrooms', 'minecraft:warped_fungus', 'minecraft:crimson_fungus')
+    rm.item_tag('unpostable', '#beneath:mushrooms', 'minecraft:warped_fungus', 'minecraft:crimson_fungus', 'beneath:ghost_pepper', 'beneath:gleamflower', 'minecraft:crimson_roots', 'minecraft:warped_roots', 'minecraft:nether_wart', 'minecraft:ghast_tear')
 
     block_and_item_tag(rm, 'tfc:rock/aqueduct', 'beneath:blackstone_aqueduct')
     rm.item_tag('tfc:rock_knapping', 'beneath:nether_pebble', 'beneath:blackstone_pebble')

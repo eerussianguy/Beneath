@@ -5,8 +5,7 @@
     "to_place": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "beneath:mushroom/portobello",
-        "Properties": {}
+        "Name": "beneath:mushroom/portobello"
       }
     }
   }

@@ -9,8 +9,7 @@
       }
     },
     "rim": {
-      "Name": "tfc:rock/magma/basalt",
-      "Properties": {}
+      "Name": "tfc:rock/magma/basalt"
     },
     "rim_size": {
       "type": "uniform",

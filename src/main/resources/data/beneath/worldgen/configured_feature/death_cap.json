@@ -5,8 +5,7 @@
     "to_place": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "beneath:mushroom/death_cap",
-        "Properties": {}
+        "Name": "beneath:mushroom/death_cap"
       }
     }
   }

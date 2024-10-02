@@ -7,8 +7,7 @@
     "targets": [
       {
         "state": {
-          "Name": "tfc:rock/magma/andesite",
-          "Properties": {}
+          "Name": "tfc:rock/magma/andesite"
         },
         "target": {
           "block": "minecraft:netherrack",

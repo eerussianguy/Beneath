@@ -7,8 +7,7 @@
     "targets": [
       {
         "state": {
-          "Name": "tfc:rock/magma/rhyolite",
-          "Properties": {}
+          "Name": "tfc:rock/magma/rhyolite"
         },
         "target": {
           "block": "minecraft:netherrack",

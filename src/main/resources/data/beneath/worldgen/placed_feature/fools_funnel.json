@@ -13,8 +13,7 @@
       "predicate": {
         "type": "would_survive",
         "state": {
-          "Name": "beneath:mushroom/fools_funnel",
-          "Properties": {}
+          "Name": "beneath:mushroom/fools_funnel"
         }
       }
     },

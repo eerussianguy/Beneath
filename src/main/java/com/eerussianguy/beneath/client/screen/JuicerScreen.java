@@ -21,10 +21,11 @@ public class JuicerScreen extends TFCContainerScreen<JuicerContainer>
     protected void renderLabels(GuiGraphics graphics, int x, int y)
     {
         super.renderLabels(graphics, x, y);
-        menu.getInventory().getStackInSlot(0).getCapability(Capabilities.FLUID_ITEM).ifPresent(cap -> {
+        drawCenteredLine(graphics, Component.translatable("beneath.screen.juicer.mushrooms"), 16);
+        menu.getTargetStack().getCapability(Capabilities.FLUID_ITEM).ifPresent(cap -> {
             if (!cap.getFluidInTank(0).isEmpty())
             {
-                drawCenteredLine(graphics, Tooltips.fluidUnitsAndCapacityOf(cap.getFluidInTank(0), JuicerItem.CAPACITY), 14);
+                drawCenteredLine(graphics, Tooltips.fluidUnitsAndCapacityOf(cap.getFluidInTank(0), JuicerItem.CAPACITY), 55);
             }
         });
     }
