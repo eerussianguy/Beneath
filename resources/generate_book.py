@@ -121,6 +121,10 @@ def make_book(rm: ResourceManager, i18n: I18n, local_instance: bool = False, rev
             text('The Hellforge requires lava to flow in aqueducts in its four corners, as well as 21 hellbricks. The 3x3 center must be filled with Cursecoal piles, which then may be lit to start the forge.'),
             text('The item slots of the Hellforge may contain fuel, or things to be smelted; there is no distinction. Be careful what you put in! There are also slots for melting things, as with the charcoal forge. The lava meter on the screen indicates temperature (as well as the visual movement of its items in world).')
         )),
+        entry('how_to_go_beneath', 'How To Go Beneath', 'minecraft:flint_and_steel', pages=(
+            text('The sacrifice needed to go Beneath is great. First, hold a $(thing)Scythe$(). Find a Pig, Goat, or Sheep. Then, obtain seven offerings. Valid offerings are skulls, anvils, placed gold, pig iron, or black steel ingots, and gold or black steel plated blocks.'),
+            text('Kill the animal within a 5 block radius of the offerings. A portal will be created, but be warned! The Beneath will temporarily invade your world, wreaking havoc and causing confusion.')
+        )),
     ))
 
     book.build()

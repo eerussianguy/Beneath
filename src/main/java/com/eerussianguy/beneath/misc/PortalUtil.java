@@ -76,7 +76,7 @@ public final class PortalUtil
     }
 
 
-    public static final int OFFERINGS_NEEDED = 6;
+    public static final int OFFERINGS_NEEDED = 7;
 
     public static boolean scanForOfferings(LevelAccessor level, BlockPos pos)
     {
