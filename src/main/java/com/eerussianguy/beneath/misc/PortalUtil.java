@@ -12,7 +12,6 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.monster.Zoglin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.AbstractSkullBlock;
@@ -34,7 +33,7 @@ public final class PortalUtil
 {
     public static void onLivingDeath(LivingDeathEvent event)
     {
-        if (event.getSource().getEntity() instanceof Player player && isPlayerDressedAppropriately(player) && player.getMainHandItem().getItem() instanceof ScytheItem)
+        if (event.getSource().getEntity() instanceof Player player && player.getMainHandItem().getItem() instanceof ScytheItem)
         {
             final LivingEntity deadEntity = event.getEntity();
             final Level level = player.level();
@@ -47,7 +46,7 @@ public final class PortalUtil
                 level.explode(null, pos.getX(), pos.getY(), pos.getZ(), 10, true, Level.ExplosionInteraction.BLOCK);
                 if (level instanceof ServerLevel server)
                 {
-                    for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < 8; i++)
                     {
                         final Zoglin zoglin = EntityType.ZOGLIN.create(level);
                         if (zoglin != null)
@@ -113,11 +112,6 @@ public final class PortalUtil
                 item == TFCItems.METAL_ITEMS.get(Metal.Default.BLACK_STEEL).get(Metal.ItemType.INGOT).get();
         }
         return false;
-    }
-
-    public static boolean isPlayerDressedAppropriately(Player player)
-    {
-        return player.getInventory().getArmor(3).getItem() == Items.CARVED_PUMPKIN;
     }
 
 }

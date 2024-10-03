@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
@@ -32,7 +33,7 @@ public class HellforgeScreen extends BlockEntityScreen<HellforgeBlockEntity, Hel
     protected void renderBg(GuiGraphics poseStack, float partialTicks, int mouseX, int mouseY)
     {
         super.renderBg(poseStack, partialTicks, mouseX, mouseY);
-        int width = (int) (105 * blockEntity.getTemperature() / Heat.maxVisibleTemperature());
+        final int width = (int) Mth.clamp(blockEntity.getTemperature() / Heat.maxVisibleTemperature(), 0, 105);
         if (width > 0)
         {
             final TextureAtlasSprite sprite = RenderHelpers.getAndBindFluidSprite(new FluidStack(Fluids.LAVA, 100));

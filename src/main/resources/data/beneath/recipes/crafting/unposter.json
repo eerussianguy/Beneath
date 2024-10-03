@@ -1,0 +1,23 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XYX",
+    "XXX",
+    "ZZZ"
+  ],
+  "key": {
+    "X": {
+      "item": "beneath:wood/lumber/crimson"
+    },
+    "Z": {
+      "item": "beneath:wood/lumber/warped"
+    },
+    "Y": {
+      "item": "tfc:composter"
+    }
+  },
+  "result": {
+    "item": "beneath:unposter"
+  }
+}

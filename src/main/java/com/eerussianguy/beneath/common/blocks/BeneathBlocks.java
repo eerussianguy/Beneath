@@ -10,6 +10,7 @@ import com.eerussianguy.beneath.common.blockentities.HellforgeBlockEntity;
 import com.eerussianguy.beneath.common.items.BeneathItems;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -33,6 +35,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.blockentities.LoomBlockEntity;
 import net.dries007.tfc.common.blockentities.TFCBlockEntities;
+import net.dries007.tfc.common.blockentities.rotation.WaterWheelBlockEntity;
 import net.dries007.tfc.common.blocks.CharcoalPileBlock;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.TFCBlocks;
@@ -42,9 +45,13 @@ import net.dries007.tfc.common.blocks.rock.MossGrowingBlock;
 import net.dries007.tfc.common.blocks.rock.MossSpreadingBlock;
 import net.dries007.tfc.common.blocks.rock.Ore;
 import net.dries007.tfc.common.blocks.rock.RockSpikeBlock;
+import net.dries007.tfc.common.blocks.rotation.AxleBlock;
+import net.dries007.tfc.common.blocks.rotation.WaterWheelBlock;
+import net.dries007.tfc.common.blocks.rotation.WindmillBlock;
 import net.dries007.tfc.common.blocks.wood.TFCCeilingHangingSignBlock;
 import net.dries007.tfc.common.blocks.wood.TFCLeavesBlock;
 import net.dries007.tfc.common.blocks.wood.TFCLoomBlock;
+import net.dries007.tfc.common.blocks.wood.TFCSaplingBlock;
 import net.dries007.tfc.common.blocks.wood.TFCStandingSignBlock;
 import net.dries007.tfc.common.blocks.wood.TFCWallHangingSignBlock;
 import net.dries007.tfc.common.blocks.wood.TFCWallSignBlock;
@@ -114,7 +121,24 @@ public class BeneathBlocks
         {
             return () -> new WartLeavesBlock(ExtendedProperties.of().mapColor(MapColor.PLANT).strength(0.5F).sound(SoundType.WART_BLOCK).defaultInstrument().randomTicks().noOcclusion().isViewBlocking(TFCBlocks::never).flammableLikeLeaves(), stem.autumnIndex(), stem.getBlock(stem.fallenLeaves()), stem.getBlock(stem.twig()), stem == Stem.CRIMSON ? 0xb01735 : 0x18a5ba);
         }
+        if (blockType == Wood.BlockType.SAPLING)
+        {
+            return () -> new NetherSaplingBlock(stem.tree(), ExtendedProperties.of(MapColor.PLANT).noCollission().randomTicks().strength(0).sound(SoundType.GRASS).flammableLikeLeaves().blockEntity(TFCBlockEntities.TICK_COUNTER), stem::daysToGrow, false);
+        }
+        if (blockType == Wood.BlockType.AXLE)
+        {
+            return () -> new AxleBlock(woodProperties(stem).noOcclusion().strength(2.5F).flammableLikeLogs().pushReaction(PushReaction.DESTROY).blockEntity(TFCBlockEntities.AXLE), stem.getBlockCasted(Wood.BlockType.WINDMILL), planksTexture(stem));
+        }
+        if (blockType == Wood.BlockType.WATER_WHEEL)
+        {
+            return () -> new WaterWheelBlock(woodProperties(stem).strength(9.0F).noOcclusion().blockEntity(TFCBlockEntities.WATER_WHEEL).ticks(WaterWheelBlockEntity::serverTick, WaterWheelBlockEntity::clientTick), stem.getBlockCasted(Wood.BlockType.AXLE), Beneath.identifier("textures/entity/water_wheel/" + stem.getSerializedName() + ".png"));
+        }
         return blockType.create(stem);
+    }
+
+    private static ResourceLocation planksTexture(RegistryWood wood)
+    {
+        return Beneath.identifier("block/wood/planks/" + wood.getSerializedName());
     }
 
     private static ExtendedProperties woodProperties(RegistryWood wood)

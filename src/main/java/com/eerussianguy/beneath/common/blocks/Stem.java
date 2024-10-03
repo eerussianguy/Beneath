@@ -95,6 +95,12 @@ public enum Stem implements RegistryWood
         return BeneathBlocks.WOODS.get(this).get(type);
     }
 
+    @SuppressWarnings("unchecked")
+    public <B extends Block> Supplier<? extends B> getBlockCasted(Wood.BlockType type)
+    {
+        return (Supplier<? extends B>) this.getBlock(type);
+    }
+
     @Override
     public BlockSetType getBlockSet()
     {

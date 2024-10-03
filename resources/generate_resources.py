@@ -27,7 +27,7 @@ class ModificationLoggingResourceManager(ResourceManager):
 
 def main():
     parser = argparse.ArgumentParser(description='Generate resources for Beneath')
-    rm = ResourceManager('beneath', resource_dir='../src/main/resources')
+    rm = ResourceManager('beneath', resource_dir='./src/main/resources')
     parser.add_argument('--clean', action='store_true', dest='clean', help='Clean all auto generated resources')
     args = parser.parse_args()
 

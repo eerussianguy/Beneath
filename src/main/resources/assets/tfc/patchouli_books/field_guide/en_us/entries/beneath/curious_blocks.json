@@ -1,0 +1,81 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "name": "Curious Blocks",
+  "category": "tfc:beneath",
+  "icon": "beneath:soul_clay",
+  "pages": [
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "X"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "X": "beneath:soul_clay"
+        }
+      },
+      "name": "Soul Clay",
+      "text": "Soul clay may be discovered in soul sand valleys. It is a source of regular clay.",
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "X"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "X": "beneath:sulfur"
+        }
+      },
+      "name": "Sulfur",
+      "text": "Sulfur can be broken with a shovel. Be careful, though: iron-containing items (including steel) explode in contact with sulfur!",
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "X"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "X": "beneath:warped_thatch"
+        }
+      },
+      "name": "Thatch",
+      "text": "Cutting grass will yield you warped or crimson straw. This can be made into thatch, the normal way.",
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "beneath:crafting/blackstone_aqueduct",
+      "text": "The blackstone aqueduct allows lava to be conducted at any distance."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "beneath:crafting/hellbricks",
+      "text": "Hellbricks are a building block that is also used for the Hellforge."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "beneath:crafting/blackstone_brick",
+      "text": "Blackstone bricks are made like regular bricks, and that includes needing to create the brick item."
+    }
+  ],
+  "read_by_default": true
+}
