@@ -226,7 +226,7 @@ def generate(rm: ResourceManager):
     rm.entity_loot('minecraft:piglin', '1-2 tfc:food/pork', '1-3 minecraft:bone')
     rm.entity_loot('minecraft:strider', '1-2 minecraft:bone', 'beneath:cursed_hide')
     rm.entity_loot('minecraft:zoglin', '1-3 minecraft:bone', '1-3 minecraft:rotten_flesh', 'beneath:cursed_hide')
-    rm.entity_loot('minecraft:zombie_piglin', '1-3 minecraft:bone', '1-3 minecraft:rotten_flesh')
+    rm.entity_loot('minecraft:zombified_piglin', '1-3 minecraft:bone', '1-3 minecraft:rotten_flesh')
 
     ### BLOCK TAGS ###
     rm.block_tag('breaks_slowly', 'minecraft:netherrack', 'minecraft:soul_sand', 'minecraft:soul_soil', 'minecraft:magma_block', 'minecraft:warped_nylium', 'minecraft:crimson_nylium')

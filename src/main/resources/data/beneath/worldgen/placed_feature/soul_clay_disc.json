@@ -4,7 +4,7 @@
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 20
+      "chance": 15
     },
     {
       "type": "minecraft:count_on_every_layer",
@@ -12,7 +12,7 @@
     },
     {
       "type": "tfc:flat_enough",
-      "flatness": 0.4,
+      "flatness": 0.3,
       "radius": 2,
       "max_depth": 4
     }

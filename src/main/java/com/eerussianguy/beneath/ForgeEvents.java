@@ -14,11 +14,14 @@ import com.eerussianguy.beneath.misc.PortalUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Strider;
+import net.minecraft.world.entity.monster.hoglin.Hoglin;
 import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -71,6 +74,7 @@ public class ForgeEvents
         bus.addListener(ForgeEvents::onEntityJoinLevel);
         bus.addListener(ForgeEvents::onSpawnCheck);
         bus.addListener(ForgeEvents::onFireStart);
+        bus.addListener(ForgeEvents::onEntityInteract);
         bus.addListener(BeneathEntities::onSpawnPlacement);
         bus.addListener(PortalUtil::onLivingDeath);
         bus.addListener(EventPriority.LOWEST, true, ForgeEvents::onPlayerRightClickBlockLowestPriority);
@@ -130,6 +134,19 @@ public class ForgeEvents
         }
     }
 
+    public static void onEntityInteract(PlayerInteractEvent.EntityInteract event)
+    {
+        Entity target = event.getTarget();
+        if ((target instanceof Strider || target instanceof Hoglin))
+        {
+            final Animal animal = (Animal) target;
+            if (animal.isFood(event.getItemStack()))
+            {
+                event.setCanceled(true);
+            }
+        }
+    }
+
     public static void onPlayerRightClickBlockLowestPriority(PlayerInteractEvent.RightClickBlock event)
     {
         if (NetherFertilizer.get(event.getItemStack()) != null)
@@ -148,7 +165,7 @@ public class ForgeEvents
         if (entity instanceof LivingEntity living)
         {
             final Item main = living.getMainHandItem().getItem();
-            if (type == EntityType.PIGLIN || type == EntityType.PIGLIN_BRUTE)
+            if (type == EntityType.PIGLIN || type == EntityType.PIGLIN_BRUTE || type == EntityType.ZOMBIFIED_PIGLIN)
             {
                 if (main == Items.GOLDEN_SWORD)
                 {
