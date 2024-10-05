@@ -1,3 +1,5 @@
 # Changes
 
-This marks the first usable 'release' build of Beneath, with the intent that it will now be used in modpacks, etc. I am also hoping this will bring more eyes to the mod, in order to help polish it more. In terms of what changed since the last build, there are  alot of miscellaneous tweaks with an eye for polish, inconsistencies, etc. as well as (finally) documentation in the TFC Field Guide of what the heck is in this mod.
+- Fixes to zombified piglins
+- Fix crash bugs with aqueducts
+- Make soul clay more common
