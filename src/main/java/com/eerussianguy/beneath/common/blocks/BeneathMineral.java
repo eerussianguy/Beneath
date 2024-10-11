@@ -4,6 +4,6 @@ public enum BeneathMineral
 {
     NETHER_PYRITE,
     BLACKSTONE_SYLVITE,
-    NETHER_CURSECOAL
+    NETHER_CURSECOAL,
     ;
 }

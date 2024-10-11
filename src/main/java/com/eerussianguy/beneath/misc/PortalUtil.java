@@ -1,5 +1,6 @@
 package com.eerussianguy.beneath.misc;
 
+import com.eerussianguy.beneath.BeneathConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -33,7 +34,7 @@ public final class PortalUtil
 {
     public static void onLivingDeath(LivingDeathEvent event)
     {
-        if (event.getSource().getEntity() instanceof Player player && player.getMainHandItem().getItem() instanceof ScytheItem)
+        if (event.getSource().getEntity() instanceof Player player && player.getMainHandItem().getItem() instanceof ScytheItem && BeneathConfig.SERVER.allowSacrifice.get())
         {
             final LivingEntity deadEntity = event.getEntity();
             final Level level = player.level();

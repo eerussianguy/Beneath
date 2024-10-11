@@ -8,13 +8,13 @@ import com.eerussianguy.beneath.common.blocks.HellforgeBlock;
 import com.eerussianguy.beneath.common.blocks.HellforgeSideBlock;
 import com.eerussianguy.beneath.common.entities.BeneathEntities;
 import com.eerussianguy.beneath.common.network.BeneathPackets;
+import com.eerussianguy.beneath.misc.LostPage;
 import com.eerussianguy.beneath.misc.NetherClimateModel;
 import com.eerussianguy.beneath.misc.NetherFertilizer;
 import com.eerussianguy.beneath.misc.PortalUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -88,11 +88,13 @@ public class ForgeEvents
         final PacketDistributor.PacketTarget target = player == null ? PacketDistributor.ALL.noArg() : PacketDistributor.PLAYER.with(() -> player);
 
         BeneathPackets.send(target, NetherFertilizer.MANAGER.createSyncPacket());
+        BeneathPackets.send(target, LostPage.MANAGER.createSyncPacket());
     }
 
     private static void onReloadListeners(AddReloadListenerEvent event)
     {
         event.addListener(NetherFertilizer.MANAGER);
+        event.addListener(LostPage.MANAGER);
     }
 
     private static void onFireStart(StartFireEvent event)
@@ -165,9 +167,9 @@ public class ForgeEvents
         if (entity instanceof LivingEntity living)
         {
             final Item main = living.getMainHandItem().getItem();
-            if (type == EntityType.PIGLIN || type == EntityType.PIGLIN_BRUTE || type == EntityType.ZOMBIFIED_PIGLIN)
+            if (type == EntityType.PIGLIN || type == EntityType.PIGLIN_BRUTE || type == EntityType.ZOMBIFIED_PIGLIN || type == EntityType.WITHER_SKELETON)
             {
-                if (main == Items.GOLDEN_SWORD)
+                if (main == Items.GOLDEN_SWORD || main == Items.STONE_SWORD)
                 {
                     living.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(TFCItems.METAL_ITEMS.get(Metal.Default.BLACK_BRONZE).get(Metal.ItemType.SWORD).get()));
                 }

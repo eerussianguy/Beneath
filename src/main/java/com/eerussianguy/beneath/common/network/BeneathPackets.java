@@ -1,6 +1,7 @@
 package com.eerussianguy.beneath.common.network;
 
 import com.eerussianguy.beneath.Beneath;
+import com.eerussianguy.beneath.misc.LostPage;
 import com.eerussianguy.beneath.misc.NetherFertilizer;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
@@ -25,6 +26,7 @@ public final class BeneathPackets
     public static void init()
     {
         registerDataManager(NetherFertilizer.Packet.class, NetherFertilizer.MANAGER);
+        registerDataManager(LostPage.Packet.class, LostPage.MANAGER);
     }
 
     private static <T extends DataManagerSyncPacket<E>, E> void registerDataManager(Class<T> cls, DataManager<E> manager)

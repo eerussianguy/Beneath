@@ -6,13 +6,13 @@ import net.dries007.tfc.config.ConfigBuilder;
 
 public class BeneathServerConfig
 {
-    private final ForgeConfigSpec.BooleanValue deathBan;
+    public final ForgeConfigSpec.BooleanValue allowSacrifice;
 
     public BeneathServerConfig(ConfigBuilder builder)
     {
         builder.push("general");
 
-        deathBan = builder.comment("If on death, players should be banished to the Nether.").define("deathBan", true);
+        allowSacrifice = builder.comment("If the sacrifice method should be allowed for getting to the nether, rather than building a portal (requires black steel pickaxe)").define("allowSacrifice", true);
 
         builder.pop();
     }

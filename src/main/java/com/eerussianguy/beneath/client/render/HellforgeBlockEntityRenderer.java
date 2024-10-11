@@ -17,7 +17,7 @@ import net.dries007.tfc.client.RenderHelpers;
 import net.dries007.tfc.common.blocks.devices.CharcoalForgeBlock;
 import net.dries007.tfc.common.capabilities.Capabilities;
 
-public class HellforgeRenderer implements BlockEntityRenderer<HellforgeBlockEntity>
+public class HellforgeBlockEntityRenderer implements BlockEntityRenderer<HellforgeBlockEntity>
 {
     @Override
     public void render(HellforgeBlockEntity forge, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay)

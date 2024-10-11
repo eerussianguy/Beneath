@@ -7,6 +7,7 @@
     "beneath:ore/rich_nether_gold",
     "beneath:ore/nether_pyrite",
     "beneath:ore/blackstone_sylvite",
-    "beneath:ore/nether_cursecoal"
+    "beneath:ore/nether_cursecoal",
+    "beneath:ore/slimed_netherrack"
   ]
 }

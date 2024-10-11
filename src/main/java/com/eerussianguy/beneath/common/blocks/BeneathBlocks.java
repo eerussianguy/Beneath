@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.SignBlock;
+import net.minecraft.world.level.block.SlimeBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -47,11 +48,8 @@ import net.dries007.tfc.common.blocks.rock.Ore;
 import net.dries007.tfc.common.blocks.rock.RockSpikeBlock;
 import net.dries007.tfc.common.blocks.rotation.AxleBlock;
 import net.dries007.tfc.common.blocks.rotation.WaterWheelBlock;
-import net.dries007.tfc.common.blocks.rotation.WindmillBlock;
 import net.dries007.tfc.common.blocks.wood.TFCCeilingHangingSignBlock;
-import net.dries007.tfc.common.blocks.wood.TFCLeavesBlock;
 import net.dries007.tfc.common.blocks.wood.TFCLoomBlock;
-import net.dries007.tfc.common.blocks.wood.TFCSaplingBlock;
 import net.dries007.tfc.common.blocks.wood.TFCStandingSignBlock;
 import net.dries007.tfc.common.blocks.wood.TFCWallHangingSignBlock;
 import net.dries007.tfc.common.blocks.wood.TFCWallSignBlock;
@@ -93,6 +91,8 @@ public class BeneathBlocks
     public static final RegistryObject<Block> GLEAMFLOWER = register("gleamflower", () -> new NFlowerBlock(ExtendedProperties.of().sound(SoundType.GRASS).instabreak().speedFactor(0.8f).noCollission().lightLevel(s -> 7)));
     public static final RegistryObject<Block> BURPFLOWER = register("burpflower", () -> new BurpingFlowerBlock(ExtendedProperties.of().sound(SoundType.GRASS).instabreak().speedFactor(0.8f).noCollission().randomTicks()));
     public static final RegistryObject<Block> UNPOSTER = register("unposter", () -> new UnposterBlock(ExtendedProperties.of(MapColor.COLOR_BLUE).strength(0.6F).noOcclusion().sound(SoundType.WOOD).randomTicks().blockEntity(BeneathBlockEntities.UNPOSTER)));
+    public static final RegistryObject<Block> ANCIENT_ALTAR = register("ancient_altar", () -> new AncientAltarBlock(ExtendedProperties.of().mapColor(MapColor.COLOR_BLACK).strength(8f).noOcclusion().sound(SoundType.GILDED_BLACKSTONE).blockEntity(BeneathBlockEntities.ANCIENT_ALTAR)));
+    public static final RegistryObject<Block> SLIMED_NETHERRACK = register("ore/slimed_netherrack", () -> new SlimeBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK).strength(1f).sound(SoundType.NETHERRACK)));
 
     public static final Map<Shroom, RegistryObject<Block>> SHROOMS = Helpers.mapOfKeys(Shroom.class, shroom -> registerNoItem("mushroom/" + shroom.getSerializedName(), () -> new NFlowerBlock(ExtendedProperties.of(Blocks.CRIMSON_FUNGUS))));
     public static final Map<Stem, Map<Wood.BlockType, RegistryObject<Block>>> WOODS = Helpers.mapOfKeys(Stem.class, wood ->

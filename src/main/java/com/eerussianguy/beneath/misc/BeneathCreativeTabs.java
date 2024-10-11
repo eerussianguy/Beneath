@@ -43,11 +43,13 @@ public class BeneathCreativeTabs
         accept(out, BeneathItems.CURSECOAL);
         accept(out, BeneathItems.RED_ELK_EGG);
         accept(out, BeneathItems.GHOST_PEPPER);
+        accept(out, BeneathItems.LOST_PAGE);
         BeneathItems.SHROOMS.values().forEach(shroom -> accept(out, shroom));
         BeneathItems.SEEDS.values().forEach(seed -> accept(out, seed));
         accept(out, BeneathItems.AGONIZING_FERTILIZER);
         BeneathItems.PURE_NUTRIENTS.values().forEach(fertilizer -> accept(out, fertilizer));
         accept(out, BeneathItems.JUICER);
+        accept(out, BeneathItems.RAW_SLIME);
         accept(out, BeneathBlocks.HAUNTED_SPIKE);
         accept(out, BeneathBlocks.GLOWSTONE_SPIKE);
         accept(out, BeneathBlocks.NETHER_PEBBLE);
@@ -56,6 +58,7 @@ public class BeneathCreativeTabs
         accept(out, BeneathBlocks.FUNGAL_COBBLERACK);
         accept(out, BeneathBlocks.BLACKSTONE_AQUEDUCT);
         accept(out, BeneathBlocks.UNPOSTER);
+        accept(out, BeneathBlocks.ANCIENT_ALTAR);
         accept(out, BeneathBlocks.SOUL_FARMLAND);
         accept(out, BeneathBlocks.CRIMSON_THATCH);
         accept(out, BeneathBlocks.WARPED_THATCH);

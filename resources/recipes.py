@@ -11,7 +11,7 @@ def generate(rm: ResourceManager):
     rm.crafting_shapeless('crafting/cobblerack_uncraft', ('beneath:cobblerack',), '4 beneath:nether_pebble').with_advancement('beneath:cobblerack')
     rm.crafting_shaped('crafting/crackrack', ['XX', 'XX'], {'X': 'beneath:crackrack_rock'}, 'beneath:crackrack').with_advancement('beneath:crackrack_rock')
     rm.crafting_shapeless('crafting/crackrack_uncraft', ('beneath:crackrack',), '4 beneath:crackrack_rock').with_advancement('beneath:crackrack')
-    rm.crafting_shaped('crafting/crimson_thatch', ['XX', 'XX'], {'X': 'beneath:warped_straw'}, 'beneath:crimson_thatch').with_advancement('beneath:crimson_straw')
+    rm.crafting_shaped('crafting/crimson_thatch', ['XX', 'XX'], {'X': 'beneath:crimson_straw'}, 'beneath:crimson_thatch').with_advancement('beneath:crimson_straw')
     rm.crafting_shaped('crafting/warped_thatch', ['XX', 'XX'], {'X': 'beneath:warped_straw'}, 'beneath:warped_thatch').with_advancement('beneath:warped_straw')
     rm.crafting_shaped('crafting/blackstone', ['XX', 'XX'], {'X': 'beneath:blackstone_pebble'}, 'minecraft:blackstone').with_advancement('beneath:blackstone_pebble')
     rm.crafting_shapeless('crafting/blackstone_uncraft', ('minecraft:blackstone',), '4 beneath:blackstone_pebble').with_advancement('minecraft:blackstone')
@@ -28,6 +28,12 @@ def generate(rm: ResourceManager):
     rm.crafting_shapeless('crafting/hellbricks', ('minecraft:nether_bricks', 'minecraft:magma_cream', 'beneath:sulfur'), 'beneath:hellbricks').with_advancement('minecraft:magma_cream')
     damage_shapeless(rm, 'crafting/juicer', ('#forge:leather', '#forge:leather', '#forge:leather', '#tfc:knives', '#forge:rods/wooden'), 'beneath:juicer').with_advancement('#forge:leather')
     rm.crafting_shaped('crafting/unposter', ['XYX', 'XXX', 'ZZZ'], {'X': 'beneath:wood/lumber/crimson', 'Z': 'beneath:wood/lumber/warped', 'Y': 'tfc:composter'}, 'beneath:unposter').with_advancement('beneath:wood/lumber/crimson')
+    rm.crafting_shapeless('crafting/blackstone_from_soot', ('#forge:cobblestone', 'tfc:soot'), 'minecraft:blackstone').with_advancement('tfc:soot')
+    rm.crafting_shapeless('crafting/blackstone_bricks_from_soot', ('#forge:stone_bricks', 'tfc:soot'), 'minecraft:blackstone_bricks').with_advancement('tfc:soot')
+    rm.crafting_shaped('crafting/ancient_altar', ['XXX', 'XYX', 'ZXZ'], {'X': 'minecraft:blackstone', 'Y': '#forge:ingots/gold', 'Z': 'tfc:sand/black'}, 'beneath:ancient_altar')
+
+    ### QUERN RECIPES ###
+    quern_recipe(rm, 'slime', 'beneath:raw_slime', 'minecraft:slime_ball')
 
     ### HEATING RECIPES ###
     metal_data = TFC_METALS['gold']
@@ -81,6 +87,13 @@ def heat_recipe(rm: ResourceManager, name_parts: utils.ResourceIdentifier, ingre
         'result_fluid': result_fluid,
         'temperature': temperature,
         'use_durability': use_durability if use_durability else None,
+    })
+
+def quern_recipe(rm: ResourceManager, name: ResourceIdentifier, item: str, result: str, count: int = 1) -> RecipeContext:
+    result = result if not isinstance(result, str) else utils.item_stack((count, result))
+    return rm.recipe(('quern', name), 'tfc:quern', {
+        'ingredient': utils.ingredient(item),
+        'result': result
     })
 
 def item_stack_provider(

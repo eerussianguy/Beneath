@@ -95,6 +95,11 @@
             }
           ],
           "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:lost_page",
+          "weight": 1
         }
       ]
     },
@@ -245,6 +250,11 @@
         {
           "type": "minecraft:item",
           "name": "tfc:food/cooked_pork",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:lost_page",
           "weight": 1
         }
       ]

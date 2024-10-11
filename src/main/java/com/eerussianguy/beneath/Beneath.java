@@ -1,6 +1,7 @@
 package com.eerussianguy.beneath;
 
 
+import java.util.Locale;
 import com.eerussianguy.beneath.common.blockentities.BeneathBlockEntities;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
 import com.eerussianguy.beneath.common.container.BeneathContainerTypes;
@@ -13,6 +14,7 @@ import com.eerussianguy.beneath.world.BeneathFeatures;
 import com.eerussianguy.beneath.world.BeneathPlacementModifiers;
 import com.mojang.logging.LogUtils;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -56,6 +58,22 @@ public class Beneath
         BeneathParticles.PARTICLE_TYPES.register(bus);
         BeneathContainerTypes.CONTAINERS.register(bus);
         BeneathCreativeTabs.TABS.register(bus);
+    }
+
+    public static MutableComponent translateEnum(Enum<?> anEnum) {
+        return Component.translatable(getEnumTranslationKey(anEnum));
+    }
+
+    public static MutableComponent translateEnum(Enum<?> anEnum, String enumName) {
+        return Component.translatable(getEnumTranslationKey(anEnum, enumName));
+    }
+
+    public static String getEnumTranslationKey(Enum<?> anEnum) {
+        return getEnumTranslationKey(anEnum, anEnum.getDeclaringClass().getSimpleName());
+    }
+
+    public static String getEnumTranslationKey(Enum<?> anEnum, String enumName) {
+        return String.join(".", MOD_ID, "enum", enumName, anEnum.name()).toLowerCase(Locale.ROOT);
     }
 
     public static ResourceLocation identifier(String path)

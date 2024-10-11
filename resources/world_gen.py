@@ -72,7 +72,20 @@ def generate(rm: ResourceManager):
         'min_y': 1,
         'max_y': 127,
         'random_name': 'sylvite',
-        'blocks': [{'replace': ['minecraft:netherrack'], 'with': [{'weight': 1, 'block': 'beneath:ore/blackstone_sylvite'}]}]
+        'blocks': [{'replace': ['minecraft:blackstone'], 'with': [{'weight': 1, 'block': 'beneath:ore/blackstone_sylvite'}]}]
+    })
+
+    configured_placed_feature(rm, 'vein/slime', 'tfc:cluster_vein', {
+        'rarity': 55,
+        'size': 24,
+        'density': 0.7,
+        'min_y': 35,
+        'max_y': 120,
+        'random_name': 'slime',
+        'blocks': [{'replace': ['minecraft:netherrack'], 'with': [
+            {'weight': 50, 'block': 'beneath:ore/slimed_netherrack'},
+            {'weight': 2, 'block': 'minecraft:glowstone'}
+        ]}]
     })
 
     configured_placed_feature(rm, 'vein/normal_gold', 'tfc:cluster_vein', {
@@ -135,7 +148,7 @@ def generate(rm: ResourceManager):
     })
 
     rm.placed_feature_tag('mushrooms', *['beneath:%s_patch' % shr for shr in MUSHROOMS])
-    rm.placed_feature_tag('veins', *['beneath:vein/%s' % v for v in ('quartz', 'sylvite', 'normal_gold', 'deep_gold', 'cursecoal', 'crackrack_pipe')])
+    rm.placed_feature_tag('veins', *['beneath:vein/%s' % v for v in ('quartz', 'sylvite', 'normal_gold', 'deep_gold', 'cursecoal', 'crackrack_pipe', 'slime')])
     rm.placed_feature_tag('underground_decoration', '#beneath:veins', *['beneath:magma_%s' % r for r, d in ROCKS.items() if d.category == 'igneous_extrusive'], 'beneath:amethyst_geode')
     rm.placed_feature_tag('everywhere_but_basalt_deltas', 'beneath:nether_pebble_patch', 'beneath:blackstone_boulders', 'beneath:cobble_boulders', 'beneath:sulfur_patch')
 

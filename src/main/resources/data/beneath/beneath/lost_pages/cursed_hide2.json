@@ -1,0 +1,19 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "cost": {
+    "item": "beneath:cursed_hide"
+  },
+  "reward": "tfc:large_raw_hide",
+  "costs": [
+    2,
+    3
+  ],
+  "rewards": [
+    2,
+    3
+  ],
+  "punishments": [
+    "none",
+    "levitationdrunkenness"
+  ]
+}

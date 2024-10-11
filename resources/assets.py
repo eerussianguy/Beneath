@@ -23,9 +23,12 @@ def generate(rm: ResourceManager):
             if ore == 'nether_gold':
                 block.with_block_loot('tfc:ore/%s_native_gold' % grade)
 
-    for ore in ('nether_pyrite', 'blackstone_sylvite', 'nether_cursecoal'):
+    for ore in ('nether_pyrite', 'blackstone_sylvite', 'nether_cursecoal', 'slimed_netherrack'):
         block = rm.blockstate('ore/%s' % ore, model='beneath:block/ore/%s' % ore)
-        block.with_block_model(textures={'all': 'beneath:block/%s' % ore}).with_item_model()
+        if ore != 'slimed_netherrack':
+            block.with_block_model(textures={'all': 'beneath:block/%s' % ore}).with_item_model()
+        else:
+            block.with_item_model()
         block.with_lang(lang('%s ore', ore))
         block.with_tag('tfc:prospectable').with_tag('minecraft:mineable/pickaxe').with_tag('tfc:needs_copper_tool')
         rm.block('beneath:ore/%s/prospected' % ore).with_lang(lang(ore))
@@ -36,6 +39,8 @@ def generate(rm: ResourceManager):
             block.with_block_loot('tfc:ore/sylvite')
         elif ore == 'nether_cursecoal':
             block.with_block_loot('beneath:cursecoal')
+        elif ore == 'slimed_netherrack':
+            block.with_block_loot('beneath:raw_slime')
 
     rm.block_tag('tfc:prospectable', 'minecraft:nether_quartz_ore')
     rm.block('minecraft:nether_quartz_ore/prospected').with_lang(lang('nether quartz'))
@@ -135,6 +140,7 @@ def generate(rm: ResourceManager):
     rm.blockstate('soul_clay', variants={'up=true': {'model': 'beneath:block/soul_clay_up'}, 'up=false': {'model': 'beneath:block/soul_clay'}}).with_block_loot('1-4 minecraft:clay_ball').with_lang(lang('soul clay')).with_block_model(textures={'all': 'beneath:block/soul_clay'}).with_tag('minecraft:mineable/shovel').with_item_model()
     rm.block_model('soul_clay_up', textures={'end': 'minecraft:block/soul_sand', 'side': 'beneath:block/soul_clay_up'}, parent='block/cube_column')
     rm.blockstate('crackrack').with_block_loot(loot_tables.alternatives({'name': 'beneath:crackrack', 'conditions': [{'condition': 'tfc:is_isolated'}]}, '2-4 beneath:crackrack_rock')).with_lang(lang('crackrack')).with_block_model().with_tag('minecraft:mineable/pickaxe').with_tag('minecraft:base_stone_nether').with_item_model()
+    rm.blockstate('ancient_altar').with_block_loot('beneath:ancient_altar').with_item_model().with_lang(lang('ancient altar'))
 
     for shroom in MUSHROOMS:
         mushlang = lang(shroom) if 'fools' not in shroom else 'Fool\'s Funnel'

@@ -12,6 +12,22 @@ class Category(Enum):
     cooked_meat = auto()
     other = auto()
 
+class Size(Enum):
+    tiny = auto()
+    very_small = auto()
+    small = auto()
+    normal = auto()
+    large = auto()
+    very_large = auto()
+    huge = auto()
+
+
+class Weight(Enum):
+    very_light = auto()
+    light = auto()
+    medium = auto()
+    heavy = auto()
+    very_heavy = auto()
 
 def generate(rm: ResourceManager):
 
@@ -67,6 +83,9 @@ def generate(rm: ResourceManager):
             weight('tfc:metal/ingot/gold', 5, 2, 8),
             weight('minecraft:bell', 1),
             weight('tfc:bronze_bell', 1),
+            weight('beneath:lost_page', 10),
+            weight('beneath:lost_page', 10),
+            weight('beneath:lost_page', 5),
         ]
     }, path='chests', loot_type='minecraft:chest')
 
@@ -90,6 +109,8 @@ def generate(rm: ResourceManager):
             weight('beneath:pure_decay', 1),
             weight('beneath:seeds/ghost_pepper', 1, 3, 6),
             weight('beneath:seeds/gleamflower', 1, 3, 6),
+            weight('beneath:lost_page', 10),
+            weight('beneath:lost_page', 5),
         ]
     }, path='chests', loot_type='minecraft:chest')
     rm.loot('minecraft:bastion_treasure', {
@@ -109,6 +130,8 @@ def generate(rm: ResourceManager):
             weight('beneath:pure_death', 1),
             weight('beneath:pure_destruction', 1),
             weight('beneath:pure_decay', 1),
+            weight('beneath:lost_page', 1),
+            weight('beneath:lost_page', 1),
         ]
     }, {
         'rolls': uniform(3, 4),
@@ -119,6 +142,7 @@ def generate(rm: ResourceManager):
             weight('minecraft:crying_obsidian', 1, 3, 5),
             weight('minecraft:gilded_blackstone', 1, 5, 15),
             weight('minecraft:magma_cream', 1, 3, 8),
+            weight('beneath:lost_page', 1),
         ]
     }, loot_type='minecraft:chest', path='chests')
 
@@ -132,6 +156,7 @@ def generate(rm: ResourceManager):
             weight('minecraft:music_disc_pigstep', 5),
             weight('beneath:seeds/ghost_pepper', 1, 3, 6),
             weight('beneath:seeds/gleamflower', 1, 3, 6),
+            weight('beneath:lost_page', 1),
         ]
     }, {
         'entries': [
@@ -146,6 +171,7 @@ def generate(rm: ResourceManager):
             weight('minecraft:obsidian', 1, 4, 6),
             weight('minecraft:arrow', 2, 5, 17),
             weight('tfc:food/cooked_pork', 1),
+            weight('beneath:lost_page', 1),
         ]
     }, loot_type='minecraft:chest', path='chests')
 
@@ -166,6 +192,8 @@ def generate(rm: ResourceManager):
             weight('beneath:pure_death', 1),
             weight('beneath:pure_destruction', 1),
             weight('beneath:pure_decay', 1),
+            weight('beneath:lost_page', 1),
+            weight('beneath:lost_page', 1),
         ]
     }, {
         'rolls': uniform(2, 4),
@@ -199,6 +227,7 @@ def generate(rm: ResourceManager):
             weight('minecraft:string', 1, 3, 8),
             weight('beneath:wood/sapling/crimson', 1, 2, 7),
             weight('beneath:wood/sapling/warped', 1, 2, 7),
+            weight('beneath:lost_page', 1),
         ]
     }, loot_type='minecraft:chest', path='chests')
 
@@ -230,6 +259,7 @@ def generate(rm: ResourceManager):
 
     ### BLOCK TAGS ###
     rm.block_tag('breaks_slowly', 'minecraft:netherrack', 'minecraft:soul_sand', 'minecraft:soul_soil', 'minecraft:magma_block', 'minecraft:warped_nylium', 'minecraft:crimson_nylium')
+    rm.block_tag('event_replaceable', 'minecraft:netherrack', 'minecraft:soul_sand', 'minecraft:soul_soil', '#minecraft:base_stone_overworld', '#tfc:dirt', '#tfc:grass', 'minecraft:blacstone', 'minecraft:warped_nylium', 'minecraft:crimson_nylium')
 
     rm.block_tag('tfc:breaks_when_isolated', 'minecraft:basalt', 'minecraft:blackstone', 'minecraft:netherrack', 'beneath:crackrack')
     rm.block_tag('tfc:tree_grows_on', 'minecraft:netherrack', 'minecraft:warped_nylium', 'minecraft:crimson_nylium')
@@ -266,6 +296,9 @@ def generate(rm: ResourceManager):
     metal_data = TFC_METALS['gold']
     item_heat(rm, 'gold_chunk', 'beneath:gold_chunk', metal_data.ingot_heat_capacity(), int(metal_data.melt_temperature), mb=40)
 
+    ### ITEM SIZES ###
+    item_size(rm, 'lost_page', 'beneath:lost_page', Size.tiny, Weight.very_heavy)
+
     ### FUELS ###
     fuel_item(rm, 'cursecoal', 'beneath:cursecoal', 1800, 1350)
     for wood in WOODS:
@@ -290,6 +323,13 @@ def generate(rm: ResourceManager):
     n_fertilizer(rm, 'blaze_powder', 'minecraft:blaze_powder', flame=0.2)
     n_fertilizer(rm, 'agonizing_fertilizer', 'beneath:agonizing_fertilizer', flame=0.1, death=0.1, decay=0.1, destr=0.1, sorrow=0.1)
 
+    ### LOST PAGES ###
+    lost_page(rm, 'slime', 'beneath:raw_slime', 'tfc:ore/rich_garnierite', [64, 100, 100, 200, 200, 220, 300], [7, 12, 15, 15, 18, 19, 22], ['none', 'slime', 'drunkenness'])
+    lost_page(rm, 'cursed_hide', 'beneath:cursed_hide', 'tfc:large_raw_hide', [1], [1], ['none', 'levitation' 'drunkenness'])
+    lost_page(rm, 'cursed_hide2', 'beneath:cursed_hide', 'tfc:large_raw_hide', [2, 3], [2, 3], ['none', 'levitation' 'drunkenness'])
+    lost_page(rm, 'cursed_hide3', 'beneath:cursed_hide', 'tfc:large_raw_hide', [4, 5, 6], [4, 5, 6], ['none', 'levitation' 'drunkenness'])
+    lost_page(rm, 'blackstone', '#forge:cobblestone', 'minecraft:blackstone', [48, 64, 64, 64, 72, 78], [48, 52, 52, 64, 74], ['none', 'infestation'], ingredient_translation='beneath.lost_page.stone_bricks')
+
     ### DAMAGE TYPES ###
     damage_type(rm, 'sulfur')
 
@@ -311,6 +351,23 @@ def n_fertilizer(rm: ResourceManager, name: str, ingredient: str, death: float =
         'flame': flame,
         'decay': decay,
         'sorrow': sorrow
+    })
+
+def lost_page(rm: ResourceManager, name: str, cost: str, reward: str, costs: List[int], rewards: List[int], punishments: List[str], ingredient_translation: str = None):
+    rm.data(('beneath', 'lost_pages', name), {
+        'cost': utils.ingredient(cost),
+        'reward': reward,
+        'costs': costs,
+        'rewards': rewards,
+        'punishments': punishments,
+        'ingredient_translation': ingredient_translation,
+    })
+
+def item_size(rm: ResourceManager, name_parts: utils.ResourceIdentifier, ingredient: utils.Json, size: Size, weight: Weight):
+    rm.data(('tfc', 'item_sizes', name_parts), {
+        'ingredient': utils.ingredient(ingredient),
+        'size': size.name,
+        'weight': weight.name
     })
 
 def item_heat(rm: ResourceManager, name_parts: utils.ResourceIdentifier, ingredient: utils.Json, heat_capacity: float, melt_temperature: Optional[float] = None, mb: Optional[int] = None):

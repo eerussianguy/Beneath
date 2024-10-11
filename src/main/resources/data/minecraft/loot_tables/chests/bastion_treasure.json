@@ -75,6 +75,16 @@
           "type": "minecraft:item",
           "name": "beneath:pure_decay",
           "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:lost_page",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:lost_page",
+          "weight": 1
         }
       ]
     },
@@ -174,6 +184,11 @@
               }
             }
           ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:lost_page",
           "weight": 1
         }
       ]

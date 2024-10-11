@@ -1,0 +1,29 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfc:cluster_vein",
+  "config": {
+    "rarity": 55,
+    "size": 24,
+    "density": 0.7,
+    "min_y": 35,
+    "max_y": 120,
+    "random_name": "slime",
+    "blocks": [
+      {
+        "replace": [
+          "minecraft:netherrack"
+        ],
+        "with": [
+          {
+            "weight": 50,
+            "block": "beneath:ore/slimed_netherrack"
+          },
+          {
+            "weight": 2,
+            "block": "minecraft:glowstone"
+          }
+        ]
+      }
+    ]
+  }
+}

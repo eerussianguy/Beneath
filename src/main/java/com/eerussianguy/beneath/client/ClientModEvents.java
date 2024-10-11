@@ -3,11 +3,13 @@ package com.eerussianguy.beneath.client;
 import java.util.stream.Stream;
 import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.client.models.RedElkModel;
+import com.eerussianguy.beneath.client.render.AncientAltarBlockEntityRenderer;
 import com.eerussianguy.beneath.client.render.BeneathHangingSignRenderer;
 import com.eerussianguy.beneath.client.render.BeneathSignRenderer;
-import com.eerussianguy.beneath.client.render.HellforgeRenderer;
+import com.eerussianguy.beneath.client.render.HellforgeBlockEntityRenderer;
 import com.eerussianguy.beneath.client.screen.HellforgeScreen;
 import com.eerussianguy.beneath.client.screen.JuicerScreen;
+import com.eerussianguy.beneath.client.screen.LostPageScreen;
 import com.eerussianguy.beneath.common.blockentities.BeneathBlockEntities;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
 import com.eerussianguy.beneath.common.blocks.Stem;
@@ -63,6 +65,7 @@ public class ClientModEvents
 
             MenuScreens.register(BeneathContainerTypes.HELLFORGE_CONTAINER.get(), HellforgeScreen::new);
             MenuScreens.register(BeneathContainerTypes.JUICER_CONTAINER.get(), JuicerScreen::new);
+            MenuScreens.register(BeneathContainerTypes.LOST_PAGE_CONTAINER.get(), LostPageScreen::new);
 
             for (Stem stem : Stem.VALUES)
             {
@@ -91,6 +94,8 @@ public class ClientModEvents
         ItemBlockRenderTypes.setRenderLayer(BeneathBlocks.BLACKSTONE_PEBBLE.get(), cutout);
         ItemBlockRenderTypes.setRenderLayer(BeneathBlocks.BLACKSTONE_AQUEDUCT.get(), cutout);
         ItemBlockRenderTypes.setRenderLayer(BeneathBlocks.UNPOSTER.get(), cutout);
+        ItemBlockRenderTypes.setRenderLayer(BeneathBlocks.ANCIENT_ALTAR.get(), cutout);
+        ItemBlockRenderTypes.setRenderLayer(BeneathBlocks.SLIMED_NETHERRACK.get(), translucent);
 
     }
 
@@ -107,7 +112,8 @@ public class ClientModEvents
 
         event.registerEntityRenderer(BeneathEntities.RED_ELK.get(), ctx -> new SimpleMobRenderer.Builder<>(ctx, RedElkModel::new, "red_elk").shadow(0.6f).texture(p -> p.isMale() ? RED_ELK_LOCATION : RED_ELK_F_LOCATION).build());
 
-        event.registerBlockEntityRenderer(BeneathBlockEntities.HELLFORGE.get(), ctx -> new HellforgeRenderer());
+        event.registerBlockEntityRenderer(BeneathBlockEntities.HELLFORGE.get(), ctx -> new HellforgeBlockEntityRenderer());
+        event.registerBlockEntityRenderer(BeneathBlockEntities.ANCIENT_ALTAR.get(), ctx -> new AncientAltarBlockEntityRenderer());
         event.registerBlockEntityRenderer(BeneathBlockEntities.SIGN.get(), BeneathSignRenderer::new);
         event.registerBlockEntityRenderer(BeneathBlockEntities.HANGING_SIGN.get(), BeneathHangingSignRenderer::new);
 

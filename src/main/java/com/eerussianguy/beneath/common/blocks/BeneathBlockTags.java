@@ -11,6 +11,7 @@ public class BeneathBlockTags
     public static final TagKey<Block> HELLFORGE_INSULATION = create("hellforge_insulation");
     public static final TagKey<Block> NETHER_BUSH_PLANTABLE_ON = create("nether_bush_plantable_on");
     public static final TagKey<Block> MUSHROOMS = create("mushrooms");
+    public static final TagKey<Block> EVENT_REPLACEABLE = create("event_replaceable");
 
     private static TagKey<Block> create(String id)
     {

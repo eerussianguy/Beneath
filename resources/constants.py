@@ -88,7 +88,7 @@ TREE_SAPLING_DROP_CHANCES = {
 NUTRIENTS = ('death', 'destruction', 'decay', 'sorrow', 'flame')
 
 SIMPLE_ITEMS = ('gold_chunk', 'cursed_hide', 'cursecoal', 'pure_death', 'pure_decay', 'pure_destruction', 'pure_sorrow', 'pure_flame', 'agonizing_fertilizer', 'crimson_straw', 'warped_straw', 'ghost_pepper', 'blackstone_brick',
-                'crackrack_rock', 'juicer',
+                'crackrack_rock', 'juicer', 'raw_slime', 'lost_page'
                 )
 MUSHROOMS = ('button', 'chantrelle', 'death_cap', 'destroying_angels', 'fools_funnel', 'oyster', 'parasol', 'portobello', 'shittake', 'sulfur_tuft')
 POISONOUS_MUSHROOMS = ('death_cap', 'destroying_angels', 'fools_funnel', 'sulfur_tuft')
@@ -120,6 +120,20 @@ DEFAULT_LANG = {
     'beneath.block_entity.hellforge': 'Hellforge',
     'beneath.screen.juicer': 'Juicer',
     'beneath.screen.juicer.mushrooms': 'Feed me mushrooms!',
+    'beneath.screen.lost_page': 'Lost Page',
+    'beneath.screen.lost_page.cost': 'Cost',
+    'beneath.screen.lost_page.reward': 'Reward',
+    'beneath.screen.lost_page.punishment': 'Punishment',
+    'beneath.lost_page.stone_bricks': 'Any Stone Bricks',
+    'beneath.punishment': 'You have been given the punishment of... %s',
+    'beneath.enum.punishment.none': 'No punishment at all!',
+    'beneath.enum.punishment.levitation': 'Levitation!',
+    'beneath.enum.punishment.drunkenness': 'A day of drunkenness!',
+    'beneath.enum.punishment.blaze_inferno': 'An inferno of blazes!',
+    'beneath.enum.punishment.infestation': 'An infestation of silverfish!',
+    'beneath.enum.punishment.withering': 'Wither!',
+    'beneath.enum.punishment.slime': 'Slime!',
+    'beneath.sacrifice.error': 'Sacrifice Error: Materials not found.',
     'item.beneath.juicer.filled': 'Juicer (%s)',
     'death.attack.beneath.sulfur': '%1$s mined sulfur with an iron tool and blew themselves up.',
     'death.attack.beneath.sulfur.player': '%1$s mined sulfur with an iron tool and blew themselves up while trying to escape %2$s.',

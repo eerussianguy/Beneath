@@ -28,6 +28,7 @@ public class BeneathBlockEntities
         BeneathBlocks.CEILING_HANGING_SIGNS, BeneathBlocks.WALL_HANGING_SIGNS
     ).flatMap(woodMap -> woodMap.values().stream().flatMap(metalMap -> metalMap.values().stream())));
     public static final RegistryObject<BlockEntityType<UnposterBlockEntity>> UNPOSTER = register("unposter", UnposterBlockEntity::new, BeneathBlocks.UNPOSTER);
+    public static final RegistryObject<BlockEntityType<AncientAltarBlockEntity>> ANCIENT_ALTAR = register("ancient_altar", AncientAltarBlockEntity::new, BeneathBlocks.ANCIENT_ALTAR);
 
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String name, BlockEntityType.BlockEntitySupplier<T> factory, Supplier<? extends Block> block)
     {

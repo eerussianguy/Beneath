@@ -1,0 +1,27 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "cost": {
+    "tag": "forge:cobblestone"
+  },
+  "reward": "minecraft:blackstone",
+  "costs": [
+    48,
+    64,
+    64,
+    64,
+    72,
+    78
+  ],
+  "rewards": [
+    48,
+    52,
+    52,
+    64,
+    74
+  ],
+  "punishments": [
+    "none",
+    "infestation"
+  ],
+  "ingredient_translation": "beneath.lost_page.stone_bricks"
+}

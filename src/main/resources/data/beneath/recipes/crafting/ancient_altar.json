@@ -1,0 +1,23 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XYX",
+    "ZXZ"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:blackstone"
+    },
+    "Y": {
+      "tag": "forge:ingots/gold"
+    },
+    "Z": {
+      "item": "tfc:sand/black"
+    }
+  },
+  "result": {
+    "item": "beneath:ancient_altar"
+  }
+}

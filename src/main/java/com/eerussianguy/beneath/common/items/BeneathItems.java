@@ -47,6 +47,8 @@ public class BeneathItems
     public static final RegistryObject<Item> GOLD_CHUNK = register("gold_chunk");
     public static final RegistryObject<Item> GHOST_PEPPER = register("ghost_pepper", () -> new Item(food()));
     public static final RegistryObject<Item> JUICER = register("juicer", () -> new JuicerItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> LOST_PAGE = register("lost_page", () -> new LostPageItem(new Item.Properties()));
+    public static final RegistryObject<Item> RAW_SLIME = register("raw_slime");
     public static final RegistryObject<Item> WARPED_STRAW = register("warped_straw");
 
     public static final Map<Shroom, RegistryObject<Item>> SHROOMS = Helpers.mapOfKeys(Shroom.class, shroom -> register("food/" + shroom.getSerializedName(), () -> new Item(new Item.Properties().food(getPoisonProperties(shroom.isPoison())))));
