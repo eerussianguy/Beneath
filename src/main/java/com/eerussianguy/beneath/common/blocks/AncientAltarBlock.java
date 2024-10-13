@@ -83,12 +83,10 @@ public class AncientAltarBlock extends DeviceBlock
                         {
                             otherAltar.getInventory().extractItem(0, 64, false);
                         }
-                        altar.getInventory().extractItem(0, 64, false);
                         int rewardAmount = page.getRewardAmount(stack);
+                        if (!level.dimensionType().ultraWarm())
+                            rewardAmount /= 2;
                         final ItemStack reward = page.getReward(stack);
-                        final int firstStack = Math.min(reward.getMaxStackSize(), rewardAmount);
-                        rewardAmount -= firstStack;
-                        altar.getInventory().insertItem(0, reward.copyWithCount(firstStack), false);
                         while (rewardAmount > 0)
                         {
                             int count = Math.min(reward.getMaxStackSize(), rewardAmount);

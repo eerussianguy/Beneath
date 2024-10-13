@@ -8,7 +8,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -41,8 +40,8 @@ public class LostPageScreen extends TFCContainerScreen<LostPageContainer>
             final ItemStack cost = items[(int) (level.getGameTime() / 20) % items.length];
 
             drawCenteredLine(graphics, Component.translatable("beneath.screen.lost_page.cost"), 16);
-            drawCenteredLine(graphics, Component.literal(item.getCostAmount(stack) + "x ").append(cost.getHoverName()), 26);
-            graphics.renderItem(cost, imageWidth / 2 - 8, 32);
+            drawCenteredLine(graphics, Component.literal(item.getCostAmount(stack) + "x ").append(item.getSpecificIngredientTranslation(stack)), 26);
+            graphics.renderItem(cost, imageWidth / 2 - 8, 34);
 
 
             drawCenteredLine(graphics, Component.translatable("beneath.screen.lost_page.reward"), 64);

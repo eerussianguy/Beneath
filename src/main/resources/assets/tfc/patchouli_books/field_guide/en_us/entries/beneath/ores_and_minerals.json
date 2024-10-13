@@ -10,6 +10,7 @@
     },
     {
       "type": "patchouli:multiblock",
+      "anchor": "nether_gold",
       "multiblock": {
         "pattern": [
           [
@@ -29,6 +30,7 @@
     },
     {
       "type": "patchouli:multiblock",
+      "anchor": "cursecoal",
       "multiblock": {
         "pattern": [
           [
@@ -43,11 +45,12 @@
         }
       },
       "name": "Cursecoal",
-      "text": "Cursecoal is a powerful fuel. It replaces netherrack above level 80.",
+      "text": "Cursecoal is a powerful $(l:beneath/hellforge)fuel$(). It replaces netherrack above level 80.",
       "enable_visualize": false
     },
     {
       "type": "patchouli:multiblock",
+      "anchor": "sylvite",
       "multiblock": {
         "pattern": [
           [
@@ -67,6 +70,7 @@
     },
     {
       "type": "patchouli:multiblock",
+      "anchor": "quartz",
       "multiblock": {
         "pattern": [
           [
@@ -81,7 +85,27 @@
         }
       },
       "name": "Nether Quartz",
-      "text": "Nether quartz replaces netherrack at all levels, and is common.",
+      "text": "Nether Quartz replaces netherrack at all levels, and is common.",
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:multiblock",
+      "anchor": "slimed_netherrack",
+      "multiblock": {
+        "pattern": [
+          [
+            "X"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "X": "beneath:ore/slimed_netherrack"
+        }
+      },
+      "name": "Slimed Netherrack",
+      "text": "Slimed Netherrack occasionally replaces Netherrack above lava level.",
       "enable_visualize": false
     }
   ],

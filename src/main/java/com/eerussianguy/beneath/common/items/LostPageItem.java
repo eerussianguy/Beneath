@@ -4,6 +4,7 @@ import java.util.List;
 import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.common.container.BeneathContainerTypes;
 import com.eerussianguy.beneath.misc.LostPage;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -55,7 +56,7 @@ public class LostPageItem extends Item
     public boolean hasInitialized(ItemStack stack)
     {
         final CompoundTag tag = stack.getTag();
-        return tag != null && (tag.contains("beneath:cost") || tag.contains("beneath:reward"));
+        return tag != null && tag.contains("beneath:lost_page_id");
     }
 
     public Ingredient getCost(ItemStack stack)
@@ -77,6 +78,19 @@ public class LostPageItem extends Item
             return page.getIngredientTranslation() != null ? Component.translatable(page.getIngredientTranslation()) : null;
         }
         return null;
+    }
+
+    public Component getSpecificIngredientTranslation(ItemStack stack)
+    {
+        final Ingredient cost = getCost(stack);
+        Component trans = getIngredientTranslation(stack);
+        if (trans == null)
+        {
+            if (cost.isEmpty())
+                return Component.empty();
+            trans = cost.getItems()[0].getHoverName();
+        }
+        return trans;
     }
 
     public ItemStack getReward(ItemStack stack)
@@ -131,17 +145,15 @@ public class LostPageItem extends Item
     {
         if (hasInitialized(stack))
         {
-            final Ingredient cost = getCost(stack);
-            Component trans = getIngredientTranslation(stack);
-            if (trans == null)
-            {
-                if (cost.isEmpty())
-                    return;
-                trans = cost.getItems()[0].getHoverName();
-            }
-            tooltip.add(Component.translatable("beneath.screen.lost_page.cost").append(Component.literal(": ")).append(Component.literal(getCostAmount(stack) + "x ").append(trans)));
-            tooltip.add(Component.translatable("beneath.screen.lost_page.reward").append(Component.literal(": ")).append(Component.literal(getRewardAmount(stack) + "x ").append(getReward(stack).getHoverName())));
-            tooltip.add(Component.translatable("beneath.screen.lost_page.punishment").append(Component.literal(": ")).append(Beneath.translateEnum(getPunishment(stack))));
+            tooltip.add(Component.translatable("beneath.screen.lost_page.cost").withStyle(ChatFormatting.RED).append(Component.literal(": ")).append(Component.literal(getCostAmount(stack) + "x ").append(getSpecificIngredientTranslation(stack))));
+            tooltip.add(Component.translatable("beneath.screen.lost_page.reward").withStyle(ChatFormatting.GOLD).append(Component.literal(": ")).append(Component.literal(getRewardAmount(stack) + "x ").append(getReward(stack).getHoverName())));
+            tooltip.add(Component.translatable("beneath.screen.lost_page.punishment").withStyle(ChatFormatting.BLUE).append(Component.literal(": ")).append(Beneath.translateEnum(getPunishment(stack))));
         }
      }
+
+    @Override
+    public boolean isFoil(ItemStack stack)
+    {
+        return hasInitialized(stack);
+    }
 }

@@ -328,7 +328,7 @@ def generate(rm: ResourceManager):
     lost_page(rm, 'cursed_hide', 'beneath:cursed_hide', 'tfc:large_raw_hide', [1], [1], ['none', 'levitation' 'drunkenness'])
     lost_page(rm, 'cursed_hide2', 'beneath:cursed_hide', 'tfc:large_raw_hide', [2, 3], [2, 3], ['none', 'levitation' 'drunkenness'])
     lost_page(rm, 'cursed_hide3', 'beneath:cursed_hide', 'tfc:large_raw_hide', [4, 5, 6], [4, 5, 6], ['none', 'levitation' 'drunkenness'])
-    lost_page(rm, 'blackstone', '#forge:cobblestone', 'minecraft:blackstone', [48, 64, 64, 64, 72, 78], [48, 52, 52, 64, 74], ['none', 'infestation'], ingredient_translation='beneath.lost_page.stone_bricks')
+    lost_page(rm, 'blackstone', '#forge:cobblestone', 'minecraft:blackstone', [48, 64, 64, 64, 72, 78], [48, 52, 52, 64, 74], ['none', 'infestation'], ingredient_translation='beneath.lost_page.cobble')
 
     ### DAMAGE TYPES ###
     damage_type(rm, 'sulfur')

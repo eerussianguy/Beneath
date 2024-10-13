@@ -7,7 +7,7 @@ import net.dries007.tfc.common.container.Container;
 
 public class LostPageContainer extends Container
 {
-    private ItemStack item;
+    private final ItemStack item;
 
     public LostPageContainer(int windowId, FriendlyByteBuf buf)
     {

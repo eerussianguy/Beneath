@@ -124,7 +124,7 @@ DEFAULT_LANG = {
     'beneath.screen.lost_page.cost': 'Cost',
     'beneath.screen.lost_page.reward': 'Reward',
     'beneath.screen.lost_page.punishment': 'Punishment',
-    'beneath.lost_page.stone_bricks': 'Any Stone Bricks',
+    'beneath.lost_page.cobble': 'Any Cobblestone',
     'beneath.punishment': 'You have been given the punishment of... %s',
     'beneath.enum.punishment.none': 'No punishment at all!',
     'beneath.enum.punishment.levitation': 'Levitation!',

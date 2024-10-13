@@ -14,7 +14,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "First, Nether Bricks can be changed into $(thing)Hellbricks$(). Charcoal piles can be transformed into $(thing)Cursecoal Piles$(). Further, $(thing)Decay$() can be added to $(thing)Soul Farmland$()."
+      "text": "First, Nether Bricks can be changed into $(thing)Hellbricks$(). Charcoal piles can be transformed into $(l:beneath/ores_and_minerals#cursecoal)Cursecoal Piles$(). Further, $(thing)Decay$() can be added to $(thing)Soul Farmland$()."
     }
   ],
   "read_by_default": true
