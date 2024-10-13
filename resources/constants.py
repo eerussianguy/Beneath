@@ -133,6 +133,7 @@ DEFAULT_LANG = {
     'beneath.enum.punishment.infestation': 'An infestation of silverfish!',
     'beneath.enum.punishment.withering': 'Wither!',
     'beneath.enum.punishment.slime': 'Slime!',
+    'beneath.enum.punishment.unknown': '§kUnknown',
     'beneath.sacrifice.error': 'Sacrifice Error: Materials not found.',
     'item.beneath.juicer.filled': 'Juicer (%s)',
     'death.attack.beneath.sulfur': '%1$s mined sulfur with an iron tool and blew themselves up.',

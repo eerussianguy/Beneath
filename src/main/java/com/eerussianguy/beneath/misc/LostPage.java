@@ -209,7 +209,11 @@ public class LostPage
                 }
             }
             spawnItemsAround(level, pos, 10, 6, () -> new ItemStack(Items.SLIME_BALL), false);
-        })
+        }),
+        UNKNOWN((player, level, pos) -> {
+            final Punishment[] values = values();
+            values[level.random.nextInt(values.length)].consumer.accept(player, level, pos);
+        }),
         ;
 
         public static Punishment valueOf(int id)
