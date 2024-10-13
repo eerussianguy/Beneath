@@ -9,7 +9,6 @@ import com.eerussianguy.beneath.client.render.BeneathSignRenderer;
 import com.eerussianguy.beneath.client.render.HellforgeBlockEntityRenderer;
 import com.eerussianguy.beneath.client.screen.HellforgeScreen;
 import com.eerussianguy.beneath.client.screen.JuicerScreen;
-import com.eerussianguy.beneath.client.screen.LostPageScreen;
 import com.eerussianguy.beneath.common.blockentities.BeneathBlockEntities;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
 import com.eerussianguy.beneath.common.blocks.Stem;
@@ -65,7 +64,6 @@ public class ClientModEvents
 
             MenuScreens.register(BeneathContainerTypes.HELLFORGE_CONTAINER.get(), HellforgeScreen::new);
             MenuScreens.register(BeneathContainerTypes.JUICER_CONTAINER.get(), JuicerScreen::new);
-            MenuScreens.register(BeneathContainerTypes.LOST_PAGE_CONTAINER.get(), LostPageScreen::new);
 
             for (Stem stem : Stem.VALUES)
             {

@@ -2,14 +2,13 @@ package com.eerussianguy.beneath.common.items;
 
 import java.util.List;
 import com.eerussianguy.beneath.Beneath;
-import com.eerussianguy.beneath.common.container.BeneathContainerTypes;
+import com.eerussianguy.beneath.client.BeneathClientUtil;
 import com.eerussianguy.beneath.misc.LostPage;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -20,8 +19,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
-
-import net.dries007.tfc.util.Helpers;
 
 public class LostPageItem extends Item
 {
@@ -34,9 +31,9 @@ public class LostPageItem extends Item
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
     {
         final ItemStack stack = player.getItemInHand(hand);
-        if (player instanceof ServerPlayer serverPlayer)
+        if (level.isClientSide)
         {
-            Helpers.openScreen(serverPlayer, BeneathContainerTypes.LOST_PAGE_PROVIDER, buf -> buf.writeItem(stack));
+            BeneathClientUtil.openLostPageScreen(stack);
         }
         return InteractionResultHolder.success(stack);
     }
