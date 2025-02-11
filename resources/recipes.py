@@ -25,11 +25,11 @@ def generate(rm: ResourceManager):
     damage_shapeless(rm, 'crafting/cracked_blackstone_bricks', ('minecraft:polished_blackstone_bricks', '#tfc:hammers'), 'minecraft:cracked_polished_blackstone_bricks').with_advancement('minecraft:polished_blackstone_bricks')
     rm.crafting_shapeless('crafting/agonizing_fertilizer', tuple('beneath:pure_%s' % n for n in NUTRIENTS), 'beneath:agonizing_fertilizer').with_advancement('beneath:pure_flame')
     rm.crafting_shapeless('crafting/cursed_hide_change', ('beneath:cursed_hide', 'tfc:powder/flux', 'tfc:powder/flux', 'minecraft:white_dye'), 'tfc:large_raw_hide').with_advancement('beneath:cursed_hide')
-    rm.crafting_shapeless('crafting/hellbricks', ('minecraft:nether_bricks', 'minecraft:magma_cream', 'beneath:sulfur'), 'beneath:hellbricks').with_advancement('minecraft:magma_cream')
+    rm.crafting_shapeless('crafting/hellbricks', ('minecraft:nether_bricks', 'minecraft:magma_cream', 'tfc:powder/sulfur'), 'beneath:hellbricks').with_advancement('minecraft:magma_cream')
     damage_shapeless(rm, 'crafting/juicer', ('#forge:leather', '#forge:leather', '#forge:leather', '#tfc:knives', '#forge:rods/wooden'), 'beneath:juicer').with_advancement('#forge:leather')
     rm.crafting_shaped('crafting/unposter', ['XYX', 'XXX', 'ZZZ'], {'X': 'beneath:wood/lumber/crimson', 'Z': 'beneath:wood/lumber/warped', 'Y': 'tfc:composter'}, 'beneath:unposter').with_advancement('beneath:wood/lumber/crimson')
     rm.crafting_shapeless('crafting/blackstone_from_soot', ('#forge:cobblestone', 'tfc:soot'), 'minecraft:blackstone').with_advancement('tfc:soot')
-    rm.crafting_shapeless('crafting/blackstone_bricks_from_soot', ('#forge:stone_bricks', 'tfc:soot'), 'minecraft:blackstone_bricks').with_advancement('tfc:soot')
+    rm.crafting_shapeless('crafting/blackstone_bricks_from_soot', ('#forge:stone_bricks', 'tfc:soot'), 'minecraft:polished_blackstone_bricks').with_advancement('tfc:soot')
     rm.crafting_shaped('crafting/ancient_altar', ['XXX', 'XYX', 'ZXZ'], {'X': 'minecraft:blackstone', 'Y': '#forge:ingots/gold', 'Z': 'tfc:sand/black'}, 'beneath:ancient_altar')
 
     ### QUERN RECIPES ###

@@ -12,6 +12,7 @@
   ],
   "punishments": [
     "none",
-    "levitationdrunkenness"
+    "levitation",
+    "drunkenness"
   ]
 }

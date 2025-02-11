@@ -3,6 +3,7 @@
   "type": "beneath:nether_spikes",
   "config": {
     "raw": "minecraft:netherrack",
-    "spike": "beneath:haunted_spike"
+    "spike": "beneath:haunted_spike",
+    "anchor_blocks": "minecraft:base_stone_nether"
   }
 }

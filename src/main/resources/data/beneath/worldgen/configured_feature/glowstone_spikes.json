@@ -3,6 +3,7 @@
   "type": "beneath:large_nether_spikes",
   "config": {
     "raw": "minecraft:glowstone",
-    "spike": "beneath:glowstone_spike"
+    "spike": "beneath:glowstone_spike",
+    "anchor_blocks": "minecraft:base_stone_nether"
   }
 }

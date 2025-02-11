@@ -259,7 +259,7 @@ def generate(rm: ResourceManager):
 
     ### BLOCK TAGS ###
     rm.block_tag('breaks_slowly', 'minecraft:netherrack', 'minecraft:soul_sand', 'minecraft:soul_soil', 'minecraft:magma_block', 'minecraft:warped_nylium', 'minecraft:crimson_nylium')
-    rm.block_tag('event_replaceable', 'minecraft:netherrack', 'minecraft:soul_sand', 'minecraft:soul_soil', '#minecraft:base_stone_overworld', '#tfc:dirt', '#tfc:grass', 'minecraft:blacstone', 'minecraft:warped_nylium', 'minecraft:crimson_nylium')
+    rm.block_tag('event_replaceable', 'minecraft:netherrack', 'minecraft:soul_sand', 'minecraft:soul_soil', '#minecraft:base_stone_overworld', '#tfc:dirt', '#tfc:grass', 'minecraft:blackstone', 'minecraft:warped_nylium', 'minecraft:crimson_nylium')
 
     rm.block_tag('tfc:breaks_when_isolated', 'minecraft:basalt', 'minecraft:blackstone', 'minecraft:netherrack', 'beneath:crackrack')
     rm.block_tag('tfc:tree_grows_on', 'minecraft:netherrack', 'minecraft:warped_nylium', 'minecraft:crimson_nylium')
@@ -325,8 +325,8 @@ def generate(rm: ResourceManager):
 
     ### LOST PAGES ###
     lost_page(rm, 'slime', 'beneath:raw_slime', 'tfc:ore/rich_garnierite', [64, 100, 100, 200, 200, 220, 300], [7, 12, 15, 15, 18, 19, 22], ['none', 'slime', 'drunkenness'])
-    lost_page(rm, 'cursed_hide', 'beneath:cursed_hide', 'tfc:large_raw_hide', [1], [1], ['none', 'levitation' 'drunkenness'])
-    lost_page(rm, 'cursed_hide2', 'beneath:cursed_hide', 'tfc:large_raw_hide', [2, 3], [2, 3], ['none', 'levitation' 'drunkenness'])
+    lost_page(rm, 'cursed_hide', 'beneath:cursed_hide', 'tfc:large_raw_hide', [1], [1], ['none', 'levitation', 'drunkenness'])
+    lost_page(rm, 'cursed_hide2', 'beneath:cursed_hide', 'tfc:large_raw_hide', [2, 3], [2, 3], ['none', 'levitation', 'drunkenness'])
     lost_page(rm, 'cursed_hide3', 'beneath:cursed_hide', 'tfc:large_raw_hide', [4, 5, 6], [4, 5, 6], ['none', 'levitation' 'drunkenness'])
     lost_page(rm, 'blackstone', '#forge:cobblestone', 'minecraft:blackstone', [48, 64, 64, 64, 72, 78], [48, 52, 52, 64, 74], ['none', 'infestation'], ingredient_translation='beneath.lost_page.cobble')
 

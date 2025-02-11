@@ -36,26 +36,26 @@ public class NetherSpikesFeature extends Feature<NetherSpikeConfig>
         // The direction that the spike is pointed
         Direction direction = random.nextBoolean() ? Direction.UP : Direction.DOWN;
         BlockState wallState = level.getBlockState(pos.relative(direction.getOpposite()));
-        if (isValidWallRock(wallState))
+        if (Helpers.isBlock(wallState, config.anchorBlocks()))
         {
-            this.place(level, pos, config.spike(), config.raw(), direction, random);
+            this.place(level, pos, config.spike(), config.raw(), direction, random, config);
         }
         else
         {
             // Switch directions and try again
             direction = direction.getOpposite();
             wallState = level.getBlockState(pos.relative(direction));
-            if (isValidWallRock(wallState))
+            if (Helpers.isBlock(wallState, config.anchorBlocks()))
             {
-                this.place(level, pos, config.spike(), config.raw(), direction, random);
+                this.place(level, pos, config.spike(), config.raw(), direction, random, config);
             }
         }
         return true;
     }
 
-    protected void place(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, RandomSource random)
+    protected void place(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, RandomSource random, NetherSpikeConfig config)
     {
-        this.placeSmallSpike(level, pos, spike, raw, direction, random);
+        this.placeSmallSpike(level, pos, spike, raw, direction, random, config);
     }
 
     protected void replaceBlock(WorldGenLevel level, BlockPos pos, BlockState state)
@@ -88,16 +88,16 @@ public class NetherSpikesFeature extends Feature<NetherSpikeConfig>
         }
     }
 
-    protected void placeSmallSpike(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, RandomSource random)
+    protected void placeSmallSpike(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, RandomSource random, NetherSpikeConfig config)
     {
-        this.placeSmallSpike(level, pos, spike, raw, direction, random, random.nextFloat());
+        this.placeSmallSpike(level, pos, spike, raw, direction, config, random.nextFloat());
     }
 
-    protected void placeSmallSpike(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, RandomSource random, float sizeWeight)
+    protected void placeSmallSpike(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, NetherSpikeConfig config, float sizeWeight)
     {
         BlockPos above = pos.above();
         BlockState stateAbove = level.getBlockState(pos.above());
-        if (Helpers.isBlock(stateAbove, BlockTags.BASE_STONE_NETHER))
+        if (Helpers.isBlock(stateAbove, config.anchorBlocks()))
         {
             level.setBlock(above, raw, 2);
         }

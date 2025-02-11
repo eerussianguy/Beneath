@@ -1,6 +1,7 @@
 package com.eerussianguy.beneath.world;
 
 import com.eerussianguy.beneath.Beneath;
+import com.eerussianguy.beneath.world.feature.HeightLimitPlacement;
 import com.eerussianguy.beneath.world.feature.NearLavaPlacement;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
@@ -14,6 +15,7 @@ public class BeneathPlacementModifiers
     public static final DeferredRegister<PlacementModifierType<?>> MODIFIERS = DeferredRegister.create(Registries.PLACEMENT_MODIFIER_TYPE, Beneath.MOD_ID);
 
     public static final RegistryObject<PlacementModifierType<NearLavaPlacement>> NEAR_LAVA = register("near_lava", () -> NearLavaPlacement.CODEC);
+    public static final RegistryObject<PlacementModifierType<HeightLimitPlacement>> HEIGHT_LIMIT = register("height_limit", () -> HeightLimitPlacement.CODEC);
 
     private static <T extends PlacementModifier> RegistryObject<PlacementModifierType<T>> register(String name, PlacementModifierType<T> codec)
     {

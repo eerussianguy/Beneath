@@ -15,7 +15,7 @@ public class LargeNetherSpikesFeature extends NetherSpikesFeature
     }
 
     @Override
-    public void place(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, RandomSource random)
+    public void place(WorldGenLevel level, BlockPos pos, BlockState spike, BlockState raw, Direction direction, RandomSource random, NetherSpikeConfig config)
     {
         final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
         final int height = 6 + random.nextInt(11);
@@ -54,12 +54,12 @@ public class LargeNetherSpikesFeature extends NetherSpikesFeature
                     }
                     else if (actualRadius < 1 && random.nextInt(3) == 0 && y > 0)
                     {
-                        placeSmallSpike(level, mutablePos, spike, raw, direction, random);
+                        placeSmallSpike(level, mutablePos, spike, raw, direction, random, config);
                     }
                 }
             }
         }
         mutablePos.set(pos).move(direction, maxHeightReached - 1);
-        placeSmallSpike(level, mutablePos, spike, raw, direction, random, 1.0f);
+        placeSmallSpike(level, mutablePos, spike, raw, direction, config, 1.0f);
     }
 }

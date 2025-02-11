@@ -6,8 +6,8 @@ from mcresources.type_definitions import ResourceIdentifier, JsonObject, Json, V
 from constants import *
 
 def generate(rm: ResourceManager):
-    configured_placed_feature(rm, 'nether_spikes', 'beneath:nether_spikes', {'raw': 'minecraft:netherrack', 'spike': 'beneath:haunted_spike'}, decorate_count(128), decorate_square(), decorate_range_10_10(), decorate_biome())
-    configured_placed_feature(rm, 'glowstone_spikes', 'beneath:large_nether_spikes', {'raw': 'minecraft:glowstone', 'spike': 'beneath:glowstone_spike'}, decorate_chance(6), decorate_count(16), decorate_square(), decorate_range_10_10(), decorate_biome())
+    configured_placed_feature(rm, 'nether_spikes', 'beneath:nether_spikes', {'raw': 'minecraft:netherrack', 'spike': 'beneath:haunted_spike', 'anchor_blocks': 'minecraft:base_stone_nether'}, decorate_count(128), decorate_square(), decorate_range_10_10(), decorate_biome())
+    configured_placed_feature(rm, 'glowstone_spikes', 'beneath:large_nether_spikes', {'raw': 'minecraft:glowstone', 'spike': 'beneath:glowstone_spike', 'anchor_blocks': 'minecraft:base_stone_nether'}, decorate_chance(6), decorate_count(16), decorate_square(), decorate_range_10_10(), decorate_biome())
     configured_placed_feature(rm, 'nether_pebble', 'minecraft:simple_block', {'to_place': random_property_provider('beneath:nether_pebble', 'count')}, decorate_replaceable(), decorate_would_survive('beneath:nether_pebble'), decorate_air())
     configured_placed_feature(rm, 'nether_pebble_patch', 'minecraft:random_patch', random_config('beneath:nether_pebble', 16, 10, 1), decorate_chance(3), decorate_every_layer(5), decorate_biome())
     configured_placed_feature(rm, 'blackstone_pebble', 'minecraft:simple_block', {'to_place': random_property_provider('beneath:blackstone_pebble', 'count')}, decorate_replaceable(), decorate_would_survive('beneath:nether_pebble'), decorate_air())
@@ -42,7 +42,7 @@ def generate(rm: ResourceManager):
             'max_height': 5,
             'wide': False
         }
-    }, decorate_every_layer(8), decorate_biome())
+    }, within_world(), decorate_every_layer(8), decorate_biome())
     configured_placed_feature(rm, 'tree/warped', 'tfc:random_tree', {
         'structures': ['beneath:warped/%s' % i for i in range(1, 18)],
         'radius': 1,
@@ -53,7 +53,7 @@ def generate(rm: ResourceManager):
             'max_height': 5,
             'wide': False
         }
-    }, decorate_every_layer(8), decorate_biome())
+    }, within_world(), decorate_every_layer(8), decorate_biome())
 
     configured_placed_feature(rm, 'vein/quartz', 'tfc:cluster_vein', {
         'rarity': 30,
@@ -318,6 +318,13 @@ def decorate_every_layer(count: int) -> Json:
     return {
         'type': 'minecraft:count_on_every_layer',
         'count': count
+    }
+
+def within_world() -> Json:
+    return {
+        'type': 'beneath:height_limit',
+        'min': 15,
+        'max': 105,
     }
 
 def decorate_chance(rarity_or_probability: Union[int, float]) -> Json:

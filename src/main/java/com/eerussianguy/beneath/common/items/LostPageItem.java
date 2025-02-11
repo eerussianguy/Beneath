@@ -31,6 +31,10 @@ public class LostPageItem extends Item
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
     {
         final ItemStack stack = player.getItemInHand(hand);
+        if (stack.getItem() instanceof LostPageItem item && item.getReward(stack).isEmpty())
+        {
+            return InteractionResultHolder.pass(stack);
+        }
         if (level.isClientSide)
         {
             BeneathClientUtil.openLostPageScreen(stack);

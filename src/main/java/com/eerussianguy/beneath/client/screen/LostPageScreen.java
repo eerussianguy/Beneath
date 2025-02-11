@@ -42,7 +42,7 @@ public class LostPageScreen extends BeneathScreen
             if (level == null)
                 return;
             final ItemStack[] items = costIngredient.getItems();
-            final ItemStack cost = items[(int) (level.getGameTime() / 20) % items.length];
+            final ItemStack cost = items.length > 0 ? items[(int) (level.getGameTime() / 20) % items.length] : ItemStack.EMPTY;
 
             drawCenteredLine(graphics, Component.translatable("beneath.screen.lost_page.cost"), x, y + 16);
             drawCenteredLine(graphics, Component.literal(item.getCostAmount(stack) + "x ").append(item.getSpecificIngredientTranslation(stack)), x, y + 26);
