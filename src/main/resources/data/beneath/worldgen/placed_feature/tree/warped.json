@@ -3,11 +3,6 @@
   "feature": "beneath:tree/warped",
   "placement": [
     {
-      "type": "beneath:height_limit",
-      "min": 15,
-      "max": 105
-    },
-    {
       "type": "minecraft:count_on_every_layer",
       "count": 8
     },

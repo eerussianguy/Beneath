@@ -42,7 +42,7 @@ def generate(rm: ResourceManager):
             'max_height': 5,
             'wide': False
         }
-    }, within_world(), decorate_every_layer(8), decorate_biome())
+    }, decorate_every_layer(8), decorate_biome())
     configured_placed_feature(rm, 'tree/warped', 'tfc:random_tree', {
         'structures': ['beneath:warped/%s' % i for i in range(1, 18)],
         'radius': 1,
@@ -53,7 +53,7 @@ def generate(rm: ResourceManager):
             'max_height': 5,
             'wide': False
         }
-    }, within_world(), decorate_every_layer(8), decorate_biome())
+    }, decorate_every_layer(8), decorate_biome())
 
     configured_placed_feature(rm, 'vein/quartz', 'tfc:cluster_vein', {
         'rarity': 30,

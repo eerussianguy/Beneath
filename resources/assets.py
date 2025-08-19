@@ -143,7 +143,7 @@ def generate(rm: ResourceManager):
     rm.blockstate('ancient_altar').with_block_loot('beneath:ancient_altar').with_item_model().with_lang(lang('ancient altar'))
 
     for shroom in MUSHROOMS:
-        mushlang = lang(shroom) if 'fools' not in shroom else 'Fool\'s Funnel'
+        mushlang = lang(shroom.replace('shittake', 'shiitake')) if 'fools' not in shroom else 'Fool\'s Funnel'
         rm.blockstate('mushroom/%s' % shroom).with_block_model(parent='block/cross', textures={'cross': 'beneath:block/mushroom/%s' % shroom}).with_block_loot('beneath:food/%s' % shroom).with_tag('tfc:plants').with_tag('tfc:mineable_with_sharp_tool').with_lang(lang(mushlang))
         rm.item_model('food/%s' % shroom, 'beneath:block/mushroom/%s' % shroom).with_lang(mushlang)
 

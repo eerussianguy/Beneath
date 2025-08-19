@@ -17,7 +17,7 @@ val jeiVersion: String = "15.2.0.21"
 val patchouliVersion: String = "1.20.1-81-FORGE"
 val jadeVersion: String = "4614153"
 val topVersion: String = "4629624"
-val tfcVersion: String = "5872631"
+val tfcVersion: String = "6835820"
 
 val modId: String = "beneath"
 
