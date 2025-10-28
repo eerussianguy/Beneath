@@ -1,0 +1,81 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "name": "Дивні блоки",
+  "category": "tfc:beneath",
+  "icon": "beneath:soul_clay",
+  "pages": [
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "X"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "X": "beneath:soul_clay"
+        }
+      },
+      "name": "Душева глина",
+      "text": "Душеву глину можна знайти в долинах душевого піску. Вона є джерелом звичайної глини.",
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "X"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "X": "beneath:sulfur"
+        }
+      },
+      "name": "Сірка",
+      "text": "Сірку можна зламати лопатою. Але будь обережним: предмети, що містять залізо (включно зі сталлю), вибухають при контакті з сіркою!",
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "X"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "X": "beneath:warped_thatch"
+        }
+      },
+      "name": "Солома",
+      "text": "Зрізання трави дасть тобі викривлену або багряну солому. З неї можна зробити солому блок звичайним способом.",
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "beneath:crafting/blackstone_aqueduct",
+      "text": "Акведук із чорнокаменю дозволяє проводити лаву на будь‑яку відстань."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "beneath:crafting/hellbricks",
+      "text": "Пекельні цеглини — це будівельний блок, який також використовується для Пекельного горна."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "beneath:crafting/blackstone_brick",
+      "text": "Чорнокам’яні цеглини виготовляються так само, як і звичайні цеглини, і для цього також потрібно створити предмет «цегла»."
+    }
+  ],
+  "read_by_default": true
+}
