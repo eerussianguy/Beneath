@@ -1,16 +1,23 @@
 package com.eerussianguy.beneath.client.render;
 
-import com.eerussianguy.beneath.Beneath;
-import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
+import com.eerussianguy.beneath.client.BeneathClientUtil;
+import com.eerussianguy.beneath.common.blocks.Stem;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 
 import net.dries007.tfc.client.render.blockentity.TFCSignBlockEntityRenderer;
-import net.dries007.tfc.common.blocks.wood.Wood;
 
 public class BeneathSignRenderer extends TFCSignBlockEntityRenderer
 {
+    static
+    {
+        for (Stem wood : Stem.VALUES)
+            TFCSignBlockEntityRenderer.MODELS.put(
+                wood.getVanillaWoodType(),
+                context -> new SignModel(context.bakeLayer(BeneathClientUtil.layerId("sign/" + wood.getSerializedName())))
+            );
+    }
     public BeneathSignRenderer(BlockEntityRendererProvider.Context context)
     {
-        super(context, BeneathBlocks.WOODS.keySet().stream().map(wood -> new SignModelData(Beneath.MOD_ID, wood.getSerializedName(), wood.getVanillaWoodType())));
+        super(context);
     }
 }

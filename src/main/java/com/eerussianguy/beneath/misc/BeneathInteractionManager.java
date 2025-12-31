@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.blocks.CharcoalPileBlock;
-import net.dries007.tfc.common.items.Powder;
+import net.dries007.tfc.common.blocks.rock.Ore;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.BlockItemPlacement;
 import net.dries007.tfc.util.Helpers;
@@ -24,7 +24,7 @@ public final class BeneathInteractionManager
 {
     public static void init()
     {
-        InteractionManager.register(Ingredient.of(BeneathItems.CURSECOAL.get()), false, (stack, context) -> {
+        InteractionManager.register(Ingredient.of(BeneathItems.CURSECOAL.get()), InteractionManager.Target.BLOCKS, (stack, context) -> {
             Player player = context.getPlayer();
             if (player != null && !player.getAbilities().mayBuild)
             {
@@ -62,8 +62,8 @@ public final class BeneathInteractionManager
             }
         });
 
-        InteractionManager.register(new BlockItemPlacement(TFCItems.POWDERS.get(Powder.SULFUR), BeneathBlocks.SULFUR));
+        InteractionManager.registerBlock(new BlockItemPlacement(TFCItems.ORE_POWDERS.get(Ore.SULFUR), BeneathBlocks.SULFUR));
 
-        InteractionManager.register(Ingredient.of(Items.NETHER_WART), false, (stack, context) -> InteractionResult.PASS);
+        InteractionManager.register(Ingredient.of(Items.NETHER_WART), InteractionManager.Target.BOTH, (stack, context) -> InteractionResult.PASS);
     }
 }

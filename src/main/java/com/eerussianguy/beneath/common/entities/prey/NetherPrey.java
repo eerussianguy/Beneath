@@ -16,8 +16,8 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathFinder;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 import net.minecraft.world.phys.shapes.CollisionContext;
 
@@ -44,14 +44,14 @@ public class NetherPrey extends Prey
         return level.getBlockState(cursor).isAir();
     }
 
-    public NetherPrey(EntityType<? extends Prey> type, Level level, TFCSounds.EntitySound sounds)
+    public NetherPrey(EntityType<? extends Prey> type, Level level, TFCSounds.EntityId sounds)
     {
         super(type, level, sounds);
         getNavigation().setCanFloat(false);
-        this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.LAVA, 0.0F);
-        this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 0.0F);
-        this.setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, 0.0F);
+        this.setPathfindingMalus(PathType.WATER, -1.0F);
+        this.setPathfindingMalus(PathType.LAVA, 0.0F);
+        this.setPathfindingMalus(PathType.DANGER_FIRE, 0.0F);
+        this.setPathfindingMalus(PathType.DAMAGE_FIRE, 0.0F);
     }
 
     @Override
@@ -148,9 +148,9 @@ public class NetherPrey extends Prey
         }
 
         @Override
-        protected boolean hasValidPathType(BlockPathTypes type)
+        protected boolean hasValidPathType(PathType type)
         {
-            return type == BlockPathTypes.LAVA || type == BlockPathTypes.DAMAGE_FIRE || type == BlockPathTypes.DANGER_FIRE || super.hasValidPathType(type);
+            return type == PathType.LAVA || type == PathType.DAMAGE_FIRE || type == PathType.DANGER_FIRE || super.hasValidPathType(type);
         }
 
         @Override

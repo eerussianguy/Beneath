@@ -12,14 +12,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 import net.dries007.tfc.client.RenderHelpers;
 import net.dries007.tfc.client.screen.BlockEntityScreen;
-import net.dries007.tfc.common.blockentities.CharcoalForgeBlockEntity;
-import net.dries007.tfc.common.capabilities.heat.Heat;
+import net.dries007.tfc.common.component.heat.Heat;
 import net.dries007.tfc.config.TFCConfig;
-import net.dries007.tfc.config.TemperatureDisplayStyle;
 
 public class HellforgeScreen extends BlockEntityScreen<HellforgeBlockEntity, HellforgeContainer>
 {

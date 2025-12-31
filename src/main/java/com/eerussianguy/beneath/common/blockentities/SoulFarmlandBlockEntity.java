@@ -3,7 +3,9 @@ package com.eerussianguy.beneath.common.blockentities;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Consumer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -27,13 +29,13 @@ public class SoulFarmlandBlockEntity extends TFCBlockEntity
         super(BeneathBlockEntities.SOUL_FARMLAND.get(), pos, state);
     }
 
-    public void addTooltipInfo(List<Component> tooltip)
+    public void addTooltipInfo(Consumer<Component> tooltip)
     {
         for (NutrientType type : NutrientType.VALUES)
         {
             if (getNutrient(type) > 0)
             {
-                tooltip.add(Component.translatable("beneath.nutrient." + type.getName(), format(getNutrient(type))));
+                tooltip.accept(Component.translatable("beneath.nutrient." + type.getName(), format(getNutrient(type))));
             }
         }
     }
@@ -44,9 +46,9 @@ public class SoulFarmlandBlockEntity extends TFCBlockEntity
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag)
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider access)
     {
-        super.loadAdditional(tag);
+        super.loadAdditional(tag, access);
         for (NutrientType type : NutrientType.VALUES)
         {
             nutrients[type.ordinal()] = tag.getFloat(type.name);
@@ -54,9 +56,9 @@ public class SoulFarmlandBlockEntity extends TFCBlockEntity
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag)
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider access)
     {
-        super.saveAdditional(tag);
+        super.saveAdditional(tag, access);
         for (NutrientType type : NutrientType.VALUES)
         {
             tag.putFloat(type.name, nutrients[type.ordinal()]);

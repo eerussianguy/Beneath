@@ -6,12 +6,7 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "mixins": [
-    "BlockEntityTypeAccessor",
-    "SlimeMixin",
-    "StructurePieceMixin",
-    "TFCFallingBlockEntityMixin"
-  ],
+  "mixins": ["BlockEntityTypeAccessor", "ServerConfigMixin", "SlimeMixin", "StructurePieceMixin", "TFCFallingBlockEntityMixin"],
   "client": ["FallingLeafParticleMixin", "LeafParticleMixin"],
   "refmap": "beneath.refmap.json"
 }

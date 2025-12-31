@@ -1,14 +1,15 @@
 package com.eerussianguy.beneath.common.blocks;
 
-import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import com.eerussianguy.beneath.common.blockentities.SoulFarmlandBlockEntity;
 import com.eerussianguy.beneath.misc.NCropUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -18,7 +19,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 import net.dries007.tfc.common.blockentities.CropBlockEntity;
-import net.dries007.tfc.common.blockentities.FarmlandBlockEntity;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.crop.CropBlock;
 import net.dries007.tfc.common.blocks.soil.FarmlandBlock;
@@ -32,7 +32,7 @@ public abstract class NetherCropBlock extends CropBlock
 
     protected NetherCropBlock(ExtendedProperties properties, int maxAge, Supplier<? extends Item> seeds, SoulFarmlandBlockEntity.NutrientType primaryNutrient)
     {
-        super(properties, maxAge, () -> Blocks.AIR, seeds, FarmlandBlockEntity.NutrientType.NITROGEN, () -> ClimateRange.NOOP);
+        super(properties, maxAge, () -> Blocks.AIR, seeds, 0f, 0f, 0f, () -> ClimateRange.NOOP);
         this.nutrient = primaryNutrient;
     }
 
@@ -45,9 +45,9 @@ public abstract class NetherCropBlock extends CropBlock
     public abstract IntegerProperty getAgeProperty();
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit)
+    public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit)
     {
-        return NCropUtil.useFertilizer(level, player, hand, pos.below()) ? InteractionResult.SUCCESS : super.use(state, level, pos, player, hand, hit);
+        return NCropUtil.useFertilizer(level, player, hand, pos.below()) ? ItemInteractionResult.SUCCESS : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override
@@ -72,11 +72,11 @@ public abstract class NetherCropBlock extends CropBlock
     }
 
     @Override
-    public void addHoeOverlayInfo(Level level, BlockPos pos, BlockState state, List<Component> text, boolean isDebug)
+    public void addHoeOverlayInfo(Level level, BlockPos pos, BlockState state, Consumer<Component> text, boolean isDebug)
     {
         final ClimateRange range = this.climateRange.get();
         final BlockPos sourcePos = pos.below();
-        text.add(FarmlandBlock.getTemperatureTooltip(level, pos, range, false));
+        text.accept(FarmlandBlock.getTemperatureTooltip(level, pos, range, false));
         SoulFarmlandBlockEntity farmland = null;
         if (level.getBlockEntity(sourcePos) instanceof SoulFarmlandBlockEntity found)
         {
@@ -99,20 +99,14 @@ public abstract class NetherCropBlock extends CropBlock
         {
             if (isDebug)
             {
-                text.add(Component.literal(String.format("[Debug] Growth = %.4f Yield = %.4f Expiry = %.4f Last Tick = %d Delta = %d", crop.getGrowth(), crop.getYield(), crop.getExpiry(), crop.getLastGrowthTick(), Calendars.get(level).getTicks() - crop.getLastGrowthTick())));
+                text.accept(Component.literal(String.format("[Debug] Growth = %.4f Yield = %.4f Expiry = %.4f Last Tick = %d Delta = %d", crop.getGrowth(), crop.getYield(), crop.getExpiry(), crop.getLastGrowthTick(), Calendars.get(level).getTicks() - crop.getLastGrowthTick())));
             }
             if (crop.getGrowth() >= 1.0F)
             {
-                text.add(Component.translatable("tfc.tooltip.farmland.mature"));
+                text.accept(Component.translatable("tfc.tooltip.farmland.mature"));
             }
         }
 
     }
 
-    @Override
-    @Deprecated
-    public FarmlandBlockEntity.NutrientType getPrimaryNutrient()
-    {
-        return super.getPrimaryNutrient();
-    }
 }

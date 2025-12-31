@@ -1,6 +1,5 @@
 package com.eerussianguy.beneath.world.feature;
 
-import java.util.Random;
 import java.util.stream.Stream;
 import com.eerussianguy.beneath.world.BeneathPlacementModifiers;
 import com.mojang.serialization.Codec;

@@ -1,6 +1,5 @@
 package com.eerussianguy.beneath.common.blocks;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;

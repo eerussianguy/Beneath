@@ -1,6 +1,7 @@
 package com.eerussianguy.beneath.common.blocks;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import com.eerussianguy.beneath.common.blockentities.SoulFarmlandBlockEntity;
 import com.eerussianguy.beneath.misc.NCropUtil;
@@ -11,7 +12,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -48,14 +51,13 @@ public class SoulFarmlandBlock extends Block implements ISoilBlock, HoeOverlayBl
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit)
+    public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit)
     {
-        return NCropUtil.useFertilizer(level, player, hand, pos) ? InteractionResult.SUCCESS : super.use(state, level, pos, player, hand, hit);
+        return NCropUtil.useFertilizer(level, player, hand, pos) ? ItemInteractionResult.SUCCESS : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override
-    public void addHoeOverlayInfo(Level level, BlockPos pos, BlockState state, List<Component> tooltip, boolean debug)
+    public void addHoeOverlayInfo(Level level, BlockPos pos, BlockState state, Consumer<Component> tooltip, boolean debug)
     {
         if (level.getBlockEntity(pos) instanceof SoulFarmlandBlockEntity farmland)
         {
@@ -64,7 +66,6 @@ public class SoulFarmlandBlock extends Block implements ISoilBlock, HoeOverlayBl
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
     {
         if (!state.canSurvive(level, pos))

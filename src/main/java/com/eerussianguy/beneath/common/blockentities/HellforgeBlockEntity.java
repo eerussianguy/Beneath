@@ -8,6 +8,7 @@ import com.eerussianguy.beneath.common.blocks.HellforgeBlock;
 import com.eerussianguy.beneath.common.blocks.HellforgeSideBlock;
 import com.eerussianguy.beneath.common.container.HellforgeContainer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -20,27 +21,24 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.util.TriPredicate;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.common.util.TriPredicate;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.apache.logging.log4j.util.TriConsumer;
 import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.common.blockentities.BellowsBlockEntity;
 import net.dries007.tfc.common.blockentities.TickableInventoryBlockEntity;
 import net.dries007.tfc.common.blocks.devices.CharcoalForgeBlock;
-import net.dries007.tfc.common.capabilities.Capabilities;
-import net.dries007.tfc.common.capabilities.food.FoodCapability;
-import net.dries007.tfc.common.capabilities.food.FoodTraits;
-import net.dries007.tfc.common.capabilities.heat.Heat;
-import net.dries007.tfc.common.capabilities.heat.HeatCapability;
+import net.dries007.tfc.common.component.food.FoodCapability;
+import net.dries007.tfc.common.component.food.FoodTraits;
+import net.dries007.tfc.common.component.heat.HeatCapability;
 import net.dries007.tfc.common.recipes.HeatingRecipe;
-import net.dries007.tfc.common.recipes.inventory.ItemStackInventory;
 import net.dries007.tfc.config.TFCConfig;
-import net.dries007.tfc.util.Fuel;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.IntArrayBuilder;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
+import net.dries007.tfc.util.data.Fuel;
 
 public class HellforgeBlockEntity extends TickableInventoryBlockEntity<ItemStackHandler> implements ICalendarTickable, MenuProvider
 {
@@ -262,25 +260,25 @@ public class HellforgeBlockEntity extends TickableInventoryBlockEntity<ItemStack
     }
 
     @Override
-    public void loadAdditional(CompoundTag nbt)
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider access)
     {
         temperature = nbt.getFloat("temperature");
         burnTicks = nbt.getInt("burnTicks");
         airTicks = nbt.getInt("airTicks");
         burnTemperature = nbt.getFloat("burnTemperature");
         lastPlayerTick = nbt.getLong("lastPlayerTick");
-        super.loadAdditional(nbt);
+        super.loadAdditional(nbt, access);
     }
 
     @Override
-    public void saveAdditional(CompoundTag nbt)
+    public void saveAdditional(CompoundTag nbt, HolderLookup.Provider access)
     {
         nbt.putFloat("temperature", temperature);
         nbt.putInt("burnTicks", burnTicks);
         nbt.putInt("airTicks", airTicks);
         nbt.putFloat("burnTemperature", burnTemperature);
         nbt.putLong("lastPlayerTick", lastPlayerTick);
-        super.saveAdditional(nbt);
+        super.saveAdditional(nbt, access);
     }
 
     @Override
@@ -312,7 +310,7 @@ public class HellforgeBlockEntity extends TickableInventoryBlockEntity<ItemStack
         }
         else
         {
-            return Helpers.mightHaveCapability(stack, Capabilities.FLUID_ITEM, HeatCapability.CAPABILITY);
+            return Helpers.mightHaveCapability(stack, Capabilities.FluidHandler.ITEM, HeatCapability.CAPABILITY);
         }
     }
 
@@ -416,8 +414,8 @@ public class HellforgeBlockEntity extends TickableInventoryBlockEntity<ItemStack
     {
         // Try and consume a piece of fuel
         inventory.setStackInSlot(slot, ItemStack.EMPTY);
-        burnTicks += fuel.getDuration();
-        burnTemperature = fuel.getTemperature();
+        burnTicks += fuel.duration();
+        burnTemperature = fuel.temperature();
         markForSync();
     }
 

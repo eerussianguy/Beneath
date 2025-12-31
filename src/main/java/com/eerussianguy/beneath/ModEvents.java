@@ -12,14 +12,13 @@ import com.eerussianguy.beneath.common.entities.BeneathEntities;
 import com.eerussianguy.beneath.misc.BeneathClimateModels;
 import com.eerussianguy.beneath.misc.BeneathInteractionManager;
 import com.eerussianguy.beneath.mixin.BlockEntityTypeAccessor;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
 import net.dries007.tfc.common.blockentities.TFCBlockEntities;
 import net.dries007.tfc.common.blocks.IForgeBlockExtension;
@@ -27,10 +26,8 @@ import net.dries007.tfc.common.blocks.wood.Wood;
 
 public class ModEvents
 {
-    public static void init()
+    public static void init(IEventBus bus)
     {
-        final IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-
         bus.addListener(ModEvents::setup);
         bus.addListener(BeneathEntities::onAttributes);
     }
@@ -90,7 +87,7 @@ public class ModEvents
 
     private static void modifyBlockEntityType(BlockEntityType<?> type, Stream<Block> extraBlocks)
     {
-        Beneath.LOGGER.debug("Modifying block entity type: " + ForgeRegistries.BLOCK_ENTITY_TYPES.getKey(type));
+        Beneath.LOGGER.debug("Modifying block entity type: " + BuiltInRegistries.BLOCK_ENTITY_TYPE.getKey(type));
         Set<Block> blocks = ((BlockEntityTypeAccessor) (Object) type).accessor$getValidBlocks();
         blocks = new HashSet<>(blocks);
         blocks.addAll(extraBlocks.toList());

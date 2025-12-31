@@ -1,5 +1,6 @@
 package com.eerussianguy.beneath;
 
+import java.util.Optional;
 import com.eerussianguy.beneath.common.blockentities.HellforgeBlockEntity;
 import com.eerussianguy.beneath.common.blocks.BeneathBlockTags;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
@@ -7,13 +8,15 @@ import com.eerussianguy.beneath.common.blocks.CursecoalPileBlock;
 import com.eerussianguy.beneath.common.blocks.HellforgeBlock;
 import com.eerussianguy.beneath.common.blocks.HellforgeSideBlock;
 import com.eerussianguy.beneath.common.entities.BeneathEntities;
-import com.eerussianguy.beneath.common.network.BeneathPackets;
-import com.eerussianguy.beneath.misc.LostPage;
 import com.eerussianguy.beneath.misc.NetherClimateModel;
 import com.eerussianguy.beneath.misc.NetherFertilizer;
 import com.eerussianguy.beneath.misc.PortalUtil;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -33,26 +36,20 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.ToolActions;
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.OnDatapackSyncEvent;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.EntityMobGriefingEvent;
-import net.minecraftforge.event.entity.living.MobSpawnEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.level.BlockEvent;
-import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.util.TriState;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.EntityMobGriefingEvent;
+import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
 
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blocks.devices.CharcoalForgeBlock;
 import net.dries007.tfc.common.items.TFCItems;
-import net.dries007.tfc.config.TFCConfig;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.Metal;
 import net.dries007.tfc.util.events.SelectClimateModelEvent;
@@ -60,17 +57,12 @@ import net.dries007.tfc.util.events.StartFireEvent;
 
 public class ForgeEvents
 {
-    public static void init()
+    public static void init(IEventBus bus)
     {
-        final IEventBus bus = MinecraftForge.EVENT_BUS;
-
         bus.addListener(ForgeEvents::onBreakSpeed);
         bus.addListener(ForgeEvents::onMobGriefing);
         bus.addListener(ForgeEvents::onToolUse);
-        bus.addListener(ForgeEvents::onLogin);
         bus.addListener(ForgeEvents::onSelectClimateModel);
-        bus.addListener(ForgeEvents::onDataSync);
-        bus.addListener(ForgeEvents::onReloadListeners);
         bus.addListener(ForgeEvents::onEntityJoinLevel);
         bus.addListener(ForgeEvents::onSpawnCheck);
         bus.addListener(ForgeEvents::onFireStart);
@@ -81,21 +73,6 @@ public class ForgeEvents
     }
 
     private static final EquipmentSlot[] SLOTS = EquipmentSlot.values();
-
-    private static void onDataSync(OnDatapackSyncEvent event)
-    {
-        final ServerPlayer player = event.getPlayer();
-        final PacketDistributor.PacketTarget target = player == null ? PacketDistributor.ALL.noArg() : PacketDistributor.PLAYER.with(() -> player);
-
-        BeneathPackets.send(target, NetherFertilizer.MANAGER.createSyncPacket());
-        BeneathPackets.send(target, LostPage.MANAGER.createSyncPacket());
-    }
-
-    private static void onReloadListeners(AddReloadListenerEvent event)
-    {
-        event.addListener(NetherFertilizer.MANAGER);
-        event.addListener(LostPage.MANAGER);
-    }
 
     private static void onFireStart(StartFireEvent event)
     {
@@ -153,7 +130,7 @@ public class ForgeEvents
     {
         if (NetherFertilizer.get(event.getItemStack()) != null)
         {
-            event.setUseBlock(Event.Result.ALLOW);
+            event.setUseBlock(TriState.TRUE);
         }
     }
 
@@ -171,28 +148,42 @@ public class ForgeEvents
             {
                 if (main == Items.GOLDEN_SWORD || main == Items.STONE_SWORD)
                 {
-                    living.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(TFCItems.METAL_ITEMS.get(Metal.Default.BLACK_BRONZE).get(Metal.ItemType.SWORD).get()));
+                    living.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(TFCItems.METAL_ITEMS.get(Metal.BLACK_BRONZE).get(Metal.ItemType.SWORD).get()));
                 }
                 else if (main == Items.GOLDEN_AXE)
                 {
-                    living.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(TFCItems.METAL_ITEMS.get(Metal.Default.BLACK_BRONZE).get(Metal.ItemType.AXE).get()));
+                    living.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(TFCItems.METAL_ITEMS.get(Metal.BLACK_BRONZE).get(Metal.ItemType.AXE).get()));
                 }
                 for (EquipmentSlot slot : SLOTS)
                 {
                     if (!living.getItemBySlot(slot).isEmpty())
                     {
-                        living.setItemSlot(slot, new ItemStack(Helpers.getRandomElement(ForgeRegistries.ITEMS, TFCTags.Items.mobEquipmentSlotTag(slot), ((LivingEntity) entity).getRandom()).orElse(Items.AIR)));
+                        final TagKey<Item> tag = switch (slot)
+                        {
+                            case FEET -> TFCTags.Items.MOB_FEET_ARMOR;
+                            case LEGS -> TFCTags.Items.MOB_LEG_ARMOR;
+                            case CHEST -> TFCTags.Items.MOB_CHEST_ARMOR;
+                            case HEAD -> TFCTags.Items.MOB_HEAD_ARMOR;
+                            default -> null;
+                        };
+                        if (tag != null)
+                            living.setItemSlot(slot, new ItemStack(getRandomElement(BuiltInRegistries.ITEM, tag, entity.getRandom()).orElse(Items.AIR)));
                     }
                 }
             }
         }
     }
 
-    private static void onSpawnCheck(MobSpawnEvent.FinalizeSpawn event)
+    private static <T> Optional<T> getRandomElement(Registry<T> registry, TagKey<T> tag, RandomSource random)
+    {
+        return registry.getTag(tag).flatMap((set) -> set.getRandomElement(random)).map(Holder::value);
+    }
+
+    private static void onSpawnCheck(FinalizeSpawnEvent event)
     {
         if (event.getEntity() instanceof Strider)
         {
-            event.setResult(Event.Result.DENY);
+            event.setSpawnCancelled(true);
         }
     }
 
@@ -200,14 +191,8 @@ public class ForgeEvents
     {
         if (event.level().dimension().equals(Level.NETHER))
         {
-            event.setModel(new NetherClimateModel());
+            event.setModel(NetherClimateModel.INSTANCE);
         }
-    }
-
-    private static void onLogin(PlayerEvent.PlayerLoggedInEvent event)
-    {
-        Beneath.LOGGER.debug("Messing with TFC Server Config");
-        TFCConfig.SERVER.enableNetherPortals.set(true);
     }
 
     private static void onBreakSpeed(PlayerEvent.BreakSpeed event)
@@ -220,7 +205,7 @@ public class ForgeEvents
 
     private static void onToolUse(BlockEvent.BlockToolModificationEvent event)
     {
-        if (event.getToolAction() == ToolActions.HOE_TILL)
+        if (event.getItemAbility() == ItemAbilities.HOE_TILL)
         {
             final UseOnContext context = event.getContext();
             if (context.getLevel().getBlockState(context.getClickedPos()).getBlock() == Blocks.SOUL_SOIL)
@@ -234,7 +219,7 @@ public class ForgeEvents
     {
         if (event.getEntity() instanceof LargeFireball && event.getEntity().level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING))
         {
-            event.setResult(Event.Result.ALLOW);
+            event.setCanGrief(true);
         }
     }
 

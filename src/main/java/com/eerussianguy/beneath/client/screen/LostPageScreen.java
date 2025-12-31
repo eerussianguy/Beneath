@@ -27,7 +27,7 @@ public class LostPageScreen extends BeneathScreen
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick)
     {
-        renderBackground(graphics);
+        renderBackground(graphics, mouseX, mouseY, partialTick);
         final int x = (width - 256) / 2;
         final int y = (height - 256) / 2 + 32;
         graphics.blit(TEXTURE, x, y, 0, 0, 256, 256);

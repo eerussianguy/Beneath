@@ -6,6 +6,7 @@ import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.common.items.LostPageItem;
 import com.eerussianguy.beneath.misc.LostPage;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -14,16 +15,17 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 import net.dries007.tfc.common.blockentities.InventoryBlockEntity;
 import net.dries007.tfc.util.Helpers;
@@ -72,28 +74,23 @@ public class AncientAltarBlockEntity extends InventoryBlockEntity<ItemStackHandl
 
     public AncientAltarBlockEntity(BlockPos pos, BlockState state)
     {
-        super(BeneathBlockEntities.ANCIENT_ALTAR.get(), pos, state, defaultInventory(1), Beneath.blockEntityName("ancient_altar"));
+        super(BeneathBlockEntities.ANCIENT_ALTAR.get(), pos, state, defaultInventory(1), Beneath.MOD_ID);
     }
 
     @Override
-    public void loadAdditional(CompoundTag nbt)
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider access)
     {
-        super.loadAdditional(nbt);
+        super.loadAdditional(nbt, access);
         tick = nbt.getInt("tick");
         success = nbt.getInt("success");
     }
 
     @Override
-    public void saveAdditional(CompoundTag nbt)
+    public void saveAdditional(CompoundTag nbt, HolderLookup.Provider access)
     {
-        super.saveAdditional(nbt);
+        super.saveAdditional(nbt, access);
         nbt.putInt("tick", tick);
         nbt.putInt("success", success);
-    }
-
-    public IItemHandler getInventory()
-    {
-        return inventory;
     }
 
     public void playSuccess()
@@ -128,7 +125,7 @@ public class AncientAltarBlockEntity extends InventoryBlockEntity<ItemStackHandl
         super.setAndUpdateSlots(slot);
     }
 
-    public InteractionResult use(Player player, InteractionHand hand)
+    public ItemInteractionResult use(Player player, InteractionHand hand)
     {
         assert level != null;
         final BlockPos pos = worldPosition;
@@ -141,7 +138,7 @@ public class AncientAltarBlockEntity extends InventoryBlockEntity<ItemStackHandl
             {
                 held.shrink(1);
                 playSuccess();
-                return InteractionResult.sidedSuccess(level.isClientSide);
+                return ItemInteractionResult.sidedSuccess(level.isClientSide);
             }
             else if (stack.getItem() instanceof LostPageItem page && page.hasInitialized(stack))
             {
@@ -191,7 +188,7 @@ public class AncientAltarBlockEntity extends InventoryBlockEntity<ItemStackHandl
                     playFail();
                     player.displayClientMessage(Component.translatable("beneath.sacrifice.error"), true);
                 }
-                return InteractionResult.sidedSuccess(level.isClientSide);
+                return ItemInteractionResult.sidedSuccess(level.isClientSide);
             }
         }
 
@@ -201,7 +198,7 @@ public class AncientAltarBlockEntity extends InventoryBlockEntity<ItemStackHandl
             ItemHandlerHelper.giveItemToPlayer(player, inv.extractItem(0, 64, false));
         }
         ItemHandlerHelper.giveItemToPlayer(player, inv.insertItem(0, held.split(64), false));
-        return InteractionResult.sidedSuccess(level.isClientSide);
+        return ItemInteractionResult.sidedSuccess(level.isClientSide);
     }
 
 }

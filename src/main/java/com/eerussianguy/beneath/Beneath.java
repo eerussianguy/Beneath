@@ -4,11 +4,12 @@ package com.eerussianguy.beneath;
 import java.util.Locale;
 import com.eerussianguy.beneath.common.blockentities.BeneathBlockEntities;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
-import com.eerussianguy.beneath.common.container.BeneathContainerTypes;
+import com.eerussianguy.beneath.common.container.BeneathMenuTypes;
 import com.eerussianguy.beneath.common.entities.BeneathEntities;
 import com.eerussianguy.beneath.common.items.BeneathItems;
-import com.eerussianguy.beneath.common.network.BeneathPackets;
+import com.eerussianguy.beneath.misc.BeneathClimateModels;
 import com.eerussianguy.beneath.misc.BeneathCreativeTabs;
+import com.eerussianguy.beneath.misc.BeneathDataManagers;
 import com.eerussianguy.beneath.misc.BeneathParticles;
 import com.eerussianguy.beneath.world.BeneathFeatures;
 import com.eerussianguy.beneath.world.BeneathPlacementModifiers;
@@ -16,14 +17,16 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLEnvironment;
 
 import com.eerussianguy.beneath.client.ClientForgeEvents;
 import com.eerussianguy.beneath.client.ClientModEvents;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
 
@@ -34,21 +37,19 @@ public class Beneath
 
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public Beneath()
+    public Beneath(ModContainer mod, IEventBus bus)
     {
-
         if (FMLEnvironment.dist == Dist.CLIENT)
         {
-            ClientForgeEvents.init();
-            ClientModEvents.init();
+            ClientForgeEvents.init(NeoForge.EVENT_BUS);
+            ClientModEvents.init(bus);
         }
 
-        ForgeEvents.init();
-        ModEvents.init();
-        BeneathConfig.init();
-        BeneathPackets.init();
+        mod.registerConfig(ModConfig.Type.SERVER, BeneathConfig.SERVER.spec());
 
-        final IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        ForgeEvents.init(NeoForge.EVENT_BUS);
+        ModEvents.init(bus);
+
         BeneathBlocks.BLOCKS.register(bus);
         BeneathBlockEntities.BLOCK_ENTITIES.register(bus);
         BeneathItems.ITEMS.register(bus);
@@ -56,8 +57,10 @@ public class Beneath
         BeneathFeatures.FEATURES.register(bus);
         BeneathPlacementModifiers.MODIFIERS.register(bus);
         BeneathParticles.PARTICLE_TYPES.register(bus);
-        BeneathContainerTypes.CONTAINERS.register(bus);
+        BeneathMenuTypes.MENU.register(bus);
         BeneathCreativeTabs.TABS.register(bus);
+        BeneathClimateModels.TYPES.register(bus);
+        BeneathDataManagers.MANAGERS.register(bus);
     }
 
     public static MutableComponent translateEnum(Enum<?> anEnum) {
@@ -78,7 +81,7 @@ public class Beneath
 
     public static ResourceLocation identifier(String path)
     {
-        return new ResourceLocation(Beneath.MOD_ID, path);
+        return ResourceLocation.fromNamespaceAndPath(Beneath.MOD_ID, path);
     }
 
     public static Component blockEntityName(String path)

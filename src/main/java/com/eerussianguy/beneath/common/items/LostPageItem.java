@@ -76,7 +76,7 @@ public class LostPageItem extends Item
         final LostPage page = getLostPage(stack);
         if (page != null)
         {
-            return page.getIngredientTranslation() != null ? Component.translatable(page.getIngredientTranslation()) : null;
+            return page.getIngredientTranslation() != null ? page.getIngredientTranslation().copy() : null;
         }
         return null;
     }
@@ -142,7 +142,7 @@ public class LostPageItem extends Item
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag debug)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag)
     {
         if (hasInitialized(stack))
         {
@@ -150,7 +150,7 @@ public class LostPageItem extends Item
             tooltip.add(Component.translatable("beneath.screen.lost_page.reward").withStyle(ChatFormatting.GOLD).append(Component.literal(": ")).append(Component.literal(getRewardAmount(stack) + "x ").append(getReward(stack).getHoverName())));
             tooltip.add(Component.translatable("beneath.screen.lost_page.punishment").withStyle(ChatFormatting.BLUE).append(Component.literal(": ")).append(Beneath.translateEnum(getPunishment(stack))));
         }
-     }
+    }
 
     @Override
     public boolean isFoil(ItemStack stack)

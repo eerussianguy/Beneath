@@ -1,21 +1,27 @@
 package com.eerussianguy.beneath.misc;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.function.Supplier;
 import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.common.blocks.BeneathBlockTags;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
 import com.eerussianguy.beneath.common.items.LostPageItem;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -38,21 +44,38 @@ import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.event.EventHooks;
 import org.apache.logging.log4j.util.TriConsumer;
 import org.jetbrains.annotations.Nullable;
 
-import net.dries007.tfc.common.capabilities.player.PlayerData;
-import net.dries007.tfc.network.DataManagerSyncPacket;
-import net.dries007.tfc.util.DataManager;
+import net.dries007.tfc.common.player.IPlayerInfo;
+import net.dries007.tfc.network.StreamCodecs;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.JsonHelpers;
 import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.data.DataManager;
 
-public class LostPage
+public record LostPage(Ingredient cost, List<Integer> costs, Holder<Item> reward, List<Integer> rewards, List<Punishment> punishments, Optional<Component> translation)
 {
-    public static final DataManager<LostPage> MANAGER = new DataManager<>(Beneath.identifier("lost_pages"), "lost_page", LostPage::new, LostPage::new, LostPage::encode, LostPage.Packet::new);
+    public static final Codec<LostPage> CODEC = RecordCodecBuilder.create(i -> i.group(
+        Ingredient.CODEC.fieldOf("cost").forGetter(c -> c.cost),
+        Codec.INT.listOf().fieldOf("costs").forGetter(c -> c.costs),
+        BuiltInRegistries.ITEM.holderByNameCodec().fieldOf("reward").forGetter(c -> c.reward),
+        Codec.INT.listOf().fieldOf("rewards").forGetter(c -> c.rewards),
+        Punishment.CODEC.listOf().fieldOf("punishments").forGetter(c -> c.punishments),
+        ComponentSerialization.CODEC.optionalFieldOf("translation_key").forGetter(c -> c.translation)
+    ).apply(i, LostPage::new));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, LostPage> STREAM_CODEC = StreamCodec.composite(
+        Ingredient.CONTENTS_STREAM_CODEC, c -> c.cost,
+        ByteBufCodecs.INT.apply(ByteBufCodecs.list()), c -> c.costs,
+        ByteBufCodecs.holderRegistry(Registries.ITEM), c -> c.reward,
+        ByteBufCodecs.INT.apply(ByteBufCodecs.list()), c -> c.rewards,
+        Punishment.STREAM_CODEC.apply(ByteBufCodecs.list()), c -> c.punishments,
+        ByteBufCodecs.optional(ComponentSerialization.STREAM_CODEC), c -> c.translation,
+        LostPage::new
+    );
+
+    public static final DataManager<LostPage> MANAGER = new DataManager<>(Beneath.identifier("nether_fertilizer"), CODEC, STREAM_CODEC);
 
     public static boolean choose(ItemStack stack, RandomSource random)
     {
@@ -70,67 +93,6 @@ public class LostPage
         return false;
     }
 
-    private final ResourceLocation id;
-    private final Ingredient cost;
-    private final List<Integer> costs;
-    private final Item reward;
-    private final List<Integer> rewards;
-    private final List<Punishment> punishments;
-    @Nullable private final String ingredientTranslation;
-
-    private LostPage(ResourceLocation id, JsonObject json)
-    {
-        this.id = id;
-        cost = Ingredient.fromJson(json.get("cost"));
-        reward = JsonHelpers.getAsItem(json, "reward");
-        costs = JsonHelpers.getAsJsonArray(json, "costs").asList().stream().map(JsonElement::getAsInt).toList();
-        rewards = JsonHelpers.getAsJsonArray(json, "rewards").asList().stream().map(JsonElement::getAsInt).toList();
-        punishments = JsonHelpers.getAsJsonArray(json, "punishments").asList().stream().map(el -> JsonHelpers.getEnum(el, LostPage.Punishment.class)).toList();
-        ingredientTranslation = JsonHelpers.getAsString(json, "ingredient_translation", null);
-    }
-
-    private LostPage(ResourceLocation id, FriendlyByteBuf buffer)
-    {
-        this.id = id;
-        cost = Ingredient.fromNetwork(buffer);
-        reward = buffer.readRegistryIdUnsafe(ForgeRegistries.ITEMS);
-
-        costs = new ArrayList<>();
-        rewards = new ArrayList<>();
-        punishments = new ArrayList<>();
-        int size = buffer.readVarInt();
-        for (int i = 0; i < size; i++)
-            costs.add(buffer.readVarInt());
-        size = buffer.readVarInt();
-        for (int i = 0; i < size; i++)
-            rewards.add(buffer.readVarInt());
-        size = buffer.readVarInt();
-        for (int i = 0; i < size; i++)
-            punishments.add(buffer.readEnum(LostPage.Punishment.class));
-        ingredientTranslation = Helpers.decodeNullable(buffer, FriendlyByteBuf::readUtf);
-    }
-
-    private void encode(FriendlyByteBuf buffer)
-    {
-        cost.toNetwork(buffer);
-        buffer.writeRegistryIdUnsafe(ForgeRegistries.ITEMS, reward);
-        buffer.writeVarInt(costs.size());
-        for (int cost : costs)
-            buffer.writeVarInt(cost);
-        buffer.writeVarInt(rewards.size());
-        for (int rew : rewards)
-            buffer.writeVarInt(rew);
-        buffer.writeVarInt(punishments.size());
-        for (Punishment punish : punishments)
-            buffer.writeEnum(punish);
-        Helpers.encodeNullable(ingredientTranslation, buffer, (t, b) -> b.writeUtf(t));
-    }
-
-    public ResourceLocation getId()
-    {
-        return id;
-    }
-
     public Ingredient getCost()
     {
         return cost;
@@ -143,7 +105,7 @@ public class LostPage
 
     public Item getReward()
     {
-        return reward;
+        return reward.value();
     }
 
     public List<Integer> getRewards()
@@ -157,9 +119,9 @@ public class LostPage
     }
 
     @Nullable
-    public String getIngredientTranslation()
+    public Component getIngredientTranslation()
     {
-        return ingredientTranslation;
+        return translation.orElse(null);
     }
 
     public enum Punishment implements StringRepresentable
@@ -174,7 +136,7 @@ public class LostPage
             });
         }),
         DRUNKENNESS((player, level, pos) -> {
-            PlayerData.get(player).addIntoxicatedTicks(ICalendar.TICKS_IN_DAY);
+            IPlayerInfo.get(player).addIntoxication(ICalendar.CALENDAR_TICKS_IN_DAY);
             player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 20, 1));
         }),
         BLAZE_INFERNO((player, level, pos) -> {
@@ -216,6 +178,9 @@ public class LostPage
         }),
         ;
 
+        public static final Codec<Punishment> CODEC = StringRepresentable.fromEnum(Punishment::values);
+        public static final StreamCodec<ByteBuf, Punishment> STREAM_CODEC = StreamCodecs.forEnum(Punishment::values);
+
         public static Punishment valueOf(int id)
         {
             return id >= 0 && id < VALUES.length ? VALUES[id] : NONE;
@@ -237,7 +202,7 @@ public class LostPage
             if (level.isClientSide)
                 return;
             consumer.accept(player, level, pos);
-            Helpers.playSound(level, pos, SoundEvents.GENERIC_EXPLODE);
+            Helpers.playSound(level, pos, SoundEvents.GENERIC_EXPLODE.value());
             player.displayClientMessage(Component.translatable("beneath.punishment", Beneath.translateEnum(this)).withStyle(ChatFormatting.RED, ChatFormatting.BOLD), true);
         }
 
@@ -277,12 +242,9 @@ public class LostPage
                 {
                     entity.moveTo(Vec3.atBottomCenterOf(newPos));
                     level.addFreshEntity(entity);
-                    ForgeEventFactory.onFinalizeSpawn(entity, access, access.getCurrentDifficultyAt(newPos), MobSpawnType.EVENT, null, null);
+                    EventHooks.finalizeMobSpawn(entity, access, access.getCurrentDifficultyAt(newPos), MobSpawnType.EVENT, null);
                 }
             }
         }
     }
-
-    public static class Packet extends DataManagerSyncPacket<LostPage> {}
-
 }

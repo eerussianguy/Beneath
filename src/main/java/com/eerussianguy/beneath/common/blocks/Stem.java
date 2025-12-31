@@ -1,17 +1,20 @@
 package com.eerussianguy.beneath.common.blocks;
 
 import java.util.Locale;
+import java.util.Optional;
 import java.util.function.Supplier;
 import com.eerussianguy.beneath.Beneath;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 
 import net.dries007.tfc.common.blocks.wood.Wood;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.registry.RegistryWood;
-import net.dries007.tfc.world.feature.tree.TFCTreeGrower;
 
 import static net.dries007.tfc.common.blocks.wood.Wood.BlockType.*;
 
@@ -26,8 +29,8 @@ public enum Stem implements RegistryWood
     private final boolean conifer;
     private final MapColor woodColor;
     private final MapColor barkColor;
-    private final TFCTreeGrower tree;
-    private final int daysToGrow;
+    private final TreeGrower tree;
+    private final int ticksToGrow;
     private final BlockSetType blockSet;
     private final WoodType woodType;
 
@@ -37,10 +40,15 @@ public enum Stem implements RegistryWood
         this.conifer = conifer;
         this.woodColor = woodColor;
         this.barkColor = barkColor;
-        this.tree = new TFCTreeGrower(Beneath.identifier("tree/" + serializedName), Beneath.identifier("tree/" + serializedName + "_large"));
+        this.tree = new TreeGrower(
+            Beneath.identifier(serializedName).toString(),
+            Optional.empty(),
+            Optional.of(ResourceKey.create(Registries.CONFIGURED_FEATURE, Beneath.identifier("tree/" + serializedName))),
+            Optional.empty()
+        );
         this.blockSet = new BlockSetType(serializedName);
         this.woodType = new WoodType(Beneath.identifier(this.serializedName).toString(), this.blockSet);
-        this.daysToGrow = daysToGrow;
+        this.ticksToGrow = daysToGrow * ICalendar.CALENDAR_TICKS_IN_DAY;
     }
 
     @Override
@@ -67,26 +75,21 @@ public enum Stem implements RegistryWood
     }
 
     @Override
-    public TFCTreeGrower tree()
+    public TreeGrower tree()
     {
         return tree;
     }
 
     @Override
-    public int daysToGrow()
+    public Supplier<Integer> ticksToGrow()
     {
-        return defaultDaysToGrow();
+        return () -> ticksToGrow;
     }
 
     @Override
     public int autumnIndex()
     {
         return 0;
-    }
-
-    public int defaultDaysToGrow()
-    {
-        return daysToGrow;
     }
 
     @Override

@@ -10,13 +10,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
+import net.neoforged.neoforge.capabilities.Capabilities;
 
 import net.dries007.tfc.common.TFCTags;
-import net.dries007.tfc.common.capabilities.Capabilities;
 import net.dries007.tfc.common.container.ItemStackContainerProvider;
 import net.dries007.tfc.common.items.JugItem;
-import net.dries007.tfc.util.Tooltips;
+import net.dries007.tfc.util.tooltip.Tooltips;
 
 public class JuicerItem extends JugItem
 {
@@ -27,15 +26,15 @@ public class JuicerItem extends JugItem
         super(properties, () -> CAPACITY, TFCTags.Fluids.USABLE_IN_JUG);
     }
 
+
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltips, TooltipFlag isAdvanced)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltips, TooltipFlag isAdvanced)
     {
-        stack.getCapability(Capabilities.FLUID_ITEM).ifPresent(cap -> {
-            if (!cap.getFluidInTank(0).isEmpty())
-            {
-                tooltips.add(Tooltips.fluidUnitsAndCapacityOf(cap.getFluidInTank(0), CAPACITY));
-            }
-        });
+        final var cap = stack.getCapability(Capabilities.FluidHandler.ITEM);
+        if (cap != null && !cap.getFluidInTank(0).isEmpty())
+        {
+            tooltips.add(Tooltips.fluidUnitsAndCapacityOf(cap.getFluidInTank(0), CAPACITY));
+        }
     }
 
     @Override
@@ -56,6 +55,7 @@ public class JuicerItem extends JugItem
 
     private boolean hasFluid(ItemStack stack)
     {
-        return stack.getCapability(Capabilities.FLUID_ITEM).map(cap -> !cap.getFluidInTank(0).isEmpty()).orElse(false);
+        final var cap = stack.getCapability(Capabilities.FluidHandler.ITEM);
+        return cap != null && !cap.getFluidInTank(0).isEmpty();
     }
 }

@@ -13,11 +13,11 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.common.blocks.rock.Ore;
+import net.dries007.tfc.common.TFCCreativeTabs.Id;
 import net.dries007.tfc.util.Metal;
 import net.dries007.tfc.util.SelfTests;
 
@@ -26,11 +26,17 @@ public class BeneathCreativeTabs
 {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Beneath.MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> BENEATH = TABS.register("beneath", () -> CreativeModeTab.builder()
-        .title(Component.translatable("beneath.creative_tab.beneath"))
-        .icon(() -> new ItemStack(BeneathItems.CURSECOAL.get()))
-        .displayItems(BeneathCreativeTabs::fillTab)
-        .build());
+    public static final Id BENEATH = register("beneath", () -> new ItemStack(BeneathItems.CURSECOAL.get()), BeneathCreativeTabs::fillTab);
+
+    private static Id register(String name, Supplier<ItemStack> icon, CreativeModeTab.DisplayItemsGenerator displayItems)
+    {
+        final var holder = TABS.register(name, () -> CreativeModeTab.builder()
+            .icon(icon)
+            .title(Component.translatable("beneath.creative_tab." + name))
+            .displayItems(displayItems)
+            .build());
+        return new Id(holder, displayItems);
+    }
 
     private static void fillTab(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output out)
     {
@@ -81,9 +87,9 @@ public class BeneathCreativeTabs
             accept(out, BeneathItems.BOATS, wood);
             accept(out, BeneathItems.CHEST_MINECARTS, wood);
             accept(out, BeneathItems.SIGNS, wood);
-            for (Metal.Default metal : Metal.Default.values())
+            for (Metal metal : Metal.values())
             {
-                if (metal.hasUtilities())
+                if (metal.allParts())
                 {
                     accept(out, BeneathItems.HANGING_SIGNS.get(wood).get(metal));
                 }

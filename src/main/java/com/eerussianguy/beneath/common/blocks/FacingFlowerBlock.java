@@ -35,7 +35,6 @@ public class FacingFlowerBlock extends NFlowerBlock
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public BlockState rotate(BlockState state, Rotation rot)
     {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));

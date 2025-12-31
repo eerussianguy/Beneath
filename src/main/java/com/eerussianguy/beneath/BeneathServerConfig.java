@@ -1,12 +1,13 @@
 package com.eerussianguy.beneath;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import java.util.function.Supplier;
 
+import net.dries007.tfc.config.BaseConfig;
 import net.dries007.tfc.config.ConfigBuilder;
 
-public class BeneathServerConfig
+public class BeneathServerConfig extends BaseConfig
 {
-    public final ForgeConfigSpec.BooleanValue allowSacrifice;
+    public final Supplier<Boolean> allowSacrifice;
 
     public BeneathServerConfig(ConfigBuilder builder)
     {

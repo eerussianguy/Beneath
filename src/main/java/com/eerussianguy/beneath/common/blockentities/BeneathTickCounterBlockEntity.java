@@ -18,7 +18,6 @@ public class BeneathTickCounterBlockEntity extends TickCounterBlockEntity
 
     public BeneathTickCounterBlockEntity(BlockPos pos, BlockState state)
     {
-        super(BeneathBlockEntities.TICK_COUNTER.get(), pos, state);
     }
 
 }

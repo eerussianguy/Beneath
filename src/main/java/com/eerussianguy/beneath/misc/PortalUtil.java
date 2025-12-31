@@ -19,8 +19,8 @@ import net.minecraft.world.level.block.AbstractSkullBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.portal.PortalForcer;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.EventHooks;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 import net.dries007.tfc.common.blockentities.IngotPileBlockEntity;
 import net.dries007.tfc.common.blocks.TFCBlocks;
@@ -53,9 +53,9 @@ public final class PortalUtil
                         if (zoglin != null)
                         {
                             zoglin.moveTo(deadEntity.position());
-                            ForgeEventFactory.onFinalizeSpawn(zoglin, server, level.getCurrentDifficultyAt(pos), MobSpawnType.SPAWN_EGG, null, null);
+                            EventHooks.finalizeMobSpawn(zoglin, server, level.getCurrentDifficultyAt(pos), MobSpawnType.SPAWN_EGG, null);
                             server.tryAddFreshEntityWithPassengers(zoglin);
-                            if (zoglin.isAddedToWorld())
+                            if (zoglin.isAddedToLevel())
                             {
                                 zoglin.setAggressive(true);
                                 zoglin.setCanPickUpLoot(true);
@@ -99,8 +99,8 @@ public final class PortalUtil
         {
             return true;
         }
-        if (block == TFCBlocks.METALS.get(Metal.Default.GOLD).get(Metal.BlockType.BLOCK).get() ||
-            block == TFCBlocks.METALS.get(Metal.Default.BLACK_STEEL).get(Metal.BlockType.BLOCK).get()
+        if (block == TFCBlocks.METALS.get(Metal.GOLD).get(Metal.BlockType.BLOCK).get() ||
+            block == TFCBlocks.METALS.get(Metal.BLACK_STEEL).get(Metal.BlockType.BLOCK).get()
         )
         {
             return true;
@@ -108,9 +108,9 @@ public final class PortalUtil
         if (level.getBlockEntity(pos) instanceof IngotPileBlockEntity pile)
         {
             final Item item = pile.getPickedItemStack().getItem();
-            return item == TFCItems.METAL_ITEMS.get(Metal.Default.GOLD).get(Metal.ItemType.INGOT).get() ||
-                item == TFCItems.METAL_ITEMS.get(Metal.Default.PIG_IRON).get(Metal.ItemType.INGOT).get() ||
-                item == TFCItems.METAL_ITEMS.get(Metal.Default.BLACK_STEEL).get(Metal.ItemType.INGOT).get();
+            return item == TFCItems.METAL_ITEMS.get(Metal.GOLD).get(Metal.ItemType.INGOT).get() ||
+                item == TFCItems.METAL_ITEMS.get(Metal.PIG_IRON).get(Metal.ItemType.INGOT).get() ||
+                item == TFCItems.METAL_ITEMS.get(Metal.BLACK_STEEL).get(Metal.ItemType.INGOT).get();
         }
         return false;
     }

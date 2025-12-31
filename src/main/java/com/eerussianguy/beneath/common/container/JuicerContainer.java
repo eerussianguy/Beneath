@@ -32,7 +32,7 @@ public class JuicerContainer extends ItemStackContainer implements ISlotCallback
 
     public JuicerContainer(int windowId, Inventory playerInv, ItemStack stack, InteractionHand hand, int slot)
     {
-        super(BeneathContainerTypes.JUICER_CONTAINER.get(), windowId, playerInv, stack, hand, slot);
+        super(BeneathMenuTypes.JUICER.get(), windowId, playerInv, stack, hand, slot);
         this.inventory = new InventoryItemHandler(this, 1);
     }
 

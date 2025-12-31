@@ -5,15 +5,13 @@ import java.util.List;
 import com.eerussianguy.beneath.misc.NetherFertilizer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 public final class ClientForgeEvents
 {
-    public static void init()
+    public static void init(IEventBus bus)
     {
-        final IEventBus bus = MinecraftForge.EVENT_BUS;
         bus.addListener(ClientForgeEvents::onTooltip);
     }
 

@@ -17,7 +17,7 @@ public class HellforgeContainer extends BlockEntityContainer<HellforgeBlockEntit
 
     private HellforgeContainer(HellforgeBlockEntity blockEntity, int windowId)
     {
-        super(BeneathContainerTypes.HELLFORGE_CONTAINER.get(), windowId, blockEntity);
+        super(BeneathMenuTypes.HELLFORGE.get(), windowId, blockEntity);
 
         addDataSlots(blockEntity.getSyncableData());
     }

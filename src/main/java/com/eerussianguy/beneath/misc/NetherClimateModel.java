@@ -7,19 +7,21 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 
+import net.dries007.tfc.util.climate.ClimateModel;
 import net.dries007.tfc.util.climate.ClimateModelType;
-import net.dries007.tfc.util.climate.TimeInvariantClimateModel;
 
-public class NetherClimateModel implements TimeInvariantClimateModel
+public enum NetherClimateModel implements ClimateModel
 {
+    INSTANCE;
+
     @Override
-    public ClimateModelType type()
+    public ClimateModelType<NetherClimateModel> type()
     {
         return BeneathClimateModels.NETHER.get();
     }
 
     @Override
-    public float getTemperature(LevelReader level, BlockPos pos)
+    public float getAverageTemperature(LevelReader level, BlockPos pos)
     {
         final Holder<Biome> name = level.getBiome(pos);
         if (name.is(Biomes.NETHER_WASTES.location()))
@@ -51,7 +53,7 @@ public class NetherClimateModel implements TimeInvariantClimateModel
     }
 
     @Override
-    public float getRainfall(LevelReader level, BlockPos pos)
+    public float getAverageRainfall(LevelReader level, BlockPos pos)
     {
         return 0;
     }

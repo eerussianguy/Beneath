@@ -1,28 +1,21 @@
 package com.eerussianguy.beneath;
 
 import java.util.function.Function;
-
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.config.ModConfig;
 
-import com.eerussianguy.beneath.client.BeneathClientConfig;
-
+import net.dries007.tfc.config.BaseConfig;
 import net.dries007.tfc.config.ConfigBuilder;
-import net.dries007.tfc.util.Helpers;
 
 public class BeneathConfig
 {
-    public static final BeneathClientConfig CLIENT = register(ModConfig.Type.CLIENT, BeneathClientConfig::new, "client");
-    public static final BeneathServerConfig SERVER = register(ModConfig.Type.SERVER, BeneathServerConfig::new, "server");
+    public static final BeneathServerConfig SERVER = register(BeneathServerConfig::new, ConfigBuilder.ServerValue::new, "server");
 
-    public static void init() {}
-
-    private static <C> C register(ModConfig.Type type, Function<ConfigBuilder, C> factory, String prefix)
+    private static <C extends BaseConfig> C register(Function<ConfigBuilder, C> factory, ConfigBuilder.Factory value, String prefix)
     {
-        final Pair<C, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(builder -> factory.apply(new ConfigBuilder(builder, prefix)));
-        if (!Helpers.BOOTSTRAP_ENVIRONMENT) ModLoadingContext.get().registerConfig(type, specPair.getRight());
-        return specPair.getLeft();
+        final Pair<C, ModConfigSpec> pair = new ModConfigSpec.Builder()
+            .configure(builder -> factory.apply(new ConfigBuilder(builder, value, prefix)));
+        pair.getKey().updateSpec(pair.getValue());
+        return pair.getKey();
     }
 }

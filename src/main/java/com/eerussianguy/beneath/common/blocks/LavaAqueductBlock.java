@@ -1,5 +1,6 @@
 package com.eerussianguy.beneath.common.blocks;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -7,9 +8,9 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -26,14 +27,14 @@ import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.common.blocks.DirectionPropertyBlock;
-import net.dries007.tfc.common.blocks.rock.AqueductBlock;
+import net.dries007.tfc.common.blocks.IForgeBlockExtension;
 import net.dries007.tfc.common.fluids.FluidHelpers;
 import net.dries007.tfc.common.fluids.FluidProperty;
 import net.dries007.tfc.common.fluids.IFluidLoggable;
@@ -47,6 +48,8 @@ public class LavaAqueductBlock extends HorizontalDirectionalBlock implements IFl
     public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
     public static final BooleanProperty WEST = BlockStateProperties.WEST;
 
+    private static final int SHORT_TICK_DELAY = 5;
+    private static final int LONG_TICK_DELAY = SHORT_TICK_DELAY * 4;
     private static final VoxelShape[] SHAPES = new VoxelShape[16];
 
     static
@@ -216,24 +219,35 @@ public class LavaAqueductBlock extends HorizontalDirectionalBlock implements IFl
     }
 
     @Override
-    public ItemStack pickupBlock(LevelAccessor level, BlockPos pos, BlockState state)
+    public ItemStack pickupBlock(@Nullable Player player, LevelAccessor level, BlockPos pos, BlockState state)
     {
-        if (state.getValue(getFluidProperty()).getFluid() != Fluids.EMPTY)
+        final Fluid containedFluid = state.getValue(getFluidProperty()).getFluid();
+        if (containedFluid != Fluids.EMPTY)
         {
-            level.scheduleTick(pos, this, getLongTickDelay(level));
+            level.scheduleTick(pos, this, LONG_TICK_DELAY);
         }
-        return IFluidLoggable.super.pickupBlock(level, pos, state);
+        return IFluidLoggable.super.pickupBlock(player, level, pos, state);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidLoggedState(state);
+        return IFluidLoggable.super.getFluidState(state);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
+    protected boolean isRandomlyTicking(BlockState state)
+    {
+        return state.getFluidState().isRandomlyTicking();
+    }
+
+    @Override
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
+    {
+        state.getFluidState().randomTick(level, pos, random);
+    }
+
+    @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         // First, if we have a fluid, we have to check if this fluid is still valid
@@ -325,14 +339,12 @@ public class LavaAqueductBlock extends HorizontalDirectionalBlock implements IFl
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public BlockState rotate(BlockState state, Rotation rot)
     {
         return DirectionPropertyBlock.rotate(super.rotate(state, rot), rot);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public BlockState mirror(BlockState state, Mirror mirror)
     {
         // super method uses rotate which breaks the orientation of asymmetrical blocks
@@ -348,7 +360,7 @@ public class LavaAqueductBlock extends HorizontalDirectionalBlock implements IFl
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity)
     {
-        if (state.getValue(getFluidProperty()).getFluid().isSame(Fluids.LAVA) && !entity.fireImmune() && entity instanceof LivingEntity living && !EnchantmentHelper.hasFrostWalker(living))
+        if (state.getValue(getFluidProperty()).getFluid().isSame(Fluids.LAVA) && entity instanceof LivingEntity living && !living.isSteppingCarefully())
         {
             entity.hurt(level.damageSources().hotFloor(), 1.0F);
         }
@@ -358,14 +370,20 @@ public class LavaAqueductBlock extends HorizontalDirectionalBlock implements IFl
 
     @Nullable
     @Override
-    public BlockPathTypes getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob entity)
+    public PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob entity)
     {
-        return state.getValue(FLUID).getFluid().isSame(Fluids.LAVA) ? BlockPathTypes.DAMAGE_FIRE : null;
+        return state.getValue(FLUID).getFluid().isSame(Fluids.LAVA) ? PathType.DAMAGE_FIRE : null;
     }
 
     @Override
     public FluidProperty getFluidProperty()
     {
         return FLUID;
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec()
+    {
+        return IForgeBlockExtension.getFakeBlockCodec();
     }
 }

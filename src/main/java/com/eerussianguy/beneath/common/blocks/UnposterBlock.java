@@ -11,6 +11,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -106,8 +107,7 @@ public class UnposterBlock extends BottomSupportedDeviceBlock implements EntityB
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit)
+    public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit)
     {
         final int stage = state.getValue(STAGE);
         final ItemStack held = player.getItemInHand(hand);
@@ -117,9 +117,9 @@ public class UnposterBlock extends BottomSupportedDeviceBlock implements EntityB
             level.setBlockAndUpdate(pos, state.setValue(STAGE, Math.min(8, stage + Mth.nextInt(level.random, 1, 2))));
             held.shrink(1);
             Helpers.playSound(level, pos, SoundEvents.NYLIUM_PLACE);
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
 
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 }

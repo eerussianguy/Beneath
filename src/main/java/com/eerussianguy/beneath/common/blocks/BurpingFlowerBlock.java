@@ -30,7 +30,6 @@ public class BurpingFlowerBlock extends FacingFlowerBlock
     }
     
     @Override
-    @SuppressWarnings("deprecation")
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
     {
         if (meetsConditions(level, pos, state))

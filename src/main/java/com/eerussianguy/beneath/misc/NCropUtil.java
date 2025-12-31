@@ -1,6 +1,5 @@
 package com.eerussianguy.beneath.misc;
 
-import java.util.Random;
 import com.eerussianguy.beneath.common.blockentities.SoulFarmlandBlockEntity;
 import com.eerussianguy.beneath.common.blocks.NetherCropBlock;
 import net.minecraft.core.BlockPos;

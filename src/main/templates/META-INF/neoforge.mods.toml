@@ -1,0 +1,47 @@
+# Loader metadata
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "MIT"
+issueTrackerURL = "https://github.com/eerussianguy/Beneath/issues"
+
+# TFC
+[[mods]]
+    modId = "${modId}"
+    version = "${modVersion}"
+    displayName = "Beneath"
+    credits = "EERussianguy"
+    authors = "EERussianguy"
+    description = '''A nether expansion addon for TFC.'''
+
+# Dependencies
+[[dependencies.beneath]]
+    modId = "patchouli"
+    type = "required"
+    versionRange = "${patchouliVersionRange}"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.beneath]]
+    modId = "jei"
+    type = "optional"
+    versionRange = "${jeiVersionRange}"
+    ordering = "NONE"
+    side = "CLIENT"
+
+[[dependencies.beneath]]
+    modId = "neoforge"
+    type = "required"
+    versionRange = "${neoForgeVersionRange}"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.beneath]]
+    modId = "minecraft"
+    type = "required"
+    versionRange = "${minecraftVersionRange}"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[mixins]]
+    config = "${modId}.mixins.json"
+

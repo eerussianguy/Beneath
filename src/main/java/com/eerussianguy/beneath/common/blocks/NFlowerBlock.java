@@ -26,7 +26,6 @@ public class NFlowerBlock extends TFCBushBlock
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext)
     {
         return PLANT_SHAPE;

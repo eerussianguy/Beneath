@@ -12,13 +12,12 @@ import com.eerussianguy.beneath.client.screen.JuicerScreen;
 import com.eerussianguy.beneath.common.blockentities.BeneathBlockEntities;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
 import com.eerussianguy.beneath.common.blocks.Stem;
-import com.eerussianguy.beneath.common.container.BeneathContainerTypes;
+import com.eerussianguy.beneath.common.container.BeneathMenuTypes;
 import com.eerussianguy.beneath.common.entities.BeneathEntities;
 import com.eerussianguy.beneath.misc.BeneathParticles;
 import com.eerussianguy.beneath.misc.ColoredSmokeParticleProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
@@ -28,42 +27,37 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 
-import net.dries007.tfc.client.RenderHelpers;
 import net.dries007.tfc.client.particle.GlintParticleProvider;
 import net.dries007.tfc.client.render.entity.SimpleMobRenderer;
 import net.dries007.tfc.client.render.entity.TFCBoatRenderer;
 import net.dries007.tfc.client.render.entity.TFCChestBoatRenderer;
+import net.dries007.tfc.common.component.TFCComponents;
 import net.dries007.tfc.util.Helpers;
 
 import static net.dries007.tfc.common.blocks.wood.Wood.BlockType.*;
 
 public class ClientModEvents
 {
-    public static void init()
+    public static void init(IEventBus bus)
     {
-        final IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-
         bus.addListener(ClientModEvents::setup);
         bus.addListener(ClientModEvents::onEntityRenderers);
         bus.addListener(ClientModEvents::onLayers);
         bus.addListener(ClientModEvents::onParticlesRegister);
+        bus.addListener(ClientModEvents::onMenuRegister);
     }
 
     @SuppressWarnings("deprecation")
     private static void setup(FMLClientSetupEvent event)
     {
         event.enqueueWork(() -> {
-            BeneathBlocks.WOODS.values().forEach(map -> ItemProperties.register(map.get(BARREL).get().asItem(), Helpers.identifier("sealed"), (stack, level, entity, unused) -> stack.hasTag() ? 1.0f : 0f));
-
-            MenuScreens.register(BeneathContainerTypes.HELLFORGE_CONTAINER.get(), HellforgeScreen::new);
-            MenuScreens.register(BeneathContainerTypes.JUICER_CONTAINER.get(), JuicerScreen::new);
+            BeneathBlocks.WOODS.values().forEach(map -> ItemProperties.register(map.get(BARREL).get().asItem(), Helpers.identifier("sealed"), (stack, level, entity, unused) -> stack.has(TFCComponents.BARREL) ? 1.0f : 0f));
 
             for (Stem stem : Stem.VALUES)
             {
@@ -76,8 +70,7 @@ public class ClientModEvents
         final RenderType cutoutMipped = RenderType.cutoutMipped();
         final RenderType translucent = RenderType.translucent();
 
-        Stream.of(BeneathBlocks.GLEAMFLOWER, BeneathBlocks.BURPFLOWER)
-            .map(RegistryObject::get).forEach(b -> ItemBlockRenderTypes.setRenderLayer(b, cutout));
+        Stream.of(BeneathBlocks.GLEAMFLOWER, BeneathBlocks.BURPFLOWER).forEach(b -> ItemBlockRenderTypes.setRenderLayer(b.get(), cutout));
         BeneathBlocks.SHROOMS.values().forEach(reg -> ItemBlockRenderTypes.setRenderLayer(reg.get(), cutout));
 
         BeneathBlocks.WOODS.values().forEach(map -> {
@@ -95,6 +88,12 @@ public class ClientModEvents
         ItemBlockRenderTypes.setRenderLayer(BeneathBlocks.ANCIENT_ALTAR.get(), cutout);
         ItemBlockRenderTypes.setRenderLayer(BeneathBlocks.SLIMED_NETHERRACK.get(), translucent);
 
+    }
+
+    public static void onMenuRegister(RegisterMenuScreensEvent event)
+    {
+        event.register(BeneathMenuTypes.HELLFORGE.get(), HellforgeScreen::new);
+        event.register(BeneathMenuTypes.JUICER.get(), JuicerScreen::new);
     }
 
     private static final ResourceLocation RED_ELK_LOCATION = Beneath.identifier("textures/entity/nether_deer.png");
@@ -126,10 +125,10 @@ public class ClientModEvents
         {
             event.registerLayerDefinition(TFCBoatRenderer.boatName(wood.getSerializedName()), () -> boatLayer);
             event.registerLayerDefinition(TFCChestBoatRenderer.chestBoatName(wood.getSerializedName()), () -> chestLayer);
-            event.registerLayerDefinition(RenderHelpers.modelIdentifier("sign/" + wood.getSerializedName()), () -> signLayer);
+            event.registerLayerDefinition(BeneathClientUtil.layerId("sign/" + wood.getSerializedName()), () -> signLayer);
         }
 
-        event.registerLayerDefinition(RenderHelpers.modelIdentifier("red_elk"), RedElkModel::createBodyLayer);
+        event.registerLayerDefinition(BeneathClientUtil.layerId("red_elk"), RedElkModel::createBodyLayer);
     }
 
     private static void onParticlesRegister(RegisterParticleProvidersEvent event)

@@ -23,10 +23,7 @@ public class ColoredSmokeParticleProvider extends LargeSmokeParticle.Provider
     public LargeSmokeParticle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double dx, double dy, double dz)
     {
         final LargeSmokeParticle part = (LargeSmokeParticle) super.createParticle(type, level, x, y, z, dx, dy, dz);
-        if (part != null)
-        {
-            part.setColor(r, g, b);
-        }
+        part.setColor(r, g, b);
         return part;
     }
 }

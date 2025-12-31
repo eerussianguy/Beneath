@@ -5,10 +5,10 @@ import com.eerussianguy.beneath.common.items.JuicerItem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
+import net.neoforged.neoforge.capabilities.Capabilities;
 
 import net.dries007.tfc.client.screen.TFCContainerScreen;
-import net.dries007.tfc.common.capabilities.Capabilities;
-import net.dries007.tfc.util.Tooltips;
+import net.dries007.tfc.util.tooltip.Tooltips;
 
 public class JuicerScreen extends TFCContainerScreen<JuicerContainer>
 {
@@ -21,12 +21,15 @@ public class JuicerScreen extends TFCContainerScreen<JuicerContainer>
     protected void renderLabels(GuiGraphics graphics, int x, int y)
     {
         super.renderLabels(graphics, x, y);
-        drawCenteredLine(graphics, Component.translatable("beneath.screen.juicer.mushrooms"), 16);
-        menu.getTargetStack().getCapability(Capabilities.FLUID_ITEM).ifPresent(cap -> {
+        drawLine(graphics, Component.translatable("beneath.screen.juicer.mushrooms"), TextAlignment.CENTER, 16);
+
+        final var cap = menu.getTargetStack().getCapability(Capabilities.FluidHandler.ITEM);
+        if (cap != null)
+        {
             if (!cap.getFluidInTank(0).isEmpty())
             {
-                drawCenteredLine(graphics, Tooltips.fluidUnitsAndCapacityOf(cap.getFluidInTank(0), JuicerItem.CAPACITY), 55);
+                drawLine(graphics, Tooltips.fluidUnitsAndCapacityOf(cap.getFluidInTank(0), JuicerItem.CAPACITY), TextAlignment.CENTER, 55);
             }
-        });
+        }
     }
 }
