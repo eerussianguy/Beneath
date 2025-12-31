@@ -3,8 +3,8 @@ from patchouli import *
 from argparse import ArgumentParser
 from typing import Optional
 
-BOOK_LANGUAGES = ('en_us',)
-MOD_LANGUAGES = ('en_us',)
+BOOK_LANGUAGES = ('en_us', 'uk_ua')
+MOD_LANGUAGES = ('en_us', 'uk_ua')
 
 class LocalInstance:
     INSTANCE_DIR = None
