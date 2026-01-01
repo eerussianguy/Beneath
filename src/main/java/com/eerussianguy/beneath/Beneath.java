@@ -8,6 +8,7 @@ import com.eerussianguy.beneath.common.container.BeneathMenuTypes;
 import com.eerussianguy.beneath.common.entities.BeneathEntities;
 import com.eerussianguy.beneath.common.items.BeneathItems;
 import com.eerussianguy.beneath.misc.BeneathClimateModels;
+import com.eerussianguy.beneath.common.component.BeneathComponents;
 import com.eerussianguy.beneath.misc.BeneathCreativeTabs;
 import com.eerussianguy.beneath.misc.BeneathDataManagers;
 import com.eerussianguy.beneath.misc.BeneathParticles;
@@ -61,6 +62,7 @@ public class Beneath
         BeneathCreativeTabs.TABS.register(bus);
         BeneathClimateModels.TYPES.register(bus);
         BeneathDataManagers.MANAGERS.register(bus);
+        BeneathComponents.COMPONENT.register(bus);
     }
 
     public static MutableComponent translateEnum(Enum<?> anEnum) {

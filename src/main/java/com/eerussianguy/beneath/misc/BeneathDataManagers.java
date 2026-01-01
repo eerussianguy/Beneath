@@ -1,5 +1,6 @@
 package com.eerussianguy.beneath.misc;
 
+import com.eerussianguy.beneath.common.component.LostPage;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import net.dries007.tfc.TerraFirmaCraft;

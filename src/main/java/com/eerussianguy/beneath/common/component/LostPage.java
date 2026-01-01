@@ -1,4 +1,4 @@
-package com.eerussianguy.beneath.misc;
+package com.eerussianguy.beneath.common.component;
 
 import java.util.List;
 import java.util.Locale;
@@ -46,7 +46,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.EventHooks;
 import org.apache.logging.log4j.util.TriConsumer;
-import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.common.player.IPlayerInfo;
 import net.dries007.tfc.network.StreamCodecs;
@@ -87,41 +86,10 @@ public record LostPage(Ingredient cost, List<Integer> costs, Holder<Item> reward
                 Beneath.LOGGER.error("No lost pages loaded... skipping");
                 return false;
             }
-            page.init(stack, random, list.get(random.nextInt(list.size())));
+            stack.set(BeneathComponents.LOST_PAGE.get(), LostPageComponent.init(stack, random, list.get(random.nextInt(list.size()))));
             return true;
         }
         return false;
-    }
-
-    public Ingredient getCost()
-    {
-        return cost;
-    }
-
-    public List<Integer> getCosts()
-    {
-        return costs;
-    }
-
-    public Item getReward()
-    {
-        return reward.value();
-    }
-
-    public List<Integer> getRewards()
-    {
-        return rewards;
-    }
-
-    public List<Punishment> getPunishments()
-    {
-        return punishments;
-    }
-
-    @Nullable
-    public Component getIngredientTranslation()
-    {
-        return translation.orElse(null);
     }
 
     public enum Punishment implements StringRepresentable

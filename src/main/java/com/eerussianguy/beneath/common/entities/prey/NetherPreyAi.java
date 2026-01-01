@@ -27,7 +27,7 @@ public class NetherPreyAi
     public static void initCoreActivity(Brain<? extends Prey> brain)
     {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
-            new AnimalPanic(2.0F),
+            new AnimalPanic<>(2.0F),
             new LookAtTargetSink(45, 90),
             new MoveToTargetSink()
         ));
