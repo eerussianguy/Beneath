@@ -95,7 +95,7 @@ public class BeneathBlocks
     public static final Id<Block> ANCIENT_ALTAR = register("ancient_altar", () -> new AncientAltarBlock(ExtendedProperties.of().mapColor(MapColor.COLOR_BLACK).strength(8f).noOcclusion().sound(SoundType.GILDED_BLACKSTONE).blockEntity(BeneathBlockEntities.ANCIENT_ALTAR).ticks(AncientAltarBlockEntity::tickBothSides)));
     public static final Id<Block> SLIMED_NETHERRACK = register("ore/slimed_netherrack", () -> new SlimeBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SLIME_BLOCK).strength(1f).sound(SoundType.NETHERRACK)));
 
-    public static final Map<Shroom, Id<Block>> SHROOMS = Helpers.mapOf(Shroom.class, shroom -> registerNoItem("mushroom/" + shroom.getSerializedName(), () -> new NFlowerBlock(ExtendedProperties.of(Blocks.CRIMSON_FUNGUS))));
+    public static final Map<Shroom, Id<Block>> MUSHROOMS = Helpers.mapOf(Shroom.class, shroom -> registerNoItem("mushroom/" + shroom.getSerializedName(), () -> new NFlowerBlock(ExtendedProperties.of(Blocks.CRIMSON_FUNGUS))));
     public static final Map<Stem, Map<Wood.BlockType, Id<Block>>> WOODS = Helpers.mapOf(Stem.class, wood ->
         Helpers.mapOf(Wood.BlockType.class, type ->
             register(type.nameFor(wood), createWood(wood, type), type.createBlockItem(wood, new Item.Properties()))

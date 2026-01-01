@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "beneath:crop/ghost_pepper",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "6"
+          }
+        }
+      ],
+      "entries": [],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "beneath:seeds/ghost_pepper"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "beneath:blocks/crop/ghost_pepper"
+}

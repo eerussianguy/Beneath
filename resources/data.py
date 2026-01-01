@@ -33,32 +33,6 @@ def generate(rm: ResourceManager):
 
     ### LOOT ###
 
-    rm.block_loot('minecraft:netherrack', loot_tables.alternatives({'name': 'minecraft:netherrack', 'conditions': [{'condition': 'tfc:is_isolated'}]}, '2-4 beneath:nether_pebble'))
-    rm.block_loot('minecraft:crimson_nylium', loot_tables.alternatives({'name': 'minecraft:crimson_nylium', 'conditions': [{'condition': 'tfc:is_isolated'}]}, '2-4 beneath:nether_pebble'))
-    rm.block_loot('minecraft:warped_nylium', loot_tables.alternatives({'name': 'minecraft:warped_nylium', 'conditions': [{'condition': 'tfc:is_isolated'}]}, '2-4 beneath:nether_pebble'))
-    rm.block_loot('minecraft:basalt', loot_tables.alternatives({'name': 'minecraft:basalt', 'conditions': [{'condition': 'tfc:is_isolated'}]}, '2-4 tfc:rock/loose/basalt'))
-    rm.block_loot('minecraft:gilded_blackstone', 'minecraft:blackstone', {'name': 'beneath:gold_chunk', 'conditions': [loot_tables.random_chance(0.25)]})
-    rm.block_loot('minecraft:gold_block', '3-6 beneath:gold_chunk')
-    rm.block_loot('minecraft:blackstone', loot_tables.alternatives({'name': 'minecraft:blackstone', 'conditions': [{'condition': 'tfc:is_isolated'}]}, '2-4 beneath:blackstone_pebble'))
-    rm.block_loot('minecraft:crimson_roots', loot_tables.alternatives({'name': 'minecraft:crimson_roots', 'conditions': [loot_tables.match_tag('forge:shears')]}, {'name': 'beneath:crimson_straw', 'conditions': [loot_tables.match_tag('tfc:sharp_tools')]}, {'name': 'beneath:seeds/crimson_roots', 'conditions': [loot_tables.random_chance(0.1)]}))
-    rm.block_loot('minecraft:warped_roots', loot_tables.alternatives({'name': 'minecraft:warped_roots', 'conditions': [loot_tables.match_tag('forge:shears')]}, {'name': 'beneath:warped_straw', 'conditions': [loot_tables.match_tag('tfc:sharp_tools')]}, {'name': 'beneath:seeds/warped_roots', 'conditions': [loot_tables.random_chance(0.1)]}))
-    rm.block_loot('minecraft:bone_block', '1-3 minecraft:bone_meal')
-    rm.block_loot('minecraft:lantern', 'tfc:lamp_glass', 'tfc:metal/bars/wrought_iron')
-    rm.block_loot('minecraft:soul_lantern', 'tfc:lamp_glass', 'tfc:metal/bars/wrought_iron')
-    rm.block_loot('minecraft:gravel', {
-           'conditions': [loot_tables.silk_touch()],
-           'name': 'tfc:rock/gravel/basalt'
-       }, loot_tables.alternatives({
-            'type': 'minecraft:item',
-            'conditions': [loot_tables.fortune_table((0.1, 0.14285715, 0.25, 1.0))],
-            'name': 'minecraft:flint'
-       }, {
-        'type': 'minecraft:item',
-        'name': 'tfc:rock/gravel/basalt'
-       }, conditions=['minecraft:survives_explosion']
-    ))
-    rm.block_loot('minecraft:nether_wart', '1-3 beneath:seeds/nether_wart', {'name': 'minecraft:nether_wart', 'conditions': [loot_tables.block_state_property('minecraft:nether_wart[age=3]')]})
-
     rm.loot('minecraft:ruined_portal', {
         'rolls': uniform(1, 2),
         'entries': [

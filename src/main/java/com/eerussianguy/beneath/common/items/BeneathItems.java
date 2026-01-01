@@ -52,7 +52,7 @@ public class BeneathItems
     public static final ItemId RAW_SLIME = register("raw_slime");
     public static final ItemId WARPED_STRAW = register("warped_straw");
 
-    public static final Map<Shroom, ItemId> SHROOMS = Helpers.mapOf(Shroom.class, shroom -> register("food/" + shroom.getSerializedName(), () -> new Item(new Item.Properties().food(getPoisonProperties(shroom.isPoison())))));
+    public static final Map<Shroom, ItemId> MUSHROOMS = Helpers.mapOf(Shroom.class, shroom -> register("food/" + shroom.getSerializedName(), () -> new Item(new Item.Properties().food(getPoisonProperties(shroom.isPoison())))));
     public static final Map<Stem, ItemId> LUMBER = Helpers.mapOf(Stem.class, wood -> register("wood/lumber/" + wood.name()));
     public static final Map<Stem, ItemId> SUPPORTS = Helpers.mapOf(Stem.class, wood ->
         register("wood/support/" + wood.name(), () -> new StandingAndWallBlockItem(BeneathBlocks.WOODS.get(wood).get(Wood.BlockType.VERTICAL_SUPPORT).get(), BeneathBlocks.WOODS.get(wood).get(Wood.BlockType.HORIZONTAL_SUPPORT).get(), new Item.Properties(), Direction.DOWN))

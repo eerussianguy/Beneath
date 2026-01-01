@@ -50,7 +50,7 @@ public class BeneathCreativeTabs
         accept(out, BeneathItems.RED_ELK_EGG);
         accept(out, BeneathItems.GHOST_PEPPER);
         accept(out, BeneathItems.LOST_PAGE);
-        BeneathItems.SHROOMS.values().forEach(shroom -> accept(out, shroom));
+        BeneathItems.MUSHROOMS.values().forEach(shroom -> accept(out, shroom));
         BeneathItems.SEEDS.values().forEach(seed -> accept(out, seed));
         accept(out, BeneathItems.AGONIZING_FERTILIZER);
         BeneathItems.PURE_NUTRIENTS.values().forEach(fertilizer -> accept(out, fertilizer));

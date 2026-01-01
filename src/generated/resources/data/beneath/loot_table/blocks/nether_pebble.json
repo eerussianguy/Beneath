@@ -1,0 +1,49 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "beneath:nether_pebble",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "count": "2"
+              }
+            },
+            {
+              "block": "beneath:nether_pebble",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "count": "3"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "count": 3.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "beneath:nether_pebble"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "beneath:blocks/nether_pebble"
+}

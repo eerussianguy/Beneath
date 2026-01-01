@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "beneath:blackstone_aqueduct"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "beneath:blocks/blackstone_aqueduct"
+}

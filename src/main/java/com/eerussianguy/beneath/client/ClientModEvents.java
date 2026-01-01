@@ -71,7 +71,7 @@ public class ClientModEvents
         final RenderType translucent = RenderType.translucent();
 
         Stream.of(BeneathBlocks.GLEAMFLOWER, BeneathBlocks.BURPFLOWER).forEach(b -> ItemBlockRenderTypes.setRenderLayer(b.get(), cutout));
-        BeneathBlocks.SHROOMS.values().forEach(reg -> ItemBlockRenderTypes.setRenderLayer(reg.get(), cutout));
+        BeneathBlocks.MUSHROOMS.values().forEach(reg -> ItemBlockRenderTypes.setRenderLayer(reg.get(), cutout));
 
         BeneathBlocks.WOODS.values().forEach(map -> {
             Stream.of(SAPLING, DOOR, TRAPDOOR, FENCE, FENCE_GATE, BUTTON, PRESSURE_PLATE, SLAB, STAIRS, TWIG, BARREL, SCRIBING_TABLE, POTTED_SAPLING).forEach(type -> ItemBlockRenderTypes.setRenderLayer(map.get(type).get(), cutout));
