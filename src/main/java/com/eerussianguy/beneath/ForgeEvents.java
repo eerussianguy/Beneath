@@ -7,7 +7,6 @@ import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
 import com.eerussianguy.beneath.common.blocks.CursecoalPileBlock;
 import com.eerussianguy.beneath.common.blocks.HellforgeBlock;
 import com.eerussianguy.beneath.common.blocks.HellforgeSideBlock;
-import com.eerussianguy.beneath.common.entities.BeneathEntities;
 import com.eerussianguy.beneath.misc.NetherClimateModel;
 import com.eerussianguy.beneath.misc.NetherFertilizer;
 import com.eerussianguy.beneath.misc.PortalUtil;

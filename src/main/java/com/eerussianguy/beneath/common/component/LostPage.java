@@ -74,7 +74,7 @@ public record LostPage(Ingredient cost, List<Integer> costs, Holder<Item> reward
         LostPage::new
     );
 
-    public static final DataManager<LostPage> MANAGER = new DataManager<>(Beneath.identifier("nether_fertilizer"), CODEC, STREAM_CODEC);
+    public static final DataManager<LostPage> MANAGER = new DataManager<>(Beneath.identifier("lost_page"), CODEC, STREAM_CODEC);
 
     public static boolean choose(ItemStack stack, RandomSource random)
     {

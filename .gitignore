@@ -25,3 +25,4 @@ resources/__pycache__
 
 # Files from Forge MDK
 forge*changelog.txt
+/src/generated/resources/.cache/
