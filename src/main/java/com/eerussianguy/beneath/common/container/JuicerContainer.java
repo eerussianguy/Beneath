@@ -9,16 +9,15 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
 
-import net.dries007.tfc.common.capabilities.Capabilities;
 import net.dries007.tfc.common.capabilities.InventoryItemHandler;
-import net.dries007.tfc.common.container.CallbackSlot;
 import net.dries007.tfc.common.container.ISlotCallback;
 import net.dries007.tfc.common.container.ItemStackContainer;
+import net.dries007.tfc.common.container.slot.CallbackSlot;
 import net.dries007.tfc.util.Helpers;
 
 public class JuicerContainer extends ItemStackContainer implements ISlotCallback
@@ -39,7 +38,9 @@ public class JuicerContainer extends ItemStackContainer implements ISlotCallback
     @Override
     public void broadcastChanges()
     {
-        stack.getCapability(Capabilities.FLUID_ITEM).ifPresent(cap -> {
+        final var cap = stack.getCapability(Capabilities.FluidHandler.ITEM);
+        if (cap != null)
+        {
             final ItemStack stack = inventory.getStackInSlot(0);
             if (!stack.isEmpty() && cap.getFluidInTank(0).getAmount() < JuicerItem.CAPACITY)
             {
@@ -47,7 +48,7 @@ public class JuicerContainer extends ItemStackContainer implements ISlotCallback
                 stack.shrink(Mth.ceil(filled / 50f));
                 player.playSound(SoundEvents.BUCKET_EMPTY);
             }
-        });
+        }
         super.broadcastChanges();
     }
 
@@ -85,10 +86,5 @@ public class JuicerContainer extends ItemStackContainer implements ISlotCallback
     public boolean isItemValid(int slot, ItemStack stack)
     {
         return Helpers.isItem(stack, BeneathItemTags.USABLE_IN_JUICER);
-    }
-
-    public IItemHandlerModifiable getInventory()
-    {
-        return inventory;
     }
 }

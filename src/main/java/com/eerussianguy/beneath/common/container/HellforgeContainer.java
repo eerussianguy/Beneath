@@ -3,10 +3,10 @@ package com.eerussianguy.beneath.common.container;
 import com.eerussianguy.beneath.common.blockentities.HellforgeBlockEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.items.IItemHandler;
 
-import net.dries007.tfc.common.capabilities.Capabilities;
 import net.dries007.tfc.common.container.BlockEntityContainer;
-import net.dries007.tfc.common.container.CallbackSlot;
+import net.dries007.tfc.common.container.slot.CallbackSlot;
 
 public class HellforgeContainer extends BlockEntityContainer<HellforgeBlockEntity>
 {
@@ -36,24 +36,21 @@ public class HellforgeContainer extends BlockEntityContainer<HellforgeBlockEntit
     @Override
     protected void addContainerSlots()
     {
-        blockEntity.getCapability(Capabilities.ITEM).ifPresent(handler -> {
-            int index = 0;
-            for (int x = 27; x <= 117; x += 18)
+        final IItemHandler inv = blockEntity.getInventory();
+        int index = 0;
+        for (int x = 27; x <= 117; x += 18)
+        {
+            for (int y = 21; y <= 57; y += 18)
             {
-                for (int y = 21; y <= 57; y += 18)
-                {
-                    addSlot(new CallbackSlot(blockEntity, handler, index, x, y));
-                    index += 1;
-                }
-            }
-
-            for (int y = 16; y <= 70; y += 18)
-            {
-                addSlot(new CallbackSlot(blockEntity, handler, index, 151, y));
+                addSlot(new CallbackSlot(blockEntity, inv, index, x, y));
                 index += 1;
             }
-        });
+        }
 
-
+        for (int y = 16; y <= 70; y += 18)
+        {
+            addSlot(new CallbackSlot(blockEntity, inv, index, 151, y));
+            index += 1;
+        }
     }
 }

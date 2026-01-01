@@ -55,7 +55,7 @@ public class HellforgeBlock extends CharcoalForgeBlock
                         {
                             mb.match(new BlockPos(x, 0, z), sideTest);
                         }
-                        mb.match(new BlockPos(x, 1, z), s -> s.isAir() || Helpers.isBlock(s, TFCTags.Blocks.FORGE_INVISIBLE_WHITELIST));
+                        mb.match(new BlockPos(x, 1, z), s -> s.isAir() || Helpers.isBlock(s, TFCTags.Blocks.CHARCOAL_FORGE_INVISIBLE));
                         mb.match(new BlockPos(x, -1, z), BeneathBlockTags.HELLFORGE_INSULATION);
                     }
                     else
@@ -131,7 +131,7 @@ public class HellforgeBlock extends CharcoalForgeBlock
         {
             if (player instanceof ServerPlayer serverPlayer)
             {
-                Helpers.openScreen(serverPlayer, forge, pos);
+                serverPlayer.openMenu(forge, pos);
                 return ItemInteractionResult.SUCCESS;
             }
         }

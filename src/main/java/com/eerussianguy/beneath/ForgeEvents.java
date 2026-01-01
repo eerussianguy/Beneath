@@ -67,7 +67,6 @@ public class ForgeEvents
         bus.addListener(ForgeEvents::onSpawnCheck);
         bus.addListener(ForgeEvents::onFireStart);
         bus.addListener(ForgeEvents::onEntityInteract);
-        bus.addListener(BeneathEntities::onSpawnPlacement);
         bus.addListener(PortalUtil::onLivingDeath);
         bus.addListener(EventPriority.LOWEST, true, ForgeEvents::onPlayerRightClickBlockLowestPriority);
     }

@@ -1,6 +1,7 @@
 package com.eerussianguy.beneath.common.blockentities;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.BiConsumer;
 import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
@@ -8,6 +9,7 @@ import com.eerussianguy.beneath.common.blocks.HellforgeBlock;
 import com.eerussianguy.beneath.common.blocks.HellforgeSideBlock;
 import com.eerussianguy.beneath.common.container.HellforgeContainer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
@@ -28,15 +30,19 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import org.apache.logging.log4j.util.TriConsumer;
 import org.jetbrains.annotations.Nullable;
 
+import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blockentities.BellowsBlockEntity;
 import net.dries007.tfc.common.blockentities.TickableInventoryBlockEntity;
 import net.dries007.tfc.common.blocks.devices.CharcoalForgeBlock;
 import net.dries007.tfc.common.component.food.FoodCapability;
 import net.dries007.tfc.common.component.food.FoodTraits;
+import net.dries007.tfc.common.component.heat.Heat;
 import net.dries007.tfc.common.component.heat.HeatCapability;
+import net.dries007.tfc.common.component.heat.IHeat;
 import net.dries007.tfc.common.recipes.HeatingRecipe;
 import net.dries007.tfc.config.TFCConfig;
 import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.SyncableContainerData;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.dries007.tfc.util.data.Fuel;
 
@@ -99,17 +105,19 @@ public class HellforgeBlockEntity extends TickableInventoryBlockEntity<ItemStack
             forge.temperature = HeatCapability.adjustDeviceTemp(forge.temperature, forge.burnTemperature, forge.airTicks, isRaining);
 
             cursor.setWithOffset(pos, 0, 1, 0);
-            HeatCapability.provideHeatTo(level, cursor, forge.temperature);
+            HeatCapability.provideHeatTo(level, cursor, Direction.DOWN, forge.temperature);
 
             forge.forEachSlot((stack, slot) -> {
-                stack.getCapability(HeatCapability.CAPABILITY).ifPresent(cap -> {
+                final @Nullable IHeat cap = HeatCapability.get(stack);
+                if (cap != null)
+                {
                     // Update temperature of item
                     float itemTemp = cap.getTemperature();
                     if (forge.temperature > itemTemp)
                     {
                         HeatCapability.addTemp(cap, forge.temperature, 2.0F + forge.temperature * 0.0025F);
                     }
-                });
+                }
 
                 final CachedTransformation ct = forge.cachedRecipes[slot];
                 if (ct != null && ct.predicate.test(forge, stack, slot))
@@ -168,14 +176,14 @@ public class HellforgeBlockEntity extends TickableInventoryBlockEntity<ItemStack
 
     public HellforgeBlockEntity(BlockPos pos, BlockState state)
     {
-        super(BeneathBlockEntities.HELLFORGE.get(), pos, state, defaultInventory(SLOT_EXTRA_MAX + 1), Beneath.blockEntityName("hellforge"));
+        super(BeneathBlockEntities.HELLFORGE.get(), pos, state, defaultInventory(SLOT_EXTRA_MAX + 1), Beneath.MOD_ID);
 
         temperature = 0;
         burnTemperature = 0;
         burnTicks = 0;
         airTicks = 0;
         lastPlayerTick = Integer.MIN_VALUE;
-        syncableData = new IntArrayBuilder().add(() -> (int) temperature, value -> temperature = value);
+        syncableData = new SyncableContainerData().add(() -> (int) temperature, value -> temperature = value);
 
         if (TFCConfig.SERVER.charcoalForgeEnableAutomation.get())
         {
@@ -220,7 +228,7 @@ public class HellforgeBlockEntity extends TickableInventoryBlockEntity<ItemStack
             {
                 // Consumed all fuel, so extinguish and cool instantly
                 extinguish();
-                forEachSlot((stack, slot) -> stack.getCapability(HeatCapability.CAPABILITY).ifPresent(cap -> cap.setTemperature(0f)), false);
+                forEachSlot((stack, slot) -> HeatCapability.setTemperature(stack, 0), false);
             }
         }
     }
@@ -306,11 +314,12 @@ public class HellforgeBlockEntity extends TickableInventoryBlockEntity<ItemStack
     {
         if (slot < ITEM_SLOTS)
         {
-            return Helpers.mightHaveCapability(stack, HeatCapability.CAPABILITY) || Fuel.get(stack) != null;
+            return HeatCapability.has(stack) || Helpers.isItem(stack.getItem(), TFCTags.Items.FORGE_FUEL);
         }
         else
         {
-            return Helpers.mightHaveCapability(stack, Capabilities.FluidHandler.ITEM, HeatCapability.CAPABILITY);
+            if (!Helpers.mightHaveCapability(stack, Capabilities.FluidHandler.ITEM)) return false;
+            return HeatCapability.has(stack);
         }
     }
 
@@ -390,11 +399,12 @@ public class HellforgeBlockEntity extends TickableInventoryBlockEntity<ItemStack
 
     private void handleInputMelting(HeatingRecipe recipe, ItemStack stack, int startIndex)
     {
-        stack.getCapability(HeatCapability.CAPABILITY).ifPresent(cap -> {
+        final IHeat cap = HeatCapability.get(stack);
+        if (cap != null)
+        {
             // Handle possible metal output
-            final ItemStackInventory inventory = new ItemStackInventory(stack);
-            FluidStack fluidStack = recipe.assembleFluid(inventory);
-            ItemStack outputStack = recipe.assemble(inventory, null);
+            FluidStack fluidStack = recipe.assembleFluid(stack);
+            ItemStack outputStack = recipe.assembleItem(stack);
             float itemTemperature = cap.getTemperature();
 
             // Loop through all input slots
@@ -406,8 +416,7 @@ public class HellforgeBlockEntity extends TickableInventoryBlockEntity<ItemStack
 
             FoodCapability.applyTrait(outputStack, FoodTraits.CHARCOAL_GRILLED);
             this.inventory.setStackInSlot(startIndex, outputStack);
-            markForSync();
-        });
+        }
     }
 
     private void consumeFuel(Fuel fuel, int slot)
@@ -444,7 +453,7 @@ public class HellforgeBlockEntity extends TickableInventoryBlockEntity<ItemStack
 
         static CachedTransformation create(HeatingRecipe recipe)
         {
-            return new CachedTransformation((forge, stack, slot) -> forge.handleInputMelting(recipe, stack, slot), (forge, stack, slot) -> stack.getCapability(HeatCapability.CAPABILITY).map(cap -> recipe.isValidTemperature(cap.getTemperature())).orElse(false));
+            return new CachedTransformation((forge, stack, slot) -> forge.handleInputMelting(recipe, stack, slot), (forge, stack, slot) -> Optional.ofNullable(HeatCapability.get(stack)).map(cap -> recipe.isValidTemperature(cap.getTemperature())).orElse(false));
         }
 
         static CachedTransformation create(Fuel fuel)

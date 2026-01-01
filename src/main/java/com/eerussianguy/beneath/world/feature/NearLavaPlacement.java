@@ -3,6 +3,7 @@ package com.eerussianguy.beneath.world.feature;
 import java.util.stream.Stream;
 import com.eerussianguy.beneath.world.BeneathPlacementModifiers;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
@@ -17,7 +18,7 @@ import net.dries007.tfc.world.Codecs;
 
 public class NearLavaPlacement extends PlacementModifier
 {
-    public static final Codec<NearLavaPlacement> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final MapCodec<NearLavaPlacement> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
         Codecs.POSITIVE_INT.optionalFieldOf("radius", 2).forGetter(c -> c.radius)
     ).apply(instance, NearLavaPlacement::new));
 

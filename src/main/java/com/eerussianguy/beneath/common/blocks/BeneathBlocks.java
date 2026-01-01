@@ -124,7 +124,7 @@ public class BeneathBlocks
         }
         if (blockType == Wood.BlockType.SAPLING)
         {
-            return () -> new NetherSaplingBlock(stem.tree(), ExtendedProperties.of(MapColor.PLANT).noCollission().randomTicks().strength(0).sound(SoundType.GRASS).flammableLikeLeaves().blockEntity(TFCBlockEntities.TICK_COUNTER), stem::daysToGrow, false);
+            return () -> new NetherSaplingBlock(stem.tree(), ExtendedProperties.of(MapColor.PLANT).noCollission().randomTicks().strength(0).sound(SoundType.GRASS).flammableLikeLeaves().blockEntity(TFCBlockEntities.TICK_COUNTER), stem.ticksToGrow(), false);
         }
         if (blockType == Wood.BlockType.AXLE)
         {

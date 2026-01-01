@@ -30,6 +30,7 @@ public class ModEvents
     {
         bus.addListener(ModEvents::setup);
         bus.addListener(BeneathEntities::onAttributes);
+        bus.addListener(BeneathEntities::onSpawnPlacement);
     }
 
     private static void setup(FMLCommonSetupEvent event)

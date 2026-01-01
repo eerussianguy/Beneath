@@ -3,6 +3,7 @@ package com.eerussianguy.beneath.world.feature;
 import java.util.stream.Stream;
 import com.eerussianguy.beneath.world.BeneathPlacementModifiers;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -14,7 +15,7 @@ import net.dries007.tfc.world.Codecs;
 
 public class HeightLimitPlacement extends PlacementModifier
 {
-    public static final Codec<HeightLimitPlacement> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final MapCodec<HeightLimitPlacement> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
         Codecs.POSITIVE_INT.fieldOf("min").forGetter(c -> c.min),
         Codecs.POSITIVE_INT.fieldOf("max").forGetter(c -> c.max))
         .apply(instance, HeightLimitPlacement::new));
