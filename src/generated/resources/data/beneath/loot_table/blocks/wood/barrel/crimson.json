@@ -1,0 +1,52 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "beneath:wood/barrel/crimson",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "sealed": "true"
+                  }
+                }
+              ],
+              "functions": [
+                {
+                  "function": "minecraft:copy_components",
+                  "include": [
+                    "minecraft:custom_name",
+                    "tfc:barrel"
+                  ],
+                  "source": "block_entity"
+                },
+                {
+                  "function": "tfc:apply_stack_size"
+                }
+              ],
+              "name": "beneath:wood/barrel/crimson"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "beneath:wood/barrel/crimson"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "beneath:blocks/wood/barrel/crimson"
+}

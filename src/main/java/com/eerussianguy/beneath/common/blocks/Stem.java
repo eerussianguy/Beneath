@@ -20,8 +20,8 @@ import static net.dries007.tfc.common.blocks.wood.Wood.BlockType.*;
 
 public enum Stem implements RegistryWood
 {
-    CRIMSON(true, MapColor.TERRACOTTA_RED, MapColor.COLOR_RED, 8),
-    WARPED(true, MapColor.TERRACOTTA_BLUE, MapColor.COLOR_BLUE, 8);
+    CRIMSON(true, MapColor.TERRACOTTA_RED, MapColor.COLOR_RED, 8, 0.0428f),
+    WARPED(true, MapColor.TERRACOTTA_BLUE, MapColor.COLOR_BLUE, 8, 0.0115f);
 
     public static final Stem[] VALUES = values();
 
@@ -33,8 +33,9 @@ public enum Stem implements RegistryWood
     private final int ticksToGrow;
     private final BlockSetType blockSet;
     private final WoodType woodType;
+    private final float saplingChance;
 
-    Stem(boolean conifer, MapColor woodColor, MapColor barkColor, int daysToGrow)
+    Stem(boolean conifer, MapColor woodColor, MapColor barkColor, int daysToGrow, float saplingChance)
     {
         this.serializedName = name().toLowerCase(Locale.ROOT);
         this.conifer = conifer;
@@ -49,6 +50,12 @@ public enum Stem implements RegistryWood
         this.blockSet = new BlockSetType(serializedName);
         this.woodType = new WoodType(Beneath.identifier(this.serializedName).toString(), this.blockSet);
         this.ticksToGrow = daysToGrow * ICalendar.CALENDAR_TICKS_IN_DAY;
+        this.saplingChance = saplingChance;
+    }
+
+    public float getSaplingDropChance()
+    {
+        return saplingChance;
     }
 
     @Override

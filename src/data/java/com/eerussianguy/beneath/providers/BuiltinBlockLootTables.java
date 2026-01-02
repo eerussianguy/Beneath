@@ -9,10 +9,12 @@ import com.eerussianguy.beneath.common.blocks.BeneathMineral;
 import com.eerussianguy.beneath.common.blocks.BeneathOre;
 import com.eerussianguy.beneath.common.blocks.NCrop;
 import com.eerussianguy.beneath.common.blocks.NetherCropBlock;
+import com.eerussianguy.beneath.common.blocks.Stem;
 import com.eerussianguy.beneath.common.items.BeneathItems;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.resources.ResourceKey;
@@ -26,30 +28,42 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.NetherWartBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.SequentialEntry;
+import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
+import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
 import net.dries007.tfc.common.TFCTags;
+import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
 import net.dries007.tfc.common.blocks.TFCBlocks;
+import net.dries007.tfc.common.blocks.devices.BarrelBlock;
+import net.dries007.tfc.common.blocks.devices.SluiceBlock;
 import net.dries007.tfc.common.blocks.rock.LooseRockBlock;
 import net.dries007.tfc.common.blocks.rock.Ore;
 import net.dries007.tfc.common.blocks.rock.Rock;
+import net.dries007.tfc.common.blocks.wood.BranchDirection;
+import net.dries007.tfc.common.blocks.wood.FallenLeavesBlock;
+import net.dries007.tfc.common.blocks.wood.Wood;
+import net.dries007.tfc.common.component.TFCComponents;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Metal;
+import net.dries007.tfc.util.loot.ApplyStackSizeFunction;
 import net.dries007.tfc.util.loot.IsIsolatedCondition;
 
 import static net.minecraft.world.level.storage.loot.LootPool.*;
@@ -57,6 +71,7 @@ import static net.minecraft.world.level.storage.loot.LootTable.*;
 import static net.minecraft.world.level.storage.loot.entries.LootItem.*;
 import static net.minecraft.world.level.storage.loot.predicates.ExplosionCondition.*;
 import static net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition.hasBlockStateProperties;
+import static net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition.*;
 
 public class BuiltinBlockLootTables extends BlockLootSubProvider implements Accessors
 {
@@ -170,8 +185,156 @@ public class BuiltinBlockLootTables extends BlockLootSubProvider implements Acce
         BeneathBlocks.MUSHROOMS.forEach((shroom, block) -> dropOther(block.get(), BeneathItems.MUSHROOMS.get(shroom)));
         addIsolated(BeneathBlocks.CRACKRACK.get(), BeneathItems.CRACKRACK_ROCK);
 
+        BeneathBlocks.WOODS.forEach((stem, map) -> map.forEach((type, block) -> createWood(stem, type)));
+
+        BeneathBlocks.CEILING_HANGING_SIGNS.forEach((stem, map) -> map.forEach((metal, block) -> dropOther(block.get(), BeneathItems.HANGING_SIGNS.get(stem).get(metal))));
+        BeneathBlocks.WALL_HANGING_SIGNS.forEach((stem, map) -> map.forEach((metal, block) -> dropOther(block.get(), BeneathItems.HANGING_SIGNS.get(stem).get(metal))));
     }
 
+    protected void createWood(Stem species, Wood.BlockType blockType)
+    {
+        Block block = species.getBlock(blockType).get();
+        switch (blockType)
+        {
+            case LOG, STRIPPED_LOG, WOOD, STRIPPED_WOOD:
+                createLogDrops(species, blockType);
+                break;
+            case LEAVES:
+                createLeavesDrops(block, species.getBlock(Wood.BlockType.SAPLING).get(), species.getSaplingDropChance());
+                break;
+            case POTTED_SAPLING:
+                add(block, createPotFlowerItemTable(species.getBlock(Wood.BlockType.SAPLING).get().asItem()));
+                break;
+            case VERTICAL_SUPPORT, HORIZONTAL_SUPPORT:
+                dropOther(block, BeneathItems.SUPPORTS.get(species));
+                break;
+            case BARREL:
+                createBarrelDrop(species);
+                break;
+            case DOOR:
+                add(block, b -> lootTable().withPool(lootPool().add(lootTableItem(b)).when(hasProperty(b, DoorBlock.HALF, DoubleBlockHalf.LOWER))));
+                break;
+            case SLUICE:
+                add(block, b -> lootTable().withPool(lootPool().add(lootTableItem(b)).when(hasProperty(b, SluiceBlock.UPPER, true))));
+                break;
+            case SIGN:
+                dropOther(block, BeneathItems.SIGNS.get(species));
+                break;
+            case FALLEN_LEAVES:
+                createFallingLeaves(block);
+                break;
+            default:
+                dropSelf(block);
+        }
+    }
+
+    private void createFallingLeaves(Block block)
+    {
+        add(block,
+            b -> LootTable.lootTable().withPool(
+                lootPool()
+                    .add(
+                        lootTableItem(b)
+                            .apply(setCount(2).when(hasProperty(b, FallenLeavesBlock.LAYERS, 2)))
+                            .apply(setCount(3).when(hasProperty(b, FallenLeavesBlock.LAYERS, 3)))
+                            .apply(setCount(4).when(hasProperty(b, FallenLeavesBlock.LAYERS, 4)))
+                            .apply(setCount(5).when(hasProperty(b, FallenLeavesBlock.LAYERS, 5)))
+                            .apply(setCount(6).when(hasProperty(b, FallenLeavesBlock.LAYERS, 6)))
+                            .apply(setCount(7).when(hasProperty(b, FallenLeavesBlock.LAYERS, 7)))
+                            .apply(setCount(8).when(hasProperty(b, FallenLeavesBlock.LAYERS, 8)))
+                    )
+            ));
+    }
+
+    public void createLeavesDrops(Block leavesBlock, Block saplingBlock, float saplingDropRate)
+    {
+        add(leavesBlock, LootTable.lootTable()
+            .withPool(
+                lootPool()
+                    .setRolls(ConstantValue.exactly(1))
+                    .name("self_pool")
+                    .add(lootTableItem(leavesBlock)
+                        .when(hasShearsOrSilkTouch()))
+                    .when(survivesExplosion())
+            ).withPool(
+                lootPool()
+                    .setRolls(ConstantValue.exactly(1))
+                    .name("sapling_pool")
+                    .add(lootTableItem(saplingBlock.asItem())
+                        .when(survivesExplosion())
+                        .when(randomChance(saplingDropRate))
+                    )
+                    .when(survivesExplosion())
+            )
+            .withPool(
+                lootPool()
+                    .setRolls(ConstantValue.exactly(1))
+                    .name("stick_pool")
+                    .add(AlternativesEntry.alternatives(
+                        lootTableItem(Items.STICK)
+                            .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(TFCTags.Items.TOOLS_SHARP)))
+                            .when(InvertedLootItemCondition.invert(hasShearsOrSilkTouch()))
+                            .when(randomChance(0.2f))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))),
+                        lootTableItem(Items.STICK)
+                            .when(InvertedLootItemCondition.invert(hasShearsOrSilkTouch()))
+                            .when(randomChance(0.05f))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                    ))
+                    .when(survivesExplosion())
+            )
+        );
+    }
+
+    protected void createLogDrops(Stem species, Wood.BlockType blockType)
+    {
+        final Block thisBlock = species.getBlock(blockType).get();
+        final Item logItem = species.getBlock(Wood.BlockType.LOG).get().asItem();
+
+        add(thisBlock, LootTable.lootTable()
+            .withPool(
+                lootPool()
+                    .setRolls(ConstantValue.exactly(1))
+                    .add(AlternativesEntry.alternatives(
+                        lootTableItem(Items.STICK)
+                            .when(isHammer())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))),
+                        lootTableItem(logItem)
+                            .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(thisBlock).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(TFCBlockStateProperties.BRANCH_DIRECTION, BranchDirection.NONE)).invert()),
+                        lootTableItem(thisBlock.asItem())
+                    )).when(survivesExplosion())
+            )
+        );
+    }
+
+    protected void createBarrelDrop(Stem wood)
+    {
+        final Block barrelBlock = wood.getBlock(Wood.BlockType.BARREL).get();
+
+        add(barrelBlock, LootTable.lootTable()
+            .withPool(
+                lootPool()
+                    .setRolls(ConstantValue.exactly(1))
+                    .add(AlternativesEntry.alternatives(
+                        lootTableItem(barrelBlock)
+                            .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(barrelBlock).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(TFCBlockStateProperties.SEALED, true)))
+                            .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY).include(DataComponents.CUSTOM_NAME).include(TFCComponents.BARREL.get()))
+                            .apply(ApplyStackSizeFunction.simpleBuilder(ApplyStackSizeFunction::new)),
+                        lootTableItem(barrelBlock.asItem())
+                    )).when(survivesExplosion())
+            )
+        );
+    }
+
+    private LootItemCondition.Builder hasShearsOrSilkTouch()
+    {
+        return MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.TOOLS_SHEAR)).or(this.hasSilkTouch());
+    }
+
+    private LootItemCondition.Builder isHammer()
+    {
+        return MatchTool.toolMatches(ItemPredicate.Builder.item().of(TFCTags.Items.TOOLS_HAMMER));
+    }
 
     private LootTable.Builder createGrass(Block block, ItemLike straw, ItemLike seed)
     {
@@ -223,7 +386,7 @@ public class BuiltinBlockLootTables extends BlockLootSubProvider implements Acce
 
     private static LootItemCondition.Builder chance(float chance)
     {
-        return LootItemRandomChanceCondition.randomChance(chance);
+        return randomChance(chance);
     }
 
     private Block metal(Metal metal, Metal.BlockType type)

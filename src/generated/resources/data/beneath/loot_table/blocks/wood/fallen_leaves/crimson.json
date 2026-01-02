@@ -1,0 +1,116 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "beneath:wood/fallen_leaves/crimson",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "layers": "2"
+                  }
+                }
+              ],
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "beneath:wood/fallen_leaves/crimson",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "layers": "3"
+                  }
+                }
+              ],
+              "count": 3.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "beneath:wood/fallen_leaves/crimson",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "layers": "4"
+                  }
+                }
+              ],
+              "count": 4.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "beneath:wood/fallen_leaves/crimson",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "layers": "5"
+                  }
+                }
+              ],
+              "count": 5.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "beneath:wood/fallen_leaves/crimson",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "layers": "6"
+                  }
+                }
+              ],
+              "count": 6.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "beneath:wood/fallen_leaves/crimson",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "layers": "7"
+                  }
+                }
+              ],
+              "count": 7.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "beneath:wood/fallen_leaves/crimson",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "layers": "8"
+                  }
+                }
+              ],
+              "count": 8.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "beneath:wood/fallen_leaves/crimson"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "beneath:blocks/wood/fallen_leaves/crimson"
+}
