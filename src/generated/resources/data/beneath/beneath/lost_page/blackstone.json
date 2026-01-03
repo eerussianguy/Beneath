@@ -1,0 +1,28 @@
+{
+  "cost": {
+    "tag": "c:cobblestone"
+  },
+  "costs": [
+    48,
+    64,
+    64,
+    64,
+    72,
+    78
+  ],
+  "punishments": [
+    "none",
+    "infestation"
+  ],
+  "reward": "minecraft:blackstone",
+  "rewards": [
+    48,
+    52,
+    52,
+    64,
+    74
+  ],
+  "translation_key": {
+    "translate": "beneath.lost_page.cobble"
+  }
+}

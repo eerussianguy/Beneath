@@ -1,0 +1,8 @@
+{
+  "forging_temperature": 0.36,
+  "heat_capacity": 353333.34,
+  "ingredient": {
+    "item": "beneath:gold_chunk"
+  },
+  "welding_temperature": 0.48000002
+}

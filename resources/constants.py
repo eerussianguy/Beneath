@@ -90,7 +90,7 @@ NUTRIENTS = ('death', 'destruction', 'decay', 'sorrow', 'flame')
 SIMPLE_ITEMS = ('gold_chunk', 'cursed_hide', 'cursecoal', 'pure_death', 'pure_decay', 'pure_destruction', 'pure_sorrow', 'pure_flame', 'agonizing_fertilizer', 'crimson_straw', 'warped_straw', 'ghost_pepper', 'blackstone_brick',
                 'crackrack_rock', 'juicer', 'raw_slime', 'lost_page',
                 )
-MUSHROOMS = ('button', 'chantrelle', 'death_cap', 'destroying_angels', 'fools_funnel', 'oyster', 'parasol', 'portobello', 'shittake', 'sulfur_tuft')
+MUSHROOMS = ('button', 'chantrelle', 'death_cap', 'destroying_angels', 'fools_funnel', 'oyster', 'parasol', 'portobello', 'shiitake', 'sulfur_tuft')
 POISONOUS_MUSHROOMS = ('death_cap', 'destroying_angels', 'fools_funnel', 'sulfur_tuft')
 
 ROCK_SPIKE_PARTS = ('base', 'middle', 'tip')

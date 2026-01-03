@@ -1,0 +1,29 @@
+{
+  "cost": {
+    "item": "beneath:raw_slime"
+  },
+  "costs": [
+    64,
+    100,
+    100,
+    200,
+    200,
+    220,
+    300
+  ],
+  "punishments": [
+    "none",
+    "slime",
+    "drunkenness"
+  ],
+  "reward": "tfc:ore/rich_garnierite",
+  "rewards": [
+    7,
+    12,
+    15,
+    15,
+    18,
+    19,
+    22
+  ]
+}

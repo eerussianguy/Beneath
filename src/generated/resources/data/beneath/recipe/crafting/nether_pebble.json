@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "beneath:cobblerack"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "beneath:nether_pebble"
+  }
+}

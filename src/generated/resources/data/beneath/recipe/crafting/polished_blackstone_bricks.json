@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "tfc:mortar"
+    },
+    "X": {
+      "item": "beneath:blackstone_brick"
+    }
+  },
+  "pattern": [
+    "XMX",
+    "MXM",
+    "XMX"
+  ],
+  "result": {
+    "count": 4,
+    "id": "minecraft:polished_blackstone_bricks"
+  }
+}

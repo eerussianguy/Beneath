@@ -1,0 +1,7 @@
+{
+  "decay": 0.2,
+  "flame": 0.1,
+  "ingredient": {
+    "item": "tfc:powder/sulfur"
+  }
+}

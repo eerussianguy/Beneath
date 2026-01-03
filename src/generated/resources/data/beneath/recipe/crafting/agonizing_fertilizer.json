@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "beneath:pure_death"
+    },
+    {
+      "item": "beneath:pure_destruction"
+    },
+    {
+      "item": "beneath:pure_decay"
+    },
+    {
+      "item": "beneath:pure_sorrow"
+    },
+    {
+      "item": "beneath:pure_flame"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "beneath:agonizing_fertilizer"
+  }
+}

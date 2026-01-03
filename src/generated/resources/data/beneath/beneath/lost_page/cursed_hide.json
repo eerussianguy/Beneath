@@ -1,0 +1,17 @@
+{
+  "cost": {
+    "item": "beneath:cursed_hide"
+  },
+  "costs": [
+    1
+  ],
+  "punishments": [
+    "none",
+    "levitation",
+    "drunkenness"
+  ],
+  "reward": "tfc:large_raw_hide",
+  "rewards": [
+    1
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "values": [
+    "#minecraft:base_stone_nether",
+    "minecraft:soul_soil",
+    "minecraft:soul_sand",
+    "beneath:soul_farmland",
+    "beneath:soul_clay",
+    "minecraft:crimson_nylium",
+    "minecraft:warped_nylium"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "decay_modifier": 1.5,
+  "fruit": 1.0,
+  "hunger": 4,
+  "ingredient": {
+    "item": "beneath:food/chantrelle"
+  },
+  "saturation": 1.0,
+  "water": 2.0
+}

@@ -1,0 +1,10 @@
+{
+  "death": 0.1,
+  "decay": 0.1,
+  "destruction": 0.1,
+  "flame": 0.1,
+  "ingredient": {
+    "item": "beneath:agonizing_fertilizer"
+  },
+  "sorrow": 0.1
+}

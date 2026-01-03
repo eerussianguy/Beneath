@@ -1,0 +1,14 @@
+{
+  "values": [
+    "minecraft:netherrack",
+    "minecraft:soul_sand",
+    "minecraft:soul_soil",
+    "minecraft:magma_block",
+    "minecraft:warped_nylium",
+    "minecraft:crimson_nylium",
+    "minecraft:blackstone",
+    "#minecraft:base_stone_overworld",
+    "#minecraft:dirt",
+    "#tfc:grass"
+  ]
+}

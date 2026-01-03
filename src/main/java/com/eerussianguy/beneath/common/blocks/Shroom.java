@@ -13,7 +13,7 @@ public enum Shroom implements StringRepresentable
     OYSTER,
     PARASOL,
     PORTOBELLO,
-    SHITTAKE,
+    SHIITAKE,
     SULFUR_TUFT(true);
 
     private final String name = name().toLowerCase(Locale.ROOT);

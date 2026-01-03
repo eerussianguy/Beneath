@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:cobblestones"
+    },
+    {
+      "item": "tfc:soot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:blackstone"
+  }
+}

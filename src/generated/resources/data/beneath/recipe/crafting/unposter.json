@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "item": "beneath:wood/lumber/crimson"
+    },
+    "Y": {
+      "item": "tfc:composter"
+    },
+    "Z": {
+      "item": "beneath:wood/lumber/warped"
+    }
+  },
+  "pattern": [
+    "XYX",
+    "XXX",
+    "ZZZ"
+  ],
+  "result": {
+    "count": 1,
+    "id": "beneath:unposter"
+  }
+}

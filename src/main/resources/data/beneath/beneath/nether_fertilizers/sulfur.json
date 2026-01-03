@@ -1,8 +1,0 @@
-{
-  "__comment__": "This file was automatically created by mcresources",
-  "ingredient": {
-    "item": "tfc:powder/sulfur"
-  },
-  "flame": 0.1,
-  "decay": 0.2
-}

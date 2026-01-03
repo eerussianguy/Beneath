@@ -17,7 +17,6 @@ def generate(rm: ResourceManager):
             block = rm.blockstate('ore/%s_%s' % (grade, ore), model='beneath:block/ore/%s_%s' % (grade, ore))
             block.with_block_model(textures={'all': 'beneath:block/%s_%s' % (grade, ore)}).with_item_model()
             block.with_lang(lang('%s %s ore', grade, ore))
-            block.with_tag('tfc:prospectable').with_tag('minecraft:mineable/pickaxe').with_tag('tfc:needs_copper_tool')
             rm.block('beneath:ore/%s_%s/prospected' % (grade, ore)).with_lang(lang(ore))
 
     for ore in ('nether_pyrite', 'blackstone_sylvite', 'nether_cursecoal', 'slimed_netherrack'):
@@ -27,7 +26,6 @@ def generate(rm: ResourceManager):
         else:
             block.with_item_model()
         block.with_lang(lang('%s ore', ore))
-        block.with_tag('tfc:prospectable').with_tag('minecraft:mineable/pickaxe').with_tag('tfc:needs_copper_tool')
         rm.block('beneath:ore/%s/prospected' % ore).with_lang(lang(ore))
 
     rm.block_tag('tfc:prospectable', 'minecraft:nether_quartz_ore')
@@ -35,7 +33,7 @@ def generate(rm: ResourceManager):
 
     for rock in ('haunted', 'glowstone',):
         block = rm.blockstate('%s_spike' % rock, variants=dict(('part=%s' % part, {'model': 'beneath:block/spike/%s_%s' % (rock, part)}) for part in ROCK_SPIKE_PARTS))
-        block.with_lang(lang('%s spike', rock)).with_tag('minecraft:mineable/pickaxe')
+        block.with_lang(lang('%s spike', rock))
 
         # Individual models
         rm.item_model('%s_spike' % rock, 'beneath:block/%s_spike' % rock, parent='beneath:block/spike/%s_base' % rock)
@@ -50,13 +48,13 @@ def generate(rm: ResourceManager):
         for i in range(1, 4):
             rm.block_model('%s_%s' % (pebble, i), {'texture': 'minecraft:block/netherrack' if pebble == 'nether_pebble' else 'minecraft:block/blackstone'}, parent='tfc:block/rock/loose_%s_%s' % ('sedimentary' if pebble == 'nether_pebble' else 'metamorphic', i))
 
-        block.with_lang(lang(pebble)).with_tag('can_be_snow_piled')
+        block.with_lang(lang(pebble))
         rm.item_model(pebble, 'beneath:item/%s' % pebble)
 
     for i in range(0, 4):
         sulf = 'sulfur%s' % i
         rm.block_model(sulf, {'0': 'beneath:block/%s' % sulf, 'particle': 'beneath:block/%s' % sulf}, parent='tfc:block/groundcover/guano')
-    rm.blockstate('sulfur', variants={'': [{'model': 'beneath:block/sulfur%s' % i} for i in range(0, 4)]}, use_default_model=False).with_lang(lang('sulfur')).with_tag('minecraft:mineable/shovel')
+    rm.blockstate('sulfur', variants={'': [{'model': 'beneath:block/sulfur%s' % i} for i in range(0, 4)]}, use_default_model=False).with_lang(lang('sulfur'))
 
     for crop, stages in DEFAULT_CROPS.items():
         name = 'beneath:%s' % crop if crop in ('ghost_pepper', 'gleamflower') else 'minecraft:%s' % crop
@@ -65,15 +63,14 @@ def generate(rm: ResourceManager):
         for i in range(stages):
             rm.block_model(('crop', crop + '_age_%d' % i), textures={'crop': 'beneath:block/crop/%s%d' % (crop, i)}, parent='block/crop')
         rm.item_model('seeds/%s' % crop).with_tag('tfc:seeds').with_lang(lang('%s seeds', crop))
-        block.with_tag('tfc:crops').with_tag('tfc:mineable_with_scythe').with_tag('tfc:mineable_with_sharp_tool')
 
-    rm.blockstate('gleamflower').with_block_model(parent='block/cross', textures={'cross': 'beneath:block/plant/gleamflower'}).with_lang(lang('gleamflower')).with_tag('tfc:plants')
+    rm.blockstate('gleamflower').with_block_model(parent='block/cross', textures={'cross': 'beneath:block/plant/gleamflower'}).with_lang(lang('gleamflower'))
     rm.item_model('gleamflower', 'beneath:block/plant/gleamflower')
 
     rm.blockstate('burpflower', variants={
         **four_rotations('beneath:block/burpflower', (90, None, 180, 270), suffix=',mature=true'),
         **four_rotations('beneath:block/burpflower_growing', (90, None, 180, 270), suffix=',mature=false'),
-    }).with_lang(lang('burpflower')).with_tag('tfc:plants')
+    }).with_lang(lang('burpflower'))
     rm.item_model('burpflower', 'beneath:block/plant/burpflower_base')
 
     for i in range(1, 9):
@@ -106,32 +103,30 @@ def generate(rm: ResourceManager):
     rm.block_model('blackstone_aqueduct_south', textures, parent='tfc:block/aqueduct/south')
     rm.block_model('blackstone_aqueduct_west', textures, parent='tfc:block/aqueduct/west')
 
-    rm.blockstate('soul_farmland').with_lang(lang('soul farmland')).with_block_model({'dirt': 'minecraft:block/soul_soil', 'top': 'beneath:block/soul_farmland'}, 'minecraft:block/template_farmland').with_tag('minecraft:mineable/shovel').with_item_model()
-    rm.blockstate('soul_clay', variants={'up=true': {'model': 'beneath:block/soul_clay_up'}, 'up=false': {'model': 'beneath:block/soul_clay'}}).with_lang(lang('soul clay')).with_block_model(textures={'all': 'beneath:block/soul_clay'}).with_tag('minecraft:mineable/shovel').with_item_model()
+    rm.blockstate('soul_farmland').with_lang(lang('soul farmland')).with_block_model({'dirt': 'minecraft:block/soul_soil', 'top': 'beneath:block/soul_farmland'}, 'minecraft:block/template_farmland').with_item_model()
+    rm.blockstate('soul_clay', variants={'up=true': {'model': 'beneath:block/soul_clay_up'}, 'up=false': {'model': 'beneath:block/soul_clay'}}).with_lang(lang('soul clay')).with_block_model(textures={'all': 'beneath:block/soul_clay'}).with_item_model()
     rm.block_model('soul_clay_up', textures={'end': 'minecraft:block/soul_sand', 'side': 'beneath:block/soul_clay_up'}, parent='block/cube_column')
-    rm.blockstate('crackrack').with_lang(lang('crackrack')).with_block_model().with_tag('minecraft:mineable/pickaxe').with_tag('minecraft:base_stone_nether').with_item_model()
+    rm.blockstate('crackrack').with_lang(lang('crackrack')).with_block_model().with_item_model()
     rm.blockstate('ancient_altar').with_item_model().with_lang(lang('ancient altar'))
 
     for shroom in MUSHROOMS:
-        mushlang = lang(shroom.replace('shittake', 'shiitake')) if 'fools' not in shroom else 'Fool\'s Funnel'
-        rm.blockstate('mushroom/%s' % shroom).with_block_model(parent='block/cross', textures={'cross': 'beneath:block/mushroom/%s' % shroom}).with_tag('tfc:plants').with_tag('tfc:mineable_with_sharp_tool').with_lang(lang(mushlang))
+        mushlang = shroom if 'fools' not in shroom else 'Fool\'s Funnel'
+        rm.blockstate('mushroom/%s' % shroom).with_block_model(parent='block/cross', textures={'cross': 'beneath:block/mushroom/%s' % shroom}).with_lang(lang(mushlang))
         rm.item_model('food/%s' % shroom, 'beneath:block/mushroom/%s' % shroom).with_lang(mushlang)
 
-    simple_block(rm, 'cobblerack', 'minecraft:mineable/pickaxe', 'forge:cobblestone')
-    simple_block(rm, 'fungal_cobblerack', 'minecraft:mineable/pickaxe')
-    simple_block(rm, 'warped_thatch', 'tfc:mineable_with_sharp_tool')
-    simple_block(rm, 'crimson_thatch', 'tfc:mineable_with_sharp_tool')
-    simple_block(rm, 'hellbricks', 'minecraft:mineable/pickaxe')
+    simple_block(rm, 'cobblerack')
+    simple_block(rm, 'fungal_cobblerack')
+    simple_block(rm, 'warped_thatch')
+    simple_block(rm, 'crimson_thatch')
+    simple_block(rm, 'hellbricks')
 
 
-def simple_block(rm: ResourceManager, name: str, *tags: str) -> BlockContext:
+def simple_block(rm: ResourceManager, name: str) -> BlockContext:
     block = rm.blockstate(name).with_lang(lang(name)).with_block_model().with_item_model()
-    for tag in tags:
-        block.with_tag(tag)
     return block
 
 def flower_pot_cross(rm: ResourceManager, simple_name: str, name: str, model: str, texture: str, loot: str):
-    rm.blockstate(name, model='beneath:block/%s' % model).with_lang(lang('potted %s', simple_name)).with_tag('minecraft:flower_pots').with_block_loot(loot, 'minecraft:flower_pot')
+    rm.blockstate(name, model='beneath:block/%s' % model).with_lang(lang('potted %s', simple_name)).with_block_loot(loot, 'minecraft:flower_pot')
     rm.block_model(model, parent='minecraft:block/flower_pot_cross', textures={'plant': texture, 'dirt': 'tfc:block/dirt/loam'})
 
 def item_model_property(rm: ResourceManager, name_parts: utils.ResourceIdentifier, overrides: utils.Json, data: Dict[str, Any]) -> ItemContext:

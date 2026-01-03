@@ -1,0 +1,189 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:obsidian",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 4.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:flint",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 4.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "tfc:metal/ingot/wrought_iron",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:flint_and_steel",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:fire_charge",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 6.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "beneath:gold_chunk",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bow",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/sword/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/axe/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/shield/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/scythe/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/shovel/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/helmet/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/chestplate/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/boots/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/greaves/black_bronze",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:metal/horse_armor/black_bronze",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:clock",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 8.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "tfc:metal/ingot/gold",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bell"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tfc:bronze_bell"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:lost_page",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:lost_page",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:lost_page",
+          "weight": 5
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 2.0,
+        "min": 1.0
+      }
+    }
+  ],
+  "random_sequence": "minecraft:chests/ruined_portal"
+}
