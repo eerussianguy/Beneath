@@ -55,7 +55,7 @@
   "block.beneath.wood.lectern.crimson": "Crimson Lectern",
   "block.beneath.wood.scribing_table.crimson": "Crimson Scribing Table",
   "block.beneath.wood.sewing_table.crimson": "Crimson Sewing Table",
-  "block.beneath.wood.jar_shelf.crimson": "Crimson Jar Shelf",
+  "block.beneath.wood.shelf.crimson": "Crimson Shelf",
   "block.beneath.wood.axle.crimson": "Crimson Axle",
   "block.beneath.wood.bladed_axle.crimson": "Crimson Bladed Axle",
   "block.beneath.wood.encased_axle.crimson": "Crimson Encased Axle",
@@ -129,7 +129,7 @@
   "block.beneath.wood.lectern.warped": "Warped Lectern",
   "block.beneath.wood.scribing_table.warped": "Warped Scribing Table",
   "block.beneath.wood.sewing_table.warped": "Warped Sewing Table",
-  "block.beneath.wood.jar_shelf.warped": "Warped Jar Shelf",
+  "block.beneath.wood.shelf.warped": "Warped Shelf",
   "block.beneath.wood.axle.warped": "Warped Axle",
   "block.beneath.wood.bladed_axle.warped": "Warped Bladed Axle",
   "block.beneath.wood.encased_axle.warped": "Warped Encased Axle",
@@ -152,6 +152,7 @@
   "entity.beneath.leviathan_fireball": "Leviathan Fireball",
   "entity.beneath.blaze_leviathan": "Blaze Leviathan",
   "entity.beneath.red_elk": "Red Elk",
+  "tfc.recipe.barrel.beneath.barrel.mortar": "Mortar",
   "beneath.nutrient.decay": "Decay: §e%s%%",
   "beneath.nutrient.death": "Death: §7%s%%",
   "beneath.nutrient.destruction": "Destruction: §6%s%%",
@@ -265,6 +266,5 @@
   "block.beneath.fungal_cobblerack": "Fungal Cobblerack",
   "block.beneath.warped_thatch": "Warped Thatch",
   "block.beneath.crimson_thatch": "Crimson Thatch",
-  "block.beneath.hellbricks": "Hellbricks",
-  "tfc.recipe.barrel.tfc.barrel.mortar": "Mortar"
+  "block.beneath.hellbricks": "Hellbricks"
 }

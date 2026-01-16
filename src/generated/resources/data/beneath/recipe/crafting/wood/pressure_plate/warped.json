@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "beneath:wood/lumber/warped"
+    }
+  },
+  "pattern": [
+    "LL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "beneath:wood/pressure_plate/warped"
+  }
+}

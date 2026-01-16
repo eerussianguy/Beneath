@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "beneath:wood/planks/warped"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "beneath:wood/button/warped"
+  }
+}

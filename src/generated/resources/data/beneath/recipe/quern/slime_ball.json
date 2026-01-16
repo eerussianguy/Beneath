@@ -1,0 +1,10 @@
+{
+  "type": "tfc:quern",
+  "ingredient": {
+    "item": "beneath:raw_slime"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:slime_ball"
+  }
+}

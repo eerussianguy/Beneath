@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfc:metal/chain/blue_steel"
+    },
+    "L": {
+      "item": "beneath:wood/lumber/warped"
+    }
+  },
+  "pattern": [
+    "C C",
+    "LLL",
+    "LLL"
+  ],
+  "result": {
+    "count": 3,
+    "id": "beneath:wood/hanging_sign/blue_steel/warped"
+  }
+}

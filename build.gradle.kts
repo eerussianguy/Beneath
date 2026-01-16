@@ -16,7 +16,7 @@ val parchmentMinecraftVersion: String = "1.21.1"
 val emiVersion: String = "1.1.22+1.21.1"
 val jeiVersion: String = "19.25.0.321"
 val patchouliVersion: String = "1.21.1-92-NEOFORGE"
-val tfcVersion: String = "4.0.15-beta"
+val tfcVersion: String = "4.0.17-beta"
 
 val modId: String = "beneath"
 val modVersion: String = System.getenv("VERSION") ?: "0.0.0-indev"
@@ -31,6 +31,7 @@ val generateModMetadata = tasks.register<ProcessResources>("generateModMetadata"
         "modVersion" to modVersion,
         "minecraftVersionRange" to "[$minecraftVersion]",
         "neoForgeVersionRange" to "[$neoForgeVersion,)",
+        "tfcVersionRange" to "[$tfcVersion,)",
         "patchouliVersionRange" to "[$patchouliVersion,)",
         "jeiVersionRange" to "[$jeiVersion,)"
     )
@@ -152,8 +153,8 @@ dependencies {
     "dataImplementation"("vazkii.patchouli:Patchouli:$patchouliVersion")
 
     // TFC
-    implementation(group = "curse.maven", name = "terrafirmacraft-302973", version = "7343990")
-    "dataImplementation"(group = "curse.maven", name = "terrafirmacraft-302973", version = "7343990")
+    implementation(group = "curse.maven", name = "terrafirmacraft-302973", version = "7452541")
+    "dataImplementation"(group = "curse.maven", name = "terrafirmacraft-302973", version = "7452541")
 
     // Jade / The One Probe
     implementation(group = "curse.maven", name = "jade-324717", version = "6853386")

@@ -1,0 +1,9 @@
+{
+  "ingredient": [
+    "beneath:wood/horizontal_support/crimson",
+    "beneath:wood/horizontal_support/warped"
+  ],
+  "support_down": 2,
+  "support_horizontal": 4,
+  "support_up": 2
+}

@@ -223,6 +223,8 @@ public class BuiltinBlockLootTables extends BlockLootSubProvider implements Acce
             case FALLEN_LEAVES:
                 createFallingLeaves(block);
                 break;
+            case SLAB:
+                createSlabItemTable(block);
             default:
                 dropSelf(block);
         }

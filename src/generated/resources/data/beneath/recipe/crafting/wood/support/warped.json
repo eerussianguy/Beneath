@@ -1,0 +1,27 @@
+{
+  "type": "tfc:advanced_shaped_crafting",
+  "input_column": 1,
+  "key": {
+    "L": {
+      "tag": "beneath:warped_logs"
+    },
+    "S": {
+      "tag": "c:tools/saw"
+    }
+  },
+  "pattern": [
+    "LS",
+    "L "
+  ],
+  "remainder": {
+    "modifiers": [
+      {
+        "type": "tfc:damage_crafting_remainder"
+      }
+    ]
+  },
+  "result": {
+    "count": 8,
+    "id": "beneath:wood/support/warped"
+  }
+}

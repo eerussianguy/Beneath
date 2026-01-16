@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "beneath:wood/lumber/warped"
+    },
+    "P": {
+      "item": "beneath:wood/log/warped"
+    }
+  },
+  "pattern": [
+    "PLP",
+    "PLP"
+  ],
+  "result": {
+    "count": 8,
+    "id": "beneath:wood/log_fence/warped"
+  }
+}

@@ -28,7 +28,6 @@ def generate(rm: ResourceManager):
         block.with_lang(lang('%s ore', ore))
         rm.block('beneath:ore/%s/prospected' % ore).with_lang(lang(ore))
 
-    rm.block_tag('tfc:prospectable', 'minecraft:nether_quartz_ore')
     rm.block('minecraft:nether_quartz_ore/prospected').with_lang(lang('nether quartz'))
 
     for rock in ('haunted', 'glowstone',):
@@ -62,7 +61,7 @@ def generate(rm: ResourceManager):
         block.with_lang(lang(crop))
         for i in range(stages):
             rm.block_model(('crop', crop + '_age_%d' % i), textures={'crop': 'beneath:block/crop/%s%d' % (crop, i)}, parent='block/crop')
-        rm.item_model('seeds/%s' % crop).with_tag('tfc:seeds').with_lang(lang('%s seeds', crop))
+        rm.item_model('seeds/%s' % crop).with_lang(lang('%s seeds', crop))
 
     rm.blockstate('gleamflower').with_block_model(parent='block/cross', textures={'cross': 'beneath:block/plant/gleamflower'}).with_lang(lang('gleamflower'))
     rm.item_model('gleamflower', 'beneath:block/plant/gleamflower')
@@ -126,7 +125,7 @@ def simple_block(rm: ResourceManager, name: str) -> BlockContext:
     return block
 
 def flower_pot_cross(rm: ResourceManager, simple_name: str, name: str, model: str, texture: str, loot: str):
-    rm.blockstate(name, model='beneath:block/%s' % model).with_lang(lang('potted %s', simple_name)).with_block_loot(loot, 'minecraft:flower_pot')
+    rm.blockstate(name, model='beneath:block/%s' % model).with_lang(lang('potted %s', simple_name))
     rm.block_model(model, parent='minecraft:block/flower_pot_cross', textures={'plant': texture, 'dirt': 'tfc:block/dirt/loam'})
 
 def item_model_property(rm: ResourceManager, name_parts: utils.ResourceIdentifier, overrides: utils.Json, data: Dict[str, Any]) -> ItemContext:

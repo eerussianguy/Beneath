@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "beneath:wood/axle/warped"
+    },
+    "L": {
+      "item": "beneath:wood/lumber/warped"
+    },
+    "S": {
+      "item": "beneath:wood/stripped_log/warped"
+    }
+  },
+  "pattern": [
+    " S ",
+    "LAL",
+    " S "
+  ],
+  "result": {
+    "count": 4,
+    "id": "beneath:wood/encased_axle/warped"
+  }
+}

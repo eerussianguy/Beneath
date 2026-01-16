@@ -1,0 +1,25 @@
+{
+  "type": "tfc:advanced_shapeless_crafting",
+  "ingredients": [
+    {
+      "tag": "c:tools/saw"
+    },
+    {
+      "tag": "beneath:warped_logs"
+    }
+  ],
+  "primary_ingredient": {
+    "tag": "c:tools/saw"
+  },
+  "remainder": {
+    "modifiers": [
+      {
+        "type": "tfc:damage_crafting_remainder"
+      }
+    ]
+  },
+  "result": {
+    "count": 8,
+    "id": "beneath:wood/lumber/warped"
+  }
+}

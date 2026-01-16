@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "tfc:glue"
+    },
+    "W": {
+      "item": "beneath:wood/stripped_log/crimson"
+    }
+  },
+  "pattern": [
+    "WGW"
+  ],
+  "result": {
+    "count": 4,
+    "id": "beneath:wood/axle/crimson"
+  }
+}

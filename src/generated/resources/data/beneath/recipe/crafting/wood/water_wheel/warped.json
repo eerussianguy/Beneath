@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "beneath:wood/axle/warped"
+    },
+    "L": {
+      "item": "beneath:wood/lumber/warped"
+    },
+    "P": {
+      "item": "beneath:wood/planks/warped"
+    }
+  },
+  "pattern": [
+    "LPL",
+    "PAP",
+    "LPL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "beneath:wood/water_wheel/warped"
+  }
+}

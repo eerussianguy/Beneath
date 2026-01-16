@@ -97,8 +97,6 @@ ROCK_SPIKE_PARTS = ('base', 'middle', 'tip')
 
 SPAWN_EGG_ENTITIES = ('red_elk',)
 
-DISABLED_VANILLA_RECIPES = ('polished_blackstone_bricks', 'polished_blackstone_button', 'polished_blackstone_pressure_plate', 'cracked_polished_blackstone_bricks', 'nether_bricks')
-
 DEFAULT_CROPS = {
     'crimson_roots': 4,
     'ghost_pepper': 7,
@@ -112,6 +110,7 @@ DEFAULT_LANG = {
     'entity.beneath.leviathan_fireball': 'Leviathan Fireball',
     'entity.beneath.blaze_leviathan': 'Blaze Leviathan',
     'entity.beneath.red_elk': 'Red Elk',
+    'tfc.recipe.barrel.beneath.barrel.mortar': 'Mortar',
     'beneath.nutrient.decay': 'Decay: §e%s%%',
     'beneath.nutrient.death': 'Death: §7%s%%',
     'beneath.nutrient.destruction': 'Destruction: §6%s%%',

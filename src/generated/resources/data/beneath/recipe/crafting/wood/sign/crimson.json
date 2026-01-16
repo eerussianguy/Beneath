@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "beneath:wood/lumber/crimson"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "LLL",
+    "LLL",
+    " S "
+  ],
+  "result": {
+    "count": 3,
+    "id": "beneath:wood/sign/crimson"
+  }
+}

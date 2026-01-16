@@ -2,7 +2,6 @@ package com.eerussianguy.beneath.providers;
 
 import java.util.concurrent.CompletableFuture;
 import com.eerussianguy.beneath.Accessors;
-import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
 import com.eerussianguy.beneath.common.blocks.Stem;
 import com.eerussianguy.beneath.common.items.BeneathItems;
@@ -10,7 +9,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.common.blocks.wood.Wood;

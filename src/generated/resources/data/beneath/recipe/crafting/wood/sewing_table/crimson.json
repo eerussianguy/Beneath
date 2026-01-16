@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "beneath:wood/log/crimson"
+    },
+    "L": {
+      "tag": "c:leathers"
+    },
+    "P": {
+      "item": "beneath:wood/planks/crimson"
+    },
+    "S": {
+      "tag": "c:tools/shear"
+    }
+  },
+  "pattern": [
+    " LS",
+    "PPP",
+    "G G"
+  ],
+  "result": {
+    "count": 1,
+    "id": "beneath:wood/sewing_table/crimson"
+  }
+}

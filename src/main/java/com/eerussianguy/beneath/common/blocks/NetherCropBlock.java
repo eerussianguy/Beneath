@@ -76,7 +76,7 @@ public abstract class NetherCropBlock extends CropBlock
     {
         final ClimateRange range = this.climateRange.get();
         final BlockPos sourcePos = pos.below();
-        text.accept(FarmlandBlock.getTemperatureTooltip(level, pos, range, false));
+        text.accept(FarmlandBlock.getInstantTemperatureTooltip(level, pos, range, false));
         SoulFarmlandBlockEntity farmland = null;
         if (level.getBlockEntity(sourcePos) instanceof SoulFarmlandBlockEntity found)
         {

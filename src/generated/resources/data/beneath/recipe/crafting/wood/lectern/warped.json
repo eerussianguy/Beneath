@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "beneath:wood/bookshelf/warped"
+    },
+    "L": {
+      "item": "beneath:wood/lumber/warped"
+    }
+  },
+  "pattern": [
+    "LLL",
+    " B ",
+    " L "
+  ],
+  "result": {
+    "count": 1,
+    "id": "beneath:wood/lectern/warped"
+  }
+}

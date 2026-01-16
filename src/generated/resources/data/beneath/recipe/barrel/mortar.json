@@ -1,0 +1,16 @@
+{
+  "type": "tfc:barrel_sealed",
+  "duration": 8000,
+  "input_fluid": {
+    "amount": 100,
+    "fluid": "tfc:limewater"
+  },
+  "input_item": {
+    "count": 1,
+    "item": "minecraft:soul_sand"
+  },
+  "output_item": {
+    "count": 16,
+    "id": "tfc:mortar"
+  }
+}

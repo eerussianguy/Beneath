@@ -4,8 +4,6 @@ from mcresources import ResourceManager, block_states, loot_tables, BlockContext
 from mcresources.type_definitions import JsonObject
 
 from constants import lang, WOODS, TREE_SAPLING_DROP_CHANCES, METALS
-from data import block_and_item_tag
-from recipes import damage_shapeless
 from assets import four_ways, four_rotations, item_model_property, slab_loot, flower_pot_cross
 
 def generate(rm: ResourceManager):
@@ -31,8 +29,6 @@ def generate(rm: ResourceManager):
                 block.with_lang(lang('%s %s', wood, variant))
         for item_type in ('lumber', 'sign', 'boat'):
             rm.item_model(('wood', item_type, wood)).with_lang(lang('%s %s', wood, item_type))
-        rm.item_tag('minecraft:signs', 'beneath:wood/sign/' + wood)
-        rm.item_tag('beneath:minecarts', 'beneath:wood/chest_minecart/' + wood)
 
         # Groundcover
         block = rm.blockstate(('wood', 'twig', wood), variants={"": four_ways('beneath:block/wood/twig/%s' % wood)}, use_default_model=False)
@@ -79,8 +75,6 @@ def generate(rm: ResourceManager):
         block.make_trapdoor()
         block.make_fence()
         block.make_fence_gate()
-
-        slab_loot(rm, 'beneath:wood/planks/%s_slab' % wood)
 
         # Tool Rack
         rack_namespace = 'beneath:wood/planks/%s_tool_rack' % wood
@@ -207,10 +201,13 @@ def generate(rm: ResourceManager):
         block = rm.blockstate('wood/sewing_table/%s' % wood, variants=four_rotations('beneath:block/wood/sewing_table/%s' % wood, (90, None, 180, 270))).with_item_model()
         rm.block_model(('wood', 'sewing_table', wood), {'0': 'beneath:block/wood/log/%s' % wood, '1': 'beneath:block/wood/planks/%s' % wood}, 'tfc:block/sewing_table')
         block.with_lang(lang('%s sewing table', wood))
-        # Jar shelf
-        block = rm.blockstate('wood/jar_shelf/%s' % wood, variants=four_rotations('beneath:block/wood/jar_shelf/%s' % wood, (90, None, 180, 270)))
-        block.with_block_model(textures={'0': 'beneath:block/wood/planks/%s' % wood}, parent='tfc:block/jar_shelf').with_item_model().with_lang(lang('%s jar shelf', wood))
-
+        # Shelf
+        block = rm.blockstate('wood/shelf/%s' % wood, variants=four_rotations('beneath:block/wood/shelf/%s' % wood, (90, None, 180, 270)))
+        block.with_block_model(textures={
+            '0': 'beneath:block/wood/planks/%s' % wood
+        }, parent='tfc:block/wood/shelf')
+        block.with_item_model()
+        block.with_lang(lang('%s shelf', wood))
         # Axle
         block = rm.blockstate('beneath:wood/axle/%s' % wood, 'tfc:block/empty')
         block.with_lang(lang('%s axle', wood))
@@ -315,89 +312,6 @@ def generate(rm: ResourceManager):
             rm.lang('block.beneath.wood.planks.' + wood + '_' + variant, lang('%s %s', wood, variant))
         for variant in ('sapling', 'leaves'):
             rm.lang('block.beneath.wood.' + variant + '.' + wood, lang('%s %s', wood, variant))
-
-        rm.data(('tfc', 'supports', 'horizontal_support_beam'), {
-            'ingredient': ['beneath:wood/horizontal_support/%s' % wood for wood in WOODS],
-            'support_up': 2,
-            'support_down': 2,
-            'support_horizontal': 4
-        })
-
-        def item(_variant: str) -> str:
-            return 'beneath:wood/%s/%s' % (_variant, wood)
-
-        def plank(_variant: str) -> str:
-            return 'beneath:wood/planks/%s_%s' % (wood, _variant)
-
-        rm.item_tag('tfc:lumber', item('lumber'))
-        rm.block_and_item_tag('scribing_tables', item('scribing_table'))
-        rm.block_and_item_tag('jar_shelves', item('jar_shelf'))
-        rm.block_and_item_tag('water_wheels', item('water_wheel'))
-        rm.block_tag('support_beams', item('vertical_support'), item('horizontal_support'))
-
-        rm.item_tag('axles', item('axle'), item('encased_axle'))
-        rm.item_tag('gear_boxes', item('gear_box'))
-        rm.item_tag('clutches', item('clutch'))
-        rm.item_tag('minecraft:boats', item('boat'))
-        block_and_item_tag(rm, 'minecraft:wooden_buttons', plank('button'))
-        block_and_item_tag(rm, 'minecraft:wooden_fences', plank('fence'), plank('log_fence'))
-        block_and_item_tag(rm, 'minecraft:wooden_slabs', plank('slab'))
-        block_and_item_tag(rm, 'minecraft:wooden_stairs', plank('stairs'))
-        block_and_item_tag(rm, 'minecraft:wooden_doors', plank('door'))
-        block_and_item_tag(rm, 'minecraft:wooden_trapdoors', plank('trapdoor'))
-        block_and_item_tag(rm, 'minecraft:wooden_pressure_plates', plank('pressure_plate'))
-        block_and_item_tag(rm, 'minecraft:logs', '#tfc:%s_logs' % wood)
-        block_and_item_tag(rm, 'minecraft:leaves', item('leaves'))
-        block_and_item_tag(rm, 'minecraft:planks', item('planks'))
-        rm.item_tag('minecraft:signs', item('sign'))
-        rm.item_tag('minecraft:boats', item('boat'))
-
-        block_and_item_tag(rm, 'tfc:%s_logs' % wood, item('log'), item('wood'), item('stripped_log'), item('stripped_wood'))
-
-        rm.entity_tag('tfc:destroys_floating_plants', 'beneath:boat/%s' % wood)
-
-        log_tag = '#tfc:%s_logs' % wood
-
-        rm.crafting_shaped('crafting/wood/%s_bookshelf' % wood, ['XXX', 'YYY', 'XXX'], {'X': item('lumber'), 'Y': '#forge:rods/wooden'}, plank('bookshelf')).with_advancement(item('lumber'))
-        rm.crafting_shapeless('crafting/wood/%s_button' % wood, item('planks'), plank('button')).with_advancement(item('planks'))
-        rm.crafting_shaped('crafting/wood/%s_door' % wood, ['XX', 'XX', 'XX'], {'X': item('lumber')}, (2, plank('door'))).with_advancement(item('lumber'))
-        rm.crafting_shaped('crafting/wood/%s_fence' % wood, ['XYX', 'XYX'], {'X': item('planks'), 'Y': item('lumber')}, (8, plank('fence'))).with_advancement(item('lumber'))
-        rm.crafting_shaped('crafting/wood/%s_log_fence' % wood, ['XYX', 'XYX'], {'X': item('log'), 'Y': item('lumber')}, (8, plank('log_fence'))).with_advancement(item('lumber'))
-        rm.crafting_shaped('crafting/wood/%s_fence_gate' % wood, ['YXY', 'YXY'], {'X': item('planks'), 'Y': item('lumber')}, (2, plank('fence_gate'))).with_advancement(item('lumber'))
-        damage_shapeless(rm, 'crafting/wood/%s_lumber_log' % wood, (log_tag, '#tfc:saws'), (8, item('lumber'))).with_advancement(item('log'))
-        damage_shapeless(rm, 'crafting/wood/%s_lumber_planks' % wood, (item('planks'), '#tfc:saws'), (4, item('lumber'))).with_advancement(item('planks'))
-        damage_shapeless(rm, 'crafting/wood/%s_stairs_undo' % wood, (plank('stairs'), '#tfc:saws'), (3, item('lumber'))).with_advancement(plank('stairs'))
-        damage_shapeless(rm, 'crafting/wood/%s_slab_undo' % wood, (plank('slab'), '#tfc:saws'), (2, item('lumber'))).with_advancement(plank('slab'))
-        rm.crafting_shaped('crafting/wood/%s_stairs' % wood, ['X  ', 'XX ', 'XXX'], {'X': item('planks')}, (8, plank('stairs'))).with_advancement(item('planks'))
-        rm.crafting_shaped('crafting/wood/%s_slab' % wood, ['XXX'], {'X': item('planks')}, (6, plank('slab'))).with_advancement(item('planks'))
-        rm.crafting_shaped('crafting/wood/%s_planks' % wood, ['XX', 'XX'], {'X': item('lumber')}, item('planks')).with_advancement(item('lumber'))
-        rm.crafting_shaped('crafting/wood/%s_tool_rack' % wood, ['XXX', '   ', 'XXX'], {'X': item('lumber')}, plank('tool_rack')).with_advancement(item('lumber'))
-        rm.crafting_shaped('crafting/wood/%s_trapdoor' % wood, ['XXX', 'XXX'], {'X': item('lumber')}, (3, plank('trapdoor'))).with_advancement(item('lumber'))
-        rm.crafting_shaped('crafting/wood/%s_workbench' % wood, ['XX', 'XX'], {'X': item('planks')}, plank('workbench')).with_advancement(item('planks'))
-        rm.crafting_shaped('crafting/wood/%s_pressure_plate' % wood, ['XX'], {'X': item('lumber')}, plank('pressure_plate')).with_advancement(item('lumber'))
-        rm.crafting_shaped('crafting/wood/%s_boat' % wood, ['X X', 'XXX'], {'X': item('planks')}, item('boat')).with_advancement(item('planks'))
-        rm.crafting_shaped('crafting/wood/%s_chest' % wood, ['XXX', 'X X', 'XXX'], {'X': item('lumber')}, item('chest')).with_advancement(item('lumber'))
-        rm.crafting_shapeless('crafting/wood/%s_trapped_chest' % wood, (item('chest'), 'minecraft:tripwire_hook'), (1, item('trapped_chest'))).with_advancement(item('chest'))
-        damage_shapeless(rm, 'crafting/wood/%s_support' % wood, (log_tag, log_tag, '#tfc:saws'), (8, item('support'))).with_advancement('#tfc:saws')
-        rm.crafting_shaped('crafting/wood/%s_loom' % wood, ['XXX', 'XSX', 'X X'], {'X': item('lumber'), 'S': 'minecraft:stick'}, plank('loom')).with_advancement(item('lumber'))
-        rm.crafting_shaped('crafting/wood/%s_sluice' % wood, ['  X', ' XY', 'XYY'], {'X': '#forge:rods/wooden', 'Y': item('lumber')}, item('sluice')).with_advancement(item('lumber'))
-        rm.crafting_shaped('crafting/wood/%s_sign' % wood, ['XXX', 'XXX', ' Y '], {'X': item('lumber'), 'Y': '#forge:rods/wooden'}, (3, item('sign'))).with_advancement(item('lumber'))
-        rm.crafting_shaped('crafting/wood/%s_barrel' % wood, ['X X', 'X X', 'XXX'], {'X': item('lumber')}, item('barrel')).with_advancement(item('lumber'))
-        rm.crafting_shaped('crafting/wood/%s_lectern' % wood, ['XXX', ' Y ', ' X '], {'X': item('lumber'), 'Y': plank('bookshelf')}, item('lectern')).with_advancement(plank('bookshelf'))
-        rm.crafting_shaped('crafting/wood/%s_scribing_table' % wood, ['F B', 'XXX', 'Y Y'], {'F': '#forge:feathers', 'B': 'minecraft:black_dye', 'X': plank('slab'), 'Y': item('planks')}, item('scribing_table')).with_advancement(item('planks'))
-        rm.crafting_shaped('crafting/wood/%s_wood' % wood, ['XX', 'XX'], {'X': item('log')}, (3, item('wood'))).with_advancement(item('log'))
-        rm.crafting_shapeless('crafting/wood/%s_chest_minecart' % wood, (item('chest'), 'minecraft:minecart'), item('chest_minecart'))
-        rm.crafting_shaped('crafting/wood/%s_shelf' % wood, ['XXX', 'Y Y', 'Z Z'], {'X': item('planks'), 'Y': item('lumber'), 'Z': '#forge:rods/wooden'}, (2, item('jar_shelf'))).with_advancement(item('lumber'))
-        rm.crafting_shaped('crafting/wood/%s_axle' % wood, ['WGW'], {'G': 'tfc:glue', 'W': item('stripped_log')}, (4, item('axle'))).with_advancement(item('lumber'))
-        rm.crafting_shapeless('crafting/wood/%s_bladed_axle' % wood, (item('axle'), '#forge:ingots/steel'), item('bladed_axle')).with_advancement(item('axle'))
-        rm.crafting_shaped('crafting/wood/%s_encased_axle' % wood, [' L ', 'WAW', ' L '], {'L': item('stripped_log'), 'W': item('lumber'), 'A': item('axle')}, (4, item('encased_axle'))).with_advancement(item('lumber'))
-        rm.crafting_shaped('crafting/wood/%s_gear_box' % wood, [' L ', 'LML', ' L '], {'L': item('lumber'), 'M': 'tfc:brass_mechanisms'}, (2, item('gear_box'))).with_advancement(item('lumber'))
-        rm.crafting_shaped('crafting/wood/%s_clutch' % wood, ['LSL', 'MAR', 'LSL'], {'L': item('lumber'), 'S': item('stripped_log'), 'M': 'tfc:brass_mechanisms', 'A': item('axle'), 'R': '#forge:dusts/redstone'}, (2, item('clutch'))).with_advancement(item('lumber'))
-        rm.crafting_shaped('crafting/wood/%s_water_wheel' % wood, ['LPL', 'PAP', 'LPL'], {'L': item('lumber'), 'P': item('planks'), 'A': item('axle')}, item('water_wheel')).with_advancement(item('lumber'))
-
-        for metal, metal_data in METALS.items():
-            if 'utility' in metal_data.types:
-                rm.crafting_shaped('crafting/wood/hanging_sign/%s/%s' % (metal, wood), ['X X', 'YYY', 'YYY'], {'X': 'tfc:metal/chain/%s' % metal, 'Y': item('lumber')}, (3, 'beneath:wood/hanging_sign/%s/%s' % (metal, wood))).with_advancement('tfc:metal/chain/%s' % metal)
 
         rm.atlas('minecraft:blocks',
              atlases.palette(

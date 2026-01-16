@@ -10,14 +10,17 @@ import com.eerussianguy.beneath.providers.BuiltinBlockTags;
 import com.eerussianguy.beneath.providers.BuiltinChestLootTables;
 import com.eerussianguy.beneath.providers.BuiltinDamageTypes;
 import com.eerussianguy.beneath.providers.BuiltinEntityLootTables;
+import com.eerussianguy.beneath.providers.BuiltinEntityTags;
 import com.eerussianguy.beneath.providers.BuiltinFoods;
 import com.eerussianguy.beneath.providers.BuiltinFuels;
 import com.eerussianguy.beneath.providers.BuiltinItemHeat;
 import com.eerussianguy.beneath.providers.BuiltinItemSizes;
+import com.eerussianguy.beneath.providers.BuiltinItemTags;
 import com.eerussianguy.beneath.providers.BuiltinLostPages;
 import com.eerussianguy.beneath.providers.BuiltinNetherFertilizers;
 import com.eerussianguy.beneath.providers.BuiltinPiglinBarterLootTables;
 import com.eerussianguy.beneath.providers.BuiltinRecipes;
+import com.eerussianguy.beneath.providers.BuiltinSupports;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistrySetBuilder;
@@ -53,6 +56,8 @@ public class DataEntryPoint
         )).getRegistryProvider();
 
         final var blockTags = add(event, new BuiltinBlockTags(event, lookup)).contentsGetter();
+        final var itemTags = add(event, new BuiltinItemTags(event, lookup)).contentsGetter();
+        add(event, new BuiltinEntityTags(event, lookup));
 
         add(event, new BuiltinNetherFertilizers(output, lookup));
         add(event, new BuiltinLostPages(output, lookup));
@@ -60,6 +65,7 @@ public class DataEntryPoint
         add(event, new BuiltinFuels(output, lookup));
         add(event, new BuiltinItemSizes(output, lookup));
         var itemHeat = add(event, new BuiltinItemHeat(output, lookup));
+        add(event, new BuiltinSupports(output, lookup));
 
         add(event, new BuiltinRecipes(output, lookup, itemHeat));
 

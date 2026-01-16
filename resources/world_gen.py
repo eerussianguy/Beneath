@@ -177,16 +177,16 @@ def generate(rm: ResourceManager):
     remove_feature(rm, 'nether_removals', '#minecraft:is_nether', '#beneath:removed_features')
 
 def add_feature(rm: ResourceManager, filename: str, biome: str, features: str, step: str):
-    rm.data(('forge', 'biome_modifier', filename), {
-        'type': 'forge:add_features',
+    rm.data(('neoforge', 'biome_modifier', filename), {
+        'type': 'neoforge:add_features',
         'biomes': biome,
         'features': features,
         'step': step
     })
 
 def remove_feature(rm: ResourceManager, filename: str, biome: str, features: str, step: str = None):
-    rm.data(('forge', 'biome_modifier', filename), {
-        'type': 'forge:remove_features',
+    rm.data(('neoforge', 'biome_modifier', filename), {
+        'type': 'neoforge:remove_features',
         'biomes': biome,
         'features': features,
         'steps': step

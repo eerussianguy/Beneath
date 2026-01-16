@@ -203,10 +203,10 @@ STACKED = 'stacked'
 
 # The data version used by DFU
 # Keep this up-to-date with the version in SharedConstants.VERSION
-DATA_VERSION = 3465
+DATA_VERSION = 3955
 
 TEMPLATES_DIR = './resources/structure_templates'
-STRUCTURES_DIR = './src/main/resources/data/beneath/structures'
+STRUCTURES_DIR = './src/main/resources/data/beneath/structure'
 
 # If `STRICT_MODE` is true, it performs some additional checks on the structure of trees that may not hold in general
 # These should be used to help while making tree structures and only ignored if they're catching false positives.
@@ -549,7 +549,7 @@ def save_structure(path: str, root_nbt: RootTag):
     :param root_nbt: The NBT to be saved
     """
     # Uncomment for hotswap
-    # root_nbt.save('./out/production/resources/data/beneath/structures/' + path.replace('/', '_'), gzipped=True)
+    # root_nbt.save('./out/production/resources/data/beneath/structure/' + path.replace('/', '_'), gzipped=True)
 
     path = os.path.join(STRUCTURES_DIR, path)
     if os.path.isfile(path):

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "beneath:wood/axle/crimson"
+    },
+    "L": {
+      "item": "beneath:wood/lumber/crimson"
+    },
+    "P": {
+      "item": "beneath:wood/planks/crimson"
+    }
+  },
+  "pattern": [
+    "LPL",
+    "PAP",
+    "LPL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "beneath:wood/water_wheel/crimson"
+  }
+}

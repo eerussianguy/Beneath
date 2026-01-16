@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "beneath:wood/axle/crimson"
+    },
+    "L": {
+      "item": "beneath:wood/lumber/crimson"
+    },
+    "M": {
+      "item": "tfc:brass_mechanisms"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    },
+    "S": {
+      "item": "beneath:wood/stripped_log/crimson"
+    }
+  },
+  "pattern": [
+    "LSL",
+    "MAR",
+    "LSL"
+  ],
+  "result": {
+    "count": 2,
+    "id": "beneath:wood/clutch/crimson"
+  }
+}

@@ -6,12 +6,12 @@ from nbtlib import nbt
 from nbtlib.tag import String as StringTag, Int as IntTag
 
 TEMPLATES_DIR = 'structure_templates'
-STRUCTURES_DIR = '../src/main/resources/data/beneath/structures'
-STRUCTURES_DIR_MC = '../src/main/resources/data/minecraft/structures'
+STRUCTURES_DIR = '../src/main/resources/data/beneath/structure'
+STRUCTURES_DIR_MC = '../src/main/resources/data/minecraft/structure'
 
 def main():
-    #bastion_structures = glob(TEMPLATES_DIR + '/bastion/**/*.nbt', recursive=True)
-    #find_chests(bastion_structures)
+    bastion_structures = glob(TEMPLATES_DIR + '/bastion/**/*.nbt', recursive=True)
+    find_chests(bastion_structures)
 
     portal_structures = glob(TEMPLATES_DIR + '/ruined_portal/*.nbt')
     find_chests(portal_structures)
@@ -61,6 +61,9 @@ def fix_stone_bricks(structures):
                 dirty = True
             elif name == 'minecraft:chiseled_stone_bricks':
                 block['Name'] = StringTag('tfc:rock/chiseled/%s' % rock)
+                dirty = True
+            elif name == 'minecraft:iron_bars':
+                block['Name'] = StringTag('tfc:metal/bars/wrought_iron')
                 dirty = True
         if dirty:
             save(the_nbt, f)

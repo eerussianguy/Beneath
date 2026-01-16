@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "beneath:wood/lumber/crimson"
+    },
+    "P": {
+      "item": "beneath:wood/planks/crimson"
+    }
+  },
+  "pattern": [
+    "PLP",
+    "PLP"
+  ],
+  "result": {
+    "count": 8,
+    "id": "beneath:wood/fence/crimson"
+  }
+}

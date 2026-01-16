@@ -57,12 +57,26 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
             .addTag(BlockTags.BASE_STONE_NETHER)
             .add(Blocks.SOUL_SOIL, Blocks.SOUL_SAND, BeneathBlocks.SOUL_FARMLAND.get(), BeneathBlocks.SOUL_CLAY.get(), Blocks.CRIMSON_NYLIUM, Blocks.WARPED_NYLIUM);
         tag(MUSHROOMS).add(BeneathBlocks.MUSHROOMS);
+        tag(NETHER_BRICKS).add(Blocks.NETHER_BRICKS, Blocks.RED_NETHER_BRICKS);
+        tag(NETHER_BRICK_DECOR)
+            .add(Blocks.NETHER_BRICK_FENCE, Blocks.NETHER_BRICK_SLAB, Blocks.NETHER_BRICK_STAIRS, Blocks.NETHER_BRICK_WALL)
+            .add(Blocks.RED_NETHER_BRICK_SLAB, Blocks.RED_NETHER_BRICK_STAIRS, Blocks.RED_NETHER_BRICK_WALL);
+        tag(BLACKSTONE).add(Blocks.BLACKSTONE, Blocks.POLISHED_BLACKSTONE, Blocks.CHISELED_POLISHED_BLACKSTONE, Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS, Blocks.GILDED_BLACKSTONE);
+        tag(BLACKSTONE_DECOR).add(Blocks.BLACKSTONE_SLAB, Blocks.BLACKSTONE_STAIRS, Blocks.BLACKSTONE_WALL, Blocks.POLISHED_BLACKSTONE_SLAB, Blocks.POLISHED_BLACKSTONE_STAIRS, Blocks.POLISHED_BLACKSTONE_WALL, Blocks.POLISHED_BLACKSTONE_BRICK_SLAB, Blocks.POLISHED_BLACKSTONE_BRICK_STAIRS, Blocks.POLISHED_BLACKSTONE_BRICK_WALL);
 
         tag(TFCTags.Blocks.AQUEDUCTS).add(BeneathBlocks.BLACKSTONE_AQUEDUCT);
         tag(TFCTags.Blocks.BREAKS_WHEN_ISOLATED).add(Blocks.BASALT, Blocks.BLACKSTONE, Blocks.NETHERRACK, BeneathBlocks.CRACKRACK.get(), Blocks.CRIMSON_NYLIUM, Blocks.WARPED_NYLIUM);
         tag(TFCTags.Blocks.TREE_GROWS_ON).add(Blocks.CRIMSON_NYLIUM, Blocks.WARPED_NYLIUM, Blocks.NETHERRACK);
-        tag(TFCTags.Blocks.PROSPECTABLE).add2(BeneathBlocks.GRADED_ORES).add(BeneathBlocks.MINERALS);
+        tag(TFCTags.Blocks.PROSPECTABLE).add2(BeneathBlocks.GRADED_ORES).add(BeneathBlocks.MINERALS).add(Blocks.NETHER_QUARTZ_ORE);
         tag(TFCTags.Blocks.CAN_BE_SNOW_PILED).add(BeneathBlocks.BLACKSTONE_PEBBLE, BeneathBlocks.NETHER_PEBBLE);
+        tag(TFCTags.Blocks.CAN_TRIGGER_COLLAPSE).addTags(NETHER_BRICKS, NETHER_BRICK_DECOR, BLACKSTONE, BLACKSTONE_DECOR);
+        tag(TFCTags.Blocks.CAN_START_COLLAPSE).addTags(NETHER_BRICKS, BLACKSTONE);
+        tag(TFCTags.Blocks.CAN_COLLAPSE)
+            .add(BeneathBlocks.HAUNTED_SPIKE, BeneathBlocks.GLOWSTONE_SPIKE)
+            .add(BeneathBlocks.CRACKRACK, BeneathBlocks.COBBLERACK, BeneathBlocks.FUNGAL_COBBLERACK)
+            .add(Blocks.GLOWSTONE, Blocks.BASALT);
+        tag(TFCTags.Blocks.CAN_LANDSLIDE)
+            .add(BeneathBlocks.COBBLERACK, BeneathBlocks.FUNGAL_COBBLERACK, BeneathBlocks.SOUL_CLAY, BeneathBlocks.SOUL_FARMLAND);
 
         tag(BlockTags.STONE_BRICKS).add(BeneathBlocks.HELLBRICKS);
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -129,6 +143,8 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
         addAllStems(Wood.BlockType.VERTICAL_SUPPORT, TFCTags.Blocks.SUPPORT_BEAMS);
         addAllStems(Wood.BlockType.SIGN, BlockTags.STANDING_SIGNS);
         addAllStems(Wood.BlockType.WALL_SIGN, BlockTags.WALL_SIGNS);
+        makeStandardLogTag(Stem.CRIMSON, CRIMSON_LOGS);
+        makeStandardLogTag(Stem.CRIMSON, WARPED_LOGS);
 
         // For every tree species
         addAllStems(Wood.BlockType.SAPLING, BlockTags.SAPLINGS);

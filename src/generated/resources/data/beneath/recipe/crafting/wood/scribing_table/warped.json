@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "tag": "c:dyes/black"
+    },
+    "F": {
+      "tag": "c:feathers"
+    },
+    "S": {
+      "item": "beneath:wood/planks/warped_slab"
+    },
+    "W": {
+      "item": "beneath:wood/planks/warped"
+    }
+  },
+  "pattern": [
+    "F D",
+    "SSS",
+    "W W"
+  ],
+  "result": {
+    "count": 1,
+    "id": "beneath:wood/scribing_table/warped"
+  }
+}

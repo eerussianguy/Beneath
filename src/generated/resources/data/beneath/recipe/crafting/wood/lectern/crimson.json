@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "beneath:wood/bookshelf/crimson"
+    },
+    "L": {
+      "item": "beneath:wood/lumber/crimson"
+    }
+  },
+  "pattern": [
+    "LLL",
+    " B ",
+    " L "
+  ],
+  "result": {
+    "count": 1,
+    "id": "beneath:wood/lectern/crimson"
+  }
+}

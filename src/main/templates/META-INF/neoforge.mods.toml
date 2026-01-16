@@ -15,6 +15,17 @@ issueTrackerURL = "https://github.com/eerussianguy/Beneath/issues"
 
 # Dependencies
 [[dependencies.beneath]]
+    modId = "tfc"
+    type = "required"
+    versionRange = "${tfcVersionRange}"
+    ordering = "AFTER"
+    side = "BOTH"
+    [dependencies.beneath.mc-publish]
+        ignore=false
+        modrinth="terrafirmacraft"
+        curseforge="terrafirmacraft"
+
+[[dependencies.beneath]]
     modId = "patchouli"
     type = "required"
     versionRange = "${patchouliVersionRange}"
