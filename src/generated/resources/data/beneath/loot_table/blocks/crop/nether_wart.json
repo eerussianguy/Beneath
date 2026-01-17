@@ -12,7 +12,12 @@
           }
         }
       ],
-      "entries": [],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:nether_wart"
+        }
+      ],
       "rolls": 1.0
     },
     {

@@ -5,8 +5,8 @@
       "type": "paletted_permutations",
       "palette_key": "beneath:color_palettes/wood/planks/palette",
       "textures": [
-        "beneath:block/wood/planks/bookshelf_top",
-        "beneath:block/wood/planks/bookshelf_side"
+        "beneath:block/wood/bookshelf/top",
+        "beneath:block/wood/bookshelf/side"
       ],
       "permutations": {
         "crimson": "beneath:color_palettes/wood/planks/crimson",

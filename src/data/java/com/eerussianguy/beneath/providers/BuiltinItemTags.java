@@ -61,6 +61,7 @@ public class BuiltinItemTags extends TagsProvider<Item> implements Accessors
             .add(Items.WARPED_FUNGUS, Items.CRIMSON_FUNGUS, BeneathItems.GHOST_PEPPER.asItem(), BeneathBlocks.GLEAMFLOWER.asItem(), Items.CRIMSON_ROOTS, Items.WARPED_ROOTS, Items.NETHER_WART, Items.GHAST_TEAR)
             .addTag(Tags.Items.MUSHROOMS);
 
+        tag(TFCTags.Items.FORGE_FUEL).add(BeneathItems.CURSECOAL);
         tag(TFCTags.Items.AQUEDUCTS).add(BeneathBlocks.BLACKSTONE_AQUEDUCT.asItem());
         tag(TFCTags.Items.STONES_LOOSE).add(BeneathBlocks.NETHER_PEBBLE.asItem(), BeneathBlocks.BLACKSTONE_PEBBLE.asItem());
         tag(TFCTags.Items.STONES_LOOSE_CATEGORY.get(RockCategory.METAMORPHIC)).add(BeneathBlocks.BLACKSTONE_PEBBLE.asItem());

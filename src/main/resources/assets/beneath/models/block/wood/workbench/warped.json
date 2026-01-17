@@ -1,0 +1,13 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "beneath:block/wood/workbench/warped_front",
+    "north": "beneath:block/wood/workbench/warped_front",
+    "south": "beneath:block/wood/workbench/warped_side",
+    "east": "beneath:block/wood/workbench/warped_side",
+    "west": "beneath:block/wood/workbench/warped_front",
+    "up": "beneath:block/wood/workbench/warped_top",
+    "down": "beneath:block/wood/planks/warped"
+  }
+}

@@ -12,7 +12,12 @@
           }
         }
       ],
-      "entries": [],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:crimson_roots"
+        }
+      ],
       "rolls": 1.0
     },
     {

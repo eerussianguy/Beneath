@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import com.eerussianguy.beneath.common.blockentities.SoulFarmlandBlockEntity;
 import com.eerussianguy.beneath.misc.NCropUtil;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -21,6 +22,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.dries007.tfc.common.blockentities.CropBlockEntity;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.crop.CropBlock;
+import net.dries007.tfc.common.blocks.crop.CropHelpers;
 import net.dries007.tfc.common.blocks.soil.FarmlandBlock;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.Calendars;
@@ -88,6 +90,10 @@ public abstract class NetherCropBlock extends CropBlock
             {
                 farmland = found;
             }
+        }
+        if (!CropHelpers.lightValid(level, pos))
+        {
+            text.accept(Component.translatable("beneath.crop.too_dark").withStyle(ChatFormatting.GRAY));
         }
 
         if (farmland != null)

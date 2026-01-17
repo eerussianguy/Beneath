@@ -220,8 +220,8 @@ def create_bookshelf(wood: str):
     filled = Image.open(templates + 'chiseled_bookshelf_occupied.png').convert('RGBA')
     empty.paste(planks, mask=mask)
     filled.paste(planks, mask=mask)
-    empty.save(path + 'block/wood/planks/%s_bookshelf_empty.png' % wood)
-    filled.save(path + 'block/wood/planks/%s_bookshelf_occupied.png' % wood)
+    empty.save(path + 'block/wood/bookshelf/%s_empty.png' % wood)
+    filled.save(path + 'block/wood/bookshelf/%s_occupied.png' % wood)
 
 
 def create_hanging_sign_chains_item(metal: str, smooth_color):
@@ -318,8 +318,8 @@ def manual_palette_swap(img: Image, palette_key: Image, palette: Image) -> Image
 
 def main():
     for wood in WOODS:
-        for bench in ('workbench_front', 'workbench_side', 'workbench_top'):
-            overlay_image(templates + bench, path + 'block/wood/planks/%s' % wood, path + 'block/wood/planks/%s_' % wood + bench)
+        for bench in ('front', 'side', 'top'):
+            overlay_image(templates + 'workbench_' + bench, path + 'block/wood/planks/%s' % wood, path + 'block/wood/workbench/%s_%s' % (wood, bench))
         create_chest(wood)
         create_sign(wood)
         create_bookshelf(wood)
@@ -330,7 +330,7 @@ def main():
         if wood != 'palm':
             create_boat_texture(wood)
         for metal, metal_data in METALS.items():
-            if 'utility' in metal_data.types:
+            if 'all' == metal_data.type:
                 create_hanging_sign(wood, metal)
 
 if __name__ == '__main__':

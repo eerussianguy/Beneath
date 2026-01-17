@@ -6,9 +6,11 @@ import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 import com.eerussianguy.beneath.common.BeneathDispenserBehaviors;
+import com.eerussianguy.beneath.common.blockentities.BeneathBlockEntities;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
 import com.eerussianguy.beneath.common.blocks.Stem;
 import com.eerussianguy.beneath.common.entities.BeneathEntities;
+import com.eerussianguy.beneath.common.items.BeneathItems;
 import com.eerussianguy.beneath.misc.BeneathClimateModels;
 import com.eerussianguy.beneath.misc.BeneathInteractionManager;
 import com.eerussianguy.beneath.mixin.BlockEntityTypeAccessor;
@@ -19,18 +21,36 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
+import net.dries007.tfc.common.blockentities.InventoryBlockEntity;
 import net.dries007.tfc.common.blockentities.TFCBlockEntities;
 import net.dries007.tfc.common.blocks.IForgeBlockExtension;
 import net.dries007.tfc.common.blocks.wood.Wood;
+import net.dries007.tfc.common.capabilities.ItemCapabilities;
 
 public class ModEvents
 {
     public static void init(IEventBus bus)
     {
         bus.addListener(ModEvents::setup);
+        bus.addListener(ModEvents::onCaps);
         bus.addListener(BeneathEntities::onAttributes);
         bus.addListener(BeneathEntities::onSpawnPlacement);
+    }
+
+    public static void onCaps(RegisterCapabilitiesEvent event)
+    {
+        registerInventory(event, BeneathBlockEntities.HELLFORGE);
+        registerInventory(event, BeneathBlockEntities.ANCIENT_ALTAR);
+
+        event.registerItem(Capabilities.FluidHandler.ITEM, ItemCapabilities::forBucket, BeneathItems.JUICER);
+    }
+
+    private static void registerInventory(RegisterCapabilitiesEvent event, Supplier<? extends BlockEntityType<? extends InventoryBlockEntity<?>>> type)
+    {
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, type.get(), InventoryBlockEntity::getSidedInventory);
     }
 
     private static void setup(FMLCommonSetupEvent event)

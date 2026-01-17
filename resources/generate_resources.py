@@ -9,7 +9,6 @@ from mcresources.type_definitions import Json
 import constants
 import woods
 import assets
-import data
 import world_gen
 
 
@@ -49,7 +48,6 @@ def main():
 def generate_all(rm: ResourceManager):
     woods.generate(rm)
     assets.generate(rm)
-    data.generate(rm)
     world_gen.generate(rm)
 
     vanilla_rm = ResourceManager('minecraft', resource_dir=rm.resource_dir)

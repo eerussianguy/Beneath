@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/wood/log_fence/inventory",
+  "textures": {
+    "log": "beneath:block/wood/log/warped",
+    "planks": "beneath:block/wood/planks/warped"
+  }
+}

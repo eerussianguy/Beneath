@@ -12,18 +12,14 @@
       "Name": "tfc:rock/magma/basalt"
     },
     "rim_size": {
-      "type": "uniform",
-      "value": {
-        "min_inclusive": 3,
-        "max_inclusive": 7
-      }
+      "type": "minecraft:uniform",
+      "min_inclusive": 3,
+      "max_inclusive": 7
     },
     "size": {
-      "type": "uniform",
-      "value": {
-        "min_inclusive": 0,
-        "max_inclusive": 2
-      }
+      "type": "minecraft:uniform",
+      "min_inclusive": 0,
+      "max_inclusive": 2
     }
   }
 }

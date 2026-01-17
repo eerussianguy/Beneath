@@ -161,8 +161,16 @@ public class BuiltinBlockLootTables extends BlockLootSubProvider implements Acce
 
         // todo yield?
         BeneathBlocks.CROPS.forEach((crop, block) -> {
+            final ItemLike item = switch (crop)
+            {
+                case GLEAMFLOWER -> BeneathBlocks.GLEAMFLOWER;
+                case NETHER_WART -> Items.NETHER_WART;
+                case GHOST_PEPPER -> BeneathItems.GHOST_PEPPER;
+                case CRIMSON_ROOTS -> Items.CRIMSON_ROOTS;
+                case WARPED_ROOTS -> Items.WARPED_ROOTS;
+            };
             add(block.get(), b -> lootTable().withPool(
-                lootPool().when(hasProperty(b, NetherCropBlock.AGE, crop.getStages() - 1))
+                lootPool().add(lootTableItem(item)).when(hasProperty(b, ((NetherCropBlock) block.get()).getAgeProperty(), crop.getStages() - 1))
             ).withPool(
                 lootPool().add(lootTableItem(BeneathItems.SEEDS.get(crop)))
             ));

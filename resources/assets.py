@@ -111,7 +111,7 @@ def generate(rm: ResourceManager):
     for shroom in MUSHROOMS:
         mushlang = shroom if 'fools' not in shroom else 'Fool\'s Funnel'
         rm.blockstate('mushroom/%s' % shroom).with_block_model(parent='block/cross', textures={'cross': 'beneath:block/mushroom/%s' % shroom}).with_lang(lang(mushlang))
-        rm.item_model('food/%s' % shroom, 'beneath:block/mushroom/%s' % shroom).with_lang(mushlang)
+        rm.item_model('food/%s' % shroom, 'beneath:block/mushroom/%s' % shroom).with_lang(lang(mushlang))
 
     simple_block(rm, 'cobblerack')
     simple_block(rm, 'fungal_cobblerack')
@@ -126,7 +126,7 @@ def simple_block(rm: ResourceManager, name: str) -> BlockContext:
 
 def flower_pot_cross(rm: ResourceManager, simple_name: str, name: str, model: str, texture: str, loot: str):
     rm.blockstate(name, model='beneath:block/%s' % model).with_lang(lang('potted %s', simple_name))
-    rm.block_model(model, parent='minecraft:block/flower_pot_cross', textures={'plant': texture, 'dirt': 'tfc:block/dirt/loam'})
+    rm.block_model(model, parent='minecraft:block/flower_pot_cross', textures={'plant': texture, 'dirt': 'tfc:block/dirt/entisol'})
 
 def item_model_property(rm: ResourceManager, name_parts: utils.ResourceIdentifier, overrides: utils.Json, data: Dict[str, Any]) -> ItemContext:
     res = utils.resource_location(rm.domain, name_parts)

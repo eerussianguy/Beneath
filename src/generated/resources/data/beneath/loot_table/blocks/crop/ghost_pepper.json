@@ -12,7 +12,12 @@
           }
         }
       ],
-      "entries": [],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "beneath:ghost_pepper"
+        }
+      ],
       "rolls": 1.0
     },
     {

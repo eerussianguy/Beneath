@@ -1,18 +1,29 @@
-from typing import NamedTuple, List, Optional, Tuple, Dict, Set
+from typing import NamedTuple, List, Optional, Tuple, Dict, Set, Literal
 
 
 def lang(key: str, *args) -> str:
     return ((key % args) if len(args) > 0 else key).replace('_', ' ').replace('/', ' ').title()
 
-class Metal(NamedTuple):
-    tier: int
-    types: Set[str]
-    heat_capacity_base: float  # Do not access directly, use one of specific or ingot heat capacity.
-    melt_temperature: float
-    melt_metal: Optional[str]
+class MetalItem(NamedTuple):
+    type: Literal['ingot', 'part', 'all', 'weathering']
+    parent_model: str | None
+    mold: bool
 
-    def specific_heat_capacity(self) -> float: return round(300 / self.heat_capacity_base) / 100_000
-    def ingot_heat_capacity(self) -> float: return 1 / self.heat_capacity_base
+class Metal(NamedTuple):
+    type: Literal['ingot', 'part', 'all']
+    weathering: bool
+
+    def has_block(self, item: str) -> bool: return self.has(METAL_BLOCKS[item])
+
+    def has(self, item: MetalItem) -> bool:
+        if item.type == 'weathering':
+            return self.weathering
+        if item.type == 'all':
+            return self.type == 'all'
+        if item.type == 'part':
+            return self.type in ('all', 'part')
+        if item.type == 'ingot':
+            return True
 
 class Rock(NamedTuple):
     category: str
@@ -20,39 +31,59 @@ class Rock(NamedTuple):
 
 ROCK_CATEGORIES: List[str] = ['sedimentary', 'metamorphic', 'igneous_extrusive', 'igneous_intrusive']
 
-TFC_METALS: Dict[str, Metal] = {
-    'gold': Metal(1, {'part'}, 0.6, 1060, None),
+METALS: dict[str, Metal] = {
+    'bismuth': Metal('part', False),
+    'bismuth_bronze': Metal('all', False),
+    'black_bronze': Metal('all', False),
+    'bronze': Metal('all', True),
+    'brass': Metal('part', True),
+    'copper': Metal('all', True),
+    'gold': Metal('part', False),
+    'nickel': Metal('part', False),
+    'rose_gold': Metal('part', False),
+    'silver': Metal('part', True),
+    'tin': Metal('part', False),
+    'zinc': Metal('part', False),
+    'sterling_silver': Metal('part', True),
+    'wrought_iron': Metal('all', True),
+    'cast_iron': Metal('part', False),
+    'pig_iron': Metal('ingot', False),
+    'steel': Metal('all', True),
+    'black_steel': Metal('all', False),
+    'blue_steel': Metal('all', False),
+    'red_steel': Metal('all', False),
+    'weak_steel': Metal('ingot', False),
+    'weak_blue_steel': Metal('ingot', False),
+    'weak_red_steel': Metal('ingot', False),
+    'high_carbon_steel': Metal('ingot', False),
+    'high_carbon_black_steel': Metal('ingot', False),
+    'high_carbon_blue_steel': Metal('ingot', False),
+    'high_carbon_red_steel': Metal('ingot', False),
+    'unknown': Metal('ingot', False)
 }
 
-METALS: Dict[str, Metal] = {
-    'bismuth': Metal(1, {'part'}, 0.14, 270, None),
-    'bismuth_bronze': Metal(2, {'part', 'tool', 'armor', 'utility'}, 0.35, 985, None),
-    'black_bronze': Metal(2, {'part', 'tool', 'armor', 'utility'}, 0.35, 1070, None),
-    'bronze': Metal(2, {'part', 'tool', 'armor', 'utility'}, 0.35, 950, None),
-    'brass': Metal(2, {'part'}, 0.35, 930, None),
-    'copper': Metal(1, {'part', 'tool', 'armor', 'utility'}, 0.35, 1080, None),
-    'gold': Metal(1, {'part'}, 0.6, 1060, None),
-    'nickel': Metal(1, {'part'}, 0.48, 1453, None),
-    'rose_gold': Metal(1, {'part'}, 0.35, 960, None),
-    'silver': Metal(1, {'part'}, 0.48, 961, None),
-    'tin': Metal(1, {'part'}, 0.14, 230, None),
-    'zinc': Metal(1, {'part'}, 0.21, 420, None),
-    'sterling_silver': Metal(1, {'part'}, 0.35, 950, None),
-    'wrought_iron': Metal(3, {'part', 'tool', 'armor', 'utility'}, 0.35, 1535, 'cast_iron'),
-    'cast_iron': Metal(1, {'part'}, 0.35, 1535, None),
-    'pig_iron': Metal(3, set(), 0.35, 1535, None),
-    'steel': Metal(4, {'part', 'tool', 'armor', 'utility'}, 0.35, 1540, None),
-    'black_steel': Metal(5, {'part', 'tool', 'armor', 'utility'}, 0.35, 1485, None),
-    'blue_steel': Metal(6, {'part', 'tool', 'armor', 'utility'}, 0.35, 1540, None),
-    'red_steel': Metal(6, {'part', 'tool', 'armor', 'utility'}, 0.35, 1540, None),
-    'weak_steel': Metal(4, set(), 0.35, 1540, None),
-    'weak_blue_steel': Metal(5, set(), 0.35, 1540, None),
-    'weak_red_steel': Metal(5, set(), 0.35, 1540, None),
-    'high_carbon_steel': Metal(3, set(), 0.35, 1540, 'pig_iron'),
-    'high_carbon_black_steel': Metal(4, set(), 0.35, 1540, 'weak_steel'),
-    'high_carbon_blue_steel': Metal(5, set(), 0.35, 1540, 'weak_blue_steel'),
-    'high_carbon_red_steel': Metal(5, set(), 0.35, 1540, 'weak_red_steel'),
-    'unknown': Metal(0, set(), 0.5, 400, None)
+METAL_BLOCKS: dict[str, MetalItem] = {
+    'block': MetalItem('part', 'block/block', False),
+    'exposed_block': MetalItem('weathering', 'block/block', False),
+    'weathered_block': MetalItem('weathering', 'block/block', False),
+    'oxidized_block': MetalItem('weathering', 'block/block', False),
+    'block_slab': MetalItem('part', 'block/block', False),
+    'exposed_block_slab': MetalItem('weathering', 'block/block', False),
+    'weathered_block_slab': MetalItem('weathering', 'block/block', False),
+    'oxidized_block_slab': MetalItem('weathering', 'block/block', False),
+    'block_stairs': MetalItem('part', 'block/block', False),
+    'exposed_block_stairs': MetalItem('weathering', 'block/block', False),
+    'weathered_block_stairs': MetalItem('weathering', 'block/block', False),
+    'oxidized_block_stairs': MetalItem('weathering', 'block/block', False),
+    'grate': MetalItem('all', 'block/block', False),
+    'exposed_grate': MetalItem('all', 'block/block', False),
+    'weathered_grate': MetalItem('all', 'block/block', False),
+    'oxidized_grate': MetalItem('all', 'block/block', False),
+    'anvil': MetalItem('part', 'tfc:block/anvil', False),
+    'bars': MetalItem('part', 'item/generated', False),
+    'chain': MetalItem('part', 'tfc:block/chain', False),
+    'lamp': MetalItem('part', 'tfc:block/lamp', False),
+    'trapdoor': MetalItem('part', 'tfc:block/trapdoor', False),
 }
 
 ROCKS: Dict[str, Rock] = {
@@ -134,6 +165,7 @@ DEFAULT_LANG = {
     'beneath.enum.punishment.slime': 'Slime!',
     'beneath.enum.punishment.unknown': '§kUnknown',
     'beneath.sacrifice.error': 'Sacrifice Error: Materials not found.',
+    'beneath.crop.too_dark': 'Too dark to grow',
     'item.beneath.juicer.filled': 'Juicer (%s)',
     'death.attack.beneath.sulfur': '%1$s mined sulfur with an iron tool and blew themselves up.',
     'death.attack.beneath.sulfur.player': '%1$s mined sulfur with an iron tool and blew themselves up while trying to escape %2$s.',

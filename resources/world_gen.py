@@ -218,11 +218,9 @@ def height_provider(min_y: VerticalAnchor, max_y: VerticalAnchor, height_type: H
 
 def uniform_int(min_inclusive: int, max_inclusive: int) -> Dict[str, Any]:
     return {
-        'type': 'uniform',
-        'value': {
-            'min_inclusive': min_inclusive,
-            'max_inclusive': max_inclusive
-        }
+        'type': 'minecraft:uniform',
+        'min_inclusive': min_inclusive,
+        'max_inclusive': max_inclusive
     }
 
 def decorate_flat_enough(flatness: float = None, radius: int = None, max_depth: int = None):

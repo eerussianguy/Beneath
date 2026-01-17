@@ -181,7 +181,7 @@ public class BeneathBlocks
     {
         return Helpers.mapOf(Stem.class, wood ->
             Helpers.mapOf(Metal.class, Metal::allParts, metal -> register(
-                "wood/planks/" + variant + "/" + metal.getSerializedName() + "/" + wood.getSerializedName(),
+                "wood/" + variant + "/" + metal.getSerializedName() + "/" + wood.getSerializedName(),
                 () -> factory.apply(ExtendedProperties.of(wood.woodColor()).sound(SoundType.WOOD).noCollission().strength(1F).flammableLikePlanks().blockEntity(BeneathBlockEntities.HANGING_SIGN).ticks(SignBlockEntity::tick), wood.getVanillaWoodType()),
                 (Function<B, BlockItem>) null)
             )

@@ -33,6 +33,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 
+import net.dries007.tfc.client.RenderHelpers;
 import net.dries007.tfc.client.particle.GlintParticleProvider;
 import net.dries007.tfc.client.render.entity.SimpleMobRenderer;
 import net.dries007.tfc.client.render.entity.TFCBoatRenderer;
@@ -120,15 +121,13 @@ public class ClientModEvents
     {
         final LayerDefinition boatLayer = BoatModel.createBodyModel();
         final LayerDefinition chestLayer = ChestBoatModel.createBodyModel();
-        final LayerDefinition signLayer = SignRenderer.createSignLayer();
         for (Stem wood : Stem.VALUES)
         {
             event.registerLayerDefinition(TFCBoatRenderer.boatName(wood.getSerializedName()), () -> boatLayer);
             event.registerLayerDefinition(TFCChestBoatRenderer.chestBoatName(wood.getSerializedName()), () -> chestLayer);
-            event.registerLayerDefinition(BeneathClientUtil.layerId("sign/" + wood.getSerializedName()), () -> signLayer);
         }
 
-        event.registerLayerDefinition(BeneathClientUtil.layerId("red_elk"), RedElkModel::createBodyLayer);
+        event.registerLayerDefinition(RenderHelpers.layerId("red_elk"), RedElkModel::createBodyLayer);
     }
 
     private static void onParticlesRegister(RegisterParticleProvidersEvent event)

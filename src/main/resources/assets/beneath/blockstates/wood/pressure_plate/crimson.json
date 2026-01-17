@@ -1,0 +1,11 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "powered=false": {
+      "model": "beneath:block/wood/pressure_plate/crimson"
+    },
+    "powered=true": {
+      "model": "beneath:block/wood/pressure_plate/crimson_down"
+    }
+  }
+}

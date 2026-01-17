@@ -2,6 +2,8 @@
   "__comment__": "This file was automatically created by mcresources",
   "parent": "item/generated",
   "textures": {
-    "layer0": "beneath:item/wood/sign/crimson"
+    "layer0": "beneath:item/wood/sign/crimson",
+    "layer1": "beneath:item/wood/sign_head_crimson",
+    "layer2": "tfc:item/wood/sign_head_overlay"
   }
 }
