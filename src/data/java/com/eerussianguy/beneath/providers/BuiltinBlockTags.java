@@ -69,19 +69,23 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
         tag(TFCTags.Blocks.TREE_GROWS_ON).add(Blocks.CRIMSON_NYLIUM, Blocks.WARPED_NYLIUM, Blocks.NETHERRACK);
         tag(TFCTags.Blocks.PROSPECTABLE).add2(BeneathBlocks.GRADED_ORES).add(BeneathBlocks.MINERALS).add(Blocks.NETHER_QUARTZ_ORE);
         tag(TFCTags.Blocks.CAN_BE_SNOW_PILED).add(BeneathBlocks.BLACKSTONE_PEBBLE, BeneathBlocks.NETHER_PEBBLE);
-        tag(TFCTags.Blocks.CAN_TRIGGER_COLLAPSE).addTags(NETHER_BRICKS, NETHER_BRICK_DECOR, BLACKSTONE, BLACKSTONE_DECOR);
-        tag(TFCTags.Blocks.CAN_START_COLLAPSE).addTags(NETHER_BRICKS, BLACKSTONE);
+        tag(TFCTags.Blocks.CAN_TRIGGER_COLLAPSE).addTags(NETHER_BRICKS, NETHER_BRICK_DECOR, BLACKSTONE, BLACKSTONE_DECOR)
+            .add(BeneathBlocks.CRACKRACK)
+            .add(Blocks.GLOWSTONE, Blocks.BASALT, Blocks.BLACKSTONE, Blocks.GILDED_BLACKSTONE);
+        tag(TFCTags.Blocks.CAN_START_COLLAPSE).addTags(NETHER_BRICKS, BLACKSTONE)
+            .add(BeneathBlocks.CRACKRACK)
+            .add(Blocks.GLOWSTONE, Blocks.BASALT, Blocks.BLACKSTONE, Blocks.GILDED_BLACKSTONE);
         tag(TFCTags.Blocks.CAN_COLLAPSE)
             .add(BeneathBlocks.HAUNTED_SPIKE, BeneathBlocks.GLOWSTONE_SPIKE)
-            .add(BeneathBlocks.CRACKRACK, BeneathBlocks.COBBLERACK, BeneathBlocks.FUNGAL_COBBLERACK)
-            .add(Blocks.GLOWSTONE, Blocks.BASALT);
+            .add(BeneathBlocks.CRACKRACK)
+            .add(Blocks.GLOWSTONE, Blocks.BASALT, Blocks.BLACKSTONE, Blocks.GILDED_BLACKSTONE);
         tag(TFCTags.Blocks.CAN_LANDSLIDE)
             .add(BeneathBlocks.COBBLERACK, BeneathBlocks.FUNGAL_COBBLERACK, BeneathBlocks.SOUL_CLAY, BeneathBlocks.SOUL_FARMLAND);
 
         tag(BlockTags.STONE_BRICKS).add(BeneathBlocks.HELLBRICKS);
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .add(BeneathBlocks.BLACKSTONE_AQUEDUCT, BeneathBlocks.COBBLERACK, BeneathBlocks.FUNGAL_COBBLERACK, BeneathBlocks.HELLBRICKS)
-            .add2(BeneathBlocks.GRADED_ORES).add(BeneathBlocks.MINERALS)
+            .add2(BeneathBlocks.GRADED_ORES).add(BeneathBlocks.MINERALS).add(BeneathBlocks.SLIMED_NETHERRACK)
             .add(BeneathBlocks.GLOWSTONE_SPIKE, BeneathBlocks.HAUNTED_SPIKE, BeneathBlocks.CRACKRACK);
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
             .add(BeneathBlocks.CURSECOAL_PILE, BeneathBlocks.HELLFORGE, BeneathBlocks.SOUL_FARMLAND, BeneathBlocks.SOUL_CLAY, BeneathBlocks.SULFUR);

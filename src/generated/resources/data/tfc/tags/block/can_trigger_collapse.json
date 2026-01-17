@@ -3,6 +3,11 @@
     "#beneath:nether_bricks",
     "#beneath:nether_brick_decor",
     "#beneath:blackstone",
-    "#beneath:blackstone_decor"
+    "#beneath:blackstone_decor",
+    "beneath:crackrack",
+    "minecraft:glowstone",
+    "minecraft:basalt",
+    "minecraft:blackstone",
+    "minecraft:gilded_blackstone"
   ]
 }

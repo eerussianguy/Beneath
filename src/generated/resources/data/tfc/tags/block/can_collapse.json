@@ -3,9 +3,9 @@
     "beneath:haunted_spike",
     "beneath:glowstone_spike",
     "beneath:crackrack",
-    "beneath:cobblerack",
-    "beneath:fungal_cobblerack",
     "minecraft:glowstone",
-    "minecraft:basalt"
+    "minecraft:basalt",
+    "minecraft:blackstone",
+    "minecraft:gilded_blackstone"
   ]
 }
