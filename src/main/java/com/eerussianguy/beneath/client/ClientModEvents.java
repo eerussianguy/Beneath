@@ -1,5 +1,7 @@
 package com.eerussianguy.beneath.client;
 
+import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.client.models.RedElkModel;
@@ -21,23 +23,30 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.client.RenderHelpers;
+import net.dries007.tfc.client.extensions.ItemRendererExtension;
 import net.dries007.tfc.client.particle.GlintParticleProvider;
+import net.dries007.tfc.client.render.blockentity.ChestItemRenderer;
 import net.dries007.tfc.client.render.entity.SimpleMobRenderer;
 import net.dries007.tfc.client.render.entity.TFCBoatRenderer;
 import net.dries007.tfc.client.render.entity.TFCChestBoatRenderer;
+import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.component.TFCComponents;
 import net.dries007.tfc.util.Helpers;
 
@@ -52,6 +61,7 @@ public class ClientModEvents
         bus.addListener(ClientModEvents::onLayers);
         bus.addListener(ClientModEvents::onParticlesRegister);
         bus.addListener(ClientModEvents::onMenuRegister);
+        bus.addListener(ClientModEvents::registerExtensions);
     }
 
     @SuppressWarnings("deprecation")
@@ -99,6 +109,18 @@ public class ClientModEvents
 
     private static final ResourceLocation RED_ELK_LOCATION = Beneath.identifier("textures/entity/nether_deer.png");
     private static final ResourceLocation RED_ELK_F_LOCATION = Beneath.identifier("textures/entity/nether_deer_fawn.png");
+
+    public static void registerExtensions(RegisterClientExtensionsEvent event)
+    {
+        BeneathBlocks.WOODS.values().forEach(map -> registerCustomItemRenderer(event, map.get(CHEST), ChestItemRenderer::new));
+        BeneathBlocks.WOODS.values().forEach(map -> registerCustomItemRenderer(event, map.get(TRAPPED_CHEST), ChestItemRenderer::new));
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> void registerCustomItemRenderer(RegisterClientExtensionsEvent event, @Nullable Supplier<? extends ItemLike> item, Function<T, BlockEntityWithoutLevelRenderer> renderer)
+    {
+        if (item != null) event.registerItem(ItemRendererExtension.cached(() -> renderer.apply((T) item.get().asItem())), item.get().asItem());
+    }
 
     private static void onEntityRenderers(EntityRenderersEvent.RegisterRenderers event)
     {

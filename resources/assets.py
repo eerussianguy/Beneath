@@ -111,7 +111,7 @@ def generate(rm: ResourceManager):
     for shroom in MUSHROOMS:
         mushlang = shroom if 'fools' not in shroom else 'Fool\'s Funnel'
         rm.blockstate('mushroom/%s' % shroom).with_block_model(parent='block/cross', textures={'cross': 'beneath:block/mushroom/%s' % shroom}).with_lang(lang(mushlang))
-        rm.item_model('food/%s' % shroom, 'beneath:block/mushroom/%s' % shroom).with_lang(lang(mushlang))
+        rm.item_model('food/%s' % shroom, 'beneath:block/mushroom/%s' % shroom).with_lang(lang(mushlang + '_mushroom'))
 
     simple_block(rm, 'cobblerack')
     simple_block(rm, 'fungal_cobblerack')

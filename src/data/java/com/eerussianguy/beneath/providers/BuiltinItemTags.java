@@ -66,6 +66,7 @@ public class BuiltinItemTags extends TagsProvider<Item> implements Accessors
         tag(TFCTags.Items.STONES_LOOSE).add(BeneathBlocks.NETHER_PEBBLE.asItem(), BeneathBlocks.BLACKSTONE_PEBBLE.asItem());
         tag(TFCTags.Items.STONES_LOOSE_CATEGORY.get(RockCategory.METAMORPHIC)).add(BeneathBlocks.BLACKSTONE_PEBBLE.asItem());
         tag(TFCTags.Items.STONES_LOOSE_CATEGORY.get(RockCategory.SEDIMENTARY)).add(BeneathBlocks.NETHER_PEBBLE.asItem());
+        tag(TFCTags.Items.VEGETABLES).add(BeneathItems.MUSHROOMS).add(BeneathItems.GHOST_PEPPER);
         tag(Tags.Items.SEEDS).add(BeneathItems.SEEDS);
 
         makeStandardLogTag(Stem.CRIMSON, BeneathItemTags.CRIMSON_LOGS);

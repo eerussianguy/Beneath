@@ -17,7 +17,7 @@ def generate(rm: ResourceManager):
     configured_placed_feature(rm, 'blackstone_boulders', 'beneath:nether_boulders', {'blocks': weighted_list([('minecraft:blackstone', 50), ('minecraft:basalt', 10), ('minecraft:gilded_blackstone', 1)])}, decorate_chance(24), decorate_every_layer(1), decorate_flat_enough(0.4, 2, 4), decorate_biome())
     configured_placed_feature(rm, 'cobble_boulders', 'beneath:nether_boulders', {'blocks': weighted_list([('minecraft:netherrack', 10), ('beneath:cobblerack', 20), ('beneath:fungal_cobblerack', 10)])}, decorate_chance(24), decorate_every_layer(1), decorate_flat_enough(0.4, 3, 4), decorate_biome())
     configured_placed_feature(rm, 'amethyst_geode', 'tfc:geode', {'outer': 'minecraft:blackstone', 'middle': 'tfc:rock/raw/quartzite', 'inner': [{'data': 'tfc:ore/amethyst/quartzite', 'weight': 1}, {'data': 'tfc:rock/raw/quartzite', 'weight': 2}]}, decorate_chance(100), decorate_above_lava_level(), decorate_square())
-    configured_placed_feature(rm, 'soul_clay_disc', 'tfc:soil_disc', {'states': [{'replace': 'minecraft:soul_sand', 'with': 'beneath:soul_clay'}], 'min_radius': 3, 'max_radius': 5, 'height': 3}, decorate_chance(15), decorate_every_layer(1), decorate_flat_enough(0.3, 2, 4))
+    configured_placed_feature(rm, 'soul_clay_disc', 'tfc:soil_disc', {'states': [{'replace': 'minecraft:soul_sand', 'with': 'beneath:soul_clay'}, {'replace': 'minecraft:soul_soil', 'with': 'beneath:soul_clay'}], 'min_radius': 3, 'max_radius': 5, 'height': 3}, decorate_chance(15), decorate_every_layer(1), decorate_flat_enough(0.3, 2, 4))
     configured_placed_feature(rm, 'delta', 'minecraft:delta_feature', {'contents': utils.block_state('minecraft:lava[level=0]'), 'rim': utils.block_state('tfc:rock/magma/basalt'), 'rim_size': uniform_int(3, 7), 'size': uniform_int(0, 2)}, decorate_every_layer(40), decorate_biome())
     configured_placed_feature(rm, 'gleamflower', 'minecraft:simple_block', {'to_place': simple_state_provider('beneath:gleamflower')}, decorate_replaceable(), decorate_would_survive('beneath:gleamflower'), decorate_air())
     configured_placed_feature(rm, 'gleamflower_patch', 'minecraft:random_patch', random_config('beneath:gleamflower', 5, 5, 1), decorate_chance(4), decorate_every_layer(1), decorate_biome())
@@ -150,7 +150,7 @@ def generate(rm: ResourceManager):
     rm.placed_feature_tag('mushrooms', *['beneath:%s_patch' % shr for shr in MUSHROOMS])
     rm.placed_feature_tag('veins', *['beneath:vein/%s' % v for v in ('quartz', 'sylvite', 'normal_gold', 'deep_gold', 'cursecoal', 'crackrack_pipe', 'slime')])
     rm.placed_feature_tag('underground_decoration', '#beneath:veins', *['beneath:magma_%s' % r for r, d in ROCKS.items() if d.category == 'igneous_extrusive'], 'beneath:amethyst_geode')
-    rm.placed_feature_tag('everywhere_but_basalt_deltas', 'beneath:nether_pebble_patch', 'beneath:blackstone_boulders', 'beneath:cobble_boulders', 'beneath:sulfur_patch')
+    rm.placed_feature_tag('everywhere_but_basalt_deltas', 'beneath:nether_pebble_patch', 'beneath:blackstone_boulders', 'beneath:cobble_boulders', 'beneath:sulfur_patch', 'beneath:soul_clay_disc')
 
     rm.placed_feature_tag('vegetal_decoration/nether_wastes', 'beneath:nether_spikes', 'beneath:glowstone_spikes', '#beneath:mushrooms')
     rm.placed_feature_tag('surface_structures/nether_wastes', 'beneath:nether_spikes', 'beneath:glowstone_spikes')

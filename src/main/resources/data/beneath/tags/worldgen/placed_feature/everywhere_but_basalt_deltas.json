@@ -5,6 +5,7 @@
     "beneath:nether_pebble_patch",
     "beneath:blackstone_boulders",
     "beneath:cobble_boulders",
-    "beneath:sulfur_patch"
+    "beneath:sulfur_patch",
+    "beneath:soul_clay_disc"
   ]
 }

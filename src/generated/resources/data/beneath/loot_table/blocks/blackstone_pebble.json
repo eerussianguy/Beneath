@@ -11,30 +11,32 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "conditions": [
-            {
-              "block": "beneath:blackstone_pebble",
-              "condition": "minecraft:block_state_property",
-              "properties": {
-                "count": "2"
-              }
-            },
-            {
-              "block": "beneath:blackstone_pebble",
-              "condition": "minecraft:block_state_property",
-              "properties": {
-                "count": "3"
-              }
-            }
-          ],
           "functions": [
             {
               "add": false,
+              "conditions": [
+                {
+                  "block": "beneath:blackstone_pebble",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "count": "2"
+                  }
+                }
+              ],
               "count": 2.0,
               "function": "minecraft:set_count"
             },
             {
               "add": false,
+              "conditions": [
+                {
+                  "block": "beneath:blackstone_pebble",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "count": "3"
+                  }
+                }
+              ],
               "count": 3.0,
               "function": "minecraft:set_count"
             }

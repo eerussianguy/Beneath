@@ -149,6 +149,7 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
         addAllStems(Wood.BlockType.WALL_SIGN, BlockTags.WALL_SIGNS);
         makeStandardLogTag(Stem.CRIMSON, CRIMSON_LOGS);
         makeStandardLogTag(Stem.CRIMSON, WARPED_LOGS);
+        tag(BlockTags.LOGS).addTags(CRIMSON_LOGS, WARPED_LOGS);
 
         // For every tree species
         addAllStems(Wood.BlockType.SAPLING, BlockTags.SAPLINGS);

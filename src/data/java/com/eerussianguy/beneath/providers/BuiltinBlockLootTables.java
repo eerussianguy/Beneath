@@ -3,6 +3,7 @@ package com.eerussianguy.beneath.providers;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiConsumer;
+import java.util.stream.Stream;
 import com.eerussianguy.beneath.Accessors;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
 import com.eerussianguy.beneath.common.blocks.BeneathMineral;
@@ -15,6 +16,7 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.resources.ResourceKey;
@@ -29,6 +31,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.Property;
@@ -137,7 +140,7 @@ public class BuiltinBlockLootTables extends BlockLootSubProvider implements Acce
             if (mineral == BeneathMineral.NETHER_PYRITE)
                 dropOther(block.get(), TFCItems.ORES.get(Ore.PYRITE));
             else if (mineral == BeneathMineral.BLACKSTONE_SYLVITE)
-                dropOther(block.get(), TFCItems.ORES.get(Ore.PYRITE));
+                dropOther(block.get(), TFCItems.ORES.get(Ore.SYLVITE));
             else if (mineral == BeneathMineral.NETHER_CURSECOAL)
                 dropOther(block.get(), BeneathItems.CURSECOAL);
         });
@@ -148,13 +151,13 @@ public class BuiltinBlockLootTables extends BlockLootSubProvider implements Acce
 
         add(BeneathBlocks.NETHER_PEBBLE.get(), b -> lootTable().withPool(lootPool().add(
             lootTableItem(b)
-                .apply(setCount(2)).when(hasProperty(b, LooseRockBlock.COUNT, 2))
-                .apply(setCount(3)).when(hasProperty(b, LooseRockBlock.COUNT, 3))
+                .apply(setCount(2).when(hasProperty(b, LooseRockBlock.COUNT, 2)))
+                .apply(setCount(3).when(hasProperty(b, LooseRockBlock.COUNT, 3)))
         ).when(survivesExplosion())));
         add(BeneathBlocks.BLACKSTONE_PEBBLE.get(), b -> lootTable().withPool(lootPool().add(
             lootTableItem(b)
-                .apply(setCount(2)).when(hasProperty(b, LooseRockBlock.COUNT, 2))
-                .apply(setCount(3)).when(hasProperty(b, LooseRockBlock.COUNT, 3))
+                .apply(setCount(2).when(hasProperty(b, LooseRockBlock.COUNT, 2)))
+                .apply(setCount(3).when(hasProperty(b, LooseRockBlock.COUNT, 3)))
         ).when(survivesExplosion())));
 
         dropOther(BeneathBlocks.SULFUR.get(), TFCItems.ORE_POWDERS.get(Ore.SULFUR));
@@ -185,7 +188,7 @@ public class BuiltinBlockLootTables extends BlockLootSubProvider implements Acce
         dropSelf(BeneathBlocks.HELLBRICKS.get());
         dropOther(BeneathBlocks.CURSECOAL_PILE.get(), BeneathItems.CURSECOAL);
         add(BeneathBlocks.HELLFORGE.get(), lootTable().withPool(lootPool().add(lootTableItem(BeneathBlocks.NETHER_PEBBLE).apply(setCount(7)))));
-        add(BeneathBlocks.HELLFORGE.get(), lootTable().withPool(lootPool().add(lootTableItem(BeneathBlocks.NETHER_PEBBLE).apply(setCount(7)))));
+        add(BeneathBlocks.HELLFORGE_SIDE.get(), lootTable().withPool(lootPool().add(lootTableItem(BeneathBlocks.NETHER_PEBBLE).apply(setCount(7)))));
         add(BeneathBlocks.SOUL_CLAY.get(), lootTable().withPool(lootPool().add(lootTableItem(Items.CLAY_BALL).apply(setCount(1, 4)))));
         dropSelf(BeneathBlocks.BLACKSTONE_AQUEDUCT.get());
         dropSelf(BeneathBlocks.ANCIENT_ALTAR.get());
@@ -346,9 +349,9 @@ public class BuiltinBlockLootTables extends BlockLootSubProvider implements Acce
         return MatchTool.toolMatches(ItemPredicate.Builder.item().of(TFCTags.Items.TOOLS_HAMMER));
     }
 
-    private LootTable.Builder createGrass(Block block, ItemLike straw, ItemLike seed)
+    private void createGrass(Block block, ItemLike straw, ItemLike seed)
     {
-        return LootTable.lootTable()
+        add(block, lootTable()
             .withPool(
                 lootPool().add(
                     AlternativesEntry.alternatives(
@@ -358,7 +361,7 @@ public class BuiltinBlockLootTables extends BlockLootSubProvider implements Acce
                             lootTableItem(straw)
                         )
                 ).when(survivesExplosion())
-            ));
+            )));
     }
 
     private static <T extends Comparable<T> & StringRepresentable> LootItemBlockStatePropertyCondition.Builder hasProperty(Block block, Property<T> property, T value)
@@ -418,32 +421,13 @@ public class BuiltinBlockLootTables extends BlockLootSubProvider implements Acce
         ));
     }
 
-    // todo remove, this is to just let it generate while i'm writing it
-    @Override
-    public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output)
-    {
-        this.generate();
-        Set<ResourceKey<LootTable>> set = new HashSet<>();
-
-        for (Block block : getKnownBlocks())
-        {
-            if (block.isEnabled(this.enabledFeatures))
-            {
-                ResourceKey<LootTable> resourcekey = block.getLootTable();
-                if (resourcekey != BuiltInLootTables.EMPTY && set.add(resourcekey) && map.containsKey(resourcekey))
-                {
-                    LootTable.Builder loottable$builder = this.map.remove(resourcekey);
-                    output.accept(resourcekey, loottable$builder);
-                }
-            }
-        }
-    }
-
     @Override
     protected Iterable<Block> getKnownBlocks()
     {
-        return super.getKnownBlocks();
-//        return BeneathBlocks.BLOCKS.getEntries().stream().map(block -> (Block) block.get()).filter(block -> !(block instanceof LiquidBlock)).toList();
+        return Stream.concat(
+            BeneathBlocks.BLOCKS.getEntries().stream().map(block -> (Block) block.get()).filter(block -> !(block instanceof LiquidBlock)).toList().stream(),
+            Stream.of(Blocks.NETHERRACK, Blocks.CRIMSON_NYLIUM, Blocks.WARPED_NYLIUM, Blocks.BASALT, Blocks.GILDED_BLACKSTONE, Blocks.BLACKSTONE, Blocks.CRIMSON_ROOTS, Blocks.WARPED_ROOTS, Blocks.GOLD_BLOCK, Blocks.LANTERN, Blocks.BONE_BLOCK, Blocks.SOUL_LANTERN, Blocks.GRAVEL, Blocks.NETHER_WART)
+        ).toList();
     }
 
     private static LootItemConditionalFunction.Builder<?> setCount(int count)

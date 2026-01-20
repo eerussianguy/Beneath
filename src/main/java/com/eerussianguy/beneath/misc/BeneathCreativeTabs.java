@@ -18,6 +18,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.common.blocks.rock.Ore;
 import net.dries007.tfc.common.TFCCreativeTabs.Id;
+import net.dries007.tfc.common.blocks.wood.Wood;
 import net.dries007.tfc.util.Metal;
 import net.dries007.tfc.util.SelfTests;
 
@@ -26,7 +27,7 @@ public class BeneathCreativeTabs
 {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Beneath.MOD_ID);
 
-    public static final Id BENEATH = register("beneath", () -> new ItemStack(BeneathItems.CURSECOAL.get()), BeneathCreativeTabs::fillTab);
+    public static final Id BENEATH = register("beneath", () -> new ItemStack(BeneathBlocks.WOODS.get(Stem.WARPED).get(Wood.BlockType.LOG).get()), BeneathCreativeTabs::fillTab);
 
     private static Id register(String name, Supplier<ItemStack> icon, CreativeModeTab.DisplayItemsGenerator displayItems)
     {

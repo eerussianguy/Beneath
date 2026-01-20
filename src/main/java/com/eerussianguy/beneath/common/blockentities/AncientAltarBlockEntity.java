@@ -192,7 +192,7 @@ public class AncientAltarBlockEntity extends InventoryBlockEntity<ItemStackHandl
         }
 
         // regular interaction
-        if (!inv.getStackInSlot(0).isEmpty())
+        if (!inv.getStackInSlot(0).isEmpty() && tick <= 0)
         {
             ItemHandlerHelper.giveItemToPlayer(player, inv.extractItem(0, 64, false));
         }
