@@ -6,6 +6,10 @@
       {
         "replace": "minecraft:soul_sand",
         "with": "beneath:soul_clay"
+      },
+      {
+        "replace": "minecraft:soul_soil",
+        "with": "beneath:soul_clay"
       }
     ],
     "min_radius": 3,
