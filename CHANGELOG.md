@@ -1,3 +1,3 @@
 # Changes
 
-- Added Ukrainian translation
+- Updated to 1.21.x
