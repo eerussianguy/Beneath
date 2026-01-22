@@ -1,0 +1,22 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "name": "Water",
+  "category": "tfc:beneath",
+  "icon": "beneath:juicer",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "На жаль, вода все ще необхідна, коли ви перебуваєте в Безодні. Вода, збережена в бочках, не випаровується, коли ви в Безодні. Однак існує також варіант створення $(thing)Соковижималки$()."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "beneath:crafting/juicer",
+      "text": "Соковижималка — це питний посуд, який дозволяє стискати $(thing)Гриби$() у воду. Одновіконний інтерфейс автоматично переробляє вставлені гриби на воду."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Гриби вільно з’являються всюди в Безодні під світом. Свіжі фрукти також можна віджати у воду, якщо вони у вас під рукою."
+    }
+  ],
+  "read_by_default": true
+}

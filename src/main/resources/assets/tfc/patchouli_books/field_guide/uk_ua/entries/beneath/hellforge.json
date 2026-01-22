@@ -1,0 +1,51 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "name": "Пекельна горна",
+  "category": "tfc:beneath",
+  "icon": "beneath:cursecoal",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(thing)Пекельна горна$() — це надзвичайно велика горна з високою місткістю для палива, продуктів і нагрівання. Вона будується з Пекельних цеглин, $(l:beneath/ores_and_minerals#cursecoal)Проклятого вугілля$() та Акведуків із чорнокаменю."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "ZXXXZ",
+            "XYYYX",
+            "XY0YX",
+            "XYYYX",
+            "ZXXXZ"
+          ],
+          [
+            "     ",
+            " XXX ",
+            " XXX ",
+            " XXX ",
+            "     "
+          ]
+        ],
+        "mapping": {
+          "Z": "beneath:blackstone_aqueduct[fluid=lava]",
+          "Y": "beneath:hellforge_side",
+          "0": "beneath:hellforge",
+          "X": "beneath:hellbricks"
+        }
+      },
+      "name": "Пекельна горна",
+      "text": "",
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Пекельна горна потребує, щоб лава текла в акведуках у її чотирьох кутах, а також 21 пекельної цеглини. Центр 3×3 має бути заповнений купами $(l:beneath/ores_and_minerals#cursecoal)Проклятого вугілля$(), які потім можна підпалити, щоб запустити горну."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Слоти предметів у Пекельній горні можуть містити як паливо, так і предмети для виплавки — розділення немає, тому будь уважним, що саме кладеш усередину. Також є слоти для плавлення, подібно до вугільної горни. Індикатор лави на екрані показує температуру, а також це видно за рухом предметів у світі."
+    }
+  ],
+  "read_by_default": true
+}

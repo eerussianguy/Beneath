@@ -126,6 +126,8 @@ public class AncientAltarBlockEntity extends InventoryBlockEntity<ItemStackHandl
 
     public ItemInteractionResult use(Player player, InteractionHand hand)
     {
+        if (tick > 0)
+            return ItemInteractionResult.FAIL;
         assert level != null;
         final BlockPos pos = worldPosition;
         final IItemHandler inv = getInventory();
@@ -161,12 +163,20 @@ public class AncientAltarBlockEntity extends InventoryBlockEntity<ItemStackHandl
                 }
                 if (found >= page.getCostAmount(stack))
                 {
+                    int toCost = page.getCostAmount(stack);
                     for (AncientAltarBlockEntity otherAltar : altars)
                     {
                         otherAltar.playSecondarySuccess();
-                        otherAltar.getInventory().extractItem(0, 64, false);
-                        level.sendBlockUpdated(otherAltar.getBlockPos(), otherAltar.getBlockState(), otherAltar.getBlockState(), Block.UPDATE_CLIENTS);
-                    }
+                        final int toExtract = Math.min(toCost, otherAltar.getInventory().getStackInSlot(0).getCount());
+                        if (toExtract > 0)
+                        {
+                            otherAltar.getInventory().extractItem(0, toExtract, false);
+                            toCost -= toExtract;
+                            level.sendBlockUpdated(otherAltar.getBlockPos(), otherAltar.getBlockState(), otherAltar.getBlockState(), Block.UPDATE_CLIENTS);
+                        }
+                        if (toCost <= 0)
+                            break;
+                     }
                     int rewardAmount = page.getRewardAmount(stack);
                     if (!level.dimensionType().ultraWarm())
                         rewardAmount /= 2;
@@ -192,7 +202,7 @@ public class AncientAltarBlockEntity extends InventoryBlockEntity<ItemStackHandl
         }
 
         // regular interaction
-        if (!inv.getStackInSlot(0).isEmpty() && tick <= 0)
+        if (!inv.getStackInSlot(0).isEmpty())
         {
             ItemHandlerHelper.giveItemToPlayer(player, inv.extractItem(0, 64, false));
         }

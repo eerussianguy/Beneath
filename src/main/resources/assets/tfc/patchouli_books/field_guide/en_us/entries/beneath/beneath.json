@@ -1,0 +1,17 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "name": "What Lies Beneath",
+  "category": "tfc:beneath",
+  "icon": "beneath:warped_thatch",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "For years, the tranquility of the overworld was all you knew. It was difficult, yes, but the sun came out; the birds chirped in the morning; and there was not a bit of $(thing)magic$(). One day, you decided that this was not enough. You dreamed of a cursed world, with strange creatures, danger beyond imagination, and unfathomable riches to exploit. That world is Beneath you."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The world of Beneath is a lot like the underworld that you are familiar with, but in the style of TerraFirmaCraft. Trees grow there, and you will find rocks on the ground that you can make into tools. Some things have been removed, some are replaced, and plenty of new content has been added. One thing is for certain: you must work harder to survive."
+    }
+  ],
+  "read_by_default": true
+}
