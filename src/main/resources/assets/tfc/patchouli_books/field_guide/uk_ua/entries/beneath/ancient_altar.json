@@ -20,7 +20,7 @@
     {
       "type": "patchouli:crafting",
       "recipe": "beneath:crafting/blackstone_from_soot",
-      "recipe2": "beneath:crafting/blackstone_bricks_from_soot"
+      "recipe2": "beneath:crafting/polished_blackstone_bricks_from_soot"
     },
     {
       "type": "patchouli:text",

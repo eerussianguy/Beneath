@@ -132,7 +132,7 @@ def make_book(rm: ResourceManager, i18n: I18n, local_instance: bool = False, rev
             crafting('beneath:crafting/ancient_altar', text_contents='The $(thing)Ancient Altar$() can hold and display up to a stack of any item. $(item)$(k:key.use)$() is used to insert or swap items in the altar.'),
             page_break(),
             text('If $(thing)Blackstone$() is not readily available for crafting an Ancient Altar, it may be crafted from $(thing)Soot$() and regular stone.'),
-            crafting('beneath:crafting/blackstone_from_soot', 'beneath:crafting/blackstone_bricks_from_soot'),
+            crafting('beneath:crafting/blackstone_from_soot', 'beneath:crafting/polished_blackstone_bricks_from_soot'),
             page_break(),
             text('Most sacrifices require a cut $(thing)Gem$() of any kind to activate, and consume the gem upon completion. The most basic sacrifice is that of reading the information on the Lost Page. To do this, place a blank page on the altar and $(item)$(k:key.use)$() with the gem. To open a page and read its contents, hold it and press $(item)$(k:key.use)$().'),
             text('Lost Pages have three items of interest: their $(thing)Cost$(), $(thing)Reward$(), and $(thing)Punishment$(). These values are fixed when the page is activated, but are randomized from a fixed set of values otherwise. This means that two pages which perform the same cost and reward may have different levels of utility.'),

@@ -108,11 +108,11 @@ public interface CraftingRecipes extends Recipes
             .input('Y', TFCBlocks.COMPOSTER)
             .pattern("XYX", "XXX", "ZZZ")
             .shaped(BeneathBlocks.UNPOSTER);
-        recipe("blackstone_from_soot")
+        recipe("from_soot")
             .input(Tags.Items.COBBLESTONES)
             .input(TFCItems.SOOT)
             .shapeless(Blocks.BLACKSTONE);
-        recipe("blackstone_bricks_from_soot")
+        recipe("from_soot")
             .input(ItemTags.STONE_BRICKS)
             .input(TFCItems.SOOT)
             .shapeless(Blocks.POLISHED_BLACKSTONE_BRICKS);
