@@ -13,6 +13,8 @@
     "beneath:ore/slimed_netherrack",
     "beneath:glowstone_spike",
     "beneath:haunted_spike",
-    "beneath:crackrack"
+    "beneath:crackrack",
+    "beneath:glowstone_rock_anchor",
+    "beneath:haunted_rock_anchor"
   ]
 }

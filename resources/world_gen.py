@@ -16,13 +16,26 @@ def generate(rm: ResourceManager):
     configured_placed_feature(rm, 'sulfur_patch', 'minecraft:random_patch', random_config('beneath:sulfur', 8, 5, 1), decorate_chance(14), decorate_every_layer(5), decorate_near_lava(5), decorate_biome())
     configured_placed_feature(rm, 'blackstone_boulders', 'beneath:nether_boulders', {'blocks': weighted_list([('minecraft:blackstone', 50), ('minecraft:basalt', 10), ('minecraft:gilded_blackstone', 1)])}, decorate_chance(24), decorate_every_layer(1), decorate_flat_enough(0.4, 2, 4), decorate_biome())
     configured_placed_feature(rm, 'cobble_boulders', 'beneath:nether_boulders', {'blocks': weighted_list([('minecraft:netherrack', 10), ('beneath:cobblerack', 20), ('beneath:fungal_cobblerack', 10)])}, decorate_chance(24), decorate_every_layer(1), decorate_flat_enough(0.4, 3, 4), decorate_biome())
-    configured_placed_feature(rm, 'amethyst_geode', 'tfc:geode', {'outer': 'minecraft:blackstone', 'middle': 'tfc:rock/raw/quartzite', 'inner': [{'data': 'tfc:ore/amethyst/quartzite', 'weight': 1}, {'data': 'tfc:rock/raw/quartzite', 'weight': 2}]}, decorate_chance(100), decorate_above_lava_level(), decorate_square())
     configured_placed_feature(rm, 'soul_clay_disc', 'tfc:soil_disc', {'states': [{'replace': 'minecraft:soul_sand', 'with': 'beneath:soul_clay'}, {'replace': 'minecraft:soul_soil', 'with': 'beneath:soul_clay'}], 'min_radius': 3, 'max_radius': 5, 'height': 3}, decorate_chance(15), decorate_every_layer(1), decorate_flat_enough(0.3, 2, 4))
     configured_placed_feature(rm, 'delta', 'minecraft:delta_feature', {'contents': utils.block_state('minecraft:lava[level=0]'), 'rim': utils.block_state('tfc:rock/magma/basalt'), 'rim_size': uniform_int(3, 7), 'size': uniform_int(0, 2)}, decorate_every_layer(40), decorate_biome())
     configured_placed_feature(rm, 'gleamflower', 'minecraft:simple_block', {'to_place': simple_state_provider('beneath:gleamflower')}, decorate_replaceable(), decorate_would_survive('beneath:gleamflower'), decorate_air())
     configured_placed_feature(rm, 'gleamflower_patch', 'minecraft:random_patch', random_config('beneath:gleamflower', 5, 5, 1), decorate_chance(4), decorate_every_layer(1), decorate_biome())
     configured_placed_feature(rm, 'burpflower', 'minecraft:simple_block', {'to_place': simple_state_provider('beneath:burpflower')}, decorate_replaceable(), decorate_would_survive('beneath:burpflower'), decorate_air())
     configured_placed_feature(rm, 'burpflower_patch', 'minecraft:random_patch', random_config('beneath:burpflower', 5, 5, 1), decorate_chance(20), decorate_every_layer(1), decorate_biome())
+
+    rm.configured_feature('amethyst_geode', 'minecraft:geode', {
+        'blocks': {
+            'filling_provider': {'type': 'minecraft:simple_state_provider', 'state': {'Name': 'minecraft:air'}},
+            'outer_layer_provider': {'type': 'minecraft:simple_state_provider', 'state': {'Name': 'tfc:rock/hardened/basalt'}},
+            'middle_layer_provider': {'type': 'minecraft:simple_state_provider', 'state': {'Name': 'tfc:rock/hardened/quartzite'}},
+            'inner_layer_provider': {'type': 'minecraft:simple_state_provider', 'state': {'Name': 'tfc:rock/hardened/quartzite'}},
+            'alternate_inner_layer_provider': {'type': 'minecraft:simple_state_provider', 'state': {'Name': 'tfc:ore/amethyst/quartzite'}},
+            'invalid_blocks': '#minecraft:geode_invalid_blocks', 'cannot_replace': '#minecraft:features_cannot_replace',
+            "inner_placements": [{"Name": "minecraft:air"}],
+        },
+        'use_alternate_layer0_chance': 0.3, 'invalid_blocks_threshold': 1, 'crack': {}, 'layers': {}
+    })
+    rm.placed_feature('amethyst_geode', 'beneath:amethyst_geode', decorate_chance(100), decorate_above_lava_level(), decorate_square())
 
     for shroom in MUSHROOMS:
         configured_placed_feature(rm, shroom, 'minecraft:simple_block', {'to_place': simple_state_provider('beneath:mushroom/%s' % shroom)}, decorate_replaceable(), decorate_would_survive('beneath:mushroom/%s' % shroom), decorate_air())

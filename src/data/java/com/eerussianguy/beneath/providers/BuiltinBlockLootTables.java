@@ -147,7 +147,9 @@ public class BuiltinBlockLootTables extends BlockLootSubProvider implements Acce
         dropOther(BeneathBlocks.SLIMED_NETHERRACK.get(), BeneathItems.RAW_SLIME);
 
         add(BeneathBlocks.HAUNTED_SPIKE.get(), lootTable().withPool(lootPool().add(lootTableItem(BeneathBlocks.NETHER_PEBBLE).apply(setCount(1, 2)))));
+        add(BeneathBlocks.HAUNTED_ROCK_ANCHOR.get(), lootTable().withPool(lootPool().add(lootTableItem(BeneathBlocks.NETHER_PEBBLE).apply(setCount(1, 2)))));
         add(BeneathBlocks.GLOWSTONE_SPIKE.get(), lootTable().withPool(lootPool().add(lootTableItem(Items.GLOWSTONE_DUST).apply(setCount(1, 2)))));
+        add(BeneathBlocks.GLOWSTONE_ROCK_ANCHOR.get(), lootTable().withPool(lootPool().add(lootTableItem(Items.GLOWSTONE_DUST).apply(setCount(1, 2)))));
 
         add(BeneathBlocks.NETHER_PEBBLE.get(), b -> lootTable().withPool(lootPool().add(
             lootTableItem(b)

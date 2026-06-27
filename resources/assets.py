@@ -34,6 +34,11 @@ def generate(rm: ResourceManager):
         block = rm.blockstate('%s_spike' % rock, variants=dict(('part=%s' % part, {'model': 'beneath:block/spike/%s_%s' % (rock, part)}) for part in ROCK_SPIKE_PARTS))
         block.with_lang(lang('%s spike', rock))
 
+        rm.blockstate('%s_rope_anchor' % rock, variants={
+            **four_rotations('beneath:block/%s_rope_anchor' % rock, (90, None, 180, 270)),
+        }).with_lang(lang('%s rope anchor', rock))
+        rm.block_model('%s_rope_anchor' % rock, parent='tfc:block/horizontal_rope_anchored', textures={'texture': 'beneath:block/%s_spike' % rock})
+
         # Individual models
         rm.item_model('%s_spike' % rock, 'beneath:block/%s_spike' % rock, parent='beneath:block/spike/%s_base' % rock)
         for part in ROCK_SPIKE_PARTS:
