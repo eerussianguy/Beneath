@@ -70,6 +70,12 @@ public enum Stem implements RegistryWood
     }
 
     @Override
+    public float getFlowerOffset()
+    {
+        return 0;
+    }
+
+    @Override
     public MapColor woodColor()
     {
         return woodColor;

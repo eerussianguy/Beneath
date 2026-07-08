@@ -38,6 +38,7 @@ import net.dries007.tfc.common.blockentities.LoomBlockEntity;
 import net.dries007.tfc.common.blockentities.TFCBlockEntities;
 import net.dries007.tfc.common.blockentities.rotation.WaterWheelBlockEntity;
 import net.dries007.tfc.common.blocks.CharcoalPileBlock;
+import net.dries007.tfc.common.blocks.CrateBlock;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.RockRopeAnchorBlock;
 import net.dries007.tfc.common.blocks.TFCBlocks;
@@ -123,7 +124,7 @@ public class BeneathBlocks
         }
         if (blockType == Wood.BlockType.LEAVES)
         {
-            return () -> new WartLeavesBlock(ExtendedProperties.of().mapColor(MapColor.PLANT).strength(0.5F).sound(SoundType.WART_BLOCK).defaultInstrument().randomTicks().noOcclusion().isViewBlocking(TFCBlocks::never).flammableLikeLeaves(), stem.autumnIndex(), stem.getBlock(stem.fallenLeaves()), stem.getBlock(stem.twig()), stem == Stem.CRIMSON ? 0xb01735 : 0x18a5ba);
+            return () -> new WartLeavesBlock(ExtendedProperties.of().mapColor(MapColor.PLANT).strength(0.5F).sound(SoundType.WART_BLOCK).defaultInstrument().randomTicks().noOcclusion().isViewBlocking(TFCBlocks::never).flammableLikeLeaves(), stem.getBlock(stem.fallenLeaves()), stem.getBlock(stem.twig()), stem == Stem.CRIMSON ? 0xb01735 : 0x18a5ba);
         }
         if (blockType == Wood.BlockType.SAPLING)
         {
@@ -136,6 +137,10 @@ public class BeneathBlocks
         if (blockType == Wood.BlockType.WATER_WHEEL)
         {
             return () -> new WaterWheelBlock(woodProperties(stem).strength(9.0F).noOcclusion().blockEntity(TFCBlockEntities.WATER_WHEEL).ticks(WaterWheelBlockEntity::serverTick, WaterWheelBlockEntity::clientTick), stem.getBlockCasted(Wood.BlockType.AXLE), Beneath.identifier("textures/entity/water_wheel/" + stem.getSerializedName() + ".png"));
+        }
+        if (blockType == Wood.BlockType.CRATE)
+        {
+            return () -> new CrateBlock(woodProperties(stem).strength(9.0F).noOcclusion().blockEntity(BeneathBlockEntities.CRATE));
         }
         return blockType.create(stem);
     }

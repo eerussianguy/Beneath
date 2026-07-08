@@ -8,7 +8,7 @@ plugins {
 
 // Toolchain versions
 val minecraftVersion: String = "1.21.1"
-val neoForgeVersion: String = "21.1.197"
+val neoForgeVersion: String = "21.1.234"
 val parchmentVersion: String = "2024.11.17"
 val parchmentMinecraftVersion: String = "1.21.1"
 
@@ -16,7 +16,7 @@ val parchmentMinecraftVersion: String = "1.21.1"
 val emiVersion: String = "1.1.22+1.21.1"
 val jeiVersion: String = "19.25.0.321"
 val patchouliVersion: String = "1.21.1-92-NEOFORGE"
-val tfcVersion: String = "4.2.0"
+val tfcVersion: String = "4.2.5"
 
 val modId: String = "beneath"
 val modVersion: String = System.getenv("VERSION") ?: "0.0.0-indev"
@@ -153,8 +153,8 @@ dependencies {
     "dataImplementation"("vazkii.patchouli:Patchouli:$patchouliVersion")
 
     // TFC
-    implementation(group = "curse.maven", name = "terrafirmacraft-302973", version = "8309510")
-    "dataImplementation"(group = "curse.maven", name = "terrafirmacraft-302973", version = "8309510")
+    implementation(group = "curse.maven", name = "terrafirmacraft-302973", version = "8365958")
+    "dataImplementation"(group = "curse.maven", name = "terrafirmacraft-302973", version = "8365958")
 
     // Jade / The One Probe
     implementation(group = "curse.maven", name = "jade-324717", version = "6853386")

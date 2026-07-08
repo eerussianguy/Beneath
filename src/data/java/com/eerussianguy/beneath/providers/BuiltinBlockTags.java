@@ -122,6 +122,7 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
         addAllStems(Wood.BlockType.HORIZONTAL_SUPPORT, BlockTags.MINEABLE_WITH_AXE);
         addAllStems(Wood.BlockType.VERTICAL_SUPPORT, BlockTags.MINEABLE_WITH_AXE);
         addAllStems(Wood.BlockType.WATER_WHEEL, BlockTags.MINEABLE_WITH_AXE);
+        addAllStems(Wood.BlockType.CRATE, BlockTags.MINEABLE_WITH_AXE);
 
         // For all true wood types
         addAllStems(Wood.BlockType.BARREL, TFCTags.Blocks.CLOCK_READABLE);
