@@ -87,7 +87,7 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
             .add(BeneathBlocks.BLACKSTONE_AQUEDUCT, BeneathBlocks.COBBLERACK, BeneathBlocks.FUNGAL_COBBLERACK, BeneathBlocks.HELLBRICKS)
             .add2(BeneathBlocks.GRADED_ORES).add(BeneathBlocks.MINERALS).add(BeneathBlocks.SLIMED_NETHERRACK)
             .add(BeneathBlocks.GLOWSTONE_SPIKE, BeneathBlocks.HAUNTED_SPIKE, BeneathBlocks.CRACKRACK)
-            .add(BeneathBlocks.GLOWSTONE_ROCK_ANCHOR, BeneathBlocks.HAUNTED_ROCK_ANCHOR);
+            .add(BeneathBlocks.GLOWSTONE_ROPE_ANCHOR, BeneathBlocks.HAUNTED_ROPE_ANCHOR);
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
             .add(BeneathBlocks.CURSECOAL_PILE, BeneathBlocks.HELLFORGE, BeneathBlocks.SOUL_FARMLAND, BeneathBlocks.SOUL_CLAY, BeneathBlocks.SULFUR);
         tag(BlockTags.MINEABLE_WITH_HOE)
