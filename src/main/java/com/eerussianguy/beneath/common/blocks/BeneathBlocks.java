@@ -38,6 +38,7 @@ import net.dries007.tfc.common.blockentities.LoomBlockEntity;
 import net.dries007.tfc.common.blockentities.TFCBlockEntities;
 import net.dries007.tfc.common.blockentities.rotation.WaterWheelBlockEntity;
 import net.dries007.tfc.common.blocks.CharcoalPileBlock;
+import net.dries007.tfc.common.blocks.CrateBlock;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.RockRopeAnchorBlock;
 import net.dries007.tfc.common.blocks.TFCBlocks;
@@ -72,10 +73,10 @@ public class BeneathBlocks
 
     public static final Map<BeneathMineral, Id<Block>> MINERALS = Helpers.mapOf(BeneathMineral.class, ore -> register("ore/" + ore.name(), () -> new Block(BlockBehaviour.Properties.of().sound(SoundType.STONE).strength(3, 10).requiresCorrectToolForDrops())));
 
-    public static final Id<Block> HAUNTED_SPIKE = register("haunted_spike", () -> new RockSpikeBlock(Block.Properties.of().sound(SoundType.NETHERRACK).strength(2f), getHauntedRockAnchor()));
-    public static final Id<Block> HAUNTED_ROCK_ANCHOR = registerNoItem("haunted_rock_anchor", () -> new RockRopeAnchorBlock(ExtendedProperties.of(Block.Properties.of().sound(SoundType.NETHERRACK).strength(2f)), HAUNTED_SPIKE));
-    public static final Id<Block> GLOWSTONE_SPIKE = register("glowstone_spike", () -> new RockSpikeBlock(Block.Properties.of().sound(SoundType.GLASS).strength(1f).lightLevel(s -> 15), getGlowstoneRockAnchor()));
-    public static final Id<Block> GLOWSTONE_ROCK_ANCHOR = registerNoItem("glowstone_rock_anchor", () -> new RockRopeAnchorBlock(ExtendedProperties.of(Block.Properties.of().sound(SoundType.GLASS).strength(1f).lightLevel(s -> 15)), GLOWSTONE_SPIKE));
+    public static final Id<Block> HAUNTED_SPIKE = register("haunted_spike", () -> new RockSpikeBlock(Block.Properties.of().sound(SoundType.NETHERRACK).strength(2f), getHauntedRopeAnchor()));
+    public static final Id<Block> HAUNTED_ROPE_ANCHOR = registerNoItem("haunted_rope_anchor", () -> new RockRopeAnchorBlock(ExtendedProperties.of(Block.Properties.of().sound(SoundType.NETHERRACK).strength(2f)), HAUNTED_SPIKE));
+    public static final Id<Block> GLOWSTONE_SPIKE = register("glowstone_spike", () -> new RockSpikeBlock(Block.Properties.of().sound(SoundType.GLASS).strength(1f).lightLevel(s -> 15), getGlowstoneRopeAnchor()));
+    public static final Id<Block> GLOWSTONE_ROPE_ANCHOR = registerNoItem("glowstone_rope_anchor", () -> new RockRopeAnchorBlock(ExtendedProperties.of(Block.Properties.of().sound(SoundType.GLASS).strength(1f).lightLevel(s -> 15)), GLOWSTONE_SPIKE));
     public static final Id<Block> NETHER_PEBBLE = register("nether_pebble", () -> new LooseRockBlock(Block.Properties.of().strength(0.05f, 0.0f).sound(SoundType.STONE).noCollission()));
     public static final Id<Block> BLACKSTONE_PEBBLE = register("blackstone_pebble", () -> new LooseRockBlock(Block.Properties.of().strength(0.05f, 0.0f).sound(SoundType.STONE).noCollission()));
     public static final Id<Block> FUNGAL_COBBLERACK = register("fungal_cobblerack", () -> new MossSpreadingBlock(BlockBehaviour.Properties.of().sound(SoundType.NETHERRACK).strength(5.5F, 10.0F).randomTicks()));
@@ -123,7 +124,7 @@ public class BeneathBlocks
         }
         if (blockType == Wood.BlockType.LEAVES)
         {
-            return () -> new WartLeavesBlock(ExtendedProperties.of().mapColor(MapColor.PLANT).strength(0.5F).sound(SoundType.WART_BLOCK).defaultInstrument().randomTicks().noOcclusion().isViewBlocking(TFCBlocks::never).flammableLikeLeaves(), stem.autumnIndex(), stem.getBlock(stem.fallenLeaves()), stem.getBlock(stem.twig()), stem == Stem.CRIMSON ? 0xb01735 : 0x18a5ba);
+            return () -> new WartLeavesBlock(ExtendedProperties.of().mapColor(MapColor.PLANT).strength(0.5F).sound(SoundType.WART_BLOCK).defaultInstrument().randomTicks().noOcclusion().isViewBlocking(TFCBlocks::never).flammableLikeLeaves(), stem.getBlock(stem.fallenLeaves()), stem.getBlock(stem.twig()), stem == Stem.CRIMSON ? 0xb01735 : 0x18a5ba);
         }
         if (blockType == Wood.BlockType.SAPLING)
         {
@@ -137,17 +138,21 @@ public class BeneathBlocks
         {
             return () -> new WaterWheelBlock(woodProperties(stem).strength(9.0F).noOcclusion().blockEntity(TFCBlockEntities.WATER_WHEEL).ticks(WaterWheelBlockEntity::serverTick, WaterWheelBlockEntity::clientTick), stem.getBlockCasted(Wood.BlockType.AXLE), Beneath.identifier("textures/entity/water_wheel/" + stem.getSerializedName() + ".png"));
         }
+        if (blockType == Wood.BlockType.CRATE)
+        {
+            return () -> new CrateBlock(woodProperties(stem).strength(9.0F).noOcclusion().blockEntity(BeneathBlockEntities.CRATE));
+        }
         return blockType.create(stem);
     }
 
-    private static Id<Block> getGlowstoneRockAnchor()
+    private static Id<Block> getGlowstoneRopeAnchor()
     {
-        return GLOWSTONE_ROCK_ANCHOR;
+        return GLOWSTONE_ROPE_ANCHOR;
     }
 
-    private static Id<Block> getHauntedRockAnchor()
+    private static Id<Block> getHauntedRopeAnchor()
     {
-        return HAUNTED_ROCK_ANCHOR;
+        return HAUNTED_ROPE_ANCHOR;
     }
 
     private static ResourceLocation planksTexture(RegistryWood wood)

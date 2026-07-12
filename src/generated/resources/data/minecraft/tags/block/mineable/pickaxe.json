@@ -14,7 +14,7 @@
     "beneath:glowstone_spike",
     "beneath:haunted_spike",
     "beneath:crackrack",
-    "beneath:glowstone_rock_anchor",
-    "beneath:haunted_rock_anchor"
+    "beneath:glowstone_rope_anchor",
+    "beneath:haunted_rope_anchor"
   ]
 }

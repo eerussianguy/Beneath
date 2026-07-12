@@ -1,8 +1,6 @@
 package com.eerussianguy.beneath.providers;
 
-import java.util.HashSet;
 import java.util.Set;
-import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 import com.eerussianguy.beneath.Accessors;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
@@ -16,10 +14,8 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.flag.FeatureFlags;
@@ -35,7 +31,6 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.SequentialEntry;
@@ -55,7 +50,6 @@ import org.jetbrains.annotations.NotNull;
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
 import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.common.blocks.devices.BarrelBlock;
 import net.dries007.tfc.common.blocks.devices.SluiceBlock;
 import net.dries007.tfc.common.blocks.rock.LooseRockBlock;
 import net.dries007.tfc.common.blocks.rock.Ore;
@@ -147,9 +141,9 @@ public class BuiltinBlockLootTables extends BlockLootSubProvider implements Acce
         dropOther(BeneathBlocks.SLIMED_NETHERRACK.get(), BeneathItems.RAW_SLIME);
 
         add(BeneathBlocks.HAUNTED_SPIKE.get(), lootTable().withPool(lootPool().add(lootTableItem(BeneathBlocks.NETHER_PEBBLE).apply(setCount(1, 2)))));
-        add(BeneathBlocks.HAUNTED_ROCK_ANCHOR.get(), lootTable().withPool(lootPool().add(lootTableItem(BeneathBlocks.NETHER_PEBBLE).apply(setCount(1, 2)))));
+        add(BeneathBlocks.HAUNTED_ROPE_ANCHOR.get(), lootTable().withPool(lootPool().add(lootTableItem(BeneathBlocks.NETHER_PEBBLE).apply(setCount(1, 2)))));
         add(BeneathBlocks.GLOWSTONE_SPIKE.get(), lootTable().withPool(lootPool().add(lootTableItem(Items.GLOWSTONE_DUST).apply(setCount(1, 2)))));
-        add(BeneathBlocks.GLOWSTONE_ROCK_ANCHOR.get(), lootTable().withPool(lootPool().add(lootTableItem(Items.GLOWSTONE_DUST).apply(setCount(1, 2)))));
+        add(BeneathBlocks.GLOWSTONE_ROPE_ANCHOR.get(), lootTable().withPool(lootPool().add(lootTableItem(Items.GLOWSTONE_DUST).apply(setCount(1, 2)))));
 
         add(BeneathBlocks.NETHER_PEBBLE.get(), b -> lootTable().withPool(lootPool().add(
             lootTableItem(b)

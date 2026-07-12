@@ -17,11 +17,11 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "beneath:nether_pebble"
+          "name": "minecraft:glowstone_dust"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "beneath:blocks/haunted_rock_anchor"
+  "random_sequence": "beneath:blocks/glowstone_rope_anchor"
 }

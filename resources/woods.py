@@ -139,6 +139,9 @@ def generate(rm: ResourceManager):
                     'texture': f'beneath:block/wood/bookshelf/{wood}_{occupancy}'
                 }, parent=f'minecraft:block/chiseled_bookshelf_{occupancy}_slot_{slot}')
 
+        # Crate
+        block = rm.blockstate(('wood', 'crate', wood)).with_block_model().with_lang(lang('%s crate', wood)).with_block_loot('beneath:wood/crate/%s' % wood).with_item_model()
+
         # Workbench
         block = rm.blockstate(('wood', 'workbench', wood)).with_block_model(parent='minecraft:block/cube', textures={
             'particle': 'beneath:block/wood/workbench/%s_front' % wood,

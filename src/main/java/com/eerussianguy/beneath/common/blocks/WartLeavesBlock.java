@@ -14,14 +14,15 @@ import net.dries007.tfc.client.ClimateRenderCache;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.wood.TFCLeavesBlock;
+import net.dries007.tfc.common.blocks.wood.Wood;
 
 public class WartLeavesBlock extends TFCLeavesBlock
 {
     private final int color;
 
-    public WartLeavesBlock(ExtendedProperties properties, int autumnIndex, @Nullable Supplier<? extends Block> fallenLeaves, @Nullable Supplier<? extends Block> fallenTwig, int color)
+    public WartLeavesBlock(ExtendedProperties properties, @Nullable Supplier<? extends Block> fallenLeaves, @Nullable Supplier<? extends Block> fallenTwig, int color)
     {
-        super(properties, autumnIndex, fallenLeaves, fallenTwig);
+        super(properties, Wood.ACACIA, fallenLeaves, fallenTwig);
         this.color = color;
     }
 

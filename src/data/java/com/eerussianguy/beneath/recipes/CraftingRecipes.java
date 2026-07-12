@@ -298,6 +298,11 @@ public interface CraftingRecipes extends Recipes
                 .input('A', blocks.get(Wood.BlockType.AXLE))
                 .pattern("LPL", "PAP", "LPL")
                 .shaped(blocks.get(Wood.BlockType.WATER_WHEEL));
+            recipe()
+                .input('L', lumber)
+                .input('S', blocks.get(Wood.BlockType.STRIPPED_LOG))
+                .pattern("SLS", "L L", "SLS")
+                .shaped(blocks.get(Wood.BlockType.CRATE));
             recipe().to2x2(blocks.get(Wood.BlockType.LOG), blocks.get(Wood.BlockType.WOOD), 3);
             recipe().to2x2(planks, blocks.get(Wood.BlockType.WORKBENCH), 1);
 

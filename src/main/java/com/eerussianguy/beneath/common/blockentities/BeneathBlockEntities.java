@@ -26,6 +26,7 @@ public class BeneathBlockEntities
     public static final Id<BeneathHangingSignBlockEntity> HANGING_SIGN = register("hanging_sign", BeneathHangingSignBlockEntity::new, Stream.of(
         BeneathBlocks.CEILING_HANGING_SIGNS, BeneathBlocks.WALL_HANGING_SIGNS
     ).flatMap(woodMap -> woodMap.values().stream().flatMap(metalMap -> metalMap.values().stream())));
+    public static final Id<BeneathCrateBlockEntity> CRATE = register("crate", BeneathCrateBlockEntity::new, BeneathBlocks.WOODS.values().stream().flatMap(map -> Stream.of(Wood.BlockType.CRATE).map(map::get)));
     public static final Id<UnposterBlockEntity> UNPOSTER = register("unposter", UnposterBlockEntity::new, BeneathBlocks.UNPOSTER);
     public static final Id<AncientAltarBlockEntity> ANCIENT_ALTAR = register("ancient_altar", AncientAltarBlockEntity::new, BeneathBlocks.ANCIENT_ALTAR);
 
