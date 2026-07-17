@@ -187,7 +187,7 @@
   "beneath.enchant.incompatible": "Enchant Error: No tome fits this item.",
   "beneath.enchant.no_offering": "Enchant Error: Not enough offerings on nearby altars.",
   "beneath.enchant.cost": "Offering: %sx %s",
-  "beneath.enchant.uses": "Uses: %s",
+  "beneath.enchant.uses": "Uses: %s / %s",
   "beneath.enchant.punishment": "Punishment: %s",
   "beneath.enchant.no_enchantments": "Enchant Error: No enchantment could be rolled.",
   "config.jade.plugin_beneath.ancient_altar": "Ancient Altar",

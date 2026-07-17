@@ -115,7 +115,7 @@ public class TomeItem extends Item
             {
                 tooltip.add(Component.translatable("beneath.enchant.cost", getCost(stack), offering.value().getDescription()).withStyle(ChatFormatting.RED));
             }
-            tooltip.add(Component.translatable("beneath.enchant.uses", getUses(stack)).withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable("beneath.enchant.uses", getUses(stack), getMaxUses(stack)).withStyle(ChatFormatting.GRAY));
             final LostPage.Punishment punishment = getPunishment(stack);
             if (punishment != null && punishment != LostPage.Punishment.NONE)
             {

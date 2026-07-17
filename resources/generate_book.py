@@ -157,6 +157,7 @@ def make_book(rm: ResourceManager, i18n: I18n, local_instance: bool = False, rev
             text('A Tome is not eternal. Each holds between $(thing)1 and 5 uses$(). Many Tomes also bear a $(thing)Punishment$(), inflicted upon you every time they enchant.'),
             text('To enchant, place the $(thing)item to enchant$() on a central altar. On surrounding altars within 5 blocks, place your inscribed $(thing)Tomes$(), and on other altars place enough of each Tome\'s $(thing)Offering$(). Then $(item)$(k:key.use)$() the central altar with a cut $(thing)Gem$().'),
             text('Every Tome that fits the item, whose offering you can pay, and whose enchantment does not clash with one already applied, is applied at once, spending one of the Tome\'s uses and dealing its punishment. Tomes that do not fit, that conflict, or that you cannot afford are simply skipped. A tool can only be enchanted this way once, so bring every Tome you mean to apply.'),
+            empty_last_page()
         )),
     ))
 
