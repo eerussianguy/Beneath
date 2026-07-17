@@ -12,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
@@ -45,6 +46,22 @@ public class HellforgeSideBlock extends CharcoalForgeBlock
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
+    {
+        if (getCenterPos(level, pos) == null)
+        {
+            for (BlockPos checkPos : BlockPos.betweenClosed(pos.offset(-1, 0, -1), pos.offset(1, 0, 1)))
+            {
+                final Block block = level.getBlockState(checkPos).getBlock();
+                if (block instanceof HellforgeSideBlock || block instanceof HellforgeBlock)
+                {
+                    level.scheduleTick(checkPos, block, 1);
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (getCenterPos(level, pos) == null)
         {

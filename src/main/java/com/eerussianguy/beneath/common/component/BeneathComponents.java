@@ -15,6 +15,7 @@ public final class BeneathComponents
     public static final DeferredRegister<DataComponentType<?>> COMPONENT = DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, Beneath.MOD_ID);
 
     public static final Id<LostPageComponent> LOST_PAGE = register("lost_page", LostPageComponent.CODEC, LostPageComponent.STREAM_CODEC);
+    public static final Id<TomeComponent> TOME = register("tome", TomeComponent.CODEC, TomeComponent.STREAM_CODEC);
 
     private static <T> Id<T> register(String name, Codec<T> codec, StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec)
     {

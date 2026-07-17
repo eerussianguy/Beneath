@@ -8,7 +8,8 @@
   "punishments": [
     "none",
     "levitation",
-    "drunkenness"
+    "drunkenness",
+    "blessing"
   ],
   "reward": "tfc:large_raw_hide",
   "rewards": [

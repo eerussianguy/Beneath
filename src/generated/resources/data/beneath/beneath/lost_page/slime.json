@@ -14,7 +14,9 @@
   "punishments": [
     "none",
     "slime",
-    "drunkenness"
+    "drunkenness",
+    "wrath",
+    "blessing"
   ],
   "reward": "tfc:ore/rich_garnierite",
   "rewards": [

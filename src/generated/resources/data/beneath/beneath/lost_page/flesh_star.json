@@ -1,0 +1,21 @@
+{
+  "cost": {
+    "item": "minecraft:rotten_flesh"
+  },
+  "costs": [
+    96,
+    128,
+    160
+  ],
+  "punishments": [
+    "withering",
+    "unknown"
+  ],
+  "reward": "tfc:gem/ruby",
+  "rewards": [
+    1,
+    2,
+    2,
+    3
+  ]
+}

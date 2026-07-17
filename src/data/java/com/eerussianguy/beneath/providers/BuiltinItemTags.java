@@ -31,8 +31,11 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import net.dries007.tfc.common.TFCTags;
+import net.dries007.tfc.common.blocks.rock.Ore;
 import net.dries007.tfc.common.blocks.rock.RockCategory;
 import net.dries007.tfc.common.blocks.wood.Wood;
+import net.dries007.tfc.common.items.TFCItems;
+import net.dries007.tfc.util.Metal;
 import net.dries007.tfc.util.registry.IdHolder;
 
 import static com.eerussianguy.beneath.common.items.BeneathItemTags.*;
@@ -68,6 +71,18 @@ public class BuiltinItemTags extends TagsProvider<Item> implements Accessors
         tag(TFCTags.Items.STONES_LOOSE_CATEGORY.get(RockCategory.SEDIMENTARY)).add(BeneathBlocks.NETHER_PEBBLE.asItem());
         tag(TFCTags.Items.VEGETABLES).add(BeneathItems.MUSHROOMS).add(BeneathItems.GHOST_PEPPER);
         tag(Tags.Items.SEEDS).add(BeneathItems.SEEDS);
+        tag(ItemTags.BOOKSHELF_BOOKS).add(BeneathItems.TOME);
+
+        tag(ENCHANTING_TIER_1)
+            .add(BeneathItems.CURSECOAL.asItem(), BeneathItems.RAW_SLIME.asItem(), BeneathItems.CURSED_HIDE.asItem(), Items.BONE);
+        tag(ENCHANTING_TIER_2)
+            .add(Items.BLAZE_POWDER, Items.MAGMA_CREAM, Items.QUARTZ, Items.ENDER_PEARL)
+            .add(TFCItems.ORE_POWDERS.get(Ore.SULFUR));
+        tag(ENCHANTING_TIER_3)
+            .add(Items.GHAST_TEAR, Items.CRYING_OBSIDIAN, Items.BLAZE_ROD);
+        tag(ENCHANTING_TIER_4)
+            .add(Items.WITHER_SKELETON_SKULL, Items.NETHER_STAR)
+            .add(TFCItems.METAL_ITEMS.get(Metal.RED_STEEL).get(Metal.ItemType.INGOT), TFCItems.METAL_ITEMS.get(Metal.BLUE_STEEL).get(Metal.ItemType.INGOT));
 
         makeStandardLogTag(Stem.CRIMSON, BeneathItemTags.CRIMSON_LOGS);
         makeStandardLogTag(Stem.WARPED, BeneathItemTags.WARPED_LOGS);

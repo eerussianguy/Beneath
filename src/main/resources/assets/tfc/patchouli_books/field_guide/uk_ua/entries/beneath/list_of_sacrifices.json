@@ -10,7 +10,15 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(li)Сирий слимак$() -> Багатий гарнієрит$() $(li)Проклята шкура$() -> Велика сира шкура$() $(li)Бруківка$() -> Чорнокамінь$()"
+      "text": "$(bold)Ore$()$(br)$(li)Raw Slime -> Rich Garnierite$()$(li)Gold Chunk -> Rich Native Gold$()$(li)Crackrack Rock -> Rich Cassiterite$()$(li)Cursed Hide -> Rich Sphalerite$()$(li)Cursecoal -> Bituminous Coal$()$(li)Cursecoal -> Sulfur Powder$()"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Materials$()$(br)$(li)Cursed Hide -> Large Raw Hide$()$(li)Cobblestone -> Blackstone$()$(li)Crimson Straw -> Straw$()$(li)Warped Straw -> Compost$()$(li)Netherrack -> Blackstone Brick$()"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Special$()$(br)$(li)Raw Slime -> Diamond$()$(li)Rotten Flesh -> Ruby$()"
     }
   ],
   "read_by_default": true

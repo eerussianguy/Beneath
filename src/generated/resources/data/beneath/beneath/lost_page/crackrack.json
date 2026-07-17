@@ -1,0 +1,23 @@
+{
+  "cost": {
+    "item": "beneath:crackrack_rock"
+  },
+  "costs": [
+    48,
+    64,
+    64,
+    96
+  ],
+  "punishments": [
+    "none",
+    "infestation",
+    "slime"
+  ],
+  "reward": "tfc:ore/rich_cassiterite",
+  "rewards": [
+    8,
+    12,
+    14,
+    16
+  ]
+}

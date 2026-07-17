@@ -1,0 +1,25 @@
+{
+  "cost": {
+    "item": "beneath:raw_slime"
+  },
+  "costs": [
+    200,
+    300,
+    400,
+    400,
+    500
+  ],
+  "punishments": [
+    "withering",
+    "blaze_inferno",
+    "unknown"
+  ],
+  "reward": "tfc:gem/diamond",
+  "rewards": [
+    1,
+    1,
+    2,
+    2,
+    3
+  ]
+}

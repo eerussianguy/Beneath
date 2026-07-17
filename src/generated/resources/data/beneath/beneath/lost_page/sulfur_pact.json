@@ -1,0 +1,21 @@
+{
+  "cost": {
+    "item": "beneath:cursecoal"
+  },
+  "costs": [
+    40,
+    56,
+    72
+  ],
+  "punishments": [
+    "none",
+    "blaze_inferno",
+    "withering"
+  ],
+  "reward": "tfc:powder/sulfur",
+  "rewards": [
+    6,
+    8,
+    10
+  ]
+}

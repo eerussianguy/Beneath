@@ -24,11 +24,14 @@ import com.eerussianguy.beneath.client.ClientModEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
+
+import net.dries007.tfc.compat.theoneprobe.TheOneProbeIntegration;
 
 
 @Mod(Beneath.MOD_ID)
@@ -37,6 +40,9 @@ public class Beneath
     public static final String MOD_ID = "beneath";
 
     public static final Logger LOGGER = LogUtils.getLogger();
+
+    public static final boolean JEI = ModList.get().isLoaded("jei");
+    public static final boolean THE_ONE_PROBE = ModList.get().isLoaded("theoneprobe");
 
     public Beneath(ModContainer mod, IEventBus bus)
     {
@@ -63,6 +69,9 @@ public class Beneath
         BeneathClimateModels.TYPES.register(bus);
         BeneathDataManagers.MANAGERS.register(bus);
         BeneathComponents.COMPONENT.register(bus);
+
+        if (THE_ONE_PROBE) TheOneProbeIntegration.init(bus);
+
     }
 
     public static MutableComponent translateEnum(Enum<?> anEnum) {

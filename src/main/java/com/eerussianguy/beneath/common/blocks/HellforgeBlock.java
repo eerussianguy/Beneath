@@ -16,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
@@ -89,6 +90,19 @@ public class HellforgeBlock extends CharcoalForgeBlock
         else
         {
             level.setBlockAndUpdate(pos, this.defaultBlockState().setValue(HEAT, 0));
+            denyNearby(level, pos);
+        }
+    }
+
+    private static void denyNearby(ServerLevel level, BlockPos pos)
+    {
+        for (BlockPos checkPos : BlockPos.betweenClosed(pos.offset(-1, 0, -1), pos.offset(1, 0, 1)))
+        {
+            final Block block = level.getBlockState(checkPos).getBlock();
+            if (block instanceof HellforgeSideBlock)
+            {
+                level.scheduleTick(checkPos, block, 1);
+            }
         }
     }
 
@@ -115,12 +129,12 @@ public class HellforgeBlock extends CharcoalForgeBlock
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (!hellForgeValid(level, pos))
         {
             level.setBlockAndUpdate(pos, state.setValue(HEAT, 0));
+            denyNearby(level, pos);
         }
     }
 

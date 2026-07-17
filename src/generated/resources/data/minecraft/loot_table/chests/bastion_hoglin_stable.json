@@ -224,6 +224,10 @@
         {
           "type": "minecraft:item",
           "name": "beneath:lost_page"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:tome"
         }
       ],
       "rolls": {

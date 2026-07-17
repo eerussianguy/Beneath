@@ -143,7 +143,20 @@ def make_book(rm: ResourceManager, i18n: I18n, local_instance: bool = False, rev
         )),
         entry('list_of_sacrifices', 'List of Sacrifices', 'tfc:gem/diamond', pages=(
             text('This entry details the possible costs and rewards for the different $(l:beneath/ancient_altar)Sacrifices$() one can make in Beneath.'),
-            text('$(li)Raw Slime$() -> Rich Garnierite$()$(li)Cursed Hide -> Large Raw Hide$()$(li)Cobblestone -> Blackstone$()'),
+            text('$(bold)Ore$()$(br)$(li)Raw Slime -> Rich Garnierite$()$(li)Gold Chunk -> Rich Native Gold$()$(li)Crackrack Rock -> Rich Cassiterite$()$(li)Cursed Hide -> Rich Sphalerite$()$(li)Cursecoal -> Bituminous Coal$()$(li)Cursecoal -> Sulfur Powder$()'),
+            text('$(bold)Materials$()$(br)$(li)Cursed Hide -> Large Raw Hide$()$(li)Cobblestone -> Blackstone$()$(li)Crimson Straw -> Straw$()$(li)Warped Straw -> Compost$()$(li)Netherrack -> Blackstone Brick$()'),
+            text('$(bold)Special$()$(br)$(li)Raw Slime -> Diamond$()$(li)Rotten Flesh -> Ruby$()'),
+        )),
+        entry('tomes', 'Tomes and Enchanting', 'beneath:tome', pages=(
+            text('$(thing)Tomes$() can apply enchantments to tools and armer. A blank Tome is an uncommon find in $(thing)Fortress$(), $(thing)Bastion$(), and $(thing)Ruined Portal$() chests. Until it is inscribed, its writing is an unreadable, and it is useless.'),
+            item_spotlight('beneath:tome', text_contents='A $(thing)Tome$(). Once inscribed at an altar it glints with enchantment, and its power is shown on its tooltip.'),
+            text('To inscribe a blank Tome, place it on an $(l:beneath/ancient_altar)Ancient Altar$() and $(item)$(k:key.use)$() it with a cut $(thing)Gem$(). The gem is consumed, and the Tome is bound $(bold)permanently$() to a single random enchantment and level, drawn from those an enchanting table could grant.'),
+            text('If one or two $(thing)enchantable items$() are resting on other altars within 5 blocks when you inscribe, the roll is restricted to enchantments that fit those items. With two items present, only enchantments valid for both can appear.'),
+            text('Every inscribed Tome also carries an $(thing)Offering$() cost, shown in red on its tooltip: a specific item and a quantity. Stronger enchantments demand rarer offerings in smaller numbers. The cost is fixed forever when the Tome is inscribed.'),
+            text('$(bold)Offerings, weakest to strongest$()$(br)$(li)Cursecoal, Raw Slime, Cursed Hide, Bone (many)$(li)Blaze Powder, Magma Cream, Quartz, Ender Pearl, Sulfur Powder$(li)Ghast Tear, Crying Obsidian, Blaze Rod$(li)Wither Skull, Nether Star, Red or Blue Steel Ingot (one)'),
+            text('A Tome is not eternal. Each holds between $(thing)1 and 5 uses$(). Many Tomes also bear a $(thing)Punishment$(), inflicted upon you every time they enchant.'),
+            text('To enchant, place the $(thing)item to enchant$() on a central altar. On surrounding altars within 5 blocks, place your inscribed $(thing)Tomes$(), and on other altars place enough of each Tome\'s $(thing)Offering$(). Then $(item)$(k:key.use)$() the central altar with a cut $(thing)Gem$().'),
+            text('Every Tome that fits the item, whose offering you can pay, and whose enchantment does not clash with one already applied, is applied at once, spending one of the Tome\'s uses and dealing its punishment. Tomes that do not fit, that conflict, or that you cannot afford are simply skipped. A tool can only be enchanted this way once, so bring every Tome you mean to apply.'),
         )),
     ))
 

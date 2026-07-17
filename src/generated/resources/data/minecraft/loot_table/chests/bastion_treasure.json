@@ -76,6 +76,10 @@
         {
           "type": "minecraft:item",
           "name": "beneath:lost_page"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:tome"
         }
       ],
       "rolls": 3.0
@@ -176,6 +180,10 @@
         {
           "type": "minecraft:item",
           "name": "beneath:lost_page"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "beneath:tome"
         }
       ],
       "rolls": {

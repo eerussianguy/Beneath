@@ -1,0 +1,21 @@
+{
+  "cost": {
+    "item": "beneath:cursed_hide"
+  },
+  "costs": [
+    6,
+    8,
+    10
+  ],
+  "punishments": [
+    "none",
+    "withering",
+    "unknown"
+  ],
+  "reward": "tfc:ore/rich_sphalerite",
+  "rewards": [
+    10,
+    14,
+    18
+  ]
+}

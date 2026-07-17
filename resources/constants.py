@@ -119,7 +119,7 @@ TREE_SAPLING_DROP_CHANCES = {
 NUTRIENTS = ('death', 'destruction', 'decay', 'sorrow', 'flame')
 
 SIMPLE_ITEMS = ('gold_chunk', 'cursed_hide', 'cursecoal', 'pure_death', 'pure_decay', 'pure_destruction', 'pure_sorrow', 'pure_flame', 'agonizing_fertilizer', 'crimson_straw', 'warped_straw', 'ghost_pepper', 'blackstone_brick',
-                'crackrack_rock', 'juicer', 'raw_slime', 'lost_page',
+                'crackrack_rock', 'juicer', 'raw_slime', 'lost_page', 'tome',
                 )
 MUSHROOMS = ('button', 'chantrelle', 'death_cap', 'destroying_angels', 'fools_funnel', 'oyster', 'parasol', 'portobello', 'shiitake', 'sulfur_tuft')
 POISONOUS_MUSHROOMS = ('death_cap', 'destroying_angels', 'fools_funnel', 'sulfur_tuft')
@@ -163,8 +163,23 @@ DEFAULT_LANG = {
     'beneath.enum.punishment.infestation': 'An infestation of silverfish!',
     'beneath.enum.punishment.withering': 'Wither!',
     'beneath.enum.punishment.slime': 'Slime!',
+    'beneath.enum.punishment.corruption': 'Corruption of the land!',
+    'beneath.enum.punishment.wrath': 'Wrath from the skies!',
+    'beneath.enum.punishment.champion': 'A champion rises!',
+    'beneath.enum.punishment.blessing': 'A blessing! Your reward is doubled.',
+    'beneath.enum.punishment.greed': 'Greed! Your page is consumed and nothing is given.',
     'beneath.enum.punishment.unknown': '§kUnknown',
     'beneath.sacrifice.error': 'Sacrifice Error: Materials not found.',
+    'beneath.enchant.no_tomes': 'Enchant Error: No tomes found on nearby altars.',
+    'beneath.enchant.incompatible': 'Enchant Error: No tome fits this item.',
+    'beneath.enchant.no_offering': 'Enchant Error: Not enough offerings on nearby altars.',
+    'beneath.enchant.cost': 'Offering: %sx %s',
+    'beneath.enchant.uses': 'Uses: %s',
+    'beneath.enchant.punishment': 'Punishment: %s',
+    'beneath.enchant.no_enchantments': 'Enchant Error: No enchantment could be rolled.',
+    'config.jade.plugin_beneath.ancient_altar': 'Ancient Altar',
+    'config.jade.plugin_beneath.hellforge': 'Hellforge',
+    'config.jade.plugin_beneath.hellforge_side': 'Hellforge',
     'beneath.crop.too_dark': 'Too dark to grow',
     'item.beneath.juicer.filled': 'Juicer (%s)',
     'death.attack.beneath.sulfur': '%1$s mined sulfur with an iron tool and blew themselves up.',

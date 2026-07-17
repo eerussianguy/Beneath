@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 import com.eerussianguy.beneath.Beneath;
 import com.eerussianguy.beneath.common.blocks.BeneathBlockTags;
 import com.eerussianguy.beneath.common.blocks.BeneathBlocks;
+import com.eerussianguy.beneath.common.items.BeneathItems;
 import com.eerussianguy.beneath.common.items.LostPageItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -27,9 +28,11 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
@@ -37,16 +40,21 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.EventHooks;
 import org.apache.logging.log4j.util.TriConsumer;
 
+import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.player.IPlayerInfo;
 import net.dries007.tfc.network.StreamCodecs;
 import net.dries007.tfc.util.Helpers;
@@ -140,9 +148,65 @@ public record LostPage(Ingredient cost, List<Integer> costs, Holder<Item> reward
             }
             spawnItemsAround(level, pos, 10, 6, () -> new ItemStack(Items.SLIME_BALL), false);
         }),
+        CORRUPTION((player, level, pos) -> {
+            final BlockState magma = Blocks.MAGMA_BLOCK.defaultBlockState();
+            final BlockState lava = Blocks.LAVA.defaultBlockState();
+            final int amount = Mth.nextInt(level.random, 6, 12);
+            for (BlockPos checkPos : BlockPos.randomInCube(level.random, amount, pos, 5))
+            {
+                final BlockState state = level.getBlockState(checkPos);
+                if (Helpers.isFluid(state.getFluidState(), TFCTags.Fluids.ANY_INFINITE_WATER))
+                {
+                    level.setBlockAndUpdate(checkPos, lava);
+                }
+                else if (Helpers.isBlock(state, BeneathBlockTags.EVENT_REPLACEABLE))
+                {
+                    level.setBlockAndUpdate(checkPos, magma);
+                }
+                else if (BaseFireBlock.canBePlacedAt(level, checkPos, Direction.UP))
+                {
+                    level.setBlockAndUpdate(checkPos, BaseFireBlock.getState(level, checkPos));
+                }
+            }
+        }),
+        WRATH((player, level, pos) -> {
+            final int count = Mth.nextInt(level.random, 2, 4);
+            for (int i = 0; i < count; i++)
+            {
+                final BlockPos strikePos = pos.offset(Mth.nextInt(level.random, -5, 5), 0, Mth.nextInt(level.random, -5, 5));
+                final LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(level);
+                if (lightning != null)
+                {
+                    lightning.moveTo(Vec3.atBottomCenterOf(strikePos));
+                    lightning.setVisualOnly(false);
+                    level.addFreshEntity(lightning);
+                }
+            }
+        }),
+        CHAMPION((player, level, pos) -> {
+            if (!(level instanceof ServerLevel server))
+                return;
+            final WitherSkeleton champion = EntityType.WITHER_SKELETON.create(level);
+            if (champion == null)
+                return;
+            final BlockPos spawnPos = pos.offset(Mth.nextInt(level.random, -3, 3), 1, Mth.nextInt(level.random, -3, 3));
+            champion.moveTo(Vec3.atBottomCenterOf(spawnPos));
+            EventHooks.finalizeMobSpawn(champion, server, server.getCurrentDifficultyAt(spawnPos), MobSpawnType.EVENT, null);
+            champion.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, ICalendar.CALENDAR_TICKS_IN_DAY, 1));
+            champion.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, ICalendar.CALENDAR_TICKS_IN_DAY, 1));
+            champion.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, ICalendar.CALENDAR_TICKS_IN_DAY, 0));
+            champion.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, ICalendar.CALENDAR_TICKS_IN_DAY, 4));
+            champion.setItemInHand(InteractionHand.OFF_HAND, BeneathItems.LOST_PAGE.get().getDefaultInstance());
+            champion.setDropChance(EquipmentSlot.OFFHAND, 2f);
+            level.addFreshEntity(champion);
+        }),
+        // Marker punishments applied in the block entity
+        BLESSING((player, level, pos) -> {}),
+        GREED((player, level, pos) -> {}),
         UNKNOWN((player, level, pos) -> {
-            final Punishment[] values = values();
-            values[level.random.nextInt(values.length)].consumer.accept(player, level, pos);
+            // BLESSING and GREED cannot be resolved here
+            final Punishment[] pool = {LEVITATION, DRUNKENNESS, BLAZE_INFERNO, INFESTATION, WITHERING, SLIME, CORRUPTION, WRATH, CHAMPION};
+            pool[level.random.nextInt(pool.length)].consumer.accept(player, level, pos);
         }),
         ;
 

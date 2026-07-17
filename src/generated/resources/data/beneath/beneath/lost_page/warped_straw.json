@@ -1,0 +1,20 @@
+{
+  "cost": {
+    "item": "beneath:warped_straw"
+  },
+  "costs": [
+    16,
+    24,
+    32
+  ],
+  "punishments": [
+    "none",
+    "levitation"
+  ],
+  "reward": "tfc:compost",
+  "rewards": [
+    4,
+    6,
+    8
+  ]
+}

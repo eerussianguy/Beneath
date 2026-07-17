@@ -1,0 +1,80 @@
+package com.eerussianguy.beneath.compat.tooltip;
+
+import java.util.Locale;
+import java.util.function.Function;
+import com.eerussianguy.beneath.Beneath;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeHitEntityData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoEntityProvider;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ITheOneProbe;
+import mcjty.theoneprobe.api.ProbeMode;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.InterModComms;
+import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
+
+import net.dries007.tfc.util.tooltip.BlockEntityTooltip;
+import net.dries007.tfc.util.tooltip.EntityTooltip;
+
+public class TheOneProbeIntegration implements Function<ITheOneProbe, Void>
+{
+    public static void init(IEventBus bus)
+    {
+        bus.addListener((InterModEnqueueEvent event) -> InterModComms.sendTo("theoneprobe", "getTheOneProbe", TheOneProbeIntegration::new));
+    }
+
+    @Override
+    public Void apply(ITheOneProbe registry)
+    {
+        BeneathTooltips.BlockEntities.register((name, tooltip, aClass) -> register(registry, tooltip, aClass));
+//        BeneathTooltips.Entities.register((name, tooltip, aClass) -> register(registry, tooltip, aClass));
+        return null;
+    }
+
+    private void register(ITheOneProbe top, BlockEntityTooltip tooltip, Class<? extends Block> blockClass)
+    {
+        top.registerProvider(new IProbeInfoProvider() {
+            @Override
+            public ResourceLocation getID()
+            {
+                return Beneath.identifier(blockClass.getSimpleName().toLowerCase(Locale.ROOT));
+            }
+
+            @Override
+            public void addProbeInfo(ProbeMode probeMode, IProbeInfo info, Player player, Level level, BlockState blockState, IProbeHitData data)
+            {
+                if (data.getPos() != null && blockClass.isInstance(blockState.getBlock()))
+                {
+                    tooltip.display(level, blockState, data.getPos(), level.getBlockEntity(data.getPos()), info::text);
+                }
+            }
+        });
+    }
+
+    private void register(ITheOneProbe top, EntityTooltip tooltip, Class<? extends Entity> entityClass)
+    {
+        top.registerEntityProvider(new IProbeInfoEntityProvider() {
+            @Override
+            public String getID()
+            {
+                return Beneath.identifier(entityClass.getSimpleName().toLowerCase(Locale.ROOT)).toString();
+            }
+
+            @Override
+            public void addProbeEntityInfo(ProbeMode probeMode, IProbeInfo info, Player player, Level level, Entity entity, IProbeHitEntityData data)
+            {
+                if (entityClass.isInstance(entity))
+                {
+                    tooltip.display(level, entity, info::text);
+                }
+            }
+        });
+    }
+}

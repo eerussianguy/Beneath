@@ -25,6 +25,7 @@ public class BuiltinItemSizes extends DataManagerProvider<ItemSizeDefinition> im
     protected void addData(HolderLookup.Provider provider)
     {
         add(BeneathItems.LOST_PAGE, Size.TINY, Weight.VERY_HEAVY);
+        add(BeneathItems.TOME, Size.TINY, Weight.VERY_HEAVY);
     }
 
     private void add(ItemLike item, Size size, Weight weight)

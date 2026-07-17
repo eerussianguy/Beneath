@@ -70,6 +70,7 @@ public class BuiltinChestLootTables implements LootTableSubProvider
                 .add(weight(BeneathItems.LOST_PAGE, 10))
                 .add(weight(BeneathItems.LOST_PAGE, 10))
                 .add(weight(BeneathItems.LOST_PAGE, 5))
+                .add(weight(BeneathItems.TOME, 5))
         ));
 
         output.accept(BuiltInLootTables.NETHER_BRIDGE, LootTable.lootTable().withPool(
@@ -93,6 +94,7 @@ public class BuiltinChestLootTables implements LootTableSubProvider
                 .add(weight(BeneathItems.SEEDS.get(NCrop.GLEAMFLOWER), 1, 3, 6))
                 .add(weight(BeneathItems.LOST_PAGE, 10))
                 .add(weight(BeneathItems.LOST_PAGE, 5))
+                .add(weight(BeneathItems.TOME, 5))
         ));
 
         output.accept(BuiltInLootTables.BASTION_TREASURE, LootTable.lootTable()
@@ -113,6 +115,7 @@ public class BuiltinChestLootTables implements LootTableSubProvider
                 .add(weight(BeneathItems.PURE_NUTRIENTS.get(SoulFarmlandBlockEntity.NutrientType.SORROW), 1))
                 .add(weight(BeneathItems.LOST_PAGE, 1))
                 .add(weight(BeneathItems.LOST_PAGE, 1))
+                .add(weight(BeneathItems.TOME, 1))
             )
             .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(3, 4))
                 .add(weight(Items.SPECTRAL_ARROW, 1, 12, 25))
@@ -122,6 +125,7 @@ public class BuiltinChestLootTables implements LootTableSubProvider
                 .add(weight(Items.GILDED_BLACKSTONE, 1, 5, 15))
                 .add(weight(Items.MAGMA_CREAM, 1, 3, 8))
                 .add(weight(BeneathItems.LOST_PAGE, 1))
+                .add(weight(BeneathItems.TOME, 1))
             )
         );
 
@@ -136,6 +140,7 @@ public class BuiltinChestLootTables implements LootTableSubProvider
                 .add(weight(BeneathItems.SEEDS.get(NCrop.GHOST_PEPPER), 1, 3, 6))
                 .add(weight(BeneathItems.SEEDS.get(NCrop.GLEAMFLOWER), 1, 3, 6))
                 .add(weight(BeneathItems.LOST_PAGE, 1))
+                .add(weight(BeneathItems.TOME, 1))
             )
             .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(weight(TFCItems.ROCK_TOOLS.get(RockCategory.IGNEOUS_EXTRUSIVE).get(RockCategory.ItemType.AXE), 2, true))
@@ -150,6 +155,7 @@ public class BuiltinChestLootTables implements LootTableSubProvider
                 .add(weight(Items.ARROW, 2, 5, 17))
                 .add(weight(TFCItems.FOOD.get(Food.COOKED_PORK), 1))
                 .add(weight(BeneathItems.LOST_PAGE, 1))
+                .add(weight(BeneathItems.TOME, 1))
             )
         );
 
@@ -172,6 +178,7 @@ public class BuiltinChestLootTables implements LootTableSubProvider
                 .add(weight(BeneathItems.PURE_NUTRIENTS.get(SoulFarmlandBlockEntity.NutrientType.SORROW), 1))
                 .add(weight(BeneathItems.LOST_PAGE, 1))
                 .add(weight(BeneathItems.LOST_PAGE, 1))
+                .add(weight(BeneathItems.TOME, 1))
             )
             .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2, 4))
                 .add(weight(Items.STRING, 1, 4, 16))
@@ -202,6 +209,7 @@ public class BuiltinChestLootTables implements LootTableSubProvider
                 .add(weight(BeneathBlocks.WOODS.get(Stem.CRIMSON).get(Wood.BlockType.SAPLING), 1, 2, 7))
                 .add(weight(BeneathBlocks.WOODS.get(Stem.WARPED).get(Wood.BlockType.SAPLING), 1, 2, 7))
                 .add(weight(BeneathItems.LOST_PAGE, 1))
+                .add(weight(BeneathItems.TOME, 1))
             )
         );
     }

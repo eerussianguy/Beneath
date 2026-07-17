@@ -1,0 +1,22 @@
+{
+  "cost": {
+    "item": "minecraft:netherrack"
+  },
+  "costs": [
+    48,
+    64,
+    64,
+    72
+  ],
+  "punishments": [
+    "none",
+    "infestation"
+  ],
+  "reward": "beneath:blackstone_brick",
+  "rewards": [
+    16,
+    24,
+    24,
+    32
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "cost": {
+    "item": "beneath:cursecoal"
+  },
+  "costs": [
+    32,
+    48,
+    64,
+    64,
+    80
+  ],
+  "punishments": [
+    "none",
+    "infestation"
+  ],
+  "reward": "tfc:ore/bituminous_coal",
+  "rewards": [
+    12,
+    16,
+    20,
+    20,
+    24
+  ]
+}

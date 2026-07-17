@@ -49,6 +49,7 @@ public class BeneathItems
     public static final ItemId GHOST_PEPPER = register("ghost_pepper", () -> new Item(food()));
     public static final ItemId JUICER = register("juicer", () -> new JuicerItem(new Item.Properties().stacksTo(1)));
     public static final ItemId LOST_PAGE = register("lost_page", () -> new LostPageItem(new Item.Properties()));
+    public static final ItemId TOME = register("tome", () -> new TomeItem(new Item.Properties()));
     public static final ItemId RAW_SLIME = register("raw_slime");
     public static final ItemId WARPED_STRAW = register("warped_straw");
 

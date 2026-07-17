@@ -1,0 +1,25 @@
+{
+  "cost": {
+    "item": "beneath:gold_chunk"
+  },
+  "costs": [
+    16,
+    24,
+    32,
+    32,
+    48
+  ],
+  "punishments": [
+    "none",
+    "drunkenness",
+    "blaze_inferno"
+  ],
+  "reward": "tfc:ore/rich_native_gold",
+  "rewards": [
+    4,
+    6,
+    6,
+    8,
+    10
+  ]
+}

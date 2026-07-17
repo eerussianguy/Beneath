@@ -12,7 +12,9 @@
   ],
   "punishments": [
     "none",
-    "infestation"
+    "infestation",
+    "wrath",
+    "greed"
   ],
   "reward": "minecraft:blackstone",
   "rewards": [
