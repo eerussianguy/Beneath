@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
 import net.dries007.tfc.common.blockentities.InventoryBlockEntity;
@@ -196,11 +195,20 @@ public class AncientAltarBlockEntity extends InventoryBlockEntity<ItemStackHandl
         }
 
         // regular interaction
-        if (!inv.getStackInSlot(0).isEmpty())
+        ItemStack pedestal = inv.getStackInSlot(0);
+        if (!pedestal.isEmpty())
         {
-            ItemHandlerHelper.giveItemToPlayer(player, inv.extractItem(0, 64, false));
+            inv.extractItem(0, pedestal.getCount(), false);
+            if (!player.addItem(pedestal))
+            {
+                Helpers.spawnItem(level, pos, pedestal);
+            }
         }
-        ItemHandlerHelper.giveItemToPlayer(player, inv.insertItem(0, held.split(64), false));
+        if (!held.isEmpty())
+        {
+            inventory.setStackInSlot(0, held.copy());
+            held.setCount(0);
+        }
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
