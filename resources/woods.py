@@ -402,7 +402,7 @@ def generate(rm: ResourceManager):
         rm.block_and_item_tag('scribing_tables', item('scribing_table'))
         rm.block_and_item_tag('jar_shelves', item('jar_shelf'))
         rm.block_and_item_tag('water_wheels', item('water_wheel'))
-        rm.block_tag('support_beams', item('vertical_support'), item('horizontal_support'))
+        rm.block_tag('tfc:support_beams', item('vertical_support'), item('horizontal_support'))
 
         rm.item_tag('axles', item('axle'), item('encased_axle'))
         rm.item_tag('gear_boxes', item('gear_box'))
