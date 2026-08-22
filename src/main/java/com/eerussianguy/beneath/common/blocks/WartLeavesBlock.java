@@ -3,6 +3,7 @@ package com.eerussianguy.beneath.common.blocks;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -44,6 +45,18 @@ public class WartLeavesBlock extends TFCLeavesBlock
                     ParticleUtils.spawnParticleBelow(level, pos, random, new BlockParticleOption(TFCParticles.FALLING_LEAF.get(), state));
                 }
             }
+        }
+    }
+
+    @Override
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
+    {
+        tick(state, level, pos, rand); // not super, which would run the seasonal branch
+        if (state.getValue(DISTANCE) > MAX_DECAY_DISTANCE && !state.getValue(PERSISTENT))
+        {
+            level.removeBlock(pos, false);
+            if (rand.nextFloat() < 0.01f) createDestructionEffects(state, level, pos, rand, false);
+            doParticles(level, pos.getX() + rand.nextFloat(), pos.getY() + rand.nextFloat(), pos.getZ() + rand.nextFloat(), 1);
         }
     }
 }
